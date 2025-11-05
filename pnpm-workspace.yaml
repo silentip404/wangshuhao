@@ -1,3 +1,7 @@
 engineStrict: true
 
+onlyBuiltDependencies:
+  - sharp
+  - unrs-resolver
+
 useNodeVersion: 24.11.0

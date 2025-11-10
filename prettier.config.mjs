@@ -19,7 +19,7 @@ const config = {
       options: { parser: 'jsonc' },
     },
     {
-      files: ['*.jsx', '*.cjsx', '*.mjsx', '*.tsx', '*.ctsx', '*.mtsx'],
+      files: ['*.vue', '*.jsx', '*.cjsx', '*.mjsx', '*.tsx', '*.ctsx', '*.mtsx'],
       options: { singleAttributePerLine: true },
     },
   ],

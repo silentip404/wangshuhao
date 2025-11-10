@@ -26,8 +26,10 @@ nohup.out
 __MACOSX/
 .AppleDouble
 .LSOverride
-Icon[
-]
+
+# Finder custom icons
+# Pattern [^!-~] prevents corruption by line-ending converters and editor auto-formatting
+Icon[^!-~]
 
 # Thumbnails
 ._*

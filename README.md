@@ -94,6 +94,14 @@
 
 - [ ] **字体优化配置检查**：验证项目是否保持使用 [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) 自动优化和加载 [Geist](https://vercel.com/font) 字体的配置。
 
+- [ ] **scripts 目录说明文档**：为 `scripts` 目录添加说明文档，详细说明各个脚本的用途、使用方法和实现细节，帮助团队成员理解和使用项目中的自动化脚本。
+
+- [ ] **完善 .gitignore 配置规则**：完善当前 `.gitignore` 配置规则，要求结构清晰，兼容不同系统差异（**Windows**、**macOS**、**Linux**），确保各类构建产物、依赖、缓存、临时文件等被正确忽略，避免误提交不必要的文件。
+
+- [ ] **在 lint-staged 中配置 ESLint 检查**：在 **lint-staged** 中配置 **ESLint** 检查，确保在提交代码前自动对暂存的文件进行代码规范检查，与 **Prettier** 格式化配合使用，提升代码质量并减少代码审查中的规范性问题。
+
+- [ ] **检查 Next.js 默认 ESLint 配置并优化**：检查 **Next.js** 默认的 **ESLint** 配置，根据项目需求进行恰当的优化，包括规则调整、插件扩展、性能优化等，确保代码规范检查既严格又实用，提升开发体验和代码质量。
+
 ## 🚀 快速开始
 
 ### 开发环境要求

@@ -62,6 +62,28 @@
 
   </details>
 
+- 🎨 **代码格式化统一**：通过 **.gitattributes**、**EditorConfig** 和 **Prettier** 配置，确保团队成员保持一致的代码风格，减少因格式差异导致的代码审查噪音和合并冲突。
+
+  <details>
+    <summary>查看配置细节</summary>
+
+  代码格式化是团队协作中的基础工程化实践，不同编辑器、不同开发者的个人偏好会导致代码风格差异，这些差异会在代码审查和合并时产生噪音，影响开发效率。本项目通过 **.gitattributes**、**EditorConfig** 和 **Prettier** 的组合配置，实现跨编辑器、跨环境的代码风格统一：
+  1. **代码宽度设置**：平衡 **TypeScript** 带来的代码量增加及阅读舒适度，在 `.editorconfig` 中设置 `max_line_length = 100`，相比常见的 80 或 120 字符，在保持可读性的同时减少不必要的换行。
+
+  2. **换行符统一**：通过 `.gitattributes`（`* text eol=lf`）、`.editorconfig`（`end_of_line = lf`）和 `prettier.config.mjs` 的综合约束，确保所有文本文件使用 **LF**（`\n`）作为换行符，避免 **Windows**（`\r\n`）与 **Unix/Linux**（`\n`）系统间的换行符差异导致的合并冲突。
+
+  3. **JSONC 文件配置优化**：针对常见的 **JSONC** 文件（如 `.vscode/**/*.json`、`tsconfig.json` 等），在 `prettier.config.mjs` 中通过 `overrides` 配置单独指定 `parser: 'jsonc'`，支持更多的行尾逗号，减少因添加或删除配置项导致的 **diff** 差异。
+
+  4. **Tailwind CSS 阅读体验优化**：为降低使用 **Tailwind CSS** 带来的阅读心智负担，在 `prettier.config.mjs` 中对 **JSX/TSX** 文件（`*.jsx`、`*.tsx` 等）启用 `singleAttributePerLine: true`，将每个属性单独成行，提升长属性列表的可读性和 **diff** 可读性。
+
+  5. **编辑器开箱即用体验**：在 `.vscode/settings.json` 中配置 `editor.defaultFormatter` 和 `editor.formatOnSave`，在 `.vscode/extensions.json` 中推荐安装 **EditorConfig** 和 **Prettier** 插件，确保使用 **VSCode** 的开发者获得开箱即用的格式化体验。
+
+  6. **持续检测与自动化**：在检查脚本、`pre-commit` 钩子、持续集成流程中持续检测代码格式，确保提交到仓库的代码符合格式化规范。
+
+  通过以上设计与实现，实现团队开发过程中的代码格式化统一并减轻开发者的心智负担。
+
+  </details>
+
 ### 📈 性能指标
 
 ## 📋 TODO

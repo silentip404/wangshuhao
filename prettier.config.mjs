@@ -22,6 +22,7 @@ const config = {
       files: ['*.vue', '*.jsx', '*.cjsx', '*.mjsx', '*.tsx', '*.ctsx', '*.mtsx'],
       options: { singleAttributePerLine: true },
     },
+    { files: ['LICENSE'], options: { parser: 'markdown', proseWrap: 'always' } },
   ],
 };
 

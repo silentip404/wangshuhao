@@ -117,6 +117,8 @@
 
   </details>
 
+- 🔒 **Lockfile 同步检查**：在 `pre-commit` 钩子中自动运行 `pnpm install --frozen-lockfile --lockfile-only`，确保 `pnpm-lock.yaml` 与 `package.json` 保持同步，防止因 lockfile 未更新导致的依赖不一致问题。
+
 ### 📈 性能指标
 
 ## 📋 TODO List
@@ -129,6 +131,8 @@
 - [x] **解决 .gitignore 文件换行符处理问题**：研究并解决部分编辑器（如 **VSCode**）在保存 `.gitignore` 文件时会自动处理行尾换行符，导致 **macOS** 系统特有的 `Icon\r` 文件忽略规则无法正确保存的问题，确保跨平台文件忽略规则的正确性。
 
 - [x] **Git 钩子中检测 commit message 规范**：在 Git 钩子中配置 commit message 格式校验，确保提交信息符合项目规范，提升提交历史可读性和可追溯性。
+
+- [x] **Pre-commit 钩子中添加 Lockfile 同步检查**：在 `pre-commit` 钩子中自动检查 `pnpm-lock.yaml` 与 `package.json` 是否保持同步。
 
 </details>
 

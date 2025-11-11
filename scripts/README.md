@@ -7,17 +7,17 @@
 ```
 scripts/
 ├── README.md                      # 本说明文档
-├── verify-node-version-config.mjs # Node.js 版本配置一致性检查脚本
+├── verify-node-version-config.ts   # Node.js 版本配置一致性检查脚本
 └── utils/
-    └── print.mjs                  # 命令行输出工具函数
+    └── print.ts                    # 命令行输出工具函数
 ```
 
 ## 📝 脚本说明
 
-### `verify-node-version-config.mjs`
+### `verify-node-version-config.ts`
 
 验证项目中分散的 Node.js 版本配置文件的一致性，确保所有配置与 `package.json` 中的 `engines.node` 字段严格一致。
 
-### `utils/print.mjs`
+### `utils/print.ts`
 
 提供统一的命令行输出工具函数，用于脚本中的信息输出。

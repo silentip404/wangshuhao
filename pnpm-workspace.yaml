@@ -1,7 +1,10 @@
 engineStrict: true
+
 managePackageManagerVersions: true
-useNodeVersion: 24.11.0
 
 onlyBuiltDependencies:
+  - esbuild
   - sharp
   - unrs-resolver
+
+useNodeVersion: 24.11.0

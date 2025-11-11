@@ -17,7 +17,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "run-s lint:*",
-    "lint:node-version": "node scripts/verify-node-version-config.mjs",
+    "lint:node-version": "tsx scripts/verify-node-version-config.ts",
     "lint:lockfile": "pnpm install --frozen-lockfile --lockfile-only --loglevel=warn",
     "lint:typescript": "tsc --noEmit",
     "lint:eslint": "eslint --max-warnings=0",
@@ -35,6 +35,7 @@
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/signale": "^1.4.7",
     "eslint": "^9.39.1",
     "eslint-config-next": "16.0.1",
     "husky": "^9.1.7",
@@ -43,6 +44,7 @@
     "prettier": "3.6.2",
     "signale": "^1.4.0",
     "tailwindcss": "^4.1.16",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   }
 }

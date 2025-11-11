@@ -1,3 +1,3 @@
-node scripts/verify-node-version-config.mjs
+tsx scripts/verify-node-version-config.ts
 pnpm install --frozen-lockfile --lockfile-only --loglevel=warn
 pnpm dlx lint-staged

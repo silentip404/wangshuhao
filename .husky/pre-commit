@@ -1,2 +1,2 @@
 node scripts/check-node-version.mjs
-npx lint-staged
+pnpm dlx lint-staged

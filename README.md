@@ -134,9 +134,9 @@
 
 - [x] **Pre-commit 钩子中添加 Lockfile 同步检查**：在 `pre-commit` 钩子中自动检查 `pnpm-lock.yaml` 与 `package.json` 是否保持同步。
 
-</details>
+- [x] **Node.js 版本配置一致性检测脚本**：开发自动化检查脚本，用于验证项目中分散的 **Node.js** 版本配置文件（`.nvmrc`、`.node-version`、`package.json` 中的 `engines.node` 和 `volta.node`、`pnpm-workspace.yaml` 中的 `useNodeVersion` 等）的一致性，确保版本配置同步。
 
-- [ ] **Node.js 版本配置一致性检测脚本**：开发自动化检查脚本，用于验证项目中分散的 **Node.js** 版本配置文件（`.nvmrc`、`.node-version`、`package.json` 中的 `engines.node` 和 `volta.node`、`pnpm-workspace.yaml` 中的 `useNodeVersion` 等）的一致性，确保版本配置同步。
+</details>
 
 - [ ] **持续集成检测流程**：在 **CI/CD** 流程中集成各类质量检测，包括代码规范检查、类型检查、测试覆盖率、依赖安全扫描、构建产物验证等，确保代码质量与项目稳定性。
 

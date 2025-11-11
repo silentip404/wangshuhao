@@ -35,6 +35,7 @@
 - **代码检查**：**ESLint**
 - **代码格式化**：**Prettier**
 - **Git 钩子管理**：**Husky**
+- **提交信息规范**：**Commitlint**
 
 ### ⚡ 核心功能
 
@@ -100,6 +101,22 @@
 
   </details>
 
+- 📝 **提交信息规范检查**：通过 **Commitlint** 和 **Husky** 的 `commit-msg` 钩子，在提交时自动校验 commit message 格式，确保提交信息符合 [Conventional Commits](https://www.conventionalcommits.org/) 规范，提升提交历史可读性和可追溯性。
+
+  <details>
+    <summary>查看实现方案</summary>
+
+  规范的 commit message 是团队协作和项目维护的基础实践，统一的提交信息格式能够提升提交历史的可读性，便于生成变更日志、定位问题、追溯代码变更。本项目通过 **Commitlint** 实现提交信息的自动校验：
+  1. **规范配置**：使用 `@commitlint/config-conventional` 作为基础配置，遵循 **Conventional Commits** 规范，要求提交信息包含类型（`feat`、`fix`、`docs` 等）、作用域（可选）、描述等信息。
+
+  2. **Git 钩子集成**：通过 **Husky** 的 `commit-msg` 钩子，在每次提交时自动运行 **Commitlint** 检查，不符合规范的提交会被自动阻止，确保提交到仓库的所有 commit message 都符合规范。
+
+  3. **开发体验优化**：提供清晰的错误提示，帮助开发者快速了解提交信息格式要求，减少因格式问题导致的提交失败。
+
+  通过以上设计与实现，确保项目提交历史的规范性和可追溯性。
+
+  </details>
+
 ### 📈 性能指标
 
 ## 📋 TODO List
@@ -110,6 +127,8 @@
 - [x] **完善 .gitignore 配置规则**：完善当前 `.gitignore` 配置规则，要求结构清晰，兼容不同系统差异（**Windows**、**macOS**、**Linux**），确保各类构建产物、依赖、缓存、临时文件等被正确忽略，避免误提交不必要的文件。
 
 - [x] **解决 .gitignore 文件换行符处理问题**：研究并解决部分编辑器（如 **VSCode**）在保存 `.gitignore` 文件时会自动处理行尾换行符，导致 **macOS** 系统特有的 `Icon\r` 文件忽略规则无法正确保存的问题，确保跨平台文件忽略规则的正确性。
+
+- [x] **Git 钩子中检测 commit message 规范**：在 Git 钩子中配置 commit message 格式校验，确保提交信息符合项目规范，提升提交历史可读性和可追溯性。
 
 </details>
 
@@ -126,8 +145,6 @@
 - [ ] **检查 Next.js 默认 ESLint 配置并优化**：检查 **Next.js** 默认的 **ESLint** 配置，根据项目需求进行恰当的优化，包括规则调整、插件扩展、性能优化等，确保代码规范检查既严格又实用，提升开发体验和代码质量。
 
 - [ ] **解决 VSCode 插件 Node.js 版本限制**：研究并解决当前无法确保 **TypeScript**、**ESLint**、**Prettier** 等 **VSCode** 插件运行时使用的 **Node.js** 版本完全符合项目要求的问题，探索通过配置或工具确保插件使用正确的 **Node.js** 版本。
-
-- [ ] **Git 钩子中检测 commit message 规范**：在 Git 钩子中配置 commit message 格式校验，确保提交信息符合项目规范，提升提交历史可读性和可追溯性。
 
 ## 🚀 快速开始
 

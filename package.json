@@ -16,8 +16,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "format": "prettier --write ."
+    "lint": "run-s lint:*",
+    "lint:node-version": "node scripts/verify-node-version-config.mjs",
+    "lint:lockfile": "pnpm install --frozen-lockfile --lockfile-only --loglevel=warn",
+    "lint:typescript": "tsc --noEmit",
+    "lint:eslint": "eslint --max-warnings=0",
+    "lint:prettier": "prettier --check --log-level=warn ."
   },
   "dependencies": {
     "next": "16.0.1",
@@ -35,6 +39,7 @@
     "eslint-config-next": "16.0.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
+    "npm-run-all2": "^8.0.4",
     "prettier": "3.6.2",
     "signale": "^1.4.0",
     "tailwindcss": "^4.1.16",

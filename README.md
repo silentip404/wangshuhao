@@ -138,15 +138,15 @@
 
 - [x] **scripts 目录说明文档**：为 `scripts` 目录添加说明文档，详细说明各个脚本的用途、使用方法和实现细节，帮助团队成员理解和使用项目中的自动化脚本。
 
+- [x] **统一代码检查命令**：汇总项目中分散的代码检查相关脚本（**Node.js** 版本配置一致性检查、**Lockfile** 同步检查、**ESLint** 代码规范检查、**Prettier** 格式化检查、**TypeScript** 类型检查等），集成为一个统一的检查命令，简化检查流程。
+
+- [x] **完善 lint-staged 配置**：在 **lint-staged** 中配置 **ESLint** 检查和 **TypeScript** 类型检查，确保在提交代码前自动对暂存的文件进行代码规范检查，与 **Prettier** 格式化配合使用，提升代码质量并减少代码审查中的规范性问题。
+
+- [x] **添加 TypeScript 类型检查脚本**：在 `package.json` 中添加 **TypeScript** 类型检查脚本，并在 **pre-commit** 钩子和 **CI/CD** 流程中集成，确保代码类型安全。
+
 </details>
 
-- [ ] **统一代码检查命令**：汇总项目中分散的代码检查相关脚本（**Node.js** 版本配置一致性检查、**Lockfile** 同步检查、**ESLint** 代码规范检查、**Prettier** 格式化检查、**TypeScript** 类型检查等），集成为一个统一的检查命令，简化检查流程。
-
-- [ ] **完善 lint-staged 配置**：在 **lint-staged** 中配置 **ESLint** 检查和 **TypeScript** 类型检查，确保在提交代码前自动对暂存的文件进行代码规范检查，与 **Prettier** 格式化配合使用，提升代码质量并减少代码审查中的规范性问题。
-
 - [ ] **优化 ESLint 配置**：检查 **Next.js** 默认的 **ESLint** 配置，根据项目需求进行恰当的优化，包括规则调整、插件扩展、性能优化等，确保代码规范检查既严格又实用，提升开发体验和代码质量。
-
-- [ ] **添加 TypeScript 类型检查脚本**：在 `package.json` 中添加 **TypeScript** 类型检查脚本，并在 **pre-commit** 钩子和 **CI/CD** 流程中集成，确保代码类型安全。
 
 - [ ] **配置测试框架**：选择并配置测试框架，添加测试工具脚本，创建测试目录结构和示例测试，配置测试覆盖率阈值。
 
@@ -236,5 +236,9 @@ pnpm dev
 - `pnpm dev` - 启动开发服务器
 - `pnpm build` - 构建生产版本
 - `pnpm start` - 启动生产服务器
-- `pnpm lint` - 运行 **ESLint** 检查
-- `pnpm format` - 使用 **Prettier** 格式化代码
+- `pnpm lint` - 运行所有代码检查
+- `pnpm lint:node-version` - 检查 **Node.js** 版本配置一致性
+- `pnpm lint:lockfile` - 检查 **Lockfile** 同步状态
+- `pnpm lint:typescript` - 运行 **TypeScript** 类型检查
+- `pnpm lint:eslint` - 运行 **ESLint** 代码规范检查
+- `pnpm lint:prettier` - 运行 **Prettier** 格式化检查

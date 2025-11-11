@@ -136,6 +136,8 @@
 
 - [x] **Node.js 版本配置一致性检测脚本**：开发自动化检查脚本，用于验证项目中分散的 **Node.js** 版本配置文件（`.nvmrc`、`.node-version`、`package.json` 中的 `engines.node` 和 `volta.node`、`pnpm-workspace.yaml` 中的 `useNodeVersion` 等）的一致性，确保版本配置同步。
 
+- [x] **scripts 目录说明文档**：为 `scripts` 目录添加说明文档，详细说明各个脚本的用途、使用方法和实现细节，帮助团队成员理解和使用项目中的自动化脚本。
+
 </details>
 
 - [ ] **持续集成检测流程**：在 **CI/CD** 流程中集成各类质量检测，包括代码规范检查、类型检查、测试覆盖率、依赖安全扫描、构建产物验证等，确保代码质量与项目稳定性。
@@ -143,8 +145,6 @@
 - [ ] **统一代码检查命令**：汇总项目中分散的代码检查相关脚本（**Node.js** 版本配置一致性检查、**Lockfile** 同步检查、**ESLint** 代码规范检查、**Prettier** 格式化检查、**TypeScript** 类型检查等），集成为一个统一的检查命令，简化检查流程。
 
 - [ ] **字体优化配置检查**：验证项目是否保持使用 [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) 自动优化和加载 [Geist](https://vercel.com/font) 字体的配置。
-
-- [ ] **scripts 目录说明文档**：为 `scripts` 目录添加说明文档，详细说明各个脚本的用途、使用方法和实现细节，帮助团队成员理解和使用项目中的自动化脚本。
 
 - [ ] **在 lint-staged 中配置 ESLint 检查**：在 **lint-staged** 中配置 **ESLint** 检查，确保在提交代码前自动对暂存的文件进行代码规范检查，与 **Prettier** 格式化配合使用，提升代码质量并减少代码审查中的规范性问题。
 

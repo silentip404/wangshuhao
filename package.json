@@ -21,7 +21,8 @@
     "lint:lockfile": "pnpm install --frozen-lockfile --lockfile-only --loglevel=warn",
     "lint:typescript": "tsc --noEmit",
     "lint:eslint": "eslint --max-warnings=0",
-    "lint:prettier": "prettier --check --log-level=warn ."
+    "lint:prettier": "prettier --check --log-level=warn .",
+    "lint:success": "tsx scripts/cli-print.ts --type=success --title=\"All linting checks completed successfully.\""
   },
   "dependencies": {
     "next": "16.0.1",
@@ -36,6 +37,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/signale": "^1.4.7",
+    "commander": "^14.0.2",
     "eslint": "^9.39.1",
     "eslint-config-next": "16.0.1",
     "husky": "^9.1.7",
@@ -45,6 +47,7 @@
     "signale": "^1.4.0",
     "tailwindcss": "^4.1.16",
     "tsx": "^4.20.6",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "zod": "^4.1.12"
   }
 }

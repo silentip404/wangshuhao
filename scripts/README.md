@@ -7,12 +7,17 @@
 ```
 scripts/
 ├── README.md                      # 本说明文档
+├── cli-print.ts                   # 命令行打印工具脚本
 ├── verify-node-version-config.ts   # Node.js 版本配置一致性检查脚本
 └── utils/
     └── print.ts                    # 命令行输出工具函数
 ```
 
 ## 📝 脚本说明
+
+### `cli-print.ts`
+
+命令行打印工具，用于在命令行中打印各类消息。支持多种消息类型，可设置标题和描述内容。
 
 ### `verify-node-version-config.ts`
 

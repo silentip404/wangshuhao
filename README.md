@@ -245,3 +245,4 @@ pnpm dev
 - `pnpm lint:typescript` - 运行 **TypeScript** 类型检查
 - `pnpm lint:eslint` - 运行 **ESLint** 代码规范检查
 - `pnpm lint:prettier` - 运行 **Prettier** 格式化检查
+- `pnpm lint:success` - 打印所有检查通过的成功消息

@@ -1,8 +1,6 @@
-/**
- * @see https://prettier.io/docs/configuration
- * @type {import("prettier").Config}
- */
-const config = {
+import type { Config } from 'prettier';
+
+const config: Config = {
   singleQuote: true,
   quoteProps: 'consistent',
   objectWrap: 'collapse',
@@ -18,10 +16,7 @@ const config = {
       ],
       options: { parser: 'jsonc' },
     },
-    {
-      files: ['*.vue', '*.jsx', '*.cjsx', '*.mjsx', '*.tsx', '*.ctsx', '*.mtsx'],
-      options: { singleAttributePerLine: true },
-    },
+    { files: ['*.jsx', '*.tsx', '*.vue'], options: { singleAttributePerLine: true } },
     { files: ['LICENSE'], options: { parser: 'markdown', proseWrap: 'always' } },
   ],
 };

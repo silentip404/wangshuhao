@@ -1,5 +1,6 @@
 {
   "name": "wangshuhao",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.22.0",
@@ -17,12 +18,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "run-s lint:*",
-    "lint:node-version": "tsx scripts/verify-node-version-config.ts",
+    "lint:node-version": "node scripts/verify-node-version-config.ts",
     "lint:lockfile": "pnpm install --frozen-lockfile --lockfile-only --loglevel=warn",
     "lint:typescript": "tsc --noEmit",
     "lint:eslint": "eslint --max-warnings=0",
     "lint:prettier": "prettier --check --log-level=warn .",
-    "lint:success": "tsx scripts/cli-print.ts --type=success --title=\"All linting checks completed successfully.\""
+    "lint:success": "node scripts/cli-print.ts --type=success --title=\"All linting checks completed successfully.\""
   },
   "dependencies": {
     "next": "16.0.2",
@@ -46,7 +47,6 @@
     "prettier": "3.6.2",
     "signale": "^1.4.0",
     "tailwindcss": "^4.1.17",
-    "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "zod": "^4.1.12"
   }

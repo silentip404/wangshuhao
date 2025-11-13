@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { print } from './utils/print';
-import packageJSON from '../package.json';
+import { print } from './utils/print.ts';
+import packageJSON from '../package.json' with { type: 'json' };
 
 interface VersionMismatch {
   config: string;

@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 import { z } from 'zod';
-import { print } from './utils/print';
+import { print } from './utils/print.ts';
 
 const program = new Command();
 

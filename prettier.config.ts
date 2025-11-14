@@ -1,6 +1,6 @@
 import type { Config } from 'prettier';
 
-const config: Config = {
+const prettierConfig: Config = {
   singleQuote: true,
   quoteProps: 'consistent',
   objectWrap: 'collapse',
@@ -21,4 +21,4 @@ const config: Config = {
   ],
 };
 
-export default config;
+export default prettierConfig;

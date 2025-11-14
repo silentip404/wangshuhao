@@ -16,16 +16,15 @@ import { print } from './scripts/utils/print';
 
 const allPluginNames = new Set<string>();
 
-const coreAllConfig = clone(
+const allCoreRulesConfig = clone(
   defineConfig({
-    name: 'validate/core-all-config',
-    files: ['**/*.{js,ts,tsx}'],
-    plugins: { js },
-    extends: ['js/all'],
+    name: 'eslint:validate/all-core-rules',
+    files: ['**/*.d.ts', '**/*.js', '**/*.ts', '**/*.tsx'],
+    rules: js.configs.all.rules,
   }),
 );
 // 修改全部核心规则为 warn 级别
-forEach(coreAllConfig, (config) => {
+forEach(allCoreRulesConfig, (config) => {
   const { rules } = config;
   if (isEmptyish(rules)) return;
 
@@ -40,7 +39,7 @@ forEach(coreAllConfig, (config) => {
   });
 });
 
-const eslintConfigWithAllRules = concat(coreAllConfig, clone(eslintConfig));
+const eslintConfigWithAllRules = concat(allCoreRulesConfig, clone(eslintConfig));
 // 追加插件的全部规则
 forEach(eslintConfigWithAllRules, (config) => {
   const { plugins } = config;

@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import { print } from './utils/print.ts';
 import packageJSON from '../package.json' with { type: 'json' };
 
@@ -117,9 +117,9 @@ function collectVersionMismatches(
 function formatMismatchErrors(mismatches: VersionMismatch[], expectedVersion: string): string[] {
   const errorDetails = mismatches.map((mismatch) =>
     [
-      `  - ${mismatch.config}`,
-      `    期望值: ${mismatch.expected}`,
-      `    实际值: ${mismatch.actual}`,
+      ` - ${mismatch.config}`,
+      `   期望值: ${mismatch.expected}`,
+      `   实际值: ${mismatch.actual}`,
     ].join('\n'),
   );
 

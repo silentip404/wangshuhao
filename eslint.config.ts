@@ -13,6 +13,12 @@ const eslintConfig = defineConfig([
     'build/**',
     'next-env.d.ts',
   ]),
+
+  {
+    files: ['**/*.{js,ts,tsx}'],
+    languageOptions: { parserOptions: { projectService: true } },
+    rules: { 'import/enforce-node-protocol-usage': ['warn', 'always'] },
+  },
 ]);
 
 export default eslintConfig;

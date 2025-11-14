@@ -147,6 +147,24 @@
 
 - 🔒 **Lockfile 同步检查**：在 `pre-commit` 钩子中自动运行 `pnpm install --frozen-lockfile --lockfile-only`，确保 `pnpm-lock.yaml` 与 `package.json` 保持同步，防止因 lockfile 未更新导致的依赖不一致问题。
 
+- 🔍 **ESLint 配置验证**：通过独立的验证配置文件，确保 **ESLint** 配置的正确性和完整性，帮助团队识别配置错误和遗漏的规则。
+
+  <details>
+    <summary>查看实现方案</summary>
+
+  **ESLint** 配置的复杂性可能导致规则遗漏或配置错误，这些问题在常规代码检查中难以发现。本项目通过独立的验证配置文件实现配置的全面检查：
+  1. **验证配置独立**：创建 `eslint.config.validate.ts` 作为独立的验证配置文件，基于主配置扩展，启用所有可用规则作为警告，确保配置的完整性。
+
+  2. **规则覆盖检查**：验证配置会自动检测所有已安装插件的规则，并将未在主配置中显式设置的规则设置为警告级别，帮助识别可能遗漏的规则。验证过程会显示所有被检测到的插件，便于开发者了解配置的覆盖范围。
+
+  3. **配置验证脚本**：在 `package.json` 中添加 `eslint:validate` 脚本，用于运行验证配置，确保配置的正确性。同时提供 `eslint:validate:inspector` 脚本，使用 **ESLint Config Inspector** 工具可视化查看验证配置，帮助开发者更直观地理解配置结构和规则覆盖情况。
+
+  4. **配置完整性提示**：验证配置会自动检查每个配置对象的 `name` 属性，缺失时会给出警告提示，建议使用 `eslint:validate:inspector` 命令辅助检查配置的完整性。
+
+  通过以上设计与实现，确保 **ESLint** 配置的正确性、完整性和可持续的维护性。
+
+  </details>
+
 ### 📈 性能指标
 
 ## 📋 TODO List
@@ -273,3 +291,6 @@ pnpm dev
 - `pnpm lint:eslint` - 运行 **ESLint** 代码规范检查
 - `pnpm lint:prettier` - 运行 **Prettier** 格式化检查
 - `pnpm lint:success` - 打印所有检查通过的成功消息
+- `pnpm eslint:inspector` - 使用 **ESLint Config Inspector** 可视化查看主 **ESLint** 配置
+- `pnpm eslint:validate` - 运行 **ESLint** 验证配置的正确性和完整性，帮助团队识别配置错误和遗漏的规则
+- `pnpm eslint:validate:inspector` - 使用 **ESLint Config Inspector** 可视化查看验证配置，帮助更直观地理解配置结构和规则覆盖情况

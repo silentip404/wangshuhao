@@ -1,27 +1,13 @@
-import { defineConfig, globalIgnores } from 'eslint/config';
-import nextVitals from 'eslint-config-next/core-web-vitals';
-import nextTypeScript from 'eslint-config-next/typescript';
+import { defineConfig } from 'eslint/config';
+import { nextPreset } from './eslint-configs/presets/next';
+import { importRules } from './eslint-configs/rules/import';
 
 const eslintConfig = defineConfig([
   {
     name: 'source-code',
     files: ['**/*.d.ts', '**/*.js', '**/*.ts', '**/*.tsx'],
-    extends: [
-      ...nextVitals,
-      ...nextTypeScript,
-      // Override default ignores of eslint-config-next.
-      globalIgnores([
-        // Default ignores of eslint-config-next:
-        '.next/**',
-        'out/**',
-        'build/**',
-        'next-env.d.ts',
-      ]),
-
-      { languageOptions: { parserOptions: { projectService: true } } },
-
-      { rules: { 'import/enforce-node-protocol-usage': ['warn', 'always'] } },
-    ],
+    languageOptions: { parserOptions: { projectService: true } },
+    extends: [nextPreset, importRules],
   },
 ]);
 

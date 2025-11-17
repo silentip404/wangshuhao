@@ -9,8 +9,7 @@ scripts/
 ├── README.md                      # 本说明文档
 ├── cli-print.ts                   # 命令行打印工具脚本
 ├── verify-node-version-config.ts   # Node.js 版本配置一致性检查脚本
-└── utils/
-    └── print.ts                    # 命令行输出工具函数
+└── utils/                          # 工具函数目录
 ```
 
 ## 📝 脚本说明
@@ -23,6 +22,6 @@ scripts/
 
 验证项目中分散的 Node.js 版本配置文件的一致性，确保所有配置与 `package.json` 中的 `engines.node` 字段严格一致。
 
-### `utils/print.ts`
+### `utils/`
 
-提供统一的命令行输出工具函数，用于脚本中的信息输出。
+工具函数目录，包含脚本中使用的通用工具函数，详见 `utils/README.md`。

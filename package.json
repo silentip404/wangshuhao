@@ -24,12 +24,16 @@
     "lint:eslint": "eslint --max-warnings=0",
     "lint:prettier": "prettier --check --log-level=warn .",
     "lint:success": "node scripts/cli-print.ts --type=success --title=\"All linting checks completed successfully.\"",
+    "fix": "run-s --continue-on-error fix:*",
+    "fix:eslint": "eslint --fix",
+    "fix:prettier": "prettier --write --log-level=warn .",
+    "fix:complete": "node scripts/cli-print.ts --type=info --title=\"All fixing tasks completed, please review the output above.\"",
     "eslint:inspector": "eslint-config-inspector",
-    "eslint:validate": "eslint --config=eslint.config.validate.ts",
+    "eslint:validate": "cross-env SORT_BY=warnings eslint --config=eslint.config.validate.ts --format=summary",
     "eslint:validate:inspector": "eslint-config-inspector --config=eslint.config.validate.ts"
   },
   "dependencies": {
-    "next": "16.0.2",
+    "next": "16.0.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "remeda": "2.32.0"
@@ -46,8 +50,11 @@
     "@types/react-dom": "^19.2.3",
     "@types/signale": "^1.4.7",
     "commander": "^14.0.2",
+    "cross-env": "^10.1.0",
     "eslint": "^9.39.1",
-    "eslint-config-next": "16.0.2",
+    "eslint-config-next": "16.0.3",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-formatter-summary": "^2.0.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
     "npm-run-all2": "^8.0.4",
@@ -56,6 +63,7 @@
     "signale": "^1.4.0",
     "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3",
+    "typescript-eslint": "^8.47.0",
     "zod": "^4.1.12"
   }
 }

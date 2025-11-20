@@ -16,8 +16,14 @@ const prettierConfig: Config = {
       ],
       options: { parser: 'jsonc' },
     },
-    { files: ['*.jsx', '*.tsx', '*.vue'], options: { singleAttributePerLine: true } },
-    { files: ['LICENSE'], options: { parser: 'markdown', proseWrap: 'always' } },
+    {
+      files: ['*.jsx', '*.tsx', '*.vue'],
+      options: { singleAttributePerLine: true },
+    },
+    {
+      files: ['LICENSE'],
+      options: { parser: 'markdown', proseWrap: 'always' },
+    },
   ],
 };
 

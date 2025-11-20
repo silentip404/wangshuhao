@@ -1,5 +1,7 @@
 import { Command } from 'commander';
+import { isDefined } from 'remeda';
 import { z } from 'zod';
+
 import { print } from './utils/print.ts';
 
 const program = new Command();
@@ -13,7 +15,7 @@ program
     '--description <description>',
     '描述内容（可多次使用以支持多行）',
     (value: string, previous: string | string[] | undefined) => {
-      if (previous === undefined) {
+      if (!isDefined(previous)) {
         return value;
       }
       if (typeof previous === 'string') {
@@ -24,18 +26,22 @@ program
     undefined,
   )
   .action((options) => {
-    const OptionsSchema = z.object({
+    const optionsSchema = z.object({
       type: z.enum(['info', 'success', 'warn', 'error']).optional(),
       title: z.string(),
       description: z.union([z.string(), z.array(z.string())]).optional(),
     });
-    const parsedOptions = OptionsSchema.safeParse(options);
+    const parsedOptions = optionsSchema.safeParse(options);
 
     if (parsedOptions.success) {
       const { type, title, description } = parsedOptions.data;
       print({ type, title, description });
     } else {
-      print({ type: 'error', title: '非法参数', description: parsedOptions.error.message });
+      print({
+        type: 'error',
+        title: '非法参数',
+        description: parsedOptions.error.message,
+      });
       process.exit(1);
     }
   });

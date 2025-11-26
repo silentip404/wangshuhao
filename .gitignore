@@ -284,3 +284,6 @@ yarn.lock
 bunfig.toml
 bun.lock
 bun.lockb
+
+# 忽略由 eslint-config-inspector 生成的临时文件
+*.bundled_*.*js

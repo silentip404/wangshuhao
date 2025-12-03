@@ -109,17 +109,15 @@
     <summary>查看配置细节</summary>
 
   代码格式化是团队协作中的基础工程化实践，不同编辑器、不同开发者的个人偏好会导致代码风格差异，这些差异会在代码审查和合并时产生噪音，影响开发效率。本项目通过 **.gitattributes**、**EditorConfig** 和 **Prettier** 的组合配置，实现跨编辑器、跨环境的代码风格统一：
-  1. **代码宽度设置**：平衡 **TypeScript** 带来的代码量增加及阅读舒适度，在 `.editorconfig` 中设置 `max_line_length = 100`，相比常见的 80 或 120 字符，在保持可读性的同时减少不必要的换行。
+  1. **换行符统一**：通过 `.gitattributes`、`.editorconfig`和 `prettier` 的综合约束，确保所有文本文件使用 **LF**（`\n`）作为换行符，避免 **Windows**（`\r\n`）与 **Unix/Linux**（`\n`）系统间的换行符差异导致的合并冲突。
 
-  2. **换行符统一**：通过 `.gitattributes`、`.editorconfig`和 `prettier` 的综合约束，确保所有文本文件使用 **LF**（`\n`）作为换行符，避免 **Windows**（`\r\n`）与 **Unix/Linux**（`\n`）系统间的换行符差异导致的合并冲突。
+  2. **JSONC 文件配置优化**：针对常见的 **JSONC** 文件（如 `.vscode/**/*.json`、`tsconfig.json` 等），通过 `overrides` 配置单独指定 `parser: 'jsonc'`，支持更多的行尾逗号，减少因添加或删除配置项导致的 **diff** 差异。
 
-  3. **JSONC 文件配置优化**：针对常见的 **JSONC** 文件（如 `.vscode/**/*.json`、`tsconfig.json` 等），通过 `overrides` 配置单独指定 `parser: 'jsonc'`，支持更多的行尾逗号，减少因添加或删除配置项导致的 **diff** 差异。
+  3. **Tailwind CSS 阅读体验优化**：为降低使用 **Tailwind CSS** 带来的阅读心智负担，在 `prettier` 中对 **JSX/TSX/VUE** 文件启用 `singleAttributePerLine: true`，将每个属性单独成行，提升长属性列表的可读性和 **diff** 可读性。
 
-  4. **Tailwind CSS 阅读体验优化**：为降低使用 **Tailwind CSS** 带来的阅读心智负担，在 `prettier` 中对 **JSX/TSX/VUE** 文件启用 `singleAttributePerLine: true`，将每个属性单独成行，提升长属性列表的可读性和 **diff** 可读性。
+  4. **编辑器开箱即用体验**：在 `.vscode` 中配置和推荐安装相关插件，确保使用 **VSCode** 的开发者获得开箱即用的格式化体验。
 
-  5. **编辑器开箱即用体验**：在 `.vscode` 中配置和推荐安装相关插件，确保使用 **VSCode** 的开发者获得开箱即用的格式化体验。
-
-  6. **持续检测与自动化**：在检查脚本、`pre-commit` 钩子、持续集成流程中持续检测代码格式，确保提交到仓库的代码符合格式化规范。
+  5. **持续检测与自动化**：在检查脚本、`pre-commit` 钩子、持续集成流程中持续检测代码格式，确保提交到仓库的代码符合格式化规范。
 
   通过以上设计与实现，实现团队开发过程中的代码格式化统一并减轻开发者的心智负担。
 
@@ -193,6 +191,8 @@
 </details>
 
 - [ ] **优化 ESLint 配置**：检查 **Next.js** 默认的 **ESLint** 配置，根据项目需求进行恰当的优化，包括规则调整、插件扩展、性能优化等，确保代码规范检查既严格又实用，提升开发体验和代码质量。
+
+- [ ] **优化 React 组件箭头函数代码风格**：开发自定义 **ESLint** 规则，对返回 **React** 组件的箭头函数单独处理 `arrow-body-style` 规则，在保持项目整体 `'arrow-body-style': ['warn', 'always']` 风格的同时，允许组件函数使用更简洁的表达式体语法，提升代码可读性和开发体验。
 
 - [ ] **配置测试框架**：选择并配置测试框架，添加测试工具脚本，创建测试目录结构和示例测试，配置测试覆盖率阈值。
 
@@ -281,16 +281,33 @@ pnpm dev
 
 ## 📜 可用脚本
 
+### 开发与构建
+
 - `pnpm dev` - 启动开发服务器
 - `pnpm build` - 构建生产版本
 - `pnpm start` - 启动生产服务器
+
+### 代码检查
+
 - `pnpm lint` - 运行所有代码检查
 - `pnpm lint:node-version` - 检查 **Node.js** 版本配置一致性
 - `pnpm lint:lockfile` - 检查 **Lockfile** 同步状态
-- `pnpm lint:typescript` - 运行 **TypeScript** 类型检查
+- `pnpm lint:knip` - 使用 **Knip** 检测未使用的文件、导出与依赖，帮助清理死代码
+- `pnpm lint:tsc` - 运行 **TypeScript** 类型检查
 - `pnpm lint:eslint` - 运行 **ESLint** 代码规范检查
 - `pnpm lint:prettier` - 运行 **Prettier** 格式化检查
-- `pnpm lint:success` - 打印所有检查通过的成功消息
+- `pnpm lint:print-success` - 打印所有检查通过的成功消息
+
+### 代码修复
+
+- `pnpm fix` - 运行所有代码修复任务
+- `pnpm fix:knip` - 使用 **Knip** 自动移除未使用的文件、导出与依赖
+- `pnpm fix:eslint` - 使用 **ESLint** 修复可修复的问题
+- `pnpm fix:prettier` - 使用 **Prettier** 格式化代码
+- `pnpm fix:print-complete` - 打印所有修复任务完成的信息提示
+
+### ESLint 配置工具
+
 - `pnpm eslint:inspector` - 使用 **ESLint Config Inspector** 可视化查看主 **ESLint** 配置
 - `pnpm eslint:validate` - 运行 **ESLint** 验证配置的正确性和完整性，帮助团队识别配置错误和遗漏的规则
 - `pnpm eslint:validate:inspector` - 使用 **ESLint Config Inspector** 可视化查看验证配置，帮助更直观地理解配置结构和规则覆盖情况

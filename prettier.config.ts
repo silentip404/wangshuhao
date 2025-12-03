@@ -9,15 +9,21 @@ const prettierConfig: Config = {
   overrides: [
     {
       files: [
+        '**/tsconfig.json',
+        '**/tsconfig.*.json',
         '.vscode/**/*.json',
         '.vscode/**/*.code-snippets',
-        'tsconfig.json',
-        'tsconfig.*.json',
       ],
       options: { parser: 'jsonc' },
     },
-    { files: ['*.jsx', '*.tsx', '*.vue'], options: { singleAttributePerLine: true } },
-    { files: ['LICENSE'], options: { parser: 'markdown', proseWrap: 'always' } },
+    {
+      files: ['**/*.jsx', '**/*.tsx', '**/*.vue'],
+      options: { singleAttributePerLine: true },
+    },
+    {
+      files: ['LICENSE'],
+      options: { parser: 'markdown', proseWrap: 'always' },
+    },
   ],
 };
 

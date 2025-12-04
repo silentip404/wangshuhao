@@ -11,12 +11,12 @@ import {
   values,
 } from 'remeda';
 
-const localPackage = await readPackage();
+const packageJSON = await readPackage();
 
 const ensureScriptsInPackage = (scripts: string[]): string[] => {
-  const localScripts = keys(localPackage.scripts ?? {});
+  const existingScripts = keys(packageJSON.scripts ?? {});
 
-  const unusedScripts = difference(scripts, localScripts);
+  const unusedScripts = difference(scripts, existingScripts);
 
   if (isEmptyish(unusedScripts)) {
     return scripts;
@@ -28,14 +28,14 @@ const ensureScriptsInPackage = (scripts: string[]): string[] => {
 };
 
 const ensureDependenciesInPackage = (dependencies: string[]): string[] => {
-  const localDependencies = pipe(
-    localPackage,
+  const existingDependencies = pipe(
+    packageJSON,
     pickBy((value, key) => toLowerCase(key).endsWith('dependencies')),
     values(),
     flatMap(keys()),
   );
 
-  const unusedDependencies = difference(dependencies, localDependencies);
+  const unusedDependencies = difference(dependencies, existingDependencies);
 
   if (isEmptyish(unusedDependencies)) {
     return dependencies;

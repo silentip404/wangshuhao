@@ -285,6 +285,9 @@ bunfig.toml
 bun.lock
 bun.lockb
 
+# 忽略某些场景下手动创建的临时文件
+*.should-be-ignored-by-git.*
+
 # 忽略由 eslint-config-inspector 生成的临时文件
 *.bundled_*.*js
 

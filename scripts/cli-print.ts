@@ -1,51 +1,46 @@
 import path from 'node:path';
 
-import { Command } from 'commander';
-import { isDefined } from 'remeda';
-import { z } from 'zod';
+import { join, omit } from 'remeda';
+import { parse } from 'ts-command-line-args';
 
-import { print } from '../utils/print.ts';
+import { helpArgConfig, helpArgOptions } from '../utils/cli-helper.ts';
+import { print, printOptionsSchema } from '../utils/print.ts';
 
-const program = new Command();
+import type { WithHelpArg } from '../utils/cli-helper.ts';
+import type { PrintOptions } from '../utils/print.ts';
 
-program
-  .name(path.basename(import.meta.url))
-  .description('命令行打印工具，用于在命令行中打印各类消息')
-  .option('--type <type>', '消息类型 (info/success/warn/error)')
-  .requiredOption('--title <title>', '标题')
-  .option(
-    '--description <description>',
-    '描述内容（可多次使用以支持多行）',
-    (value: string, previous: string | string[] | undefined) => {
-      if (!isDefined(previous)) {
-        return value;
-      }
-      if (typeof previous === 'string') {
-        return [previous, value];
-      }
-      return [...previous, value];
+const typeSchema = printOptionsSchema.shape.type.unwrap();
+
+const cliArguments = parse<WithHelpArg<PrintOptions>>(
+  {
+    ...helpArgConfig,
+
+    type: {
+      type: (value) => typeSchema.parse(value),
+      typeLabel: join(typeSchema.options, '/'),
+      optional: true,
+      description: '消息类型',
     },
-    undefined,
-  )
-  .action((untypedOptions) => {
-    const optionsSchema = z.object({
-      type: z.enum(['info', 'success', 'warn', 'error']).optional(),
-      title: z.string(),
-      description: z.union([z.string(), z.array(z.string())]).optional(),
-    });
-    const parsedOptions = optionsSchema.safeParse(untypedOptions);
+    title: { type: String, description: '消息标题' },
+    description: {
+      type: String,
+      multiple: true,
+      optional: true,
+      description: '消息描述',
+    },
+  },
+  {
+    ...helpArgOptions,
 
-    if (parsedOptions.success) {
-      const options = parsedOptions.data;
-      print(options);
-    } else {
-      print({
-        type: 'error',
-        title: '非法参数',
-        description: parsedOptions.error.message,
-      });
-      process.exit(1);
-    }
-  });
+    headerContentSections: [
+      {
+        header: path.basename(import.meta.url),
+        content: '在命令行中打印各类消息',
+      },
+    ],
+  },
+);
 
-program.parse();
+const options = omit(cliArguments, ['help']);
+
+print(options);

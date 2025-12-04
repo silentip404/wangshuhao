@@ -23,10 +23,20 @@
     "paths": {},
   },
   "include": [
-    "**/*.d.ts",
-    "**/*.js",
     "**/*.ts",
     "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.cts",
+    "**/*.cjs",
+    "**/*.mts",
+    "**/*.mjs",
+
+    // 必要的基础类型声明文件
+    // 改动时需要同步更新 scripts/tsc-files.ts 中的 include 配置
+    "**/*.d.ts",
+    "**/*.d.cts",
+    "**/*.d.mts",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
   ],

@@ -35,7 +35,6 @@
     "eslint:validate:inspector": "eslint-config-inspector --config=eslint.config.validate.ts"
   },
   "dependencies": {
-    "await-to-js": "^3.0.0",
     "next": "16.0.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
@@ -52,7 +51,6 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/signale": "^1.4.7",
-    "commander": "^14.0.2",
     "cross-env": "^10.1.0",
     "eslint": "^9.39.1",
     "eslint-config-flat-gitignore": "^2.1.0",
@@ -63,6 +61,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsonc": "^2.21.0",
     "husky": "^9.1.7",
+    "jsonc-eslint-parser": "^2.4.1",
     "knip": "^5.70.2",
     "lint-staged": "^16.2.7",
     "minimatch": "^10.1.1",
@@ -75,6 +74,7 @@
     "read-yaml-file": "^2.1.0",
     "signale": "^1.4.0",
     "tailwindcss": "^4.1.17",
+    "ts-command-line-args": "^2.5.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0",
     "zod": "^4.1.13"

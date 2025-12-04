@@ -261,10 +261,7 @@ const typescriptOverrides = defineConfig([
           format: null,
           custom: {
             regex: (() => {
-              const prefixes = join(
-                ['is', 'should', 'has', 'can', 'did', 'will'],
-                '|',
-              );
+              const prefixes = join(['is', 'should', 'ignore'], '|');
               const camelCaseRegex = `^(${prefixes})[A-Z][a-zA-Z0-9]*$`;
               const upperCaseRegex = `^(${toUpperCase(prefixes)})(_[A-Z0-9]+)+$`;
 

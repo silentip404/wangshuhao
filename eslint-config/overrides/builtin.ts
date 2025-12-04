@@ -88,7 +88,7 @@ const builtinOverrides = defineConfig([
        */
       'max-statements': [
         'warn',
-        { max: 32 },
+        { max: 16 },
         { ignoreTopLevelFunctions: true },
       ],
       /**

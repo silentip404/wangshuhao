@@ -9,11 +9,13 @@ const isRunningInKnip = isIncludedIn(
   ensureScriptsInPackage(['lint:knip', 'fix:knip']),
 );
 
-interface PrintOptions {
-  type?: 'info' | 'success' | 'warn' | 'error';
-  title: string;
-  description?: string | string[];
-}
+const printOptionsSchema = z.object({
+  type: z.enum(['info', 'success', 'warn', 'error']).optional(),
+  title: z.string(),
+  description: z.union([z.string(), z.array(z.string())]).optional(),
+});
+
+type PrintOptions = z.infer<typeof printOptionsSchema>;
 
 const print = ({
   type = 'info',
@@ -31,30 +33,7 @@ const print = ({
     ? `${title}\n\n${descriptionText}\n`
     : `${title}\n`;
 
-  switch (type) {
-    case 'info':
-      signale.info(message);
-      break;
-    case 'success':
-      signale.success(message);
-      break;
-    case 'warn':
-      signale.warn(message);
-      break;
-    case 'error':
-      signale.error(message);
-      break;
-    default: {
-      const unknownTypeSchema = z.string();
-      const parsedUnknownType = unknownTypeSchema.safeParse(type);
-
-      if (!parsedUnknownType.success) {
-        throw new Error(parsedUnknownType.error.message);
-      }
-
-      throw new Error(`未知的 type 类型: ${parsedUnknownType.data}`);
-    }
-  }
+  signale[type](message);
 };
 
-export { print };
+export { print, type PrintOptions, printOptionsSchema };

@@ -19,7 +19,6 @@
     "start": "next start",
     "lint": "run-s lint:*",
     "lint:node-version": "pnpm exec node scripts/verify-node-version-sync.ts",
-    "lint:typesync": "pnpm exec node scripts/typesync.ts",
     "lint:lockfile": "pnpm exec node scripts/verify-lockfile-sync.ts",
     "lint:knip": "knip --no-progress",
     "lint:tsc": "tsc --noEmit",
@@ -27,7 +26,6 @@
     "lint:prettier": "prettier --check --log-level=warn .",
     "lint:success-message": "pnpm exec node scripts/cli-print-message.ts --type=success --title=\"All linting checks completed successfully.\"",
     "fix": "run-s --continue-on-error fix:*",
-    "fix:typesync": "pnpm exec node scripts/typesync.ts --fix",
     "fix:knip": "knip --no-progress --fix",
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write --log-level=warn .",
@@ -80,7 +78,6 @@
     "ts-command-line-args": "^2.5.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0",
-    "typesync": "^0.14.3",
     "zod": "^4.1.13"
   }
 }

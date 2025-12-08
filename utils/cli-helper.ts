@@ -1,13 +1,4 @@
-import {
-  defaultTo,
-  filter,
-  isEmptyish,
-  isIncludedIn,
-  isTruthy,
-  map,
-  partition,
-  pipe,
-} from 'remeda';
+import { isEmptyish, isIncludedIn, map, partition, pipe } from 'remeda';
 
 import { toRelativePosixPath } from './path.ts';
 import { printMessage } from './print-message.ts';
@@ -92,16 +83,6 @@ const analyzeVerifyFiles = (
   };
 };
 
-const filterTruthyCliArguments = (
-  cliArguments: (string | undefined)[],
-): string[] =>
-  pipe(
-    cliArguments,
-    map(defaultTo('')),
-    map((cliArgument) => cliArgument.trim()),
-    filter(isTruthy),
-  );
-
 export {
   helpArgConfig,
   helpArgOptions,
@@ -109,5 +90,4 @@ export {
   type WithHelpArg,
   verifyFilesArgsConfig,
   analyzeVerifyFiles,
-  filterTruthyCliArguments,
 };

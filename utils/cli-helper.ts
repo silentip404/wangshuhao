@@ -1,4 +1,13 @@
-import { isEmptyish, isIncludedIn, map, partition, pipe } from 'remeda';
+import {
+  filter,
+  isEmptyish,
+  isIncludedIn,
+  isTruthy,
+  join,
+  map,
+  partition,
+  pipe,
+} from 'remeda';
 
 import { toRelativePosixPath } from './path.ts';
 import { printMessage } from './print-message.ts';
@@ -83,6 +92,23 @@ const analyzeVerifyFiles = (
   };
 };
 
+const mergeStdOutputs = ({
+  stdout,
+  stderr,
+}: {
+  stdout: Buffer;
+  stderr: Buffer;
+}): string => {
+  const outputs = [stdout, stderr];
+
+  return pipe(
+    outputs,
+    map((buffer) => buffer.toString().trim()),
+    filter(isTruthy),
+    join('\n'),
+  );
+};
+
 export {
   helpArgConfig,
   helpArgOptions,
@@ -90,4 +116,5 @@ export {
   type WithHelpArg,
   verifyFilesArgsConfig,
   analyzeVerifyFiles,
+  mergeStdOutputs,
 };

@@ -291,6 +291,7 @@ pnpm dev
 
 - `pnpm lint` - 运行所有代码检查
 - `pnpm lint:node-version` - 检查 **Node.js** 版本配置一致性
+- `pnpm lint:typesync` - 检查 **TypeScript** 类型定义同步状态
 - `pnpm lint:lockfile` - 检查 **Lockfile** 同步状态
 - `pnpm lint:knip` - 使用 **Knip** 检测未使用的文件、导出与依赖，帮助清理死代码
 - `pnpm lint:tsc` - 运行 **TypeScript** 类型检查
@@ -301,6 +302,7 @@ pnpm dev
 ### 代码修复
 
 - `pnpm fix` - 运行所有代码修复任务
+- `pnpm fix:typesync` - 自动同步 **TypeScript** 类型定义
 - `pnpm fix:knip` - 使用 **Knip** 自动移除未使用的文件、导出与依赖
 - `pnpm fix:eslint` - 使用 **ESLint** 修复可修复的问题
 - `pnpm fix:prettier` - 使用 **Prettier** 格式化代码

@@ -1,6 +1,6 @@
-import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 
+import { execa } from 'execa';
 import { omit } from 'remeda';
 import { parse } from 'ts-command-line-args';
 
@@ -10,7 +10,6 @@ import {
   helpArgOptions,
   verifyFilesArgsConfig,
 } from '../utils/cli-helper.ts';
-import { printMessage } from '../utils/print-message.ts';
 
 import type { VerifyFilesArgs, WithHelpArg } from '../utils/cli-helper.ts';
 
@@ -52,20 +51,13 @@ if (!shouldRunVerification) {
 }
 
 // 执行 pnpm install 验证
-const { status, error } = spawnSync(
+const { exitCode, all } = await execa(
   'pnpm',
   ['install', '--frozen-lockfile', '--lockfile-only', '--loglevel=warn'],
-  { stdio: 'inherit', shell: true },
+  { reject: false, all: true },
 );
 
-if (error !== undefined) {
-  printMessage({
-    type: 'error',
-    title: '执行 lockfile 同步验证失败',
-    description: error.message,
-  });
-  process.exit(1);
+if (exitCode !== 0) {
+  console.error(all);
+  process.exit(exitCode);
 }
-
-// 以 pnpm install 命令的退出状态退出进程
-process.exit(status);

@@ -1,15 +1,14 @@
-import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 
+import { execa } from 'execa';
 import { omit } from 'remeda';
 import { parse } from 'ts-command-line-args';
 
 import {
+  filterTruthyCliArguments,
   helpArgConfig,
   helpArgOptions,
-  mergeStdOutputs,
 } from '../utils/cli-helper.ts';
-import { printMessage } from '../utils/print-message.ts';
 
 import type { WithHelpArg } from '../utils/cli-helper.ts';
 
@@ -42,27 +41,18 @@ const options = omit(cliArguments, ['help']);
 const { fix: shouldFix } = options;
 
 // 执行 typesync 命令
-const { status, error, stdout, stderr } = spawnSync(
+const { exitCode, all } = await execa(
   'pnpm',
-  ['typesync', shouldFix === true ? '' : '--dry=fail'],
-  { shell: true },
+  [
+    'typesync',
+    ...filterTruthyCliArguments([
+      shouldFix === true ? undefined : '--dry=fail',
+    ]),
+  ],
+  { reject: false, all: true },
 );
 
-if (error !== undefined) {
-  printMessage({
-    type: 'error',
-    title: '使用临时配置文件执行 tsc 命令失败',
-    description: error.message,
-  });
-  process.exit(1);
+if (exitCode !== 0) {
+  console.error(all);
+  process.exit(exitCode);
 }
-
-// 如果 typesync 命令执行失败，则打印输出
-if (status !== 0) {
-  const output = mergeStdOutputs({ stdout, stderr });
-
-  console.error(output);
-}
-
-// 以 typesync 命令的退出状态退出进程
-process.exit(status);

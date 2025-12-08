@@ -1,9 +1,9 @@
 import {
+  defaultTo,
   filter,
   isEmptyish,
   isIncludedIn,
   isTruthy,
-  join,
   map,
   partition,
   pipe,
@@ -92,22 +92,15 @@ const analyzeVerifyFiles = (
   };
 };
 
-const mergeStdOutputs = ({
-  stdout,
-  stderr,
-}: {
-  stdout: Buffer;
-  stderr: Buffer;
-}): string => {
-  const outputs = [stdout, stderr];
-
-  return pipe(
-    outputs,
-    map((buffer) => buffer.toString().trim()),
+const filterTruthyCliArguments = (
+  cliArguments: (string | undefined)[],
+): string[] =>
+  pipe(
+    cliArguments,
+    map(defaultTo('')),
+    map((cliArgument) => cliArgument.trim()),
     filter(isTruthy),
-    join('\n'),
   );
-};
 
 export {
   helpArgConfig,
@@ -116,5 +109,5 @@ export {
   type WithHelpArg,
   verifyFilesArgsConfig,
   analyzeVerifyFiles,
-  mergeStdOutputs,
+  filterTruthyCliArguments,
 };

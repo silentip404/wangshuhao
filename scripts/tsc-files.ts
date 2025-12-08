@@ -1,7 +1,7 @@
-import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { execa } from 'execa';
 import { minimatch } from 'minimatch';
 import { resolveTSConfig, writeTSConfig } from 'pkg-types';
 import {
@@ -136,23 +136,16 @@ await writeTSConfig(temporaryConfigFilename, {
 });
 
 // 使用临时 TypeScript 配置文件执行 tsc 命令
-const { status, error } = spawnSync(
+const { exitCode, all } = await execa(
   'pnpm',
   ['tsc', '--project', temporaryConfigFilename, '--pretty'],
-  { stdio: 'inherit', shell: true },
+  { reject: false, all: true },
 );
 
 // 清理临时 TypeScript 配置文件
 fs.rmSync(temporaryConfigFilename, { force: true });
 
-if (error !== undefined) {
-  printMessage({
-    type: 'error',
-    title: '使用临时配置文件执行 tsc 命令失败',
-    description: error.message,
-  });
-  process.exit(1);
+if (exitCode !== 0) {
+  console.error(all);
+  process.exit(exitCode);
 }
-
-// 以 tsc 命令的退出状态退出进程
-process.exit(status);

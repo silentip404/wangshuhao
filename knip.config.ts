@@ -1,9 +1,5 @@
-import { ensureDependenciesInPackage } from './utils/ensure.ts';
-
 import type { KnipConfig } from 'knip';
 
-const knipConfig: KnipConfig = {
-  ignoreDependencies: ensureDependenciesInPackage(['typesync']),
-};
+const knipConfig: KnipConfig = {};
 
 export default knipConfig;

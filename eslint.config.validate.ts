@@ -18,7 +18,7 @@ import {
 
 import eslintConfig from './eslint.config.ts';
 import { GLOB_JS_DERIVED } from './utils/file-patterns.ts';
-import { print } from './utils/print.ts';
+import { printMessage } from './utils/print-message.ts';
 
 const validateAddedRuleSeverity = 'warn' as const;
 
@@ -77,7 +77,7 @@ const eslintConfigWithAllRules = pipe(
   }),
 );
 
-print({
+printMessage({
   title: '正在使用 ESLint 全部内置规则和以下插件的全部规则进行配置验证：',
   description: Array.from(allPluginNames).map((name) => ` - ${name}`),
 });
@@ -85,7 +85,7 @@ print({
 // 检查配置的 name 属性缺失
 forEach(eslintConfigWithAllRules, (config, index) => {
   if (!isTruthy(config.name)) {
-    print({
+    printMessage({
       type: 'warn',
       title: `配置[${index}]的 name 属性缺失`,
       description:

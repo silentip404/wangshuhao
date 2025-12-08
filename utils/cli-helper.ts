@@ -1,7 +1,7 @@
 import { isEmptyish, isIncludedIn, map, partition, pipe } from 'remeda';
 
 import { toRelativePosixPath } from './path.ts';
-import { print } from './print.ts';
+import { printMessage } from './print-message.ts';
 
 import type { ArgumentConfig, ParseOptions } from 'ts-command-line-args';
 
@@ -62,7 +62,7 @@ const analyzeVerifyFiles = (
 
   // 如果存在未知文件且未设置忽略未知文件，则报错退出
   if (!isEmptyish(unknownFiles) && ignoreUnknown !== true) {
-    print({
+    printMessage({
       type: 'error',
       title: '检测到未知文件',
       description: [

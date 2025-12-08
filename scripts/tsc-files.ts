@@ -18,7 +18,7 @@ import { parse } from 'ts-command-line-args';
 
 import { helpArgConfig, helpArgOptions } from '../utils/cli-helper.ts';
 import { toRelativePosixPath } from '../utils/path.ts';
-import { print } from '../utils/print.ts';
+import { printMessage } from '../utils/print-message.ts';
 
 import type { WithHelpArg } from '../utils/cli-helper.ts';
 
@@ -80,7 +80,7 @@ const [tscFiles, unknownFiles] = pipe(
 
 // 如果存在未知文件且未设置忽略未知文件，则报错退出
 if (!isEmptyish(unknownFiles) && ignoreUnknown !== true) {
-  print({
+  printMessage({
     type: 'error',
     title: '检测到未知文件',
     description: [
@@ -146,7 +146,7 @@ const { status, error } = spawnSync(
 fs.rmSync(temporaryConfigFilename, { force: true });
 
 if (error !== undefined) {
-  print({
+  printMessage({
     type: 'error',
     title: '使用临时配置文件执行 tsc 命令失败',
     description: error.message,

@@ -296,7 +296,7 @@ pnpm dev
 - `pnpm lint:tsc` - 运行 **TypeScript** 类型检查
 - `pnpm lint:eslint` - 运行 **ESLint** 代码规范检查
 - `pnpm lint:prettier` - 运行 **Prettier** 格式化检查
-- `pnpm lint:print-success` - 打印所有检查通过的成功消息
+- `pnpm lint:success-message` - 打印所有检查通过的成功消息
 
 ### 代码修复
 
@@ -304,7 +304,7 @@ pnpm dev
 - `pnpm fix:knip` - 使用 **Knip** 自动移除未使用的文件、导出与依赖
 - `pnpm fix:eslint` - 使用 **ESLint** 修复可修复的问题
 - `pnpm fix:prettier` - 使用 **Prettier** 格式化代码
-- `pnpm fix:print-complete` - 打印所有修复任务完成的信息提示
+- `pnpm fix:complete-message` - 打印所有修复任务完成的信息提示
 
 ### ESLint 配置工具
 

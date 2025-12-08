@@ -9,19 +9,19 @@ const isRunningInKnip = isIncludedIn(
   ensureScriptsInPackage(['lint:knip', 'fix:knip']),
 );
 
-const printOptionsSchema = z.object({
+const printMessageOptionsSchema = z.object({
   type: z.enum(['info', 'success', 'warn', 'error']).optional(),
   title: z.string(),
   description: z.union([z.string(), z.array(z.string())]).optional(),
 });
 
-type PrintOptions = z.infer<typeof printOptionsSchema>;
+type PrintMessageOptions = z.infer<typeof printMessageOptionsSchema>;
 
-const print = ({
+const printMessage = ({
   type = 'info',
   title,
   description = '',
-}: PrintOptions): void => {
+}: PrintMessageOptions): void => {
   if (isRunningInKnip) {
     return;
   }
@@ -36,4 +36,4 @@ const print = ({
   signale[type](message);
 };
 
-export { print, type PrintOptions, printOptionsSchema };
+export { printMessage, type PrintMessageOptions, printMessageOptionsSchema };

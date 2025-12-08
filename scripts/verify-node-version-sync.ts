@@ -21,7 +21,7 @@ import {
   helpArgOptions,
   verifyFilesArgsConfig,
 } from '../utils/cli-helper.ts';
-import { print } from '../utils/print.ts';
+import { printMessage } from '../utils/print-message.ts';
 
 import type { VerifyFilesArgs, WithHelpArg } from '../utils/cli-helper.ts';
 
@@ -33,7 +33,7 @@ const getStandardNodeVersion = (): string => {
   const exactNodeVersionRegex = /^(\d+\.\d+\.\d+)$/;
 
   if (nodeVersion === undefined) {
-    print({
+    printMessage({
       type: 'error',
       title: '未读取到 Node.js 版本配置',
       description: '请在 package.json 中设置 engines.node 字段',
@@ -41,7 +41,7 @@ const getStandardNodeVersion = (): string => {
     process.exit(1);
   }
   if (typeof nodeVersion !== 'string') {
-    print({
+    printMessage({
       type: 'error',
       title: '错误的 Node.js 版本配置',
       description: '原因：package.json 中的 engines.node 字段必须为字符串',
@@ -49,7 +49,7 @@ const getStandardNodeVersion = (): string => {
     process.exit(1);
   }
   if (!exactNodeVersionRegex.test(nodeVersion)) {
-    print({
+    printMessage({
       type: 'error',
       title: '错误的 Node.js 版本配置',
       description: `原因：package.json 中的 engines.node 字段必须满足 ${exactNodeVersionRegex.source} 格式`,
@@ -178,7 +178,7 @@ const errors = await Promise.all([
 const definedErrors = filter(errors, isDefined);
 
 if (!isEmptyish(definedErrors)) {
-  print({
+  printMessage({
     type: 'error',
     title: '错误的 Node.js 版本配置',
     description: map(definedErrors, (definedError) => ` - ${definedError}`),

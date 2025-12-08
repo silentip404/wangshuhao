@@ -4,14 +4,17 @@ import { join, omit } from 'remeda';
 import { parse } from 'ts-command-line-args';
 
 import { helpArgConfig, helpArgOptions } from '../utils/cli-helper.ts';
-import { print, printOptionsSchema } from '../utils/print.ts';
+import {
+  printMessage,
+  printMessageOptionsSchema,
+} from '../utils/print-message.ts';
 
 import type { WithHelpArg } from '../utils/cli-helper.ts';
-import type { PrintOptions } from '../utils/print.ts';
+import type { PrintMessageOptions } from '../utils/print-message.ts';
 
-const typeSchema = printOptionsSchema.shape.type.unwrap();
+const typeSchema = printMessageOptionsSchema.shape.type.unwrap();
 
-const cliArguments = parse<WithHelpArg<PrintOptions>>(
+const cliArguments = parse<WithHelpArg<PrintMessageOptions>>(
   {
     ...helpArgConfig,
 
@@ -43,4 +46,4 @@ const cliArguments = parse<WithHelpArg<PrintOptions>>(
 
 const options = omit(cliArguments, ['help']);
 
-print(options);
+printMessage(options);

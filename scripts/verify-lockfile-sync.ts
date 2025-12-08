@@ -10,7 +10,7 @@ import {
   helpArgOptions,
   verifyFilesArgsConfig,
 } from '../utils/cli-helper.ts';
-import { print } from '../utils/print.ts';
+import { printMessage } from '../utils/print-message.ts';
 
 import type { VerifyFilesArgs, WithHelpArg } from '../utils/cli-helper.ts';
 
@@ -59,7 +59,7 @@ const { status, error } = spawnSync(
 );
 
 if (error !== undefined) {
-  print({
+  printMessage({
     type: 'error',
     title: '执行 lockfile 同步验证失败',
     description: error.message,

@@ -1,18 +1,22 @@
 import { defineConfig } from 'eslint/config';
 import ignore from 'eslint-config-flat-gitignore';
-import depend from 'eslint-plugin-depend';
 
 import { builtinOverrides } from './eslint-config/overrides/builtin.ts';
+import { dependOverrides } from './eslint-config/overrides/depend.ts';
 import { importOverrides } from './eslint-config/overrides/import.ts';
 import { jsoncOverrides } from './eslint-config/overrides/jsonc.ts';
 import { typescriptOverrides } from './eslint-config/overrides/typescript.ts';
 import { builtinPresets } from './eslint-config/presets/builtin.ts';
+import { dependPresets } from './eslint-config/presets/depend.ts';
 import { importPresets } from './eslint-config/presets/import.ts';
 import { jsoncPresets } from './eslint-config/presets/jsonc.ts';
 import { prettierPresets } from './eslint-config/presets/prettier.ts';
 import { typescriptPresets } from './eslint-config/presets/typescript.ts';
-import { ensureDependenciesInPackage } from './utils/ensure.ts';
-import { GLOB_JSON_DERIVED, GLOB_JS_DERIVED } from './utils/file-patterns.ts';
+import {
+  GLOB_DEPEND_DERIVED,
+  GLOB_JSON_DERIVED,
+  GLOB_JS_DERIVED,
+} from './utils/file-patterns.ts';
 
 import type { ConfigWithExtends } from 'typescript-eslint';
 
@@ -64,30 +68,29 @@ const eslintConfig = defineConfig([
   },
 
   /**
+   * 依赖项使用限制预设配置
+   */
+  {
+    name: 'depend:presets',
+    files: [...GLOB_DEPEND_DERIVED],
+    extends: [dependPresets],
+  },
+
+  /**
+   * 依赖项使用限制覆盖配置
+   */
+  {
+    name: 'depend:overrides',
+    files: [...GLOB_DEPEND_DERIVED],
+    extends: [dependOverrides],
+  },
+
+  /**
    * 其他杂项覆盖配置
    */
   {
     name: 'misc:overrides',
     extends: [
-      // 检查是否正在使用不推荐的依赖（有更好的替代方案）
-      {
-        files: ['**/package.json', ...GLOB_JS_DERIVED],
-        plugins: { depend },
-        rules: {
-          'depend/ban-dependencies': [
-            'error',
-            {
-              allowed: ensureDependenciesInPackage([
-                // 比 nano-staged 有更好的 TypeScript 类型支持且持续活跃维护
-                'lint-staged',
-                // 比 eslint-plugin-import-x 有更好的 TypeScript 类型支持且持续活跃维护
-                'eslint-plugin-import',
-              ]),
-            },
-          ],
-        },
-      },
-
       // 允许使用 Node.js 内置模块的特例
       {
         files: ['{scripts,utils}/**/*.ts'],

@@ -20,10 +20,13 @@ const GLOB_JSONC = [
 const GLOB_JSON5 = ['**/*.json5'] as const;
 const GLOB_JSON_DERIVED = [...GLOB_JSON, ...GLOB_JSONC, ...GLOB_JSON5] as const;
 
+const GLOB_DEPEND_DERIVED = ['**/package.json', ...GLOB_JS_DERIVED] as const;
+
 export {
   GLOB_JS_DERIVED,
   GLOB_JSON,
   GLOB_JSONC,
   GLOB_JSON5,
   GLOB_JSON_DERIVED,
+  GLOB_DEPEND_DERIVED,
 };

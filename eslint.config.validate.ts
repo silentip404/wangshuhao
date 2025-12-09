@@ -17,8 +17,9 @@ import {
 } from 'remeda';
 
 import eslintConfig from './eslint.config.ts';
+import { ensureScriptInPackage } from './utils/ensure.ts';
 import { GLOB_JS_DERIVED } from './utils/file-patterns.ts';
-import { printMessage } from './utils/print-message.ts';
+import { printError, printMessage } from './utils/print-message.ts';
 
 const validateAddedRuleSeverity = 'warn' as const;
 
@@ -34,9 +35,12 @@ const allBuiltinRulesConfig = defineConfig({
       return concat([validateAddedRuleSeverity], drop(ruleValue, 1));
     }
 
-    throw new Error(
-      `内置规则 ${ruleName} 的值类型错误，请优化 ${import.meta.filename} 脚本`,
+    printError(
+      new Error(
+        `内置规则 ${ruleName} 的值类型错误，请优化 ${import.meta.filename} 脚本`,
+      ),
     );
+    process.exit(1);
   }),
 });
 
@@ -82,14 +86,15 @@ printMessage({
   description: Array.from(allPluginNames).map((name) => `- ${name}`),
 });
 
+const inspectorScript = ensureScriptInPackage('eslint:validate:inspector');
+
 // 检查配置的 name 属性缺失
 forEach(eslintConfigWithAllRules, (config, index) => {
   if (!isTruthy(config.name)) {
     printMessage({
       type: 'warn',
       title: `配置[${index}]的 name 属性缺失`,
-      description:
-        '您可以运行 pnpm eslint:validate:inspector 命令辅助检查配置的完整性',
+      description: `您可以运行 pnpm run ${inspectorScript} 命令辅助检查配置的完整性`,
     });
   }
 });

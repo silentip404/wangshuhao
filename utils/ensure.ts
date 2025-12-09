@@ -11,7 +11,22 @@ import {
   values,
 } from 'remeda';
 
+import { printError } from './print-message.ts';
+
 const packageJSON = await readPackage();
+
+const ensureScriptInPackage = (script: string): string => {
+  if (script in (packageJSON.scripts ?? {})) {
+    return script;
+  }
+
+  printError(
+    new Error(
+      `配置 ${JSON.stringify(script)} 未添加到 package.json 中，请检查相关配置`,
+    ),
+  );
+  process.exit(1);
+};
 
 const ensureScriptsInPackage = (scripts: string[]): string[] => {
   const existingScripts = keys(packageJSON.scripts ?? {});
@@ -22,9 +37,12 @@ const ensureScriptsInPackage = (scripts: string[]): string[] => {
     return scripts;
   }
 
-  throw new Error(
-    `配置 ${JSON.stringify(scripts)} 中的 ${join(unusedScripts, ',')} 未添加到 package.json 中，请检查相关配置`,
+  printError(
+    new Error(
+      `配置 ${JSON.stringify(scripts)} 中的 ${join(unusedScripts, ',')} 未添加到 package.json 中，请检查相关配置`,
+    ),
   );
+  process.exit(1);
 };
 
 const ensureDependenciesInPackage = (dependencies: string[]): string[] => {
@@ -41,9 +59,16 @@ const ensureDependenciesInPackage = (dependencies: string[]): string[] => {
     return dependencies;
   }
 
-  throw new Error(
-    `配置 ${JSON.stringify(dependencies)} 中的 ${join(unusedDependencies, ',')} 未添加到 package.json 中，请检查相关配置`,
+  printError(
+    new Error(
+      `配置 ${JSON.stringify(dependencies)} 中的 ${join(unusedDependencies, ',')} 未添加到 package.json 中，请检查相关配置`,
+    ),
   );
+  process.exit(1);
 };
 
-export { ensureScriptsInPackage, ensureDependenciesInPackage };
+export {
+  ensureScriptsInPackage,
+  ensureDependenciesInPackage,
+  ensureScriptInPackage,
+};

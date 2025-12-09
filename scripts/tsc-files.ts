@@ -137,7 +137,7 @@ await writeTSConfig(temporaryConfigFilename, {
 
 // 使用临时 TypeScript 配置文件执行 tsc 命令
 const { exitCode, all } = await execa(
-  'pnpm',
+  'pnpm exec',
   ['tsc', '--project', temporaryConfigFilename, '--pretty'],
   { reject: false, all: true },
 );

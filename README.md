@@ -274,7 +274,7 @@ pnpm install
 ### 启动开发服务器
 
 ```bash
-pnpm dev
+pnpm run dev
 ```
 
 在浏览器中打开 [http://localhost:3000](http://localhost:3000) 查看结果。
@@ -283,33 +283,33 @@ pnpm dev
 
 ### 开发与构建
 
-- `pnpm dev` - 启动开发服务器
-- `pnpm build` - 构建生产版本
-- `pnpm start` - 启动生产服务器
+- `pnpm run dev` - 启动开发服务器
+- `pnpm run build` - 构建生产版本
+- `pnpm run start` - 启动生产服务器
 
 ### 代码检查
 
-- `pnpm lint` - 运行所有代码检查
-- `pnpm lint:node-version` - 检查 **Node.js** 版本配置一致性
-- `pnpm lint:typesync` - 检查 **TypeScript** 类型定义同步状态
-- `pnpm lint:lockfile` - 检查 **Lockfile** 同步状态
-- `pnpm lint:knip` - 使用 **Knip** 检测未使用的文件、导出与依赖，帮助清理死代码
-- `pnpm lint:tsc` - 运行 **TypeScript** 类型检查
-- `pnpm lint:eslint` - 运行 **ESLint** 代码规范检查
-- `pnpm lint:prettier` - 运行 **Prettier** 格式化检查
-- `pnpm lint:success-message` - 打印所有检查通过的成功消息
+- `pnpm run lint` - 运行所有代码检查
+- `pnpm run lint:node-version` - 检查 **Node.js** 版本配置一致性
+- `pnpm run lint:typesync` - 检查 **TypeScript** 类型定义同步状态
+- `pnpm run lint:lockfile` - 检查 **Lockfile** 同步状态
+- `pnpm run lint:knip` - 使用 **Knip** 检测未使用的文件、导出与依赖，帮助清理死代码
+- `pnpm run lint:tsc` - 运行 **TypeScript** 类型检查
+- `pnpm run lint:eslint` - 运行 **ESLint** 代码规范检查
+- `pnpm run lint:prettier` - 运行 **Prettier** 格式化检查
+- `pnpm run lint:success-message` - 打印所有检查通过的成功消息
 
 ### 代码修复
 
-- `pnpm fix` - 运行所有代码修复任务
-- `pnpm fix:typesync` - 自动同步 **TypeScript** 类型定义
-- `pnpm fix:knip` - 使用 **Knip** 自动移除未使用的文件、导出与依赖
-- `pnpm fix:eslint` - 使用 **ESLint** 修复可修复的问题
-- `pnpm fix:prettier` - 使用 **Prettier** 格式化代码
-- `pnpm fix:complete-message` - 打印所有修复任务完成的信息提示
+- `pnpm run fix` - 运行所有代码修复任务
+- `pnpm run fix:typesync` - 自动同步 **TypeScript** 类型定义
+- `pnpm run fix:knip` - 使用 **Knip** 自动移除未使用的文件、导出与依赖
+- `pnpm run fix:eslint` - 使用 **ESLint** 修复可修复的问题
+- `pnpm run fix:prettier` - 使用 **Prettier** 格式化代码
+- `pnpm run fix:complete-message` - 打印所有修复任务完成的信息提示
 
 ### ESLint 配置工具
 
-- `pnpm eslint:inspector` - 使用 **ESLint Config Inspector** 可视化查看主 **ESLint** 配置
-- `pnpm eslint:validate` - 运行 **ESLint** 验证配置的正确性和完整性，帮助团队识别配置错误和遗漏的规则
-- `pnpm eslint:validate:inspector` - 使用 **ESLint Config Inspector** 可视化查看验证配置，帮助更直观地理解配置结构和规则覆盖情况
+- `pnpm run eslint:inspector` - 使用 **ESLint Config Inspector** 可视化查看主 **ESLint** 配置
+- `pnpm run eslint:validate` - 运行 **ESLint** 验证配置的正确性和完整性，帮助团队识别配置错误和遗漏的规则
+- `pnpm run eslint:validate:inspector` - 使用 **ESLint Config Inspector** 可视化查看验证配置，帮助更直观地理解配置结构和规则覆盖情况

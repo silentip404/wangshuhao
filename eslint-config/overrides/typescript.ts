@@ -4,6 +4,8 @@ import { forEachObj, join, keys, toUpperCase } from 'remeda';
 import { plugin } from 'typescript-eslint';
 import { z } from 'zod';
 
+import { printError } from '../../utils/print-message.ts';
+
 /**
  * 自动关闭被 TypeScript ESLint 扩展的内置规则
  *
@@ -23,9 +25,12 @@ if ('rules' in plugin) {
   const parsedRules = rulesSchema.safeParse(plugin.rules);
 
   if (!parsedRules.success) {
-    throw new Error(
-      `typescript-eslint 插件的 rules 属性不符合预期，请优化 ${import.meta.filename} 逻辑`,
+    printError(
+      new Error(
+        `typescript-eslint 插件的 rules 属性不符合预期，请优化 ${import.meta.filename} 逻辑`,
+      ),
     );
+    process.exit(1);
   }
 
   // 获取所有 ESLint 内置规则名称
@@ -42,9 +47,12 @@ if ('rules' in plugin) {
     extendedBuiltinRules[ruleName] = 'off';
   });
 } else {
-  throw new Error(
-    `typescript-eslint 插件的 rules 属性不存在，请优化 ${import.meta.filename} 逻辑`,
+  printError(
+    new Error(
+      `typescript-eslint 插件的 rules 属性不存在，请优化 ${import.meta.filename} 逻辑`,
+    ),
   );
+  process.exit(1);
 }
 
 const typescriptOverrides = defineConfig([

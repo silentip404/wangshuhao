@@ -79,7 +79,7 @@ const eslintConfigWithAllRules = pipe(
 
 printMessage({
   title: '正在使用 ESLint 全部内置规则和以下插件的全部规则进行配置验证：',
-  description: Array.from(allPluginNames).map((name) => ` - ${name}`),
+  description: Array.from(allPluginNames).map((name) => `- ${name}`),
 });
 
 // 检查配置的 name 属性缺失

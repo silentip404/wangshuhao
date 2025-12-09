@@ -1,8 +1,10 @@
-import { isIncludedIn, isTruthy } from 'remeda';
-import signale from 'signale';
+import { consola } from 'consola';
+import { isIncludedIn } from 'remeda';
 import { z } from 'zod';
 
 import { ensureScriptsInPackage } from './ensure.ts';
+
+import type { InputLogObject } from 'consola';
 
 const isRunningInKnip = isIncludedIn(
   process.env.npm_lifecycle_event,
@@ -26,14 +28,12 @@ const printMessage = ({
     return;
   }
 
-  const descriptionText = Array.isArray(description)
-    ? description.join('\n')
-    : description;
-  const message = isTruthy(descriptionText.trim())
-    ? `${title}\n\n${descriptionText}\n`
-    : `${title}\n`;
+  const typedOptions: InputLogObject = {
+    message: title,
+    additional: description,
+  };
 
-  signale[type](message);
+  consola[type](typedOptions);
 };
 
 export { printMessage, type PrintMessageOptions, printMessageOptionsSchema };

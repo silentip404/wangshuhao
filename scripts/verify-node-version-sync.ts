@@ -181,7 +181,7 @@ if (!isEmptyish(definedErrors)) {
   printMessage({
     type: 'error',
     title: '错误的 Node.js 版本配置',
-    description: map(definedErrors, (definedError) => ` - ${definedError}`),
+    description: map(definedErrors, (definedError) => `- ${definedError}`),
   });
 
   process.exit(1);

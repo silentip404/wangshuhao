@@ -68,7 +68,7 @@ const analyzeVerifyFiles = (
       description: [
         unknownErrorTitle,
         '',
-        ...unknownFiles.map((file) => ` - ${file}`),
+        ...unknownFiles.map((file) => `  - ${file}`),
         '',
         '如需自动忽略未知文件，请使用 --ignore-unknown 选项',
       ],

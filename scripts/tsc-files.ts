@@ -85,7 +85,7 @@ if (!isEmptyish(unknownFiles) && ignoreUnknown !== true) {
     title: '检测到未知文件',
     description: [
       '以下文件无法运行 tsc 检查:',
-      ...unknownFiles.map((file) => ` - ${file}`),
+      ...unknownFiles.map((file) => `  - ${file}`),
       '',
       '如需自动忽略未知文件，请使用 --ignore-unknown 选项',
     ],

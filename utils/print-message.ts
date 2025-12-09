@@ -1,5 +1,5 @@
 import { consola } from 'consola';
-import { isIncludedIn } from 'remeda';
+import { flat, isEmptyish, isIncludedIn } from 'remeda';
 import { z } from 'zod';
 
 import { ensureScriptsInPackage } from './ensure.ts';
@@ -32,6 +32,11 @@ const printMessage = ({
     message: title,
     additional: description,
   };
+
+  // 在描述前添加零宽度空格以优化显示效果
+  if (!isEmptyish(typedOptions.additional)) {
+    typedOptions.additional = flat(['\u200B', ...[typedOptions.additional]]);
+  }
 
   consola[type](typedOptions);
 };

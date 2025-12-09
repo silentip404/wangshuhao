@@ -19,7 +19,8 @@ import {
 import eslintConfig from './eslint.config.ts';
 import { ensureScriptInPackage } from './utils/ensure.ts';
 import { GLOB_JS_DERIVED } from './utils/file-patterns.ts';
-import { printError, printMessage } from './utils/print-message.ts';
+import { printError } from './utils/print-error.ts';
+import { printMessage } from './utils/print-message.ts';
 
 const validateAddedRuleSeverity = 'warn' as const;
 

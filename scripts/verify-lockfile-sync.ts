@@ -10,6 +10,7 @@ import {
   helpArgOptions,
   verifyFilesArgsConfig,
 } from '../utils/cli-helper.ts';
+import { printMessage } from '../utils/print-message.ts';
 
 import type { VerifyFilesArgs, WithHelpArg } from '../utils/cli-helper.ts';
 
@@ -58,6 +59,11 @@ const { exitCode, all } = await execa(
 );
 
 if (exitCode !== 0) {
-  console.error(all);
+  printMessage({
+    type: 'error',
+    title: '验证 package.json 和 pnpm-lock.yaml 同步失败',
+    description: all,
+  });
+
   process.exit(exitCode);
 }

@@ -4,7 +4,7 @@ import { forEachObj, join, keys, toUpperCase } from 'remeda';
 import { plugin } from 'typescript-eslint';
 import { z } from 'zod';
 
-import { printError } from '../../utils/print-message.ts';
+import { printError } from '../../utils/print-error.ts';
 
 /**
  * 自动关闭被 TypeScript ESLint 扩展的内置规则

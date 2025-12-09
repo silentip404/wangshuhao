@@ -146,6 +146,7 @@ const { exitCode, all } = await execa(
 fs.rmSync(temporaryConfigFilename, { force: true });
 
 if (exitCode !== 0) {
-  console.error(all);
+  printMessage({ type: 'error', title: '运行 tsc 检查失败', description: all });
+
   process.exit(exitCode);
 }

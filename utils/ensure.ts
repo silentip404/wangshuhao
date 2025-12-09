@@ -11,7 +11,7 @@ import {
   values,
 } from 'remeda';
 
-import { printError } from './print-message.ts';
+import { printError } from './print-error.ts';
 
 const packageJSON = await readPackage();
 

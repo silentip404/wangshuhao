@@ -167,6 +167,35 @@ const importOverrides = defineConfig([
        * - 符合现代 ESM 模块化实践，便于大型项目维护和团队协作
        */
       'import/exports-last': 'warn',
+      /**
+       * 模块依赖数量控制
+       *
+       * @reason
+       * - 过多的依赖关系通常表明模块承担了过多职责，违反单一职责原则
+       * - 限制依赖数量促使开发者进行合理的模块拆分和架构设计
+       * - 降低模块耦合度，提升代码的可测试性和可维护性
+       * - 排除类型导入的限制，避免对 TypeScript 类型系统的正常使用造成干扰
+       */
+      'import/max-dependencies': ['warn', { max: 16, ignoreTypeImports: true }],
+      /**
+       * 循环依赖检测
+       *
+       * @reason
+       * - 循环依赖是公认的架构反模式，会导致模块初始化顺序不确定和运行时错误
+       * - 及早发现循环依赖有助于保持清晰的模块依赖关系，提升代码架构质量
+       * - TypeScript 类型系统无法完全避免运行时的循环依赖问题
+       */
+      'import/no-cycle': [
+        'error',
+        { maxDepth: Infinity, ignoreExternal: true },
+      ],
+      /**
+       * import 语句位置规范
+       *
+       * @reason
+       * - 统一的导入位置便于快速了解模块依赖关系，提升代码可维护性
+       */
+      'import/first': 'error',
     },
   },
 ]);

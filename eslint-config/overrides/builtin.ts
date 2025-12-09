@@ -129,6 +129,36 @@ const builtinOverrides = defineConfig([
        * - 简化代码逻辑，避免不必要的嵌套结构，使得控制流程更加清晰。
        */
       'no-else-return': ['warn', { allowElseIf: false }],
+      /**
+       * 函数代码行数控制
+       *
+       * @reason
+       * - 限制函数长度促使开发者遵循单一职责原则，提升代码可维护性
+       * - 短小函数更易于单元测试、代码审查和重构
+       * - 跳过空行和注释的统计，避免因代码格式化和文档注释导致的误报
+       */
+      'max-lines-per-function': [
+        'warn',
+        { max: 80, skipBlankLines: true, skipComments: true },
+      ],
+      /**
+       * 文件代码行数控制
+       *
+       * @reason
+       * - 限制文件长度促使开发者遵循单一职责原则和模块化设计思维
+       * - 较小的文件更易于导航、理解和维护，降低认知负担
+       * - 跳过空行和注释的统计，避免因代码格式化和文档注释导致的误报
+       */
+      'max-lines': ['warn', { skipBlankLines: true, skipComments: true }],
+      /**
+       * 禁止使用控制台输出方法
+       *
+       * @reason
+       * - 正式输出统一使用封装的日志工具确保日志输出的一致性和可控性
+       * - 便于在生产环境中实现统一的日志管理、过滤和上报机制
+       * - 临时调试代码使用之后需要及时删除
+       */
+      'no-console': 'warn',
     },
   },
 ]);

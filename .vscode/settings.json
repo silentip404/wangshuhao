@@ -8,6 +8,10 @@
     "json",
     "jsonc",
   ],
+  "eslint.rules.customizations": [
+    // 降级所有规则，突出显示 TypeScript 的错误
+    { "rule": "*", "severity": "downgrade" },
+  ],
 
   // Prettier 通用配置
   "editor.defaultFormatter": "esbenp.prettier-vscode",

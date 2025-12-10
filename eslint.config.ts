@@ -94,7 +94,7 @@ const eslintConfig = defineConfig([
     extends: [
       // 允许使用 Node.js 内置模块的特例
       {
-        files: ['{scripts,utils}/**/*.ts'],
+        files: ['*.config.{,*.}{js,ts}', '{scripts,utils}/**/*.ts'],
         rules: { 'import/no-nodejs-modules': 'off' },
       },
 

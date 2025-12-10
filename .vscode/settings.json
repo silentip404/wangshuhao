@@ -11,6 +11,9 @@
   "eslint.rules.customizations": [
     // 降级所有规则，突出显示 TypeScript 的错误
     { "rule": "*", "severity": "downgrade" },
+
+    // 关闭一些支持自动修复的规则提示，降低开发过程的心智负担
+    { "rule": "curly", "severity": "off" },
   ],
 
   // Prettier 通用配置

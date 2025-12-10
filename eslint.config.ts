@@ -18,13 +18,14 @@ import {
   GLOB_JS_DERIVED,
 } from './utils/file-patterns.ts';
 
+import type { SetRequired } from 'type-fest';
 import type { ConfigWithExtends } from 'typescript-eslint';
 
 const eslintConfig = defineConfig([
   /**
    * 全局忽略配置
    */
-  ignore({ root: true, files: ['.gitignore'] }),
+  { ...ignore({ root: true, files: ['.gitignore'] }), name: 'global:ignore' },
 
   /**
    * JS 派生文件预设配置
@@ -110,6 +111,6 @@ const eslintConfig = defineConfig([
       },
     ],
   } satisfies Pick<ConfigWithExtends, 'name' | 'extends'>,
-]);
+] satisfies SetRequired<ConfigWithExtends, 'name'>[]);
 
 export default eslintConfig;

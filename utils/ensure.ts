@@ -15,19 +15,6 @@ import { printError } from './print-error.ts';
 
 const packageJSON = await readPackage();
 
-const ensureScriptInPackage = (script: string): string => {
-  if (script in (packageJSON.scripts ?? {})) {
-    return script;
-  }
-
-  printError(
-    new Error(
-      `配置 ${JSON.stringify(script)} 未添加到 package.json 中，请检查相关配置`,
-    ),
-  );
-  process.exit(1);
-};
-
 const ensureScriptsInPackage = (scripts: string[]): string[] => {
   const existingScripts = keys(packageJSON.scripts ?? {});
 
@@ -67,8 +54,4 @@ const ensureDependenciesInPackage = (dependencies: string[]): string[] => {
   process.exit(1);
 };
 
-export {
-  ensureScriptsInPackage,
-  ensureDependenciesInPackage,
-  ensureScriptInPackage,
-};
+export { ensureScriptsInPackage, ensureDependenciesInPackage };

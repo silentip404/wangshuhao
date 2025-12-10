@@ -196,6 +196,14 @@ const importOverrides = defineConfig([
        * - 统一的导入位置便于快速了解模块依赖关系，提升代码可维护性
        */
       'import/first': 'error',
+      /**
+       * 导出语句集中管理
+       *
+       * @reason
+       * - 统一的导出位置为模块建立清晰的对外接口视图,符合 API 优先的设计理念
+       * - 集中式导出便于快速定位模块的公共接口,降低维护成本
+       */
+      'import/group-exports': 'warn',
     },
   },
 ]);

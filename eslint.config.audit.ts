@@ -26,11 +26,11 @@ const eslintConfigWithAllRules = map(eslintConfig, (config) => {
   return { ...config, rules: merge(rules, config.rules) };
 });
 
-const validateConfigWithAllRules = concat(
+const auditConfigWithAllRules = concat(
   normalizeSeverity(
     [
       {
-        name: 'eslint:validate/all-builtin-rules',
+        name: 'eslint:audit/all-builtin-rules',
         files: [...GLOB_JS_DERIVED],
         rules: js.configs.all.rules,
       },
@@ -40,10 +40,18 @@ const validateConfigWithAllRules = concat(
   eslintConfigWithAllRules,
 );
 
-const allPluginNames = collectPluginNamesByConfigs(validateConfigWithAllRules);
+const allPluginNames = collectPluginNamesByConfigs(auditConfigWithAllRules);
 printMessage({
-  title: '正在使用 ESLint 全部内置规则和以下插件的全部规则进行配置验证：',
-  description: [...allPluginNames.map((name) => `- ${name}`), ''],
+  title: 'ESLint 配置审查提示',
+  description: concat(
+    allPluginNames.map((name) => `- ${name}`),
+    [
+      '',
+      '已开启上述插件的全部规则和全部内置规则对项目代码运行 ESLint 问题统计',
+      '请结合问题统计结果和项目实际需求，明确开启或关闭尚未配置的规则',
+      '',
+    ],
+  ),
 });
 
-export default validateConfigWithAllRules;
+export default auditConfigWithAllRules;

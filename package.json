@@ -31,8 +31,8 @@
     "fix:prettier": "prettier --write --log-level=warn .",
     "fix:complete-message": "pnpm exec node scripts/cli-print-message.ts --type=info --title=\"All fixing tasks completed, please review the output above.\"",
     "eslint:inspector": "eslint-config-inspector",
-    "eslint:validate": "cross-env SORT_BY=warnings eslint --config=eslint.config.validate.ts --format=summary",
-    "eslint:validate:inspector": "eslint-config-inspector --config=eslint.config.validate.ts"
+    "eslint:audit": "cross-env SORT_BY=warnings eslint --config=eslint.config.audit.ts --format=summary",
+    "eslint:audit:inspector": "eslint-config-inspector --config=eslint.config.audit.ts"
   },
   "dependencies": {
     "next": "16.0.7",

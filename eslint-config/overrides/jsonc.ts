@@ -16,7 +16,7 @@ const jsoncOverrides = defineConfig([
        * JSON 数组值排序检查
        *
        * @reason
-       * - 允许开发者根据上下文语义手动管理数组顺序，避免强制排序带来的意外行为
+       * - 提倡根据上下文语义手动管理数组顺序
        */
       'jsonc/sort-array-values': 'off',
       /**
@@ -27,6 +27,13 @@ const jsoncOverrides = defineConfig([
        * - 显式配置规则以确保 linting 行为的精确控制和可预测性
        */
       'jsonc/auto': 'off',
+      /**
+       * JSON 属性键命名规范
+       *
+       * @reason
+       * - JSON 文件承载多种场景，强制统一命名会破坏生态兼容性
+       */
+      'jsonc/key-name-casing': 'off',
     },
   },
 ]);

@@ -1,10 +1,13 @@
 import { defineConfig } from 'eslint/config';
 import eslintPluginJsonc from 'eslint-plugin-jsonc';
 
+import { defineAuditSettings } from '../utils/audit.ts';
+
 const jsoncOverrides = defineConfig([
   {
     name: 'jsonc:conflict-with-prettier',
     extends: eslintPluginJsonc.configs['flat/prettier'],
+    settings: defineAuditSettings({ shouldPrependAllRules: false }),
   },
   {
     name: 'jsonc:jsonc-overrides',

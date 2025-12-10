@@ -1,8 +1,9 @@
 import { styleText } from 'node:util';
 
 import js from '@eslint/js';
-import { concat, isEmptyish, map, merge } from 'remeda';
+import { concat, isEmptyish, isIncludedIn, map, merge } from 'remeda';
 
+import { collectSkipPrependAllRulesConfigNames } from './eslint-config/utils/audit.ts';
 import { collectPluginNamesByConfigs } from './eslint-config/utils/plugin.ts';
 import {
   collectRuleNamesByPlugins,
@@ -15,10 +16,24 @@ import { printMessage } from './utils/print-message.ts';
 
 const SEVERITY = 'warn';
 
+const builtinConfigWithAllRules = normalizeSeverity(
+  [
+    {
+      name: 'eslint:audit/all-builtin-rules',
+      files: [...GLOB_JS_DERIVED],
+      rules: js.configs.all.rules,
+    },
+  ],
+  SEVERITY,
+);
+
+const skipNames = collectSkipPrependAllRulesConfigNames(eslintConfig);
+
 const eslintConfigWithAllRules = map(eslintConfig, (config) => {
+  const name = config.name?.trim();
   const { plugins } = config;
 
-  if (isEmptyish(plugins)) {
+  if (isIncludedIn(name, skipNames) || isEmptyish(plugins)) {
     return config;
   }
 
@@ -28,21 +43,7 @@ const eslintConfigWithAllRules = map(eslintConfig, (config) => {
   return { ...config, rules: merge(rules, config.rules) };
 });
 
-const auditConfigWithAllRules = concat(
-  normalizeSeverity(
-    [
-      {
-        name: 'eslint:audit/all-builtin-rules',
-        files: [...GLOB_JS_DERIVED],
-        rules: js.configs.all.rules,
-      },
-    ],
-    SEVERITY,
-  ),
-  eslintConfigWithAllRules,
-);
-
-const allPluginNames = collectPluginNamesByConfigs(auditConfigWithAllRules);
+const allPluginNames = collectPluginNamesByConfigs(eslintConfigWithAllRules);
 printMessage({
   title: 'ESLint 配置审查提示',
   description: [
@@ -58,4 +59,4 @@ printMessage({
   ],
 });
 
-export default auditConfigWithAllRules;
+export default concat(builtinConfigWithAllRules, eslintConfigWithAllRules);

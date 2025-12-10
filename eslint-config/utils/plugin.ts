@@ -2,7 +2,7 @@ import { forEach, isEmptyish, keys } from 'remeda';
 
 import type { Config } from 'eslint/config';
 
-export const collectPluginNamesByConfigs = (configs: Config[]): string[] => {
+export const collectPluginNames = (configs: Config[]): string[] => {
   const pluginNames = new Set<string>();
 
   forEach(configs, (config) => {

@@ -5,12 +5,10 @@ import type { Config } from 'eslint/config';
 
 type Plugins = NonNullable<Config['plugins']>;
 
-const createRulesByRuleNames = (
-  ruleNames: string[],
-  severity: Severity,
-): RulesConfig => mapToObj(ruleNames, (ruleName) => [ruleName, severity]);
+const createRules = (ruleNames: string[], severity: Severity): RulesConfig =>
+  mapToObj(ruleNames, (ruleName) => [ruleName, severity]);
 
-const collectRuleNamesByPlugins = (plugins: Plugins): string[] => {
+const collectRuleNames = (plugins: Plugins): string[] => {
   const ruleNames = new Set<string>();
 
   forEachObj(plugins, (pluginValue, pluginName) => {
@@ -36,4 +34,4 @@ const collectRuleNamesByPlugins = (plugins: Plugins): string[] => {
   return Array.from(ruleNames);
 };
 
-export { createRulesByRuleNames, collectRuleNamesByPlugins };
+export { createRules, collectRuleNames };

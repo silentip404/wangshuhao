@@ -17,7 +17,7 @@ const defineAuditSettings = (
   [AUDIT_SETTINGS_NAMESPACE]: settings,
 });
 
-const resolveAuditSettingsByConfig = (config: Config): AuditSettings => {
+const resolveAuditSettings = (config: Config): AuditSettings => {
   const unknownSettings = config.settings?.[AUDIT_SETTINGS_NAMESPACE];
 
   return auditSettingsSchema.parse(unknownSettings ?? {});
@@ -27,7 +27,7 @@ const collectSkipPrependAllRulesConfigNames = (configs: Config[]): string[] => {
   const exactConfigNames = pipe(
     configs,
     filter((config) => {
-      const { shouldPrependAllRules } = resolveAuditSettingsByConfig(config);
+      const { shouldPrependAllRules } = resolveAuditSettings(config);
 
       return shouldPrependAllRules === false;
     }),

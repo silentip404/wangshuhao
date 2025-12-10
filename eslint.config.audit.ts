@@ -4,11 +4,8 @@ import js from '@eslint/js';
 import { concat, isEmptyish, isIncludedIn, map, merge } from 'remeda';
 
 import { collectSkipPrependAllRulesConfigNames } from './eslint-config/utils/audit.ts';
-import { collectPluginNamesByConfigs } from './eslint-config/utils/plugin.ts';
-import {
-  collectRuleNamesByPlugins,
-  createRulesByRuleNames,
-} from './eslint-config/utils/rule.ts';
+import { collectPluginNames } from './eslint-config/utils/plugin.ts';
+import { collectRuleNames, createRules } from './eslint-config/utils/rule.ts';
 import { normalizeSeverity } from './eslint-config/utils/severity.ts';
 import eslintConfig from './eslint.config.ts';
 import { GLOB_JS_DERIVED } from './utils/file-patterns.ts';
@@ -37,13 +34,13 @@ const eslintConfigWithAllRules = map(eslintConfig, (config) => {
     return config;
   }
 
-  const ruleNames = collectRuleNamesByPlugins(plugins);
-  const rules = createRulesByRuleNames(ruleNames, SEVERITY);
+  const ruleNames = collectRuleNames(plugins);
+  const rules = createRules(ruleNames, SEVERITY);
 
   return { ...config, rules: merge(rules, config.rules) };
 });
 
-const allPluginNames = collectPluginNamesByConfigs(eslintConfigWithAllRules);
+const allPluginNames = collectPluginNames(eslintConfigWithAllRules);
 printMessage({
   title: 'ESLint 配置审查提示',
   description: [

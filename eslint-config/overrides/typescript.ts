@@ -1,59 +1,8 @@
-import js from '@eslint/js';
 import { defineConfig } from 'eslint/config';
-import { forEachObj, join, keys, toUpperCase } from 'remeda';
+import { join, toUpperCase } from 'remeda';
 import { plugin } from 'typescript-eslint';
-import { z } from 'zod';
 
-import { printError } from '../../utils/print-error.ts';
-
-/**
- * 自动关闭被 TypeScript ESLint 扩展的内置规则
- *
- * @description
- * TypeScript ESLint 提供了许多内置 ESLint 规则的增强版本（如 no-unused-vars）
- * 为避免规则冲突和重复检查，需要关闭这些被扩展的内置规则
- *
- * @example
- * 如果 TypeScript ESLint 提供了 '@typescript-eslint/no-unused-vars'
- * 则自动将内置的 'no-unused-vars' 设置为 'off'
- */
-const extendedBuiltinRules: Record<string, 'off'> = {};
-
-if ('rules' in plugin) {
-  // 验证插件 rules 结构，确保运行时安全
-  const rulesSchema = z.record(z.string(), z.unknown());
-  const parsedRules = rulesSchema.safeParse(plugin.rules);
-
-  if (!parsedRules.success) {
-    printError(
-      new Error(
-        `typescript-eslint 插件的 rules 属性不符合预期，请优化 ${import.meta.filename} 逻辑`,
-      ),
-    );
-    process.exit(1);
-  }
-
-  // 获取所有 ESLint 内置规则名称
-  const builtinRuleNames = new Set(keys(js.configs.all.rules));
-  const { data } = parsedRules;
-
-  // 遍历 TypeScript ESLint 的所有规则
-  // 如果规则名与内置规则同名，说明是扩展规则，需要关闭内置版本
-  forEachObj(data, (ruleValue, ruleName) => {
-    if (!builtinRuleNames.has(ruleName)) {
-      return;
-    }
-
-    extendedBuiltinRules[ruleName] = 'off';
-  });
-} else {
-  printError(
-    new Error(
-      `typescript-eslint 插件的 rules 属性不存在，请优化 ${import.meta.filename} 逻辑`,
-    ),
-  );
-  process.exit(1);
-}
+import { createDisabledBuiltinExtendedRules } from '../utils/rule.ts';
 
 const typescriptOverrides = defineConfig([
   {
@@ -65,7 +14,7 @@ const typescriptOverrides = defineConfig([
      * - 避免规则冲突和重复检查
      * - 统一由 @typescript-eslint/${ruleName} 代替对应的内置规则
      */
-    rules: extendedBuiltinRules,
+    rules: createDisabledBuiltinExtendedRules({ '@typescript-eslint': plugin }),
   },
   {
     name: 'typescript:related-non-typescript-overrides',

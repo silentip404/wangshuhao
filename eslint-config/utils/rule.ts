@@ -1,4 +1,12 @@
-import { forEachObj, isEmptyish, isTruthy, mapToObj } from 'remeda';
+import js from '@eslint/js';
+import {
+  forEachObj,
+  intersection,
+  isEmptyish,
+  isTruthy,
+  keys,
+  mapToObj,
+} from 'remeda';
 
 import type { RulesConfig, Severity } from '@eslint/core';
 import type { Config } from 'eslint/config';
@@ -8,7 +16,15 @@ type Plugins = NonNullable<Config['plugins']>;
 const createRules = (ruleNames: string[], severity: Severity): RulesConfig =>
   mapToObj(ruleNames, (ruleName) => [ruleName, severity]);
 
-const collectRuleNames = (plugins: Plugins): string[] => {
+interface CollectRuleNamesOptions {
+  shouldWithPluginName?: boolean;
+}
+const collectRuleNames = (
+  plugins: Plugins,
+  options: CollectRuleNamesOptions = {},
+): string[] => {
+  const { shouldWithPluginName = true } = options;
+
   const ruleNames = new Set<string>();
 
   forEachObj(plugins, (pluginValue, pluginName) => {
@@ -27,11 +43,24 @@ const collectRuleNames = (plugins: Plugins): string[] => {
         return;
       }
 
-      ruleNames.add(`${pluginName}/${ruleName}`);
+      ruleNames.add(
+        shouldWithPluginName ? `${pluginName}/${ruleName}` : ruleName,
+      );
     });
   });
 
   return Array.from(ruleNames);
 };
 
-export { createRules, collectRuleNames };
+const createDisabledBuiltinExtendedRules = (
+  plugins: Plugins,
+): Record<string, 'off'> => {
+  const disabledNames = intersection(
+    keys(js.configs.all.rules),
+    collectRuleNames(plugins, { shouldWithPluginName: false }),
+  );
+
+  return mapToObj(disabledNames, (name) => [name, 'off']);
+};
+
+export { createRules, collectRuleNames, createDisabledBuiltinExtendedRules };

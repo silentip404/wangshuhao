@@ -159,6 +159,28 @@ const builtinOverrides = defineConfig([
        * - 临时调试代码使用之后需要及时删除
        */
       'no-console': 'warn',
+      /**
+       * 语法限制规则
+       *
+       * @reason
+       * - 通过约束特定语法模式统一代码风格，建立团队编码规范共识
+       * - 在语法层面预防潜在的代码质量问题和架构反模式
+       */
+      'no-restricted-syntax': [
+        'warn',
+
+        // 基础语法限制
+        'FunctionExpression',
+        'WithStatement',
+        'BinaryExpression[operator="in"]',
+
+        // 导入导出相关语法限制
+        {
+          selector: 'ExportNamedDeclaration[declaration]',
+          message:
+            'Inline exports are not allowed. Use export { ... } instead.',
+        },
+      ],
     },
   },
 ]);

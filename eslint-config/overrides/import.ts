@@ -1,7 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import { map } from 'remeda';
 
-const projectAlias = ['^@\\/'];
+import { GLOB_ALIAS } from '#node/utils';
 
 const importOverrides = defineConfig([
   {
@@ -90,7 +90,14 @@ const importOverrides = defineConfig([
       'import/extensions': [
         'error',
         'ignorePackages',
-        { checkTypeImports: true },
+        {
+          checkTypeImports: true,
+          pathGroupOverrides: map(GLOB_ALIAS, (alias) => ({
+            // 忽略别名后缀名
+            pattern: alias,
+            action: 'ignore',
+          })),
+        },
       ],
       /**
        * 未分配导入检查
@@ -120,7 +127,8 @@ const importOverrides = defineConfig([
             'object',
             'type',
           ],
-          'pathGroups': map(projectAlias, (alias) => ({
+          'pathGroups': map(GLOB_ALIAS, (alias) => ({
+            // 别名视作内部模块
             pattern: alias,
             group: 'internal',
           })),
@@ -162,7 +170,18 @@ const importOverrides = defineConfig([
        * - 强制树状依赖结构，避免复杂图状导入关系，提升整体架构稳定性
        * - 推动使用路径别名机制，强化模块边界清晰度，便于大型项目扩展
        */
-      'import/no-relative-parent-imports': ['warn', { ignore: projectAlias }],
+      'import/no-relative-parent-imports': [
+        'warn',
+        {
+          ignore: [
+            // 允许别名导入
+            ...GLOB_ALIAS,
+
+            // 允许一些特殊文件导入
+            '../utils/index.ts',
+          ],
+        },
+      ],
       /**
        * 导出语句位置要求
        *
@@ -220,6 +239,9 @@ const importOverrides = defineConfig([
         'warn',
         {
           allow: [
+            // 允许导入别名路径
+            ...map(GLOB_ALIAS, (alias) => alias.replace('#', '\\#')),
+
             // 允许导入一层目录下的 index.ts
             '*/index.ts',
 

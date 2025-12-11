@@ -21,9 +21,9 @@ import {
   helpArgOptions,
   printMessage,
   toRelativePosixPath,
-} from '../utils/index.ts';
+} from '#node/utils';
 
-import type { WithHelpArg } from '../utils/index.ts';
+import type { WithHelpArg } from '#node/utils';
 
 type CliArguments = WithHelpArg<{
   'files': string[];

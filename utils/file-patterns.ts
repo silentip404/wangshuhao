@@ -1,3 +1,5 @@
+const GLOB_ALIAS = ['#node/*'] as const;
+
 const GLOB_JS = ['**/*.js'] as const;
 const GLOB_TS = ['**/*.ts'] as const;
 const GLOB_D_TS = ['**/*.d.ts'] as const;
@@ -23,6 +25,7 @@ const GLOB_JSON_DERIVED = [...GLOB_JSON, ...GLOB_JSONC, ...GLOB_JSON5] as const;
 const GLOB_DEPEND_DERIVED = ['**/package.json', ...GLOB_JS_DERIVED] as const;
 
 export {
+  GLOB_ALIAS,
   GLOB_JS_DERIVED,
   GLOB_JSON,
   GLOB_JSONC,

@@ -11,6 +11,9 @@
   "volta": {
     "node": "24.11.0"
   },
+  "imports": {
+    "#node/utils": "./utils/index.ts"
+  },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",

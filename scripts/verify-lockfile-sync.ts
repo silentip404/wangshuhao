@@ -10,9 +10,9 @@ import {
   helpArgOptions,
   printMessage,
   verifyFilesArgsConfig,
-} from '../utils/index.ts';
+} from '#node/utils';
 
-import type { VerifyFilesArgs, WithHelpArg } from '../utils/index.ts';
+import type { VerifyFilesArgs, WithHelpArg } from '#node/utils';
 
 type CliArguments = WithHelpArg<VerifyFilesArgs>;
 

@@ -105,12 +105,6 @@ const eslintConfig = defineConfig([
         files: ['*.config.{,*.}{js,ts}', 'app/**/{layout,page}.tsx'],
         rules: { 'import/no-default-export': 'off' },
       },
-
-      // Node.js 使用 type stripping 方式运行 TypeScript 代码时，暂不支持别名系统
-      {
-        files: ['{scripts,eslint-config}/**/*.ts'],
-        rules: { 'import/no-relative-parent-imports': 'off' },
-      },
     ],
   } satisfies Pick<ConfigWithExtends, 'name' | 'extends'>,
 ] satisfies SetRequired<ConfigWithExtends, 'name'>[]);

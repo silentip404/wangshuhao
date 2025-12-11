@@ -20,7 +20,10 @@
     "jsx": "react-jsx",
     "incremental": true,
     "plugins": [{ "name": "next" }],
-    "paths": {},
+    "paths": {
+      // 与 package.json 中的 imports 配置保持同步
+      "#node/utils": ["./utils/index.ts"],
+    },
   },
   "include": [
     "**/*.ts",

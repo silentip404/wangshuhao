@@ -2,7 +2,7 @@ import { defineConfig } from 'eslint/config';
 import { join, toUpperCase } from 'remeda';
 import { plugin } from 'typescript-eslint';
 
-import { createDisabledBuiltinExtendedRules } from '../utils/rule.ts';
+import { createDisabledBuiltinExtendedRules } from '../utils/index.ts';
 
 const typescriptOverrides = defineConfig([
   {

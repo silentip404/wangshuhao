@@ -1,6 +1,6 @@
 import { defineConfig } from 'eslint/config';
 
-import { ensureDependenciesInPackage } from '../../utils/ensure.ts';
+import { ensureDependenciesInPackage } from '../../utils/index.ts';
 
 const dependOverrides = defineConfig([
   {

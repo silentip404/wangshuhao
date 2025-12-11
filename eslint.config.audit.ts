@@ -3,13 +3,15 @@ import { styleText } from 'node:util';
 import js from '@eslint/js';
 import { concat, isEmptyish, isIncludedIn, map, merge } from 'remeda';
 
-import { collectSkipPrependAllRulesConfigNames } from './eslint-config/utils/audit.ts';
-import { collectPluginNames } from './eslint-config/utils/plugin.ts';
-import { collectRuleNames, createRules } from './eslint-config/utils/rule.ts';
-import { normalizeSeverity } from './eslint-config/utils/severity.ts';
+import {
+  collectPluginNames,
+  collectRuleNames,
+  collectSkipPrependAllRulesConfigNames,
+  createRules,
+  normalizeSeverity,
+} from './eslint-config/index.ts';
 import eslintConfig from './eslint.config.ts';
-import { GLOB_JS_DERIVED } from './utils/file-patterns.ts';
-import { printMessage } from './utils/print-message.ts';
+import { GLOB_JS_DERIVED, printMessage } from './utils/index.ts';
 
 const SEVERITY = 'warn';
 

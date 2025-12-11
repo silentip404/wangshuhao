@@ -87,7 +87,11 @@ const importOverrides = defineConfig([
        * - 明确的扩展名使模块解析更透明，便于理解项目结构和依赖关系
        * - 提高代码可移植性，减少构建工具和运行时环境的差异
        */
-      'import/extensions': ['error', 'ignorePackages'],
+      'import/extensions': [
+        'error',
+        'ignorePackages',
+        { checkTypeImports: true },
+      ],
       /**
        * 未分配导入检查
        *
@@ -204,6 +208,29 @@ const importOverrides = defineConfig([
        * - 集中式导出便于快速定位模块的公共接口,降低维护成本
        */
       'import/group-exports': 'warn',
+      /**
+       * 模块内部路径导入控制
+       *
+       * @reason
+       * - 强制通过公开 API 访问模块，建立清晰的模块边界和依赖关系
+       * - 降低模块间耦合度，提升代码重构的安全性和可维护性
+       * - 通过白名单机制平衡架构约束与工程实用性
+       */
+      'import/no-internal-modules': [
+        'warn',
+        {
+          allow: [
+            // 允许导入一层目录下的 index.ts
+            '*/index.ts',
+
+            // 允许导入第三方依赖的特定内部模块
+            'next/*',
+            'next/font/*',
+            'eslint/config',
+            'eslint-config-prettier/flat',
+          ],
+        },
+      ],
     },
   },
 ]);

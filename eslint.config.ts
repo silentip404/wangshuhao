@@ -1,22 +1,24 @@
 import { defineConfig } from 'eslint/config';
 import ignore from 'eslint-config-flat-gitignore';
 
-import { builtinOverrides } from './eslint-config/overrides/builtin.ts';
-import { dependOverrides } from './eslint-config/overrides/depend.ts';
-import { importOverrides } from './eslint-config/overrides/import.ts';
-import { jsoncOverrides } from './eslint-config/overrides/jsonc.ts';
-import { typescriptOverrides } from './eslint-config/overrides/typescript.ts';
-import { builtinPresets } from './eslint-config/presets/builtin.ts';
-import { dependPresets } from './eslint-config/presets/depend.ts';
-import { importPresets } from './eslint-config/presets/import.ts';
-import { jsoncPresets } from './eslint-config/presets/jsonc.ts';
-import { prettierPresets } from './eslint-config/presets/prettier.ts';
-import { typescriptPresets } from './eslint-config/presets/typescript.ts';
+import {
+  builtinOverrides,
+  builtinPresets,
+  dependOverrides,
+  dependPresets,
+  importOverrides,
+  importPresets,
+  jsoncOverrides,
+  jsoncPresets,
+  prettierPresets,
+  typescriptOverrides,
+  typescriptPresets,
+} from './eslint-config/index.ts';
 import {
   GLOB_DEPEND_DERIVED,
   GLOB_JSON_DERIVED,
   GLOB_JS_DERIVED,
-} from './utils/file-patterns.ts';
+} from './utils/index.ts';
 
 import type { SetRequired } from 'type-fest';
 import type { ConfigWithExtends } from 'typescript-eslint';

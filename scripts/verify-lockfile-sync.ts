@@ -8,11 +8,11 @@ import {
   analyzeVerifyFiles,
   helpArgConfig,
   helpArgOptions,
+  printMessage,
   verifyFilesArgsConfig,
-} from '../utils/cli-helper.ts';
-import { printMessage } from '../utils/print-message.ts';
+} from '../utils/index.ts';
 
-import type { VerifyFilesArgs, WithHelpArg } from '../utils/cli-helper.ts';
+import type { VerifyFilesArgs, WithHelpArg } from '../utils/index.ts';
 
 type CliArguments = WithHelpArg<VerifyFilesArgs>;
 

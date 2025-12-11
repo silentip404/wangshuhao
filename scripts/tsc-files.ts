@@ -16,11 +16,14 @@ import {
 } from 'remeda';
 import { parse } from 'ts-command-line-args';
 
-import { helpArgConfig, helpArgOptions } from '../utils/cli-helper.ts';
-import { toRelativePosixPath } from '../utils/path.ts';
-import { printMessage } from '../utils/print-message.ts';
+import {
+  helpArgConfig,
+  helpArgOptions,
+  printMessage,
+  toRelativePosixPath,
+} from '../utils/index.ts';
 
-import type { WithHelpArg } from '../utils/cli-helper.ts';
+import type { WithHelpArg } from '../utils/index.ts';
 
 type CliArguments = WithHelpArg<{
   'files': string[];

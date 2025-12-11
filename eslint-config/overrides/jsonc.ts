@@ -1,7 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import eslintPluginJsonc from 'eslint-plugin-jsonc';
 
-import { defineAuditSettings } from '../utils/audit.ts';
+import { defineAuditSettings } from '../utils/index.ts';
 
 const jsoncOverrides = defineConfig([
   {

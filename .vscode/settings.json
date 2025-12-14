@@ -9,8 +9,8 @@
     "jsonc",
   ],
   "eslint.rules.customizations": [
-    // 降级所有规则，突出显示 TypeScript 的错误
-    { "rule": "*", "severity": "downgrade" },
+    // 默认设置规则为警告级别，突出显示 TypeScript 的错误
+    { "rule": "*", "severity": "warn" },
 
     // 关闭一些支持自动修复的规则提示，降低开发过程的心智负担
     { "rule": "curly", "severity": "off" },

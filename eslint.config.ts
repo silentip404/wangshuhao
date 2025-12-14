@@ -13,6 +13,8 @@ import {
   prettierPresets,
   regexpOverrides,
   regexpPresets,
+  sortPackageJson,
+  sortTsconfig,
   typescriptOverrides,
   typescriptPresets,
 } from './eslint-config/index.ts';
@@ -102,6 +104,10 @@ const eslintConfig = defineConfig([
   {
     name: 'misc:overrides',
     extends: [
+      // 对 package.json 进行排序
+      sortPackageJson,
+      // 对 tsconfig.json 进行排序
+      sortTsconfig,
       // 允许使用 Node.js 内置模块的特例
       {
         files: ['*.config.{,*.}{js,ts}', '{scripts,utils}/**/*.ts'],

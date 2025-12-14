@@ -43,6 +43,14 @@ const jsoncOverrides = defineConfig([
        * - JSON 文件承载多种场景，强制统一命名会破坏生态兼容性
        */
       'jsonc/key-name-casing': 'off',
+      /**
+       * JSON 对象键排序
+       *
+       * @reason
+       * - 默认关闭，避免对所有 JSON 文件强制排序造成不必要的约束
+       * - 对于需要排序的特定 JSON 文件应在项目的 ESLint 配置中针对性地启用
+       */
+      'jsonc/sort-keys': 'off',
     },
   },
 ]);

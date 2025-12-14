@@ -8,7 +8,7 @@ const typescriptOverrides = defineConfig([
   {
     name: 'typescript:disable-extended-builtin-overrides',
     /**
-     * 批量关闭被 TypeScript ESLint 扩展的内置规则
+     * 批量关闭被 typescript-eslint 扩展的内置规则
      *
      * @reason
      * - 避免规则冲突和重复检查

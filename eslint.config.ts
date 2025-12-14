@@ -11,6 +11,8 @@ import {
   jsoncOverrides,
   jsoncPresets,
   prettierPresets,
+  regexpOverrides,
+  regexpPresets,
   typescriptOverrides,
   typescriptPresets,
 } from './eslint-config/index.ts';
@@ -39,6 +41,7 @@ const eslintConfig = defineConfig([
       builtinPresets,
       typescriptPresets,
       importPresets,
+      regexpPresets,
       prettierPresets,
     ],
   },
@@ -49,7 +52,12 @@ const eslintConfig = defineConfig([
   {
     name: 'js-derived:overrides',
     files: [...GLOB_JS_DERIVED],
-    extends: [builtinOverrides, typescriptOverrides, importOverrides],
+    extends: [
+      builtinOverrides,
+      typescriptOverrides,
+      importOverrides,
+      regexpOverrides,
+    ],
   },
 
   /**

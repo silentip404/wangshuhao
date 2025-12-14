@@ -1,7 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import { map } from 'remeda';
 
-import { GLOB_ALIAS } from '#node/utils';
+import { GLOB_ALIAS, ensureDependenciesInPackage } from '#node/utils';
 
 const importOverrides = defineConfig([
   {
@@ -252,6 +252,17 @@ const importOverrides = defineConfig([
             'eslint-config-prettier/flat',
           ],
         },
+      ],
+      /**
+       * 命名空间导入使用约束
+       *
+       * @reason
+       * - 命名导入使代码依赖关系更加明确，便于静态分析工具进行 tree-shaking 优化
+       * - 显式导入提升代码可读性，避免命名空间对象的过度使用，降低模块耦合度
+       */
+      'import/no-namespace': [
+        'warn',
+        { ignore: ensureDependenciesInPackage(['eslint-plugin-regexp']) },
       ],
     },
   },

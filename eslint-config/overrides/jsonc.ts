@@ -1,13 +1,22 @@
 import { defineConfig } from 'eslint/config';
 import eslintPluginJsonc from 'eslint-plugin-jsonc';
 
-import { defineAuditSettings } from '../utils/index.ts';
+import { defineConfigWithAuditSettings } from '../utils/index.ts';
 
 const jsoncOverrides = defineConfig([
   {
     name: 'jsonc:conflict-with-prettier',
-    extends: eslintPluginJsonc.configs['flat/prettier'],
-    settings: defineAuditSettings({ shouldPrependAllRules: false }),
+    extends: defineConfigWithAuditSettings(
+      {
+        /**
+         * 本意是为了仅关闭可能与 Prettier 冲突的 jsonc 规则
+         * 但在 configs['flat/prettier'] 中存在 jsonc 插件定义
+         * 因此在运行规则审查时，应明确跳过为此配置前置追加全部规则
+         */
+        shouldPrependAllRules: false,
+      },
+      eslintPluginJsonc.configs['flat/prettier'],
+    ),
   },
   {
     name: 'jsonc:jsonc-overrides',

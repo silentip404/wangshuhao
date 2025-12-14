@@ -1,14 +1,14 @@
 import { styleText } from 'node:util';
 
 import js from '@eslint/js';
-import { concat, isEmptyish, isIncludedIn, map, merge } from 'remeda';
+import { concat, isEmptyish, map, merge } from 'remeda';
 
 import {
   collectPluginNames,
   collectRuleNames,
-  collectSkipPrependAllRulesConfigNames,
   createRules,
   normalizeSeverity,
+  resolveAuditSettings,
 } from './eslint-config/index.ts';
 import eslintConfig from './eslint.config.ts';
 import { GLOB_JS_DERIVED, printMessage } from './utils/index.ts';
@@ -26,13 +26,16 @@ const builtinConfigWithAllRules = normalizeSeverity(
   SEVERITY,
 );
 
-const skipNames = collectSkipPrependAllRulesConfigNames(eslintConfig);
-
 const eslintConfigWithAllRules = map(eslintConfig, (config) => {
-  const name = config.name?.trim();
+  const { shouldPrependAllRules } = resolveAuditSettings(config);
+
+  if (shouldPrependAllRules === false) {
+    return config;
+  }
+
   const { plugins } = config;
 
-  if (isIncludedIn(name, skipNames) || isEmptyish(plugins)) {
+  if (isEmptyish(plugins)) {
     return config;
   }
 

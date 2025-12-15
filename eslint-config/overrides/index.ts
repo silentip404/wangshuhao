@@ -4,5 +4,5 @@ export * from './import.ts';
 export * from './jsonc.ts';
 export * from './perfectionist.ts';
 export * from './regexp.ts';
-export * from './sort.ts';
+export * from './sort-json.ts';
 export * from './typescript.ts';

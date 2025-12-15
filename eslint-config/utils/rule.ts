@@ -1,5 +1,5 @@
 import { type RulesConfig, type Severity } from '@eslint/core';
-import js from '@eslint/js';
+import eslintJs from '@eslint/js';
 import { type Config } from 'eslint/config';
 import {
   forEachObj,
@@ -55,7 +55,7 @@ const createDisabledBuiltinExtendedRules = (
   plugins: Plugins,
 ): Record<string, 'off'> => {
   const disabledNames = intersection(
-    keys(js.configs.all.rules),
+    keys(eslintJs.configs.all.rules),
     collectRuleNames(plugins, { shouldWithPluginName: false }),
   );
 

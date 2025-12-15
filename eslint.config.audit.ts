@@ -1,6 +1,6 @@
 import { styleText } from 'node:util';
 
-import js from '@eslint/js';
+import eslintJs from '@eslint/js';
 import { concat, isEmptyish, map, merge } from 'remeda';
 
 import {
@@ -20,7 +20,7 @@ const builtinConfigWithAllRules = normalizeSeverity(
     {
       name: 'eslint:audit/all-builtin-rules',
       files: [...GLOB_DERIVED_JS],
-      rules: js.configs.all.rules,
+      rules: eslintJs.configs.all.rules,
     },
   ],
   SEVERITY,

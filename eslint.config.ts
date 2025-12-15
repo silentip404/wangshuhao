@@ -1,4 +1,4 @@
-import ignore from 'eslint-config-flat-gitignore';
+import createIgnoreConfig from 'eslint-config-flat-gitignore';
 import { defineConfig } from 'eslint/config';
 import { type SetRequired } from 'type-fest';
 import { type ConfigWithExtends } from 'typescript-eslint';
@@ -12,6 +12,8 @@ import {
   importPresets,
   jsoncOverrides,
   jsoncPresets,
+  localOverrides,
+  localPresets,
   perfectionistOverrides,
   perfectionistPresets,
   prettierPresets,
@@ -32,7 +34,10 @@ const eslintConfig = defineConfig([
   /**
    * 全局忽略配置
    */
-  { ...ignore({ root: true, files: ['.gitignore'] }), name: 'global:ignore' },
+  {
+    ...createIgnoreConfig({ root: true, files: ['.gitignore'] }),
+    name: 'global:ignore',
+  },
 
   /**
    * JS 派生文件预设配置
@@ -47,6 +52,7 @@ const eslintConfig = defineConfig([
       regexpPresets,
       perfectionistPresets,
       prettierPresets,
+      localPresets,
     ],
   },
 
@@ -62,6 +68,7 @@ const eslintConfig = defineConfig([
       importOverrides,
       regexpOverrides,
       perfectionistOverrides,
+      localOverrides,
     ],
   },
 

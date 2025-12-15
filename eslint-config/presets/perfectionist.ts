@@ -1,9 +1,9 @@
-import perfectionist from 'eslint-plugin-perfectionist';
+import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { defineConfig } from 'eslint/config';
 
 const perfectionistPresets = defineConfig([
   {
-    plugins: { perfectionist },
+    plugins: { perfectionist: perfectionistPlugin },
     settings: {
       perfectionist: {
         type: 'natural',

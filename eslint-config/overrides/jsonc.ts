@@ -1,4 +1,4 @@
-import eslintPluginJsonc from 'eslint-plugin-jsonc';
+import jsoncPlugin from 'eslint-plugin-jsonc';
 import { defineConfig } from 'eslint/config';
 
 import { defineConfigWithAuditSettings } from '../utils/index.ts';
@@ -15,7 +15,7 @@ const jsoncOverrides = defineConfig([
          */
         shouldPrependAllRules: false,
       },
-      eslintPluginJsonc.configs['flat/prettier'],
+      jsoncPlugin.configs['flat/prettier'],
     ),
   },
   {

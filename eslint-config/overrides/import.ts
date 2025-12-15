@@ -138,6 +138,7 @@ const importOverrides = defineConfig([
 
             // 允许一些特殊文件导入
             '../utils/index.ts',
+            '../local-plugin/index.ts',
           ],
         },
       ],
@@ -209,6 +210,7 @@ const importOverrides = defineConfig([
             'next/font/*',
             'eslint/config',
             'eslint-config-prettier/flat',
+            '@typescript-eslint/utils/json-schema',
           ],
         },
       ],

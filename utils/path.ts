@@ -43,4 +43,7 @@ const toRelativePosixPath = ({
   return addDotSlash ? `./${posixPath}` : posixPath;
 };
 
-export { toRelativePosixPath };
+const getFilenameWithoutExtension = (filePath: string): string =>
+  path.basename(filePath, path.extname(filePath));
+
+export { getFilenameWithoutExtension, toRelativePosixPath };

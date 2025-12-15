@@ -1,4 +1,4 @@
-import * as plugin from 'eslint-plugin-regexp';
+import * as regexpPlugin from 'eslint-plugin-regexp';
 import { defineConfig } from 'eslint/config';
 
 import { createDisabledBuiltinExtendedRules } from '../utils/index.ts';
@@ -13,7 +13,7 @@ const regexpOverrides = defineConfig([
      * - 避免规则冲突和重复检查
      * - 统一由 regexp/${ruleName} 代替对应的内置规则
      */
-    rules: createDisabledBuiltinExtendedRules({ regexp: plugin }),
+    rules: createDisabledBuiltinExtendedRules({ regexp: regexpPlugin }),
   },
   {
     name: 'regexp:regexp-overrides',

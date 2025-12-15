@@ -88,7 +88,7 @@ const builtinOverrides = defineConfig([
        */
       'max-statements': [
         'warn',
-        { max: 16 },
+        { max: 32 },
         { ignoreTopLevelFunctions: true },
       ],
       /**
@@ -139,7 +139,7 @@ const builtinOverrides = defineConfig([
        */
       'max-lines-per-function': [
         'warn',
-        { max: 80, skipBlankLines: true, skipComments: true },
+        { max: 256, skipBlankLines: true, skipComments: true },
       ],
       /**
        * 文件代码行数控制
@@ -149,7 +149,10 @@ const builtinOverrides = defineConfig([
        * - 较小的文件更易于导航、理解和维护，降低认知负担
        * - 跳过空行和注释的统计，避免因代码格式化和文档注释导致的误报
        */
-      'max-lines': ['warn', { skipBlankLines: true, skipComments: true }],
+      'max-lines': [
+        'warn',
+        { max: 512, skipBlankLines: true, skipComments: true },
+      ],
       /**
        * 禁止使用控制台输出方法
        *

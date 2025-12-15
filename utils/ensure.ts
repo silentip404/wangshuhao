@@ -54,4 +54,4 @@ const ensureDependenciesInPackage = (dependencies: string[]): string[] => {
   process.exit(1);
 };
 
-export { ensureScriptsInPackage, ensureDependenciesInPackage };
+export { ensureDependenciesInPackage, ensureScriptsInPackage };

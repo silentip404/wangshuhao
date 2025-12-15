@@ -1,3 +1,5 @@
+import { type Severity } from '@eslint/core';
+import { type Config } from 'eslint/config';
 import {
   concat,
   drop,
@@ -8,9 +10,6 @@ import {
   mapValues,
   merge,
 } from 'remeda';
-
-import type { Severity } from '@eslint/core';
-import type { Config } from 'eslint/config';
 
 const normalizeSeverity = (configs: Config[], severity: Severity): Config[] =>
   map(configs, (config) => {

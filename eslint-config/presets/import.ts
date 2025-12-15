@@ -1,5 +1,5 @@
-import { defineConfig } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
+import { defineConfig } from 'eslint/config';
 
 const importPresets = defineConfig([
   importPlugin.flatConfigs.recommended,

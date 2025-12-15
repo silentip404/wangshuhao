@@ -1,5 +1,7 @@
-import { defineConfig } from 'eslint/config';
 import ignore from 'eslint-config-flat-gitignore';
+import { defineConfig } from 'eslint/config';
+import { type SetRequired } from 'type-fest';
+import { type ConfigWithExtends } from 'typescript-eslint';
 
 import {
   builtinOverrides,
@@ -10,6 +12,8 @@ import {
   importPresets,
   jsoncOverrides,
   jsoncPresets,
+  perfectionistOverrides,
+  perfectionistPresets,
   prettierPresets,
   regexpOverrides,
   regexpPresets,
@@ -19,13 +23,10 @@ import {
   typescriptPresets,
 } from './eslint-config/index.ts';
 import {
-  GLOB_DEPEND_DERIVED,
-  GLOB_JSON_DERIVED,
-  GLOB_JS_DERIVED,
+  GLOB_DERIVED_DEPEND,
+  GLOB_DERIVED_JS,
+  GLOB_DERIVED_JSON,
 } from './utils/index.ts';
-
-import type { SetRequired } from 'type-fest';
-import type { ConfigWithExtends } from 'typescript-eslint';
 
 const eslintConfig = defineConfig([
   /**
@@ -37,13 +38,14 @@ const eslintConfig = defineConfig([
    * JS 派生文件预设配置
    */
   {
-    name: 'js-derived:presets',
-    files: [...GLOB_JS_DERIVED],
+    name: 'derived-js:presets',
+    files: [...GLOB_DERIVED_JS],
     extends: [
       builtinPresets,
       typescriptPresets,
       importPresets,
       regexpPresets,
+      perfectionistPresets,
       prettierPresets,
     ],
   },
@@ -52,13 +54,14 @@ const eslintConfig = defineConfig([
    * JS 派生文件覆盖配置
    */
   {
-    name: 'js-derived:overrides',
-    files: [...GLOB_JS_DERIVED],
+    name: 'derived-js:overrides',
+    files: [...GLOB_DERIVED_JS],
     extends: [
       builtinOverrides,
       typescriptOverrides,
       importOverrides,
       regexpOverrides,
+      perfectionistOverrides,
     ],
   },
 
@@ -66,8 +69,8 @@ const eslintConfig = defineConfig([
    * JSON 派生文件预设配置
    */
   {
-    name: 'json-derived:presets',
-    files: [...GLOB_JSON_DERIVED],
+    name: 'derived-json:presets',
+    files: [...GLOB_DERIVED_JSON],
     extends: [jsoncPresets],
   },
 
@@ -75,8 +78,8 @@ const eslintConfig = defineConfig([
    * JSON 派生文件覆盖配置
    */
   {
-    name: 'json-derived:overrides',
-    files: [...GLOB_JSON_DERIVED],
+    name: 'derived-json:overrides',
+    files: [...GLOB_DERIVED_JSON],
     extends: [jsoncOverrides],
   },
 
@@ -85,7 +88,7 @@ const eslintConfig = defineConfig([
    */
   {
     name: 'depend:presets',
-    files: [...GLOB_DEPEND_DERIVED],
+    files: [...GLOB_DERIVED_DEPEND],
     extends: [dependPresets],
   },
 
@@ -94,7 +97,7 @@ const eslintConfig = defineConfig([
    */
   {
     name: 'depend:overrides',
-    files: [...GLOB_DEPEND_DERIVED],
+    files: [...GLOB_DERIVED_DEPEND],
     extends: [dependOverrides],
   },
 
@@ -120,7 +123,7 @@ const eslintConfig = defineConfig([
         rules: { 'import/no-default-export': 'off' },
       },
     ],
-  } satisfies Pick<ConfigWithExtends, 'name' | 'extends'>,
+  } satisfies Pick<ConfigWithExtends, 'extends' | 'name'>,
 ] satisfies SetRequired<ConfigWithExtends, 'name'>[]);
 
 export default eslintConfig;

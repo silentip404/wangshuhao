@@ -1,4 +1,4 @@
-import type { Configuration } from 'lint-staged';
+import { type Configuration } from 'lint-staged';
 
 const lintStagedConfig: Configuration = {
   '*': [

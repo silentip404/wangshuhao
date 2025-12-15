@@ -21,7 +21,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "isolatedModules": true,
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": false,
     "skipLibCheck": true,
     "plugins": [{ "name": "next" }],
   },

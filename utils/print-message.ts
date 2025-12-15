@@ -1,10 +1,8 @@
-import { consola } from 'consola';
+import { consola, type InputLogObject } from 'consola';
 import { flat, isEmptyish, isIncludedIn } from 'remeda';
 import { z } from 'zod';
 
 import { ensureScriptsInPackage } from './ensure.ts';
-
-import type { InputLogObject } from 'consola';
 
 const isRunningInKnip = isIncludedIn(
   process.env.npm_lifecycle_event,
@@ -41,4 +39,4 @@ const printMessage = ({
   consola[type](typedOptions);
 };
 
-export { printMessage, type PrintMessageOptions, printMessageOptionsSchema };
+export { printMessage, printMessageOptionsSchema, type PrintMessageOptions };

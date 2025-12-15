@@ -180,6 +180,10 @@ const builtinOverrides = defineConfig([
           message:
             'Inline exports are not allowed. Use export { ... } instead.',
         },
+        {
+          selector: 'ExportNamedDeclaration[exportKind="type"]',
+          message: 'Use inline type specifiers: export { type ... } instead.',
+        },
       ],
     },
   },

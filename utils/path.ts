@@ -2,8 +2,8 @@ import path from 'node:path';
 
 interface ToRelativePosixPathOptions {
   filename: string;
-  relativeDirname?: string;
   addDotSlash?: boolean;
+  relativeDirname?: string;
 }
 
 /**

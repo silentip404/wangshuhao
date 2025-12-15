@@ -1,5 +1,5 @@
-import { defineConfig } from 'eslint/config';
 import prettierConfig from 'eslint-config-prettier/flat';
+import { defineConfig } from 'eslint/config';
 import { omitBy } from 'remeda';
 
 const prettierPresets = defineConfig([

@@ -1,5 +1,5 @@
-import { defineConfig } from 'eslint/config';
 import * as plugin from 'eslint-plugin-regexp';
+import { defineConfig } from 'eslint/config';
 
 import { createDisabledBuiltinExtendedRules } from '../utils/index.ts';
 

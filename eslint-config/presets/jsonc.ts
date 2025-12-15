@@ -1,12 +1,12 @@
-import { defineConfig } from 'eslint/config';
 import eslintPluginJsonc from 'eslint-plugin-jsonc';
+import { defineConfig } from 'eslint/config';
 import jsoncParser from 'jsonc-eslint-parser';
 
 import {
+  GLOB_DERIVED_JSON,
   GLOB_JSON,
   GLOB_JSON5,
   GLOB_JSONC,
-  GLOB_JSON_DERIVED,
 } from '#node/utils';
 
 const jsoncPresets = defineConfig([
@@ -25,7 +25,7 @@ const jsoncPresets = defineConfig([
     ignores: [...GLOB_JSON, ...GLOB_JSONC],
     extends: eslintPluginJsonc.configs['flat/recommended-with-json5'],
   },
-  { files: [...GLOB_JSON_DERIVED], languageOptions: { parser: jsoncParser } },
+  { files: [...GLOB_DERIVED_JSON], languageOptions: { parser: jsoncParser } },
 ]);
 
 export { jsoncPresets };

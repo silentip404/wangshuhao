@@ -1,14 +1,13 @@
 import { isEmptyish, isIncludedIn, map, partition, pipe } from 'remeda';
+import { type ArgumentConfig, type ParseOptions } from 'ts-command-line-args';
 
 import { toRelativePosixPath } from './path.ts';
 import { printMessage } from './print-message.ts';
 
-import type { ArgumentConfig, ParseOptions } from 'ts-command-line-args';
-
 interface HelpArg {
   help?: boolean;
 }
-type WithHelpArg<T> = T & HelpArg;
+type WithHelpArg<T> = HelpArg & T;
 const helpArgConfig: ArgumentConfig<HelpArg> = {
   help: {
     type: Boolean,
@@ -39,15 +38,15 @@ const verifyFilesArgsConfig: ArgumentConfig<VerifyFilesArgs> = {
   },
 };
 interface AnalyzeVerifyFilesOptions {
-  files?: string[];
   allRelatedFiles: string[];
-  ignoreUnknown?: boolean;
   unknownErrorTitle: string;
+  files?: string[];
+  ignoreUnknown?: boolean;
 }
 interface AnalyzeVerifyFilesResult {
   relatedFiles: string[];
-  unknownFiles: string[];
   shouldRunVerification: boolean;
+  unknownFiles: string[];
 }
 const analyzeVerifyFiles = (
   options: AnalyzeVerifyFilesOptions,
@@ -84,10 +83,10 @@ const analyzeVerifyFiles = (
 };
 
 export {
+  analyzeVerifyFiles,
   helpArgConfig,
   helpArgOptions,
+  verifyFilesArgsConfig,
   type VerifyFilesArgs,
   type WithHelpArg,
-  verifyFilesArgsConfig,
-  analyzeVerifyFiles,
 };

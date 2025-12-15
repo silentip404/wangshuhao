@@ -1,7 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import { map } from 'remeda';
 
-import { GLOB_ALIAS, ensureDependenciesInPackage } from '#node/utils';
+import { ensureDependenciesInPackage, GLOB_ALIAS } from '#node/utils';
 
 const importOverrides = defineConfig([
   {
@@ -14,14 +14,6 @@ const importOverrides = defineConfig([
        * - import/no-duplicates 提供更强大的功能，包括自动合并导入和更好的 TypeScript 支持
        */
       'no-duplicate-imports': 'off',
-      /**
-       * 导入语句排序规则检查
-       *
-       * @reason
-       * - 配合 import/order 实现导入语句的完全规范化
-       * - 开启 ignoreDeclarationSort 避免与 import/order 冲突
-       */
-      'sort-imports': ['warn', { ignoreDeclarationSort: true }],
     },
   },
   {
@@ -65,7 +57,7 @@ const importOverrides = defineConfig([
        * @reason
        * - 合并来自同一模块的多个导入语句，提高代码整洁度和可维护性
        */
-      'import/no-duplicates': 'warn',
+      'import/no-duplicates': ['warn', { 'prefer-inline': true }],
       /**
        * 禁止使用命名导出
        *
@@ -108,45 +100,12 @@ const importOverrides = defineConfig([
        */
       'import/no-unassigned-import': ['error', { allow: ['**/*.css'] }],
       /**
-       * 导入语句排序检查
+       * 类型导入标记位置统一
        *
        * @reason
-       * - 统一的导入顺序降低代码审查时的认知负担，提升团队协作效率
-       * - 清晰的分组策略使依赖层次一目了然
+       * - 内联标记可以减少导入语句数量，避免重复的模块路径声明
        */
-      'import/order': [
-        'warn',
-        {
-          'groups': [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-            'object',
-            'type',
-          ],
-          'pathGroups': map(GLOB_ALIAS, (alias) => ({
-            // 别名视作内部模块
-            pattern: alias,
-            group: 'internal',
-          })),
-          'sortTypesGroup': true,
-          'newlines-between': 'always',
-          'newlines-between-types': 'always',
-          'alphabetize': { order: 'asc', caseInsensitive: false },
-          'distinctGroup': false,
-        },
-      ],
-      /**
-       * 类型导入语法风格检查
-       *
-       * @reason
-       * - 强制类型导入使用顶层 import type 语法，与值导入完全分离
-       * - 提高代码可读性，类型导入与值导入的边界更清晰明确
-       */
-      'import/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
+      'import/consistent-type-specifier-style': ['warn', 'prefer-inline'],
       /**
        * Node.js 内置模块使用检查
        *

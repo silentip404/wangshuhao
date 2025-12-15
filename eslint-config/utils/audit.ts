@@ -1,7 +1,6 @@
+import { type Config } from 'eslint/config';
 import { map, merge } from 'remeda';
 import { z } from 'zod';
-
-import type { Config } from 'eslint/config';
 
 const AUDIT_SETTINGS_NAMESPACE = 'audit';
 

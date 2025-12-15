@@ -132,10 +132,10 @@ const typescriptOverrides = defineConfig([
        * 类型导入副作用检查
        *
        * @reason
-       * - 配合 verbatimModuleSyntax 避免意外的副作用导入（如 import {} from 'mod'）
-       * - 确保类型导入在编译后完全移除，减少运行时开销
+       * - 项目未启用 verbatimModuleSyntax，TypeScript 编译器会自动处理类型导入的擦除
+       * - Next.js 内置打包工具能够自动管理模块导入和副作用
        */
-      '@typescript-eslint/no-import-type-side-effects': 'error',
+      '@typescript-eslint/no-import-type-side-effects': 'off',
       /**
        * switch 语句穷尽性检查
        *
@@ -246,6 +246,18 @@ const typescriptOverrides = defineConfig([
           allowNumber: true,
           allowRegExp: false,
         },
+      ],
+      /**
+       * 类型导出一致性检查
+       *
+       * @reason
+       * - 显式类型导出允许打包工具在隔离模块级别优化代码，移除纯类型导出
+       * - 统一导出风格提升代码库的可维护性和可读性
+       * - 为 Tree-shaking 提供更精确的依赖分析依据
+       */
+      '@typescript-eslint/consistent-type-exports': [
+        'warn',
+        { fixMixedExportsWithInlineTypeSpecifier: true },
       ],
     },
   },

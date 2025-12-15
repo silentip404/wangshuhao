@@ -1,5 +1,5 @@
-import { defineConfig } from 'eslint/config';
 import eslintPluginJsonc from 'eslint-plugin-jsonc';
+import { defineConfig } from 'eslint/config';
 
 import { defineConfigWithAuditSettings } from '../utils/index.ts';
 

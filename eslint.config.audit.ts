@@ -11,7 +11,7 @@ import {
   resolveAuditSettings,
 } from './eslint-config/index.ts';
 import eslintConfig from './eslint.config.ts';
-import { GLOB_JS_DERIVED, printMessage } from './utils/index.ts';
+import { GLOB_DERIVED_JS, printMessage } from './utils/index.ts';
 
 const SEVERITY = 'warn';
 
@@ -19,7 +19,7 @@ const builtinConfigWithAllRules = normalizeSeverity(
   [
     {
       name: 'eslint:audit/all-builtin-rules',
-      files: [...GLOB_JS_DERIVED],
+      files: [...GLOB_DERIVED_JS],
       rules: js.configs.all.rules,
     },
   ],

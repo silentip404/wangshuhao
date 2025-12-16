@@ -75,7 +75,7 @@
       "  },",
       "  defaultOptions: [{ enumOption: 'lower' }],",
       "  create: (context, options) => {",
-      "    const { stringOption, enumOption } = options[0];",
+      "    const [{ stringOption, enumOption }] = options;",
       "",
       "    return {};",
       "  },",

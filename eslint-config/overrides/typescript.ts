@@ -259,6 +259,33 @@ const typescriptOverrides = defineConfig([
         'warn',
         { fixMixedExportsWithInlineTypeSpecifier: true },
       ],
+      /**
+       * 强制使用解构赋值
+       *
+       * @reason
+       * - 解构赋值清晰地表达了变量的来源，增强了代码可读性。
+       * - 避免了传统赋值可能引入的混乱，使代码逻辑更明显。
+       * - 在 TypeScript 中，解构赋值可以充分利用类型注释，增强类型安全。
+       */
+      '@typescript-eslint/prefer-destructuring': 'warn',
+      /**
+       * 禁止变量声明遮蔽外部作用域中的变量
+       *
+       * @reason
+       * - 防止变量遮蔽有助于提高代码清晰度，减少潜在的错误和混淆。
+       * - 通过避免同名变量，提升代码的可维护性，尤其是在复杂的代码库中。
+       * - 理清各作用域中的变量关系有助于开发者更好地理解代码的结构。
+       */
+      '@typescript-eslint/no-shadow': 'warn',
+      /**
+       * 强制使用变量初始化声明
+       *
+       * @reason
+       * - 提高代码清晰度，确保变量在使用之前被明确初始化，避免潜在的未定义行为。
+       * - 通过保证变量总是有初始值，减少在不同作用域中出现未初始化变量的错误。
+       * - 在复杂逻辑中明确变量的初始状态，有助于增加团队协作的信心和可维护性。
+       */
+      '@typescript-eslint/init-declarations': 'warn',
     },
   },
 ]);

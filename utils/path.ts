@@ -38,7 +38,7 @@ const toRelativePosixPath = ({
     path.normalize(filename),
   );
 
-  const posixPath = relativePath.replace(/\\/gu, '/');
+  const posixPath = relativePath.replace(/\\/gv, '/');
 
   return addDotSlash ? `./${posixPath}` : posixPath;
 };

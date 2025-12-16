@@ -91,19 +91,19 @@ const eslintSchema = createESLintSchema({
   },
 });
 
+type Matcher = NonNullable<Options['0']['matchers']>[number];
+type MatcherImportType = Matcher['importType'];
 type MessageIds =
   | 'invalidImportName'
   | 'invalidRegexSource'
   | 'matcherNotFound';
 type Options = InferSchema<typeof eslintSchema>;
-type Matcher = NonNullable<Options['0']['matchers']>[number];
-type MatcherImportType = Matcher['importType'];
 type RegexErrorIdentifier = null;
 
 const getNameVariants = (
   input: string,
 ): { camelCase: string; pascalCase: string } => {
-  const sanitized = input.replace(/[^a-z0-9]+/giu, ' ');
+  const sanitized = input.replace(/[^0-9a-z]+/giv, ' ');
   const camelCase = toCamelCase(sanitized);
   const pascalCase = capitalize(camelCase);
 
@@ -113,10 +113,10 @@ const getNameVariants = (
 const parseImportDeclaration = (
   node: TSESTree.ImportDeclaration,
 ): {
-  packageName: string;
+  camelCaseImportName: string;
   defaultImportName?: string;
   namespaceImportName?: string;
-  camelCaseImportName: string;
+  packageName: string;
   pascalCaseImportName: string;
 } => {
   const parseSpecifierNameByType = (
@@ -167,25 +167,25 @@ const ruleValue = createRule<Options, MessageIds>({
     {
       ignoreUnMatched: false,
       matchers: [
-        { importType: 'all', regexSource: /^.*$/u.source, mode: 'camelCase' },
+        { importType: 'all', regexSource: /^.*$/v.source, mode: 'camelCase' },
       ],
     },
   ],
   create: (context, options) => {
-    const { ignoreUnMatched, matchers } = options[0];
+    const [{ ignoreUnMatched, matchers }] = options;
 
     const createRegexMatcher = (): {
+      replace: (options: {
+        node: TSESTree.ImportDeclaration;
+        regexSource: string;
+        replacement: string;
+        sourceString: string;
+      }) => RegexErrorIdentifier | string;
       test: (options: {
+        node: TSESTree.ImportDeclaration;
         regexSource: string;
         testString: string;
-        node: TSESTree.ImportDeclaration;
       }) => boolean;
-      replace: (options: {
-        regexSource: string;
-        sourceString: string;
-        replacement: string;
-        node: TSESTree.ImportDeclaration;
-      }) => RegexErrorIdentifier | string;
     } => {
       const cache = new Map<string, RegexErrorIdentifier | RegExp>();
       const reportedErrors = new Set<string>();
@@ -229,9 +229,9 @@ const ruleValue = createRule<Options, MessageIds>({
           node,
         }): RegexErrorIdentifier | string => {
           const regex = getOrCompileRegex(regexSource, node);
-          return !isNullish(regex)
-            ? sourceString.replace(regex, replacement)
-            : null;
+          return isNullish(regex)
+            ? null
+            : sourceString.replace(regex, replacement);
         },
       };
     };
@@ -246,14 +246,14 @@ const ruleValue = createRule<Options, MessageIds>({
       camelCaseImportName,
       pascalCaseImportName,
     }: {
-      node: TSESTree.ImportDeclaration;
+      camelCaseImportName: string;
       importName: string;
       importType: MatcherImportType;
+      node: TSESTree.ImportDeclaration;
       packageName: string;
-      camelCaseImportName: string;
       pascalCaseImportName: string;
     }): void => {
-      const matcher = find(matchers ?? [], (matcher) => {
+      const matchedMatcher = find(matchers ?? [], (matcher) => {
         if (matcher.importType !== 'all' && matcher.importType !== importType) {
           return false;
         }
@@ -265,7 +265,7 @@ const ruleValue = createRule<Options, MessageIds>({
         });
       });
 
-      if (matcher === undefined) {
+      if (matchedMatcher === undefined) {
         if (ignoreUnMatched === true) {
           return;
         }
@@ -279,11 +279,11 @@ const ruleValue = createRule<Options, MessageIds>({
         return;
       }
 
-      const { mode } = matcher;
+      const { mode } = matchedMatcher;
 
       switch (mode) {
         case 'equal': {
-          const { value } = matcher;
+          const { value } = matchedMatcher;
 
           if (importName !== value) {
             context.report({
@@ -313,7 +313,7 @@ const ruleValue = createRule<Options, MessageIds>({
         }
 
         case 'template': {
-          const { regexSource, template, transform } = matcher;
+          const { regexSource, template, transform } = matchedMatcher;
 
           const transformedName = regexMatcher.replace({
             regexSource,
@@ -328,11 +328,10 @@ const ruleValue = createRule<Options, MessageIds>({
 
           const transformedNameVariants = getNameVariants(transformedName);
 
-          let expectedImportName: string;
+          let expectedImportName = transformedName;
 
           switch (transform) {
             case 'none':
-              expectedImportName = transformedName;
               break;
             case 'camelCase':
               expectedImportName = transformedNameVariants.camelCase;
@@ -341,8 +340,9 @@ const ruleValue = createRule<Options, MessageIds>({
               expectedImportName = transformedNameVariants.pascalCase;
               break;
             default:
-              expectedImportName = transformedName;
-              break;
+              throw new Error(
+                `Invalid transform: ${JSON.stringify({ transform })}`,
+              );
           }
 
           if (importName !== expectedImportName) {

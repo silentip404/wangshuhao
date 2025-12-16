@@ -20,31 +20,31 @@ const localOverrides = defineConfig([
             // 特殊命名
             {
               importType: 'all',
-              regexSource: /^.*eslint.config.ts$/u.source,
+              regexSource: /^.*eslint.config.ts$/v.source,
               mode: 'equal',
               value: 'eslintConfig',
             },
             {
               importType: 'all',
-              regexSource: /^eslint-config-flat-gitignore$/u.source,
+              regexSource: /^eslint-config-flat-gitignore$/v.source,
               mode: 'equal',
               value: 'createIgnoreConfig',
             },
             {
               importType: 'all',
-              regexSource: /^eslint-config-prettier\/flat$/u.source,
+              regexSource: /^eslint-config-prettier\/flat$/v.source,
               mode: 'equal',
               value: 'prettierConfig',
             },
             {
               importType: 'all',
-              regexSource: /^next\/image$/u.source,
+              regexSource: /^next\/image$/v.source,
               mode: 'equal',
               value: 'Image',
             },
             {
               importType: 'all',
-              regexSource: /^jsonc-eslint-parser$/u.source,
+              regexSource: /^jsonc-eslint-parser$/v.source,
               mode: 'equal',
               value: 'jsoncParser',
             },
@@ -52,23 +52,23 @@ const localOverrides = defineConfig([
             // 通用命名
             {
               importType: 'all',
-              regexSource: /^node:(.*)$/u.source,
+              regexSource: /^node:(?<name>.*)$/v.source,
               mode: 'template',
-              template: '$1',
+              template: '$<name>',
               transform: 'camelCase',
             },
             {
               importType: 'all',
-              regexSource: /^[a-z0-9._-]+-plugin-(.*)$/u.source,
+              regexSource: /^[\-.0-9_a-z]+-plugin-(?<name>.*)$/v.source,
               mode: 'template',
-              template: '$1Plugin',
+              template: '$<name>Plugin',
               transform: 'camelCase',
             },
 
             // 默认命名
             {
               importType: 'all',
-              regexSource: /^.*$/u.source,
+              regexSource: /^.*$/v.source,
               mode: 'camelCase',
             },
           ],

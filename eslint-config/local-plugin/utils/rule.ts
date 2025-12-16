@@ -5,8 +5,8 @@ import { getFilenameWithoutExtension } from '#node/utils';
 const initRule = (
   ruleFilePath: string,
 ): {
-  ruleName: string;
   createRule: ReturnType<typeof ESLintUtils.RuleCreator>;
+  ruleName: string;
 } => {
   const ruleName = getFilenameWithoutExtension(ruleFilePath);
   const createRule = ESLintUtils.RuleCreator(

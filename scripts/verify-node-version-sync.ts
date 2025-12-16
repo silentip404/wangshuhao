@@ -30,7 +30,7 @@ const packageJSON = await readPackage();
 // 获取并验证 Node 版本
 const getStandardNodeVersion = (): string => {
   const nodeVersion = prop(packageJSON, 'engines', 'node') as unknown;
-  const exactNodeVersionRegex = /^\d+\.\d+\.\d+$/u;
+  const exactNodeVersionRegex = /^\d+\.\d+\.\d+$/v;
 
   if (nodeVersion === undefined) {
     printMessage({

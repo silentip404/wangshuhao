@@ -4,3 +4,4 @@ export * from './file-patterns.ts';
 export * from './path.ts';
 export * from './print-error.ts';
 export * from './print-message.ts';
+export * from './string.ts';

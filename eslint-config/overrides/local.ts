@@ -5,72 +5,75 @@ const localOverrides = defineConfig([
     name: 'local:local-overrides',
     rules: {
       /**
-       * 默认导入命名规范
+       * 模块标识符命名规范
        *
        * @reason
-       * - 统一的默认导入命名规范消除团队协作中的命名歧义，提升代码库的一致性
-       * - 规范化的导入名称降低代码审查和重构的认知负担
-       * - 在大型项目中便于快速定位和理解模块依赖关系
+       * - 统一的模块标识符命名规范可以消除团队协作中的命名歧义，提升代码库的一致性
+       * - 规范化的模块标识符能降低代码审查和重构的认知负担
+       * - 在大型项目中便于快速定位和理解模块依赖关系，提升代码的可读性和可维护性
        */
-      'local/restrict-non-named-import-name': [
+      'local/module-identifier-naming-convention': [
         'warn',
         {
           ignoreUnMatched: false,
           matchers: [
             // 特殊命名
             {
-              importType: 'all',
+              type: 'all',
               regexSource: /^.*eslint.config.ts$/v.source,
               mode: 'equal',
-              value: 'eslintConfig',
+              identifier: 'eslintConfig',
             },
             {
-              importType: 'all',
+              type: 'all',
               regexSource: /^eslint-config-flat-gitignore$/v.source,
               mode: 'equal',
-              value: 'createIgnoreConfig',
+              identifier: 'createIgnoreConfig',
             },
             {
-              importType: 'all',
+              type: 'all',
               regexSource: /^eslint-config-prettier\/flat$/v.source,
               mode: 'equal',
-              value: 'prettierConfig',
+              identifier: 'prettierConfig',
             },
             {
-              importType: 'all',
+              type: 'all',
               regexSource: /^next\/image$/v.source,
               mode: 'equal',
-              value: 'Image',
+              identifier: 'Image',
             },
             {
-              importType: 'all',
+              type: 'all',
               regexSource: /^jsonc-eslint-parser$/v.source,
               mode: 'equal',
-              value: 'jsoncParser',
+              identifier: 'jsoncParser',
             },
 
             // 通用命名
             {
-              importType: 'all',
+              type: 'all',
               regexSource: /^node:(?<name>.*)$/v.source,
-              mode: 'template',
-              template: '$<name>',
-              transform: 'camelCase',
+              mode: 'replace',
+              replacement: '$<name>',
+              transformMode: 'camelCase',
             },
             {
-              importType: 'all',
+              type: 'all',
               regexSource: /^[\-.0-9_a-z]+-plugin-(?<name>.*)$/v.source,
-              mode: 'template',
-              template: '$<name>Plugin',
-              transform: 'camelCase',
+              mode: 'replace',
+              replacement: '$<name>Plugin',
+              transformMode: 'camelCase',
+            },
+            {
+              type: 'all',
+              regexSource: /^(?<path>\.\.?\/.+)\.\w+$/v.source,
+              mode: 'replace',
+              replacement: '$<path>',
+              transformMode: 'camelCase',
             },
 
             // 默认命名
-            {
-              importType: 'all',
-              regexSource: /^.*$/v.source,
-              mode: 'camelCase',
-            },
+            { type: 'all', regexSource: /^.*$/v.source, mode: 'camelCase' },
           ],
         },
       ],

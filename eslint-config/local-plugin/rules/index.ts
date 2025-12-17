@@ -1,1 +1,1 @@
-export * as restrictNonNamedImportName from './restrict-non-named-import-name.ts';
+export * as moduleIdentifierNamingConvention from './module-identifier-naming-convention.ts';

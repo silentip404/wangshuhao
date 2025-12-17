@@ -210,7 +210,7 @@ const importOverrides = defineConfig([
             'next/font/*',
             'eslint/config',
             'eslint-config-prettier/flat',
-            '@typescript-eslint/utils/json-schema',
+            '@typescript-eslint/utils/*',
           ],
         },
       ],

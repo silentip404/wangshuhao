@@ -1,6 +1,6 @@
 import { AST_NODE_TYPES, type TSESTree } from '@typescript-eslint/utils';
 import { type RuleContext } from '@typescript-eslint/utils/ts-eslint';
-import { find, isNullish } from 'remeda';
+import { find, isNullish, isTruthy } from 'remeda';
 
 import { getSanitizedCaseVariants, type CaseVariants } from '#node/utils';
 
@@ -167,6 +167,12 @@ const lintModuleIdentifier = (
 ): void => {
   const { moduleIdentifier, type } = options;
 
+  const modulePath = lintContext.modulePathVariants.raw;
+
+  if (!isTruthy(modulePath.trim())) {
+    return;
+  }
+
   const matchedMatcher = find(
     lintContext.ruleOptions.matchers ?? [],
     (matcher) => {
@@ -177,7 +183,7 @@ const lintModuleIdentifier = (
       return lintContext.regexSourceMatcher.test({
         node: lintContext.node,
         regexSource: matcher.regexSource,
-        modulePath: lintContext.modulePathVariants.raw,
+        modulePath,
       });
     },
   );
@@ -190,7 +196,7 @@ const lintModuleIdentifier = (
     lintContext.context.report({
       node: lintContext.node,
       messageId: 'matcherNotFound',
-      data: { modulePath: lintContext.modulePathVariants.raw },
+      data: { modulePath },
     });
 
     return;
@@ -206,11 +212,7 @@ const lintModuleIdentifier = (
     lintContext.context.report({
       node: lintContext.node,
       messageId: 'invalidModuleIdentifier',
-      data: {
-        moduleIdentifier,
-        modulePath: lintContext.modulePathVariants.raw,
-        expectedModuleIdentifier,
-      },
+      data: { moduleIdentifier, modulePath, expectedModuleIdentifier },
     });
   };
 
@@ -243,7 +245,7 @@ const lintModuleIdentifier = (
       const { regexSource, replacement, transformMode } = matchedMatcher;
 
       const replacedModulePath = lintContext.regexSourceMatcher.replace({
-        modulePath: lintContext.modulePathVariants.raw,
+        modulePath,
         node: lintContext.node,
         regexSource,
         replacement,

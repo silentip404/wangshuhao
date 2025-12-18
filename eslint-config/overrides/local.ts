@@ -59,9 +59,11 @@ const localOverrides = defineConfig([
             },
             {
               type: 'all',
-              regexSource: /^[\-.0-9_a-z]+-plugin-(?<name>.*)$/v.source,
+              regexSource:
+                /^[\-.0-9_a-z]+-plugin-(?<name>[^\/]+)(?<subpath>\/.*)?$/v
+                  .source,
               mode: 'replace',
-              replacement: '$<name>Plugin',
+              replacement: '$<name>Plugin$<subpath>',
               transformMode: 'camelCase',
             },
             {

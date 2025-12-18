@@ -223,6 +223,15 @@ const builtinOverrides = defineConfig([
        * - 确保标识符具有足够的描述性，有助于明确代码的意图。
        */
       'id-length': 'warn',
+      /**
+       * 强制使用对象字面量的简写语法
+       *
+       * @reason
+       * - 简写语法使得代码更加简洁，提高开发效率。
+       * - 提高代码可读性，方便开发者迅速理解对象结构。
+       * - 符合现代 JavaScript 编码习惯，避免不一致的语法风格可能带来的困惑。
+       */
+      'object-shorthand': ['error', 'always'],
     },
   },
 ]);

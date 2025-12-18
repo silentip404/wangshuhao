@@ -98,23 +98,52 @@
 
 import { defineConfig } from 'eslint/config';
 
+type Group = string | { newlinesBetween: number };
+
+/**
+ * Unknown 组守卫配置
+ *
+ * @description
+ * 通过设置异常的换行数量作为哨兵值，当有元素未被正确分类而
+ * 落入 unknown 组时，将产生与 Prettier 格式化规范的冲突，以此作为
+ * 视觉提示，提醒开发者完善自定义分组配置
+ *
+ * @reason
+ * - 利用格式化冲突作为主动告警机制，而非被动发现分类遗漏
+ */
+const UNKNOWN_GROUP_GUARD = [{ newlinesBetween: 3 }, 'unknown'];
+
 const createNamedImportsExportsGroups = (
   type: 'export' | 'import',
-): string[] => [`value-${type}`, `type-${type}`, 'unknown'];
+): Group[] => [`value-${type}`, `type-${type}`, ...UNKNOWN_GROUP_GUARD];
 
-const createUnionIntersectionTypesGroups = (): (string[] | string)[] => [
-  'named',
-  'keyword',
-  'operator',
-  'tuple',
-  ['intersection', 'union'],
-  'function',
-  'conditional',
-  'object',
-  'import',
-  'literal',
+const createUnionIntersectionTypesGroups = (): Group[] => [
   'nullish',
-  'unknown',
+  'keyword',
+  'literal',
+  'operator',
+  'named',
+  'import',
+  'tuple',
+  'object',
+  'function',
+  'intersection',
+  'union',
+  'conditional',
+  ...UNKNOWN_GROUP_GUARD,
+];
+
+const createInterfacesObjectTypesGroups = (): Group[] => [
+  'required-property',
+  'multiline-required-property',
+  'required-method',
+  'multiline-required-method',
+  'optional-property',
+  'multiline-optional-property',
+  'optional-method',
+  'multiline-optional-method',
+  'index-signature',
+  ...UNKNOWN_GROUP_GUARD,
 ];
 
 const perfectionistOverrides = defineConfig([
@@ -192,20 +221,7 @@ const perfectionistOverrides = defineConfig([
        */
       'perfectionist/sort-interfaces': [
         'warn',
-        {
-          groups: [
-            'required-property',
-            'multiline-required-property',
-            'required-method',
-            'multiline-required-method',
-            'optional-property',
-            'multiline-optional-property',
-            'optional-method',
-            'multiline-optional-method',
-            'index-signature',
-            'unknown',
-          ],
-        },
+        { groups: createInterfacesObjectTypesGroups() },
       ],
       /**
        * JSX 属性排序规范
@@ -225,19 +241,32 @@ const perfectionistOverrides = defineConfig([
             'data-attribute',
             'aria-attribute',
             'shorthand-prop',
+            'prop',
             'multiline-prop',
             'callback',
-            'unknown',
+            ...UNKNOWN_GROUP_GUARD,
           ],
           customGroups: [
-            { groupName: 'key', elementNamePattern: '^key$' },
-            { groupName: 'ref', elementNamePattern: '^ref$' },
-            { groupName: 'id', elementNamePattern: '^id$' },
-            { groupName: 'className', elementNamePattern: '^className$' },
-            { groupName: 'style', elementNamePattern: '^style$' },
-            { groupName: 'data-attribute', elementNamePattern: '^data-' },
-            { groupName: 'aria-attribute', elementNamePattern: '^aria-' },
-            { groupName: 'callback', elementNamePattern: '^on[A-Z].*' },
+            { groupName: 'key', elementNamePattern: /^key$/v.source },
+            { groupName: 'ref', elementNamePattern: /^ref$/v.source },
+            { groupName: 'id', elementNamePattern: /^id$/v.source },
+            {
+              groupName: 'className',
+              elementNamePattern: /^className$/v.source,
+            },
+            { groupName: 'style', elementNamePattern: /^style$/v.source },
+            {
+              groupName: 'data-attribute',
+              elementNamePattern: /^data-.*$/v.source,
+            },
+            {
+              groupName: 'aria-attribute',
+              elementNamePattern: /^aria-.*$/v.source,
+            },
+            {
+              groupName: 'callback',
+              elementNamePattern: /^on[A-Z].*$/v.source,
+            },
           ],
         },
       ],
@@ -262,7 +291,7 @@ const perfectionistOverrides = defineConfig([
             'side-effect-style',
             'side-effect',
             'type',
-            'unknown',
+            ...UNKNOWN_GROUP_GUARD,
           ],
         },
       ],
@@ -286,7 +315,10 @@ const perfectionistOverrides = defineConfig([
        * @reason
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
-      'perfectionist/sort-object-types': 'warn',
+      'perfectionist/sort-object-types': [
+        'warn',
+        { groups: createInterfacesObjectTypesGroups() },
+      ],
     },
   },
 ]);

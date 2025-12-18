@@ -29,7 +29,7 @@ interface RegexSourceMatcher {
     node: RelatedNode;
     regexSource: string;
     replacement: string;
-  }) => string | null;
+  }) => null | string;
   test: (options: {
     modulePath: string;
     node: RelatedNode;
@@ -105,13 +105,13 @@ const eslintSchema = createESLintSchema({
 });
 
 const createRegexSourceMatcher = (context: Context): RegexSourceMatcher => {
-  const cache = new Map<string, RegExp | null>();
+  const cache = new Map<string, null | RegExp>();
   const reportedErrors = new Set<string>();
 
   const getOrCompileRegex = (
     node: RelatedNode,
     regexSource: string,
-  ): RegExp | null => {
+  ): null | RegExp => {
     if (!cache.has(regexSource)) {
       try {
         cache.set(regexSource, new RegExp(regexSource));
@@ -147,7 +147,7 @@ const createRegexSourceMatcher = (context: Context): RegexSourceMatcher => {
       node,
       regexSource,
       replacement,
-    }): string | null => {
+    }): null | string => {
       const regex = getOrCompileRegex(node, regexSource);
 
       return isNullish(regex) ? null : modulePath.replace(regex, replacement);
@@ -224,18 +224,16 @@ const lintModuleIdentifier = (
       break;
     }
 
-    case 'camelCase':
+    case 'camelCase': {
+      const expectedModuleIdentifier = lintContext.modulePathVariants.camelCase;
+      reportInvalidModuleIdentifier(expectedModuleIdentifier);
+
+      break;
+    }
+
     case 'PascalCase': {
-      const expectedModuleIdentifier = (() => {
-        switch (mode) {
-          case 'camelCase':
-            return lintContext.modulePathVariants.camelCase;
-          case 'PascalCase':
-            return lintContext.modulePathVariants.pascalCase;
-          default:
-            throw new Error(`Unexpected mode: ${JSON.stringify({ mode })}`);
-        }
-      })();
+      const expectedModuleIdentifier =
+        lintContext.modulePathVariants.pascalCase;
       reportInvalidModuleIdentifier(expectedModuleIdentifier);
 
       break;
@@ -262,7 +260,7 @@ const lintModuleIdentifier = (
       const expectedModuleIdentifier = (() => {
         switch (transformMode) {
           case 'none':
-            return replacedModulePath;
+            return replacedModulePathVariants.raw;
           case 'camelCase':
             return replacedModulePathVariants.camelCase;
           case 'PascalCase':

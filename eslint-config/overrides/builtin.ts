@@ -2,7 +2,7 @@ import { defineConfig } from 'eslint/config';
 
 const builtinOverrides = defineConfig([
   {
-    name: 'builtin:builtin-overrides',
+    name: 'builtin:overrides',
     // @perfectionist-sort-objects
     rules: {
       /**
@@ -36,6 +36,13 @@ const builtinOverrides = defineConfig([
        * - 提升代码清晰度，消除视觉歧义，降低维护风险
        */
       'curly': 'error',
+      /**
+       * switch 语句 default 分支检查
+       *
+       * @reason
+       * - 强制开发者显式声明默认行为，避免运行时遗漏边界情况的错误处理
+       */
+      'default-case': 'warn',
       /**
        * 函数定义风格检查
        *

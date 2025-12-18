@@ -19,7 +19,7 @@ const jsoncOverrides = defineConfig([
     ),
   },
   {
-    name: 'jsonc:jsonc-overrides',
+    name: 'jsonc:overrides',
     // @perfectionist-sort-objects
     rules: {
       /**

@@ -4,7 +4,7 @@ import { ensureDependenciesInPackage } from '#node/utils';
 
 const dependOverrides = defineConfig([
   {
-    name: 'depend:depend-overrides',
+    name: 'depend:overrides',
     // @perfectionist-sort-objects
     rules: {
       /**

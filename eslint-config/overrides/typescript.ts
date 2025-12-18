@@ -1,45 +1,18 @@
 import { defineConfig } from 'eslint/config';
 import { join, toUpperCase } from 'remeda';
-import { plugin } from 'typescript-eslint';
-
-import { createDisabledBuiltinExtendedRules } from '../utils/index.ts';
 
 const typescriptOverrides = defineConfig([
   {
-    name: 'typescript:disable-extended-builtin-overrides',
-    /**
-     * 批量关闭被 typescript-eslint 扩展的内置规则
-     *
-     * @reason
-     * - 避免规则冲突和重复检查
-     * - 统一由 @typescript-eslint/${ruleName} 代替对应的内置规则
-     */
-    rules: createDisabledBuiltinExtendedRules({ '@typescript-eslint': plugin }),
-  },
-  {
-    name: 'typescript:related-non-typescript-overrides',
+    name: 'typescript:conflicting-rules',
     // @perfectionist-sort-objects
     rules: {
-      /**
-       * 驼峰命名检查
-       *
-       * @reason
-       * - 规则实现过于笼统，覆盖场景不足
-       * - 使用 @typescript-eslint/naming-convention 替代，获得更精细的类型感知命名控制
-       */
       'camelcase': 'off',
-      /**
-       * switch 语句 default 分支检查
-       *
-       * @reason
-       * - 作为 @typescript-eslint/switch-exhaustiveness-check 的补充
-       * - 强制开发者显式声明默认行为，避免运行时遗漏边界情况的错误处理
-       */
-      'default-case': 'warn',
+      'consistent-return': 'off',
+      'no-magic-numbers': 'off',
     },
   },
   {
-    name: 'typescript:typescript-overrides',
+    name: 'typescript:overrides',
     // @perfectionist-sort-objects
     rules: {
       /**

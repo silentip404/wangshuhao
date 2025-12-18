@@ -5,20 +5,12 @@ import { ensureDependenciesInPackage, GLOB_ALIAS } from '#node/utils';
 
 const importOverrides = defineConfig([
   {
-    name: 'import:related-non-import-overrides',
+    name: 'import:conflicting-rules',
     // @perfectionist-sort-objects
-    rules: {
-      /**
-       * 重复导入检查
-       *
-       * @reason
-       * - import/no-duplicates 提供更强大的功能，包括自动合并导入和更好的 TypeScript 支持
-       */
-      'no-duplicate-imports': 'off',
-    },
+    rules: { 'no-duplicate-imports': 'off' },
   },
   {
-    name: 'import:import-overrides',
+    name: 'import:overrides',
     // @perfectionist-sort-objects
     rules: {
       /**

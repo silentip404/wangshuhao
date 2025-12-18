@@ -1,14 +1,6 @@
 import { type RulesConfig, type Severity } from '@eslint/core';
-import eslintJs from '@eslint/js';
 import { type Config } from 'eslint/config';
-import {
-  forEachObj,
-  intersection,
-  isEmptyish,
-  isTruthy,
-  keys,
-  mapToObj,
-} from 'remeda';
+import { forEachObj, isEmptyish, isTruthy, mapToObj } from 'remeda';
 
 type Plugins = NonNullable<Config['plugins']>;
 
@@ -51,15 +43,4 @@ const collectRuleNames = (
   return Array.from(ruleNames);
 };
 
-const createDisabledBuiltinExtendedRules = (
-  plugins: Plugins,
-): Record<string, 'off'> => {
-  const disabledNames = intersection(
-    keys(eslintJs.configs.all.rules),
-    collectRuleNames(plugins, { shouldWithPluginName: false }),
-  );
-
-  return mapToObj(disabledNames, (name) => [name, 'off']);
-};
-
-export { collectRuleNames, createDisabledBuiltinExtendedRules, createRules };
+export { collectRuleNames, createRules };

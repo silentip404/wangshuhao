@@ -148,31 +148,12 @@ const createInterfacesObjectTypesGroups = (): Group[] => [
 
 const perfectionistOverrides = defineConfig([
   {
-    name: 'perfectionist:related-non-perfectionist-overrides',
+    name: 'perfectionist:conflicting-rules',
     // @perfectionist-sort-objects
-    rules: {
-      /**
-       * 导入语句排序规则
-       *
-       * @reason
-       * - 与 Perfectionist 插件的导入排序规则功能重叠，后者提供更精细的分组和排序控制
-       * - 避免多个排序规则之间的冲突和不一致的自动修复行为
-       * - 统一使用 Perfectionist 作为排序规范的单一来源，降低配置复杂度
-       */
-      'import/order': 'off',
-      /**
-       * 导入语句排序规则
-       *
-       * @reason
-       * - 与 Perfectionist 插件的导入排序规则功能重叠，后者提供更精细的分组和排序控制
-       * - 避免多个排序规则之间的冲突和不一致的自动修复行为
-       * - 统一使用 Perfectionist 作为排序规范的单一来源，降低配置复杂度
-       */
-      'sort-imports': 'off',
-    },
+    rules: { 'import/order': 'off', 'sort-imports': 'off' },
   },
   {
-    name: 'perfectionist:perfectionist-overrides',
+    name: 'perfectionist:overrides',
     // @perfectionist-sort-objects
     rules: {
       /**

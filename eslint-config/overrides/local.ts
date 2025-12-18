@@ -2,7 +2,7 @@ import { defineConfig } from 'eslint/config';
 
 const localOverrides = defineConfig([
   {
-    name: 'local:local-overrides',
+    name: 'local:overrides',
     // @perfectionist-sort-objects
     rules: {
       /**

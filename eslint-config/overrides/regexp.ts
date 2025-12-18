@@ -1,37 +1,16 @@
-import * as regexpPlugin from 'eslint-plugin-regexp';
 import { defineConfig } from 'eslint/config';
-
-import { createDisabledBuiltinExtendedRules } from '../utils/index.ts';
 
 const regexpOverrides = defineConfig([
   {
-    name: 'regexp:disable-extended-builtin-overrides',
-    /**
-     * 批量关闭被 eslint-plugin-regexp 扩展的内置规则
-     *
-     * @reason
-     * - 避免规则冲突和重复检查
-     * - 统一由 regexp/${ruleName} 代替对应的内置规则
-     */
-    rules: createDisabledBuiltinExtendedRules({ regexp: regexpPlugin }),
-  },
-  {
-    name: 'regexp:related-non-regexp-overrides',
+    name: 'regexp:conflicting-rules',
     // @perfectionist-sort-objects
     rules: {
-      /**
-       * 正则表达式执行方法检查
-       *
-       * @reason
-       * - 与 Regexp 规则功能重叠，后者作为专业的正则插件提供更准确的检测和修复
-       * - 避免多个同类规则之间的冲突和不一致的自动修复行为
-       * - 统一使用 Regexp 作为正则表达式规范的单一来源，降低配置复杂度
-       */
       '@typescript-eslint/prefer-regexp-exec': 'off',
+      'require-unicode-regexp': 'off',
     },
   },
   {
-    name: 'regexp:regexp-overrides',
+    name: 'regexp:overrides',
     // @perfectionist-sort-objects
     rules: {
       /**

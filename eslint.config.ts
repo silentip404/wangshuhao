@@ -6,6 +6,7 @@ import { type ConfigWithExtends } from 'typescript-eslint';
 import {
   builtinOverrides,
   builtinPresets,
+  commandPresets,
   dependOverrides,
   dependPresets,
   importOverrides,
@@ -38,6 +39,11 @@ const eslintConfig = defineConfig([
     ...createIgnoreConfig({ root: true, files: ['.gitignore'] }),
     name: 'global:ignore',
   },
+
+  /**
+   * 基于特殊注释按需触发的 lint 工具
+   */
+  { name: 'command:presets', extends: [commandPresets] },
 
   /**
    * JS 派生文件预设配置

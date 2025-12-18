@@ -149,16 +149,8 @@ const createInterfacesObjectTypesGroups = (): Group[] => [
 const perfectionistOverrides = defineConfig([
   {
     name: 'perfectionist:related-non-perfectionist-overrides',
+    // @perfectionist-sort-objects
     rules: {
-      /**
-       * 导入语句排序规则
-       *
-       * @reason
-       * - 与 Perfectionist 插件的导入排序规则功能重叠，后者提供更精细的分组和排序控制
-       * - 避免多个排序规则之间的冲突和不一致的自动修复行为
-       * - 统一使用 Perfectionist 作为排序规范的单一来源，降低配置复杂度
-       */
-      'sort-imports': 'off',
       /**
        * 导入语句排序规则
        *
@@ -168,50 +160,45 @@ const perfectionistOverrides = defineConfig([
        * - 统一使用 Perfectionist 作为排序规范的单一来源，降低配置复杂度
        */
       'import/order': 'off',
+      /**
+       * 导入语句排序规则
+       *
+       * @reason
+       * - 与 Perfectionist 插件的导入排序规则功能重叠，后者提供更精细的分组和排序控制
+       * - 避免多个排序规则之间的冲突和不一致的自动修复行为
+       * - 统一使用 Perfectionist 作为排序规范的单一来源，降低配置复杂度
+       */
+      'sort-imports': 'off',
     },
   },
   {
     name: 'perfectionist:perfectionist-overrides',
+    // @perfectionist-sort-objects
     rules: {
       /**
-       * 具名导入排序规则
+       * 导入语句排序
        *
        * @reason
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
-      'perfectionist/sort-named-imports': [
+      'perfectionist/sort-imports': [
         'warn',
-        { groups: createNamedImportsExportsGroups('import') },
-      ],
-      /**
-       * 具名导出排序规则
-       *
-       * @reason
-       * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
-       */
-      'perfectionist/sort-named-exports': [
-        'warn',
-        { groups: createNamedImportsExportsGroups('export') },
-      ],
-      /**
-       * 联合类型成员排序
-       *
-       * @reason
-       * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
-       */
-      'perfectionist/sort-union-types': [
-        'warn',
-        { groups: createUnionIntersectionTypesGroups() },
-      ],
-      /**
-       * 交叉类型成员排序
-       *
-       * @reason
-       * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
-       */
-      'perfectionist/sort-intersection-types': [
-        'warn',
-        { groups: createUnionIntersectionTypesGroups() },
+        {
+          groups: [
+            'builtin',
+            'external',
+            ['subpath', 'tsconfig-path', 'internal'],
+            'parent',
+            'sibling',
+            'index',
+            'style',
+            'side-effect-style',
+            'side-effect',
+            'type',
+            ...UNKNOWN_GROUP_GUARD,
+          ],
+          newlinesBetween: 1,
+        },
       ],
       /**
        * TypeScript 接口属性排序
@@ -224,6 +211,16 @@ const perfectionistOverrides = defineConfig([
         { groups: createInterfacesObjectTypesGroups() },
       ],
       /**
+       * 交叉类型成员排序
+       *
+       * @reason
+       * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
+       */
+      'perfectionist/sort-intersection-types': [
+        'warn',
+        { groups: createUnionIntersectionTypesGroups() },
+      ],
+      /**
        * JSX 属性排序规范
        *
        * @reason
@@ -232,6 +229,28 @@ const perfectionistOverrides = defineConfig([
       'perfectionist/sort-jsx-props': [
         'warn',
         {
+          customGroups: [
+            { elementNamePattern: /^key$/v.source, groupName: 'key' },
+            { elementNamePattern: /^ref$/v.source, groupName: 'ref' },
+            { elementNamePattern: /^id$/v.source, groupName: 'id' },
+            {
+              elementNamePattern: /^className$/v.source,
+              groupName: 'className',
+            },
+            { elementNamePattern: /^style$/v.source, groupName: 'style' },
+            {
+              elementNamePattern: /^data-.*$/v.source,
+              groupName: 'data-attribute',
+            },
+            {
+              elementNamePattern: /^aria-.*$/v.source,
+              groupName: 'aria-attribute',
+            },
+            {
+              elementNamePattern: /^on[A-Z].*$/v.source,
+              groupName: 'callback',
+            },
+          ],
           groups: [
             'key',
             'ref',
@@ -246,53 +265,6 @@ const perfectionistOverrides = defineConfig([
             'callback',
             ...UNKNOWN_GROUP_GUARD,
           ],
-          customGroups: [
-            { groupName: 'key', elementNamePattern: /^key$/v.source },
-            { groupName: 'ref', elementNamePattern: /^ref$/v.source },
-            { groupName: 'id', elementNamePattern: /^id$/v.source },
-            {
-              groupName: 'className',
-              elementNamePattern: /^className$/v.source,
-            },
-            { groupName: 'style', elementNamePattern: /^style$/v.source },
-            {
-              groupName: 'data-attribute',
-              elementNamePattern: /^data-.*$/v.source,
-            },
-            {
-              groupName: 'aria-attribute',
-              elementNamePattern: /^aria-.*$/v.source,
-            },
-            {
-              groupName: 'callback',
-              elementNamePattern: /^on[A-Z].*$/v.source,
-            },
-          ],
-        },
-      ],
-      /**
-       * 导入语句排序
-       *
-       * @reason
-       * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
-       */
-      'perfectionist/sort-imports': [
-        'warn',
-        {
-          newlinesBetween: 1,
-          groups: [
-            'builtin',
-            'external',
-            ['subpath', 'tsconfig-path', 'internal'],
-            'parent',
-            'sibling',
-            'index',
-            'style',
-            'side-effect-style',
-            'side-effect',
-            'type',
-            ...UNKNOWN_GROUP_GUARD,
-          ],
         },
       ],
       /**
@@ -303,12 +275,25 @@ const perfectionistOverrides = defineConfig([
        */
       'perfectionist/sort-modules': 'warn',
       /**
-       * 强制 switch 语句分支排序
+       * 具名导出排序规则
        *
        * @reason
-       * - 尊重开发者对代码结构的主导权
+       * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
-      'perfectionist/sort-switch-case': 'off',
+      'perfectionist/sort-named-exports': [
+        'warn',
+        { groups: createNamedImportsExportsGroups('export') },
+      ],
+      /**
+       * 具名导入排序规则
+       *
+       * @reason
+       * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
+       */
+      'perfectionist/sort-named-imports': [
+        'warn',
+        { groups: createNamedImportsExportsGroups('import') },
+      ],
       /**
        * 强制对象类型的排序
        *
@@ -318,6 +303,32 @@ const perfectionistOverrides = defineConfig([
       'perfectionist/sort-object-types': [
         'warn',
         { groups: createInterfacesObjectTypesGroups() },
+      ],
+      /**
+       * 对象键排序检查
+       *
+       * @reason
+       * - 全局禁用自动排序，避免对所有对象字面量强制排序造成不必要的约束
+       * - 对象属性顺序可能反映业务优先级或重要性层级，应尊重开发者的设计意图
+       * - 通过 @perfectionist-sort-objects 注释在需要的地方手动启用，实现精准控制
+       */
+      'perfectionist/sort-objects': 'off',
+      /**
+       * 强制 switch 语句分支排序
+       *
+       * @reason
+       * - 尊重开发者对代码结构的主导权
+       */
+      'perfectionist/sort-switch-case': 'off',
+      /**
+       * 联合类型成员排序
+       *
+       * @reason
+       * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
+       */
+      'perfectionist/sort-union-types': [
+        'warn',
+        { groups: createUnionIntersectionTypesGroups() },
       ],
     },
   },

@@ -5,6 +5,7 @@ import { ensureDependenciesInPackage } from '#node/utils';
 const dependOverrides = defineConfig([
   {
     name: 'depend:depend-overrides',
+    // @perfectionist-sort-objects
     rules: {
       /**
        * 依赖项使用限制

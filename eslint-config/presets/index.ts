@@ -1,4 +1,5 @@
 export * from './builtin.ts';
+export * from './command/index.ts';
 export * from './depend.ts';
 export * from './import.ts';
 export * from './jsonc.ts';

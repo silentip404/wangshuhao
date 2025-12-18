@@ -20,14 +20,8 @@ const jsoncOverrides = defineConfig([
   },
   {
     name: 'jsonc:jsonc-overrides',
+    // @perfectionist-sort-objects
     rules: {
-      /**
-       * JSON 数组值排序检查
-       *
-       * @reason
-       * - 提倡根据上下文语义手动管理数组顺序
-       */
-      'jsonc/sort-array-values': 'off',
       /**
        * JSON 文件自动规则应用
        *
@@ -43,6 +37,13 @@ const jsoncOverrides = defineConfig([
        * - JSON 文件承载多种场景，强制统一命名会破坏生态兼容性
        */
       'jsonc/key-name-casing': 'off',
+      /**
+       * JSON 数组值排序检查
+       *
+       * @reason
+       * - 提倡根据上下文语义手动管理数组顺序
+       */
+      'jsonc/sort-array-values': 'off',
       /**
        * JSON 对象键排序
        *

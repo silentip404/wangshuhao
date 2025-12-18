@@ -1,7 +1,7 @@
 {
   "命令行工具": {
     "scope": "typescript",
-    "prefix": "t#cli-args-template",
+    "prefix": "@cli-args-template",
     "body": [
       "import path from 'node:path';",
       "",
@@ -42,7 +42,7 @@
   },
   "自定义 ESLint 规则（带选项）": {
     "scope": "typescript",
-    "prefix": "t#eslint-rule-with-options",
+    "prefix": "@eslint-rule-with-options",
     "body": [
       "import {",
       "  createESLintSchema,",
@@ -87,7 +87,7 @@
   },
   "自定义 ESLint 规则（不带选项）": {
     "scope": "typescript",
-    "prefix": "t#eslint-rule-without-options",
+    "prefix": "@eslint-rule-without-options",
     "body": [
       "import { initRule } from '../utils/index.ts';",
       "",
@@ -110,5 +110,11 @@
       "export { ruleName, ruleValue };",
       "",
     ],
+  },
+  "Perfectionist 排序对象": {
+    "scope": "typescript,javascript,typescriptreact,javascriptreact",
+    "prefix": "@perfectionist-sort-objects",
+    "body": ["@perfectionist-sort-objects"],
+    "description": "触发 eslint-plugin-command 的 perfectionist-sort-objects 命令，自动排序对象属性",
   },
 }

@@ -16,8 +16,42 @@ const regexpOverrides = defineConfig([
     rules: createDisabledBuiltinExtendedRules({ regexp: regexpPlugin }),
   },
   {
-    name: 'regexp:regexp-overrides',
+    name: 'regexp:related-non-regexp-overrides',
+    // @perfectionist-sort-objects
     rules: {
+      /**
+       * 正则表达式执行方法检查
+       *
+       * @reason
+       * - 与 Regexp 规则功能重叠，后者作为专业的正则插件提供更准确的检测和修复
+       * - 避免多个同类规则之间的冲突和不一致的自动修复行为
+       * - 统一使用 Regexp 作为正则表达式规范的单一来源，降低配置复杂度
+       */
+      '@typescript-eslint/prefer-regexp-exec': 'off',
+    },
+  },
+  {
+    name: 'regexp:regexp-overrides',
+    // @perfectionist-sort-objects
+    rules: {
+      /**
+       * 强制使用命名捕获组
+       *
+       * @reason
+       * - 使用命名捕获组可以提高正则表达式的可读性和可维护性，便于理解捕获的内容。
+       * - 明确的捕获组名称有助于在调试时快速定位和识别正则表达式的功能。
+       * - 避免使用无名捕获组可能导致的混淆，特别是在正则表达式较复杂时。
+       */
+      'regexp/prefer-named-capture-group': 'warn',
+      /**
+       * 正则表达式执行方法检查
+       *
+       * @reason
+       * - 统一正则表达式执行方式，提升代码可读性和可维护性
+       * - RegExp.exec() 性能略优于 String.match()（非全局模式下）
+       * - 明确区分单次匹配和全局匹配的语义，避免 API 混用
+       */
+      'regexp/prefer-regexp-exec': 'warn',
       /**
        * 强制正则表达式使用 Unicode 标志
        *
@@ -36,15 +70,6 @@ const regexpOverrides = defineConfig([
        * - 增强代码可读性和可维护性，避免因为正则表达式不支持国际字符集而带来的潜在错误。
        */
       'regexp/require-unicode-sets-regexp': 'warn',
-      /**
-       * 强制使用命名捕获组
-       *
-       * @reason
-       * - 使用命名捕获组可以提高正则表达式的可读性和可维护性，便于理解捕获的内容。
-       * - 明确的捕获组名称有助于在调试时快速定位和识别正则表达式的功能。
-       * - 避免使用无名捕获组可能导致的混淆，特别是在正则表达式较复杂时。
-       */
-      'regexp/prefer-named-capture-group': 'warn',
       /**
        * 强制字符类中的元素顺序
        *

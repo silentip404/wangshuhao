@@ -3,6 +3,7 @@ import { defineConfig } from 'eslint/config';
 const localOverrides = defineConfig([
   {
     name: 'local:local-overrides',
+    // @perfectionist-sort-objects
     rules: {
       /**
        * 模块标识符命名规范
@@ -47,6 +48,12 @@ const localOverrides = defineConfig([
               regexSource: /^jsonc-eslint-parser$/v.source,
               mode: 'equal',
               identifier: 'jsoncParser',
+            },
+            {
+              type: 'all',
+              regexSource: /^eslint-plugin-command\/config$/v.source,
+              mode: 'equal',
+              identifier: 'createCommandConfig',
             },
 
             // 通用命名

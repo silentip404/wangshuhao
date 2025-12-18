@@ -1,18 +1,29 @@
 {
-  "命令行工具": {
+  "// @perfectionist-sort-objects": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "@<01>: sort-objects",
+    "body": ["// @perfectionist-sort-objects"],
+  },
+  "@perfectionist-sort-objects": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "@<02>: sort-objects",
+    "body": ["@perfectionist-sort-objects"],
+  },
+
+  "命令行参数解析模板": {
     "scope": "typescript",
-    "prefix": "@cli-args-template",
+    "prefix": "@<03>: cli-args-template",
     "body": [
       "import path from 'node:path';",
       "",
       "import { omit } from 'remeda';",
       "import { parse } from 'ts-command-line-args';",
       "",
-      "import { helpArgConfig, helpArgOptions } from '../utils/cli-helper.ts';",
+      "import { helpArgConfig, helpArgOptions, type WithHelpArg } from '#node/utils';",
       "",
-      "import type { WithHelpArg } from '../utils/cli-helper.ts';",
+      "type CliArguments = WithHelpArg<{ argument?: string }>;",
       "",
-      "const cliArguments = parse<WithHelpArg<{ argument?: string }>>(",
+      "const cliArguments = parse<CliArguments>(",
       "  {",
       "    ...helpArgConfig,",
       "",
@@ -40,9 +51,10 @@
       "",
     ],
   },
-  "自定义 ESLint 规则（带选项）": {
+
+  "ESLint 规则模板（有选项）": {
     "scope": "typescript",
-    "prefix": "@eslint-rule-with-options",
+    "prefix": "@<04>: with-options",
     "body": [
       "import {",
       "  createESLintSchema,",
@@ -50,7 +62,10 @@
       "  type InferSchema,",
       "} from '../utils/index.ts';",
       "",
-      "const schema = createESLintSchema({",
+      "type MessageIds = 'message';",
+      "type RuleOptions = InferSchema<typeof eslintSchema>[0];",
+      "",
+      "const eslintSchema = createESLintSchema({",
       "  type: 'object',",
       "  additionalProperties: false,",
       "  required: ['enumOption'],",
@@ -60,22 +75,19 @@
       "  },",
       "});",
       "",
-      "type MessageIds = 'message';",
-      "type Options = InferSchema<typeof schema>;",
-      "",
       "const { ruleName, createRule } = initRule(import.meta.url);",
       "",
-      "const ruleValue = createRule<Options, MessageIds>({",
+      "const ruleValue = createRule<[RuleOptions], MessageIds>({",
       "  name: ruleName,",
       "  meta: {",
       "    type: 'problem',",
-      "    schema,",
+      "    schema: eslintSchema,",
       "    docs: { description: 'This is an example rule with options.' },",
       "    messages: { message: 'This is an example error message.' },",
       "  },",
       "  defaultOptions: [{ enumOption: 'lower' }],",
-      "  create: (context, options) => {",
-      "    const [{ stringOption, enumOption }] = options;",
+      "  create: (context, [ruleOptions]) => {",
+      "    const { stringOption, enumOption } = ruleOptions;",
       "",
       "    return {};",
       "  },",
@@ -85,9 +97,10 @@
       "",
     ],
   },
-  "自定义 ESLint 规则（不带选项）": {
+
+  "ESLint 规则模板（无选项）": {
     "scope": "typescript",
-    "prefix": "@eslint-rule-without-options",
+    "prefix": "@<05>: without-options",
     "body": [
       "import { initRule } from '../utils/index.ts';",
       "",
@@ -110,11 +123,5 @@
       "export { ruleName, ruleValue };",
       "",
     ],
-  },
-  "Perfectionist 排序对象": {
-    "scope": "typescript,javascript,typescriptreact,javascriptreact",
-    "prefix": "@perfectionist-sort-objects",
-    "body": ["@perfectionist-sort-objects"],
-    "description": "触发 eslint-plugin-command 的 perfectionist-sort-objects 命令，自动排序对象属性",
   },
 }

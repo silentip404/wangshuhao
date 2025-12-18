@@ -32,6 +32,7 @@ type CliArguments = WithHelpArg<{
 const cliArguments = parse<CliArguments>(
   {
     ...helpArgConfig,
+
     'files': {
       type: String,
       typeLabel: 'file1.ts file2.ts ...',

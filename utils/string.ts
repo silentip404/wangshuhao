@@ -1,4 +1,6 @@
-import { capitalize, toCamelCase } from 'remeda';
+import { capitalize, split, toCamelCase } from 'remeda';
+
+const splitLines = (text: string): string[] => split(text, /\r\n|\r|\n/v);
 
 interface CaseVariants {
   camelCase: string;
@@ -15,4 +17,4 @@ const getSanitizedCaseVariants = (raw: string): CaseVariants => {
   return { camelCase, pascalCase, raw };
 };
 
-export { getSanitizedCaseVariants, type CaseVariants };
+export { getSanitizedCaseVariants, splitLines, type CaseVariants };

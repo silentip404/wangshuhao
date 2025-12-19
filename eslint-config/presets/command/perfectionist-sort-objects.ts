@@ -1,10 +1,69 @@
-import { AST_NODE_TYPES, AST_TOKEN_TYPES } from '@typescript-eslint/utils';
+import {
+  AST_NODE_TYPES,
+  AST_TOKEN_TYPES,
+  type TSESTree,
+} from '@typescript-eslint/utils';
 import { Linter } from 'eslint';
 import { defineCommand } from 'eslint-plugin-command/commands';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
-import { isTruthy, merge, pick, pipe } from 'remeda';
+import { findLastIndex, isTruthy, merge, pick, pipe } from 'remeda';
 
+import { getFilenameWithoutExtension, splitLines } from '#node/utils';
+
+const COMMAND = '@perfectionist-sort-objects';
 const TEMPORARY_VARIABLE_PREFIX = 'const unsortedObject = ';
+
+const matchCommand = (
+  command: string,
+  comment: TSESTree.Comment,
+): null | undefined | boolean | RegExpMatchArray => {
+  const trimmedValue = comment.value.trim();
+
+  const regexString = (() => {
+    switch (comment.type) {
+      case AST_TOKEN_TYPES.Block:
+        return String.raw`(?:\b|\s)${command}(?:\b|\s|$)`;
+      case AST_TOKEN_TYPES.Line:
+        return String.raw`^${command}$`;
+      default:
+        throw new Error(
+          `Unexpected comment.type: ${JSON.stringify({ comment })}`,
+        );
+    }
+  })();
+
+  return new RegExp(regexString).exec(trimmedValue);
+};
+
+const getCommandLoc = (
+  command: string,
+  comment: TSESTree.Comment,
+): TSESTree.SourceLocation => {
+  const { loc } = comment;
+
+  const commentLines = splitLines(comment.value);
+  const commandCommentIndex = findLastIndex(commentLines, (commentLine) =>
+    commentLine.includes(command),
+  );
+  const commandComment = commentLines[commandCommentIndex];
+
+  if (commandComment === undefined) {
+    return loc;
+  }
+
+  const columnOffset = commandComment.indexOf(command);
+
+  const line = loc.start.line + commandCommentIndex;
+  const column =
+    commandCommentIndex === 0
+      ? loc.start.column + '//'.length + columnOffset
+      : columnOffset;
+
+  return {
+    start: { line, column },
+    end: { line, column: column + command.length },
+  };
+};
 
 const linter = new Linter();
 const config: Linter.Config = {
@@ -25,26 +84,9 @@ const config: Linter.Config = {
 };
 
 const perfectionistSortObjects = defineCommand({
-  name: 'perfectionist-sort-objects',
+  name: getFilenameWithoutExtension(import.meta.url),
   commentType: 'both',
-  match: (comment) => {
-    const trimmedValue = comment.value.trim();
-
-    const regex = (() => {
-      switch (comment.type) {
-        case AST_TOKEN_TYPES.Block:
-          return /(?:\b|\s)@perfectionist-sort-objects(?:\b|\s|$)/v;
-        case AST_TOKEN_TYPES.Line:
-          return /^@perfectionist-sort-objects$/v;
-        default:
-          throw new Error(
-            `Unexpected comment.type: ${JSON.stringify({ comment })}`,
-          );
-      }
-    })();
-
-    return regex.exec(trimmedValue);
-  },
+  match: (comment) => matchCommand(COMMAND, comment),
   action: (context) => {
     let node = context.findNodeBelow('ObjectExpression', 'ObjectPattern');
 
@@ -85,6 +127,7 @@ const perfectionistSortObjects = defineCommand({
 
       context.report({
         node,
+        loc: getCommandLoc(COMMAND, context.comment),
         message: 'Object properties are not sorted.',
         removeComment: false,
         fix: (fixer) => fixer.replaceText(node, sortedObjectText),

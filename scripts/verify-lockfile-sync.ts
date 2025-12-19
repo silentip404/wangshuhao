@@ -54,7 +54,7 @@ if (!shouldRunVerification) {
 // 执行 pnpm install 验证
 const { exitCode, all } = await execa(
   'pnpm',
-  ['install', '--frozen-lockfile', '--lockfile-only', '--loglevel=warn'],
+  ['install', '--frozen-lockfile', '--offline', '--loglevel=warn'],
   { reject: false, all: true },
 );
 

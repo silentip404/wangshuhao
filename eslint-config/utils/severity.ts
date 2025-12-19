@@ -1,4 +1,4 @@
-import { type Severity } from '@eslint/core';
+import { type Linter } from 'eslint';
 import { type Config } from 'eslint/config';
 import {
   concat,
@@ -11,7 +11,10 @@ import {
   merge,
 } from 'remeda';
 
-const normalizeSeverity = (configs: Config[], severity: Severity): Config[] =>
+const normalizeSeverity = (
+  configs: Config[],
+  severity: Linter.RuleSeverity,
+): Config[] =>
   map(configs, (config) => {
     const { rules } = config;
 

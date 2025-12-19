@@ -1,10 +1,13 @@
-import { type RulesConfig, type Severity } from '@eslint/core';
+import { type Linter } from 'eslint';
 import { type Config } from 'eslint/config';
 import { forEachObj, isEmptyish, isTruthy, mapToObj } from 'remeda';
 
 type Plugins = NonNullable<Config['plugins']>;
 
-const createRules = (ruleNames: string[], severity: Severity): RulesConfig =>
+const createRules = (
+  ruleNames: string[],
+  severity: Linter.RuleSeverity,
+): Linter.RulesRecord =>
   mapToObj(ruleNames, (ruleName) => [ruleName, severity]);
 
 interface CollectRuleNamesOptions {

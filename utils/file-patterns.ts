@@ -1,4 +1,13 @@
-const GLOB_ALIAS = ['#node/*'] as const;
+import { makeRe } from 'minimatch';
+import { filter, isTruthy, map, pipe } from 'remeda';
+
+const ALIASES_GLOB = ['#*/**'];
+const ALIASES_REGEX = pipe(
+  ALIASES_GLOB,
+  map((alias) => makeRe(alias, { nocomment: true })),
+  filter(isTruthy),
+);
+const ALIASES_REGEX_STRING = map(ALIASES_REGEX, (regex) => regex.source);
 
 const GLOB_JS = ['**/*.js'] as const;
 const GLOB_TS = ['**/*.ts'] as const;
@@ -25,7 +34,8 @@ const GLOB_DERIVED_JSON = [...GLOB_JSON, ...GLOB_JSONC, ...GLOB_JSON5] as const;
 const GLOB_DERIVED_DEPEND = ['**/package.json', ...GLOB_DERIVED_JS] as const;
 
 export {
-  GLOB_ALIAS,
+  ALIASES_GLOB,
+  ALIASES_REGEX_STRING,
   GLOB_DERIVED_DEPEND,
   GLOB_DERIVED_JS,
   GLOB_DERIVED_JSON,

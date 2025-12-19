@@ -1,7 +1,11 @@
 import { defineConfig } from 'eslint/config';
 import { map } from 'remeda';
 
-import { ensureDependenciesInPackage, GLOB_ALIAS } from '#node/utils';
+import {
+  ALIASES_GLOB,
+  ALIASES_REGEX_STRING,
+  ensureDependenciesInPackage,
+} from '#node/utils';
 
 const importXOverrides = defineConfig([
   {
@@ -41,9 +45,9 @@ const importXOverrides = defineConfig([
         {
           checkTypeImports: true,
           fix: true,
-          pathGroupOverrides: map(GLOB_ALIAS, (alias) => ({
+          pathGroupOverrides: map(ALIASES_GLOB, (alias) => ({
             action: 'ignore',
-            // 忽略别名后缀名
+            // 忽略别名后缀名（此规则使用 minimatch() + { nocomment: true } 匹配）
             pattern: alias,
           })),
         },
@@ -123,8 +127,10 @@ const importXOverrides = defineConfig([
         'warn',
         {
           allow: [
-            // 允许导入别名路径
-            ...map(GLOB_ALIAS, (alias) => alias.replace('#', '\\#')),
+            // 允许导入别名路径（此规则使用 makeRe 默认选项匹配，不支持外部传入 { nocomment: true } 以支持 # 符号）
+            ...map(ALIASES_GLOB, (alias) =>
+              alias.replaceAll('#', String.raw`\#`),
+            ),
 
             // 允许导入一层目录下的 index.ts
             '*/index.ts',
@@ -176,12 +182,12 @@ const importXOverrides = defineConfig([
         'warn',
         {
           ignore: [
-            // 允许别名导入
-            ...GLOB_ALIAS,
+            // 允许别名导入（此规则使用 new RegExp 匹配）
+            ...ALIASES_REGEX_STRING,
 
             // 允许一些特殊文件导入
-            '../utils/index.ts',
-            '../local-plugin/index.ts',
+            /^\.\.\/utils\/index\.ts$/v.source,
+            /^\.\.\/local-plugin\/index\.ts$/v.source,
           ],
         },
       ],

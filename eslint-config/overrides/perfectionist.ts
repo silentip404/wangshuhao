@@ -150,7 +150,7 @@ const perfectionistOverrides = defineConfig([
   {
     name: 'perfectionist:conflicting-rules',
     // @perfectionist-sort-objects
-    rules: { 'import/order': 'off', 'sort-imports': 'off' },
+    rules: { 'import-x/order': 'off', 'sort-imports': 'off' },
   },
   {
     name: 'perfectionist:overrides',

@@ -14,7 +14,7 @@
     "scope": "typescript",
     "prefix": "@<03>: cli-args-template",
     "body": [
-      "import path from 'node:path';",
+      "import path from 'path';",
       "",
       "import { omit } from 'remeda';",
       "import { parse } from 'ts-command-line-args';",

@@ -1,4 +1,4 @@
-import path from 'node:path';
+import path from 'path';
 
 interface ToRelativePosixPathOptions {
   filename: string;

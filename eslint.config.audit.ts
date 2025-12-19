@@ -1,4 +1,4 @@
-import { styleText } from 'node:util';
+import { styleText } from 'util';
 
 import eslintJs from '@eslint/js';
 import { concat, isEmptyish, map, merge } from 'remeda';

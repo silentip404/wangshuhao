@@ -1,4 +1,4 @@
-import path from 'node:path';
+import path from 'path';
 
 import { join, omit } from 'remeda';
 import { parse } from 'ts-command-line-args';

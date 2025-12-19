@@ -2,6 +2,11 @@ import { defineConfig } from 'eslint/config';
 
 const localOverrides = defineConfig([
   {
+    name: 'local:conflicting-rules',
+    // @perfectionist-sort-objects
+    rules: { 'import-x/no-rename-default': 'off' },
+  },
+  {
     name: 'local:overrides',
     // @perfectionist-sort-objects
     rules: {

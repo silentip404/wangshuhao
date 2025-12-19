@@ -28,14 +28,6 @@ const dependOverrides = defineConfig([
              */
             'lint-staged',
             /**
-             * 目前 eslint-plugin-import 维护积极，且 TypeScript 类型支持友好
-             *
-             * - 目前 eslint-plugin-import-x 与 eslint/config 提供的 defineConfig 方法类型不兼容
-             *
-             * @see https://github.com/es-tooling/module-replacements/blob/main/docs/modules/eslint-plugin-import.md
-             */
-            'eslint-plugin-import',
-            /**
              * 目前 execa 维护积极，且 TypeScript 类型支持友好
              *
              * - knip 尚未适配 tinyexec

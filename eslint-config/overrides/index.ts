@@ -1,6 +1,6 @@
 export * from './builtin.ts';
 export * from './depend.ts';
-export * from './import.ts';
+export * from './import-x.ts';
 export * from './jsonc.ts';
 export * from './local.ts';
 export * from './perfectionist.ts';

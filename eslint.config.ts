@@ -9,8 +9,8 @@ import {
   commandPresets,
   dependOverrides,
   dependPresets,
-  importOverrides,
-  importPresets,
+  importXOverrides,
+  importXPresets,
   jsoncOverrides,
   jsoncPresets,
   localOverrides,
@@ -54,7 +54,7 @@ const eslintConfig = defineConfig([
     extends: [
       builtinPresets,
       typescriptPresets,
-      importPresets,
+      importXPresets,
       regexpPresets,
       perfectionistPresets,
       prettierPresets,
@@ -71,7 +71,7 @@ const eslintConfig = defineConfig([
     extends: [
       builtinOverrides,
       typescriptOverrides,
-      importOverrides,
+      importXOverrides,
       regexpOverrides,
       perfectionistOverrides,
       localOverrides,
@@ -127,13 +127,13 @@ const eslintConfig = defineConfig([
       // 允许使用 Node.js 内置模块的特例
       {
         files: ['*.config.{,*.}{js,ts}', '{scripts,utils}/**/*.ts'],
-        rules: { 'import/no-nodejs-modules': 'off' },
+        rules: { 'import-x/no-nodejs-modules': 'off' },
       },
 
       // 允许使用默认导出的特例
       {
         files: ['*.config.{,*.}{js,ts}', 'app/**/{layout,page}.tsx'],
-        rules: { 'import/no-default-export': 'off' },
+        rules: { 'import-x/no-default-export': 'off' },
       },
     ],
   } satisfies Pick<ConfigWithExtends, 'extends' | 'name'>,

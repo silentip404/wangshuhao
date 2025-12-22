@@ -9,7 +9,7 @@ interface CaseVariants {
 }
 
 const getSanitizedCaseVariants = (raw: string): CaseVariants => {
-  const sanitized = raw.replace(/[^0-9a-z]+/giv, ' ');
+  const sanitized = raw.replace(/[^0-9a-z]/giv, ' ');
 
   const camelCase = toCamelCase(sanitized);
   const pascalCase = capitalize(camelCase);

@@ -11,8 +11,8 @@ const auditSettingsSchema = z.object({
 type AuditSettings = z.infer<typeof auditSettingsSchema>;
 
 const defineConfigWithAuditSettings = (
-  settings: AuditSettings,
   configs: Config[],
+  settings: AuditSettings,
 ): Config[] =>
   map(configs, (config) => ({
     ...config,

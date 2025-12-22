@@ -1,11 +1,11 @@
-import Image from 'next/image';
+import NextImage from 'next/image';
 
 export default function Home(): React.ReactNode {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <div className="dark:invert">
-          <Image
+          <NextImage
             priority
             alt="Next.js logo"
             height={20}
@@ -43,7 +43,7 @@ export default function Home(): React.ReactNode {
             target="_blank"
           >
             <span className="dark:invert">
-              <Image
+              <NextImage
                 alt="Vercel logomark"
                 height={16}
                 src="/vercel.svg"

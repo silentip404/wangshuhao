@@ -1,5 +1,7 @@
 import { defineConfig } from 'eslint/config';
 
+import { ensureModulePathInPackage } from '#node/utils';
+
 const localOverrides = defineConfig([
   {
     name: 'local:conflicting-rules',
@@ -26,49 +28,36 @@ const localOverrides = defineConfig([
             // 特殊命名
             {
               type: 'all',
-              regexSource: /^.*eslint.config.ts$/v.source,
+              regexSource: `^${ensureModulePathInPackage('next/image')}$`,
               mode: 'equal',
-              identifier: 'eslintConfig',
+              identifier: 'NextImage',
             },
             {
               type: 'all',
-              regexSource: /^eslint-config-flat-gitignore$/v.source,
+              regexSource: `^${ensureModulePathInPackage('eslint-config-flat-gitignore')}$`,
               mode: 'equal',
               identifier: 'createIgnoreConfig',
             },
             {
               type: 'all',
-              regexSource: /^eslint-config-prettier\/flat$/v.source,
+              regexSource: `^${ensureModulePathInPackage('eslint-config-prettier/flat')}$`,
               mode: 'equal',
               identifier: 'prettierConfig',
             },
             {
               type: 'all',
-              regexSource: /^next\/image$/v.source,
-              mode: 'equal',
-              identifier: 'Image',
-            },
-            {
-              type: 'all',
-              regexSource: /^jsonc-eslint-parser$/v.source,
+              regexSource: `^${ensureModulePathInPackage('jsonc-eslint-parser')}$`,
               mode: 'equal',
               identifier: 'jsoncParser',
             },
             {
               type: 'all',
-              regexSource: /^eslint-plugin-command\/config$/v.source,
+              regexSource: `^${ensureModulePathInPackage('eslint-plugin-command/config')}$`,
               mode: 'equal',
               identifier: 'createCommandConfig',
             },
 
             // 通用命名
-            {
-              type: 'all',
-              regexSource: /^node:(?<name>.*)$/v.source,
-              mode: 'replace',
-              replacement: '$<name>',
-              transformMode: 'camelCase',
-            },
             {
               type: 'all',
               regexSource:
@@ -87,7 +76,7 @@ const localOverrides = defineConfig([
             },
 
             // 默认命名
-            { type: 'all', regexSource: /^.*$/v.source, mode: 'camelCase' },
+            { type: 'all', regexSource: '^.*$', mode: 'camelCase' },
           ],
         },
       ],

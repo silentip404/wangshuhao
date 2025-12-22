@@ -3,6 +3,7 @@ import { type Config } from 'eslint/config';
 import {
   concat,
   drop,
+  isArray,
   isEmptyish,
   isNumber,
   isString,
@@ -32,9 +33,12 @@ const normalizeSeverity = (
           return severity;
         }
 
-        const ruleOptions = drop(ruleValue, 1);
+        if (isArray(ruleValue)) {
+          const ruleOptions = drop(ruleValue, 1);
+          return concat([severity], ruleOptions);
+        }
 
-        return concat([severity], ruleOptions);
+        return ruleValue satisfies never;
       }),
     });
   });

@@ -7,6 +7,7 @@ const jsoncOverrides = defineConfig([
   {
     name: 'jsonc:conflict-with-prettier',
     extends: defineConfigWithAuditSettings(
+      jsoncPlugin.configs['flat/prettier'],
       {
         /**
          * 本意是为了仅关闭可能与 Prettier 冲突的 jsonc 规则
@@ -15,7 +16,6 @@ const jsoncOverrides = defineConfig([
          */
         shouldPrependAllRules: false,
       },
-      jsoncPlugin.configs['flat/prettier'],
     ),
   },
   {

@@ -4,7 +4,7 @@ import { map } from 'remeda';
 import {
   ALIASES_GLOB,
   ALIASES_REGEX_STRING,
-  ensureDependenciesInPackage,
+  ensureModulePathsInPackage,
 } from '#node/utils';
 
 const importXOverrides = defineConfig([
@@ -136,12 +136,14 @@ const importXOverrides = defineConfig([
             '*/index.ts',
 
             // 允许导入第三方依赖的特定内部模块
-            'next/*',
-            'next/font/*',
-            'eslint/config',
-            'eslint-config-prettier/flat',
-            '@typescript-eslint/utils/*',
-            'eslint-plugin-command/*',
+            ...ensureModulePathsInPackage([
+              'next/image',
+              'next/font/*',
+              'eslint/config',
+              'eslint-config-prettier/flat',
+              '@typescript-eslint/utils/*',
+              'eslint-plugin-command/*',
+            ]),
           ],
         },
       ],
@@ -161,7 +163,7 @@ const importXOverrides = defineConfig([
        */
       'import-x/no-namespace': [
         'warn',
-        { ignore: ensureDependenciesInPackage(['eslint-plugin-regexp']) },
+        { ignore: ensureModulePathsInPackage(['eslint-plugin-regexp']) },
       ],
       /**
        * Node.js 内置模块使用检查
@@ -186,8 +188,8 @@ const importXOverrides = defineConfig([
             ...ALIASES_REGEX_STRING,
 
             // 允许一些特殊文件导入
-            /^\.\.\/utils\/index\.ts$/v.source,
-            /^\.\.\/local-plugin\/index\.ts$/v.source,
+            String.raw`^\.\./utils/index\.ts$`,
+            String.raw`^\.\./local-plugin/index\.ts$`,
           ],
         },
       ],

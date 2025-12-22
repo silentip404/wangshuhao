@@ -1,5 +1,7 @@
 import { type Config } from 'prettier';
 
+import { GLOB_JSONC } from '#node/utils';
+
 const prettierConfig: Config = {
   singleQuote: true,
   quoteProps: 'consistent',
@@ -7,21 +9,13 @@ const prettierConfig: Config = {
   htmlWhitespaceSensitivity: 'ignore',
   vueIndentScriptAndStyle: true,
   overrides: [
-    {
-      files: [
-        '**/tsconfig.json',
-        '**/tsconfig.*.json',
-        '.vscode/**/*.json',
-        '.vscode/**/*.code-snippets',
-      ],
-      options: { parser: 'jsonc' },
-    },
+    { files: [...GLOB_JSONC], options: { parser: 'jsonc' } },
     {
       files: ['**/*.jsx', '**/*.tsx', '**/*.vue'],
       options: { singleAttributePerLine: true },
     },
     {
-      files: ['LICENSE'],
+      files: ['**/LICENSE'],
       options: { parser: 'markdown', proseWrap: 'always' },
     },
   ],

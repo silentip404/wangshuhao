@@ -1,6 +1,6 @@
 import { defineConfig } from 'eslint/config';
 
-import { ensureDependenciesInPackage } from '#node/utils';
+import { ensureModulePathsInPackage } from '#node/utils';
 
 const dependOverrides = defineConfig([
   {
@@ -18,7 +18,7 @@ const dependOverrides = defineConfig([
       'depend/ban-dependencies': [
         'error',
         {
-          allowed: ensureDependenciesInPackage([
+          allowed: ensureModulePathsInPackage([
             /**
              * 目前 lint-staged 维护积极，且 TypeScript 类型支持友好
              *

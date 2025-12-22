@@ -1,57 +1,83 @@
 import { readPackage } from 'pkg-types';
 import {
-  difference,
   flatMap,
-  isEmptyish,
-  join,
+  isIncludedIn,
   keys,
+  map,
   pickBy,
   pipe,
   toLowerCase,
   values,
 } from 'remeda';
 
-import { printError } from './print-error.ts';
-
 const packageJSON = await readPackage();
+const existingScripts = keys(packageJSON.scripts ?? {});
+const existingDependencies = pipe(
+  packageJSON,
+  pickBy((value, key) => toLowerCase(key).endsWith('dependencies')),
+  values(),
+  flatMap(keys()),
+);
+
+const ensureScriptInPackage = (script: string): string => {
+  if (isIncludedIn(script, existingScripts)) {
+    return script;
+  }
+
+  throw new Error(
+    `配置 ${JSON.stringify(script)} 未添加到 package.json 中，请检查相关配置`,
+  );
+};
 
 const ensureScriptsInPackage = (scripts: string[]): string[] => {
-  const existingScripts = keys(packageJSON.scripts ?? {});
+  const ensuredScripts = map(scripts, ensureScriptInPackage);
 
-  const unusedScripts = difference(scripts, existingScripts);
-
-  if (isEmptyish(unusedScripts)) {
-    return scripts;
-  }
-
-  printError(
-    new Error(
-      `配置 ${JSON.stringify(scripts)} 中的 ${join(unusedScripts, ',')} 未添加到 package.json 中，请检查相关配置`,
-    ),
-  );
-  process.exit(1);
+  return ensuredScripts;
 };
 
-const ensureDependenciesInPackage = (dependencies: string[]): string[] => {
-  const existingDependencies = pipe(
-    packageJSON,
-    pickBy((value, key) => toLowerCase(key).endsWith('dependencies')),
-    values(),
-    flatMap(keys()),
-  );
+const parsePackageName = (
+  modulePath: string,
+): { packageName: string; subpath: string } => {
+  const match =
+    /^(?<scope>@[\-0-9a-z~][\-.0-9_a-z~]*\/)?(?<name>[\-0-9a-z~][\-.0-9_a-z~]*)(?:\/(?<subpath>.*))?$/v.exec(
+      modulePath,
+    );
 
-  const unusedDependencies = difference(dependencies, existingDependencies);
+  const { groups } = match ?? {};
 
-  if (isEmptyish(unusedDependencies)) {
-    return dependencies;
+  if (groups === undefined) {
+    throw new Error(
+      `配置 ${JSON.stringify(modulePath)} 不是有效的 npm 包路径，请检查相关配置`,
+    );
   }
 
-  printError(
-    new Error(
-      `配置 ${JSON.stringify(dependencies)} 中的 ${join(unusedDependencies, ',')} 未添加到 package.json 中，请检查相关配置`,
-    ),
-  );
-  process.exit(1);
+  const scope = groups.scope ?? '';
+  const name = groups.name ?? '';
+  const subpath = groups.subpath ?? '';
+
+  return { packageName: scope + name, subpath };
 };
 
-export { ensureDependenciesInPackage, ensureScriptsInPackage };
+const ensureModulePathInPackage = (modulePath: string): string => {
+  const { packageName } = parsePackageName(modulePath);
+
+  if (isIncludedIn(packageName, existingDependencies)) {
+    return modulePath;
+  }
+
+  throw new Error(
+    `配置 ${packageName}(${modulePath}) 未添加到 package.json 中，请检查相关配置`,
+  );
+};
+
+const ensureModulePathsInPackage = (modulePaths: string[]): string[] => {
+  const ensuredModulePaths = map(modulePaths, ensureModulePathInPackage);
+
+  return ensuredModulePaths;
+};
+
+export {
+  ensureModulePathInPackage,
+  ensureModulePathsInPackage,
+  ensureScriptsInPackage,
+};

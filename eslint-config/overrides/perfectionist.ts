@@ -211,26 +211,14 @@ const perfectionistOverrides = defineConfig([
         'warn',
         {
           customGroups: [
-            { elementNamePattern: /^key$/v.source, groupName: 'key' },
-            { elementNamePattern: /^ref$/v.source, groupName: 'ref' },
-            { elementNamePattern: /^id$/v.source, groupName: 'id' },
-            {
-              elementNamePattern: /^className$/v.source,
-              groupName: 'className',
-            },
-            { elementNamePattern: /^style$/v.source, groupName: 'style' },
-            {
-              elementNamePattern: /^data-.*$/v.source,
-              groupName: 'data-attribute',
-            },
-            {
-              elementNamePattern: /^aria-.*$/v.source,
-              groupName: 'aria-attribute',
-            },
-            {
-              elementNamePattern: /^on[A-Z].*$/v.source,
-              groupName: 'callback',
-            },
+            { elementNamePattern: '^key$', groupName: 'key' },
+            { elementNamePattern: '^ref$', groupName: 'ref' },
+            { elementNamePattern: '^id$', groupName: 'id' },
+            { elementNamePattern: '^className$', groupName: 'className' },
+            { elementNamePattern: '^style$', groupName: 'style' },
+            { elementNamePattern: '^data-.*$', groupName: 'data-attribute' },
+            { elementNamePattern: '^aria-.*$', groupName: 'aria-attribute' },
+            { elementNamePattern: '^on[A-Z].*$', groupName: 'callback' },
           ],
           groups: [
             'key',

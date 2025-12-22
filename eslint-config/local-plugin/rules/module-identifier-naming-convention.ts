@@ -306,9 +306,7 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
   defaultOptions: [
     {
       ignoreUnMatched: false,
-      matchers: [
-        { type: 'all', regexSource: /^.*$/v.source, mode: 'camelCase' },
-      ],
+      matchers: [{ type: 'all', regexSource: '^.*$', mode: 'camelCase' }],
     },
   ],
   create: (context, [ruleOptions]) => {

@@ -8,6 +8,7 @@
     "moduleResolution": "bundler",
     "paths": {
       // 与 package.json 中的 imports 配置保持同步
+      "#node/ts-expect-error-reasons": ["./ts-expect-error-reasons.ts"],
       "#node/utils": ["./utils/index.ts"],
     },
     "resolveJsonModule": true,

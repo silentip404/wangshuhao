@@ -1,5 +1,7 @@
 import { defineConfig } from 'eslint/config';
-import { join, toUpperCase } from 'remeda';
+import { join, keys, toUpperCase } from 'remeda';
+
+import { tsExpectErrorReasons } from '#node/ts-expect-error-reasons';
 
 const typescriptOverrides = defineConfig([
   {
@@ -15,6 +17,26 @@ const typescriptOverrides = defineConfig([
     name: 'typescript:overrides',
     // @perfectionist-sort-objects
     rules: {
+      /**
+       * TypeScript 指令注释检查
+       *
+       * @reason
+       * - 统一管理 @ts-expect-error 使用场景，防止类型忽略滥用破坏类型安全基础
+       * - 强制使用 @ts-expect-error 替代 @ts-ignore，确保底层问题修复后能被及时发现
+       * - 预定义原因列表提升代码审查效率，便于追踪和清理技术债务
+       */
+      '@typescript-eslint/ban-ts-comment': [
+        'error',
+        {
+          'minimumDescriptionLength': 3,
+          'ts-check': false,
+          'ts-expect-error': {
+            descriptionFormat: String.raw`^: See tsExpectErrorReasons\['(${join(keys(tsExpectErrorReasons), '|')})'\]$`,
+          },
+          'ts-ignore': true,
+          'ts-nocheck': true,
+        },
+      ],
       /**
        * return 语句值检查
        *

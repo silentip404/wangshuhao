@@ -3,9 +3,9 @@ import { importX } from 'eslint-plugin-import-x';
 import { defineConfig } from 'eslint/config';
 
 const importXPresets = defineConfig([
-  // @ts-expect-error: https://github.com/typescript-eslint/typescript-eslint/issues/11543
+  // @ts-expect-error: See tsExpectErrorReasons['typescript-eslint/issues/11543']
   importX.flatConfigs.recommended,
-  // @ts-expect-error: https://github.com/typescript-eslint/typescript-eslint/issues/11543
+  // @ts-expect-error: See tsExpectErrorReasons['typescript-eslint/issues/11543']
   importX.flatConfigs.typescript,
   {
     settings: {

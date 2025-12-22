@@ -6,7 +6,7 @@ import {
 import { Linter } from 'eslint';
 import { defineCommand } from 'eslint-plugin-command/commands';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
-import { findLastIndex, isTruthy, merge, pick, pipe } from 'remeda';
+import { findLastIndex, isTruthy } from 'remeda';
 
 import { getFilenameWithoutExtension, splitLines } from '#node/utils';
 
@@ -67,13 +67,7 @@ const getCommandLoc = (
 
 const linter = new Linter();
 const config: Linter.Config = {
-  plugins: {
-    perfectionist: pipe(
-      perfectionistPlugin,
-      pick(['meta', 'rules']),
-      merge({ rules: pick(perfectionistPlugin.rules, ['sort-objects']) }),
-    ),
-  },
+  plugins: { perfectionist: perfectionistPlugin },
   rules: {
     'perfectionist/sort-objects': [
       'warn',

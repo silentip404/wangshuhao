@@ -78,7 +78,7 @@ const cliArguments = parse<CliArguments>(
 
 const options = omit(cliArguments, ['help']);
 
-const { files, 'ignore-unknown': ignoreUnknown } = options;
+const { files, 'ignore-unknown': shouldIgnoreUnknown } = options;
 
 const allRelatedFiles: string[] = [
   'package.json',
@@ -89,7 +89,7 @@ const allRelatedFiles: string[] = [
 const { shouldRunVerification, relatedFiles } = analyzeVerifyFiles({
   files,
   allRelatedFiles,
-  ignoreUnknown,
+  shouldIgnoreUnknown,
   unknownErrorTitle: '以下文件与 Node.js 版本配置同步验证无关:',
 });
 

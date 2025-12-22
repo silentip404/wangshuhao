@@ -60,7 +60,7 @@ const cliArguments = parse<CliArguments>(
 
 const options = omit(cliArguments, ['help']);
 
-const { files, 'ignore-unknown': ignoreUnknown } = options;
+const { files, 'ignore-unknown': shouldIgnoreUnknown } = options;
 
 const typecheckExtensions: string[] = [
   '.ts',
@@ -82,7 +82,7 @@ const [tscFiles, unknownFiles] = pipe(
 );
 
 // 如果存在未知文件且未设置忽略未知文件，则报错退出
-if (!isEmptyish(unknownFiles) && ignoreUnknown !== true) {
+if (!isEmptyish(unknownFiles) && shouldIgnoreUnknown !== true) {
   printMessage({
     type: 'error',
     title: '检测到未知文件',

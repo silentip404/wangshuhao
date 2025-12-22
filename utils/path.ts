@@ -2,8 +2,8 @@ import path from 'path';
 
 interface ToRelativePosixPathOptions {
   filename: string;
-  addDotSlash?: boolean;
   relativeDirname?: string;
+  shouldAddDotSlash?: boolean;
 }
 
 /**
@@ -31,7 +31,7 @@ interface ToRelativePosixPathOptions {
 const toRelativePosixPath = ({
   filename,
   relativeDirname = process.cwd(),
-  addDotSlash = false,
+  shouldAddDotSlash = false,
 }: ToRelativePosixPathOptions): string => {
   const relativePath = path.relative(
     path.normalize(relativeDirname),
@@ -40,7 +40,7 @@ const toRelativePosixPath = ({
 
   const posixPath = relativePath.replace(/\\/gv, '/');
 
-  return addDotSlash ? `./${posixPath}` : posixPath;
+  return shouldAddDotSlash ? `./${posixPath}` : posixPath;
 };
 
 const getFilenameWithoutExtension = (filePath: string): string =>

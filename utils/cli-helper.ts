@@ -41,7 +41,7 @@ interface AnalyzeVerifyFilesOptions {
   allRelatedFiles: string[];
   unknownErrorTitle: string;
   files?: string[];
-  ignoreUnknown?: boolean;
+  shouldIgnoreUnknown?: boolean;
 }
 interface AnalyzeVerifyFilesResult {
   relatedFiles: string[];
@@ -51,7 +51,8 @@ interface AnalyzeVerifyFilesResult {
 const analyzeVerifyFiles = (
   options: AnalyzeVerifyFilesOptions,
 ): AnalyzeVerifyFilesResult => {
-  const { files, allRelatedFiles, ignoreUnknown, unknownErrorTitle } = options;
+  const { files, allRelatedFiles, shouldIgnoreUnknown, unknownErrorTitle } =
+    options;
 
   const [relatedFiles, unknownFiles] = pipe(
     files ?? [],
@@ -60,7 +61,7 @@ const analyzeVerifyFiles = (
   );
 
   // 如果存在未知文件且未设置忽略未知文件，则报错退出
-  if (!isEmptyish(unknownFiles) && ignoreUnknown !== true) {
+  if (!isEmptyish(unknownFiles) && shouldIgnoreUnknown !== true) {
     printMessage({
       type: 'error',
       title: '检测到未知文件',

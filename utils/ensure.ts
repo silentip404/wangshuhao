@@ -10,7 +10,9 @@ import {
   values,
 } from 'remeda';
 
-const packageJSON = await readPackage();
+import { ROOT } from './path.ts';
+
+const packageJSON = await readPackage(ROOT);
 const existingScripts = keys(packageJSON.scripts ?? {});
 const existingDependencies = pipe(
   packageJSON,

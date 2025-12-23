@@ -20,12 +20,14 @@ import {
   helpArgConfig,
   helpArgOptions,
   printMessage,
+  resolveFromRoot,
+  ROOT,
   verifyFilesArgsConfig,
   type VerifyFilesArgs,
   type WithHelpArg,
 } from '#node/utils';
 
-const packageJSON = await readPackage();
+const packageJSON = await readPackage(ROOT);
 
 // 获取并验证 Node 版本
 const getStandardNodeVersion = (): string => {
@@ -131,7 +133,7 @@ const errors = await Promise.all([
       return;
     }
 
-    const config = await readYamlFile('pnpm-workspace.yaml');
+    const config = await readYamlFile(resolveFromRoot('pnpm-workspace.yaml'));
     const configSchema = z.record(z.string(), z.unknown());
     const nodeVersion = prop(configSchema.parse(config), 'useNodeVersion');
 
@@ -148,7 +150,7 @@ const errors = await Promise.all([
       return;
     }
 
-    const content = await readFile('.nvmrc', 'utf-8');
+    const content = await readFile(resolveFromRoot('.nvmrc'), 'utf-8');
     const nodeVersion = content.trim();
 
     if (nodeVersion === standardNodeVersion) {
@@ -164,7 +166,7 @@ const errors = await Promise.all([
       return;
     }
 
-    const content = await readFile('.node-version', 'utf-8');
+    const content = await readFile(resolveFromRoot('.node-version'), 'utf-8');
     const nodeVersion = content.trim();
 
     if (nodeVersion === standardNodeVersion) {

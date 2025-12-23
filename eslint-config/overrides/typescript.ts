@@ -1,7 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import { join, keys, toUpperCase } from 'remeda';
 
-import { tsExpectErrorReasons } from '#node/ts-expect-error-reasons.ts';
+import { reasons } from '#node/ts-expect-error-reasons.ts';
 
 const typescriptOverrides = defineConfig([
   {
@@ -31,7 +31,7 @@ const typescriptOverrides = defineConfig([
           'minimumDescriptionLength': 3,
           'ts-check': false,
           'ts-expect-error': {
-            descriptionFormat: String.raw`^: See tsExpectErrorReasons\['(${join(keys(tsExpectErrorReasons), '|')})'\]$`,
+            descriptionFormat: String.raw`^: See reasons\['(${join(keys(reasons), '|')})'\] in ts-expect-error-reasons\.ts$`,
           },
           'ts-ignore': true,
           'ts-nocheck': true,

@@ -1,6 +1,6 @@
 import { defineConfig } from 'eslint/config';
 
-import { ensureModulePathInPackage } from '#node/utils';
+import { ensureModulePathInPackage } from '#node/utils/index.ts';
 
 const localOverrides = defineConfig([
   {

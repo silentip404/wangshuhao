@@ -10,7 +10,7 @@ import {
   printMessageOptionsSchema,
   type PrintMessageOptions,
   type WithHelpArg,
-} from '#node/utils';
+} from '#node/utils/index.ts';
 
 const typeSchema = printMessageOptionsSchema.shape.type.unwrap();
 

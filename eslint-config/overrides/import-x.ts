@@ -5,7 +5,7 @@ import {
   ALIASES_GLOB,
   ALIASES_REGEX_STRING,
   ensureModulePathsInPackage,
-} from '#node/utils';
+} from '#node/utils/index.ts';
 
 const importXOverrides = defineConfig([
   {
@@ -42,15 +42,7 @@ const importXOverrides = defineConfig([
       'import-x/extensions': [
         'error',
         'ignorePackages',
-        {
-          checkTypeImports: true,
-          fix: true,
-          pathGroupOverrides: map(ALIASES_GLOB, (alias) => ({
-            action: 'ignore',
-            // 忽略别名后缀名（此规则使用 minimatch() + { nocomment: true } 匹配）
-            pattern: alias,
-          })),
-        },
+        { checkTypeImports: true, fix: true },
       ],
       /**
        * import 语句位置规范

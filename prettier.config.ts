@@ -1,6 +1,6 @@
 import { type Config } from 'prettier';
 
-import { GLOB_JSONC } from '#node/utils';
+import { GLOB_JSONC } from '#node/utils/index.ts';
 
 const prettierConfig: Config = {
   singleQuote: true,

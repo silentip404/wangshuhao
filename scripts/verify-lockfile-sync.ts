@@ -12,7 +12,7 @@ import {
   verifyFilesArgsConfig,
   type VerifyFilesArgs,
   type WithHelpArg,
-} from '#node/utils';
+} from '#node/utils/index.ts';
 
 type CliArguments = WithHelpArg<VerifyFilesArgs>;
 

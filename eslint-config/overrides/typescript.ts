@@ -1,7 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import { join, keys, toUpperCase } from 'remeda';
 
-import { tsExpectErrorReasons } from '#node/ts-expect-error-reasons';
+import { tsExpectErrorReasons } from '#node/ts-expect-error-reasons.ts';
 
 const typescriptOverrides = defineConfig([
   {

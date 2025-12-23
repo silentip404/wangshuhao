@@ -8,8 +8,8 @@
     "node": "24.11.0"
   },
   "imports": {
-    "#node/ts-expect-error-reasons": "./ts-expect-error-reasons.ts",
-    "#node/utils": "./utils/index.ts"
+    "#node/ts-expect-error-reasons.ts": "./ts-expect-error-reasons.ts",
+    "#node/utils/index.ts": "./utils/index.ts"
   },
   "engines": {
     "node": "24.11.0",

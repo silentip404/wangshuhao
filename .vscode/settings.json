@@ -12,7 +12,11 @@
     // 默认设置规则为警告级别，突出显示 TypeScript 的错误
     { "rule": "*", "severity": "warn" },
 
+    // 需要重点关注的一些规则
+    { "rule": "depend/ban-dependencies", "severity": "error" },
+
     // 关闭或降级一些支持自动修复的规则提示，降低开发过程的心智负担
+    { "rule": "perfectionist/*", "severity": "off" },
     { "rule": "command/command", "severity": "info" },
     { "rule": "curly", "severity": "off" },
   ],

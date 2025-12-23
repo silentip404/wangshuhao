@@ -34,6 +34,12 @@ const localOverrides = defineConfig([
             },
             {
               type: 'all',
+              regexSource: `^${ensureModulePathInPackage('@eslint-react/eslint-plugin')}$`,
+              mode: 'equal',
+              identifier: 'eslintPlugin',
+            },
+            {
+              type: 'all',
               regexSource: `^${ensureModulePathInPackage('eslint-config-flat-gitignore')}$`,
               mode: 'equal',
               identifier: 'createIgnoreConfig',

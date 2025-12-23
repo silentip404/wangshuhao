@@ -5,7 +5,7 @@ import { defineConfigWithAuditSettings } from '../utils/index.ts';
 
 const jsoncOverrides = defineConfig([
   {
-    name: 'jsonc:conflict-with-prettier',
+    name: 'jsonc:conflicting-rules',
     extends: defineConfigWithAuditSettings(
       jsoncPlugin.configs['flat/prettier'],
       {

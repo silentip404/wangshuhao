@@ -140,6 +140,13 @@ const importXOverrides = defineConfig([
         },
       ],
       /**
+       * 禁止将默认导出作为命名导入
+       *
+       * @reason
+       * - 保持默认导入风格一致，避免混淆命名导入和默认导入
+       */
+      'import-x/no-named-default': 'warn',
+      /**
        * 禁止使用命名导出
        *
        * @reason
@@ -153,10 +160,7 @@ const importXOverrides = defineConfig([
        * - 命名导入使代码依赖关系更加明确，便于静态分析工具进行 tree-shaking 优化
        * - 显式导入提升代码可读性，避免命名空间对象的过度使用，降低模块耦合度
        */
-      'import-x/no-namespace': [
-        'warn',
-        { ignore: ensureModulePathsInPackage(['eslint-plugin-regexp']) },
-      ],
+      'import-x/no-namespace': 'warn',
       /**
        * Node.js 内置模块使用检查
        *

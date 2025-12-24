@@ -1,4 +1,3 @@
-import createIgnoreConfig from 'eslint-config-flat-gitignore';
 import { defineConfig } from 'eslint/config';
 import type { SetRequired } from 'type-fest';
 import type { ConfigWithExtends } from 'typescript-eslint';
@@ -11,6 +10,7 @@ import {
   commandPresets,
   dependOverrides,
   dependPresets,
+  ignorePresets,
   importXOverrides,
   importXPresets,
   jsoncOverrides,
@@ -43,13 +43,7 @@ const eslintConfig = defineConfig([
   /**
    * 全局忽略配置
    */
-  {
-    ...createIgnoreConfig({
-      root: true,
-      files: ['.gitignore', '.husky/_/.gitignore'],
-    }),
-    name: 'global:ignore',
-  },
+  { name: 'global:ignore', extends: [ignorePresets] },
 
   /**
    * 强制执行对文件名和目录结构的检查

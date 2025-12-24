@@ -11,6 +11,7 @@ const typescriptOverrides = defineConfig([
       'camelcase': 'off',
       'consistent-return': 'off',
       'no-magic-numbers': 'off',
+      'no-use-before-define': 'off',
     },
   },
   {
@@ -218,6 +219,15 @@ const typescriptOverrides = defineConfig([
        * - AI 辅助编程场景中防止生成不安全的类型断言代码
        */
       '@typescript-eslint/no-unsafe-type-assertion': 'error',
+      /**
+       * 禁止在变量定义之前使用变量
+       *
+       * @reason
+       * - 防止在闭包中引用尚未初始化的变量，避免运行时错误
+       * - 强制代码按照依赖顺序组织，提升可读性和可维护性
+       * - TypeScript 静态检查无法检测此类时序问题，需要 ESLint 规则补充
+       */
+      '@typescript-eslint/no-use-before-define': 'error',
       /**
        * 强制使用解构赋值
        *

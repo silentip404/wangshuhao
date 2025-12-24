@@ -112,6 +112,15 @@ const builtinOverrides = defineConfig([
        */
       'new-cap': 'off',
       /**
+       * 禁止在循环中使用 await
+       *
+       * @reason
+       * - 规则的初衷是避免可并行操作被顺序执行影响性能
+       * - 但许多场景下顺序执行是有意为之（如需要串行依赖或提前终止）
+       * - 盲目使用 Promise.all 可能增加代码复杂度且不适合所有场景
+       */
+      'no-await-in-loop': 'off',
+      /**
        * 禁止使用控制台输出方法
        *
        * @reason
@@ -120,6 +129,14 @@ const builtinOverrides = defineConfig([
        * - 临时调试代码使用之后需要及时删除
        */
       'no-console': 'warn',
+      /**
+       * 禁止使用 continue 语句
+       *
+       * @reason
+       * - continue 作为卫语句可以避免代码嵌套过深，提升可读性
+       * - 在循环中提前跳过不满足条件的迭代是常见且合理的模式
+       */
+      'no-continue': 'off',
       /**
        * 禁止在包含 return 语句的 if 块之后使用 else 块
        *

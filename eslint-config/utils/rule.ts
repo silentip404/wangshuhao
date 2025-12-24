@@ -1,5 +1,5 @@
-import { type Linter } from 'eslint';
-import { type Config } from 'eslint/config';
+import type { Linter } from 'eslint';
+import type { Config } from 'eslint/config';
 import { forEachObj, isEmptyish, isTruthy, mapToObj } from 'remeda';
 
 type Plugins = NonNullable<Config['plugins']>;

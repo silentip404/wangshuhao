@@ -113,10 +113,6 @@ type Group = string | { newlinesBetween: number };
  */
 const UNKNOWN_GROUP_GUARD = [{ newlinesBetween: 3 }, 'unknown'];
 
-const createNamedImportsExportsGroups = (
-  type: 'export' | 'import',
-): Group[] => [`value-${type}`, `type-${type}`, ...UNKNOWN_GROUP_GUARD];
-
 const createUnionIntersectionTypesGroups = (): Group[] => [
   'nullish',
   'keyword',
@@ -182,7 +178,6 @@ const perfectionistOverrides = defineConfig([
             'style',
             'side-effect-style',
             'side-effect',
-            'type',
             ...UNKNOWN_GROUP_GUARD,
           ],
           newlinesBetween: 1,
@@ -256,20 +251,14 @@ const perfectionistOverrides = defineConfig([
        * @reason
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
-      'perfectionist/sort-named-exports': [
-        'warn',
-        { groups: createNamedImportsExportsGroups('export') },
-      ],
+      'perfectionist/sort-named-exports': 'warn',
       /**
        * 具名导入排序规则
        *
        * @reason
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
-      'perfectionist/sort-named-imports': [
-        'warn',
-        { groups: createNamedImportsExportsGroups('import') },
-      ],
+      'perfectionist/sort-named-imports': 'warn',
       /**
        * 强制对象类型的排序
        *

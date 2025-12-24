@@ -21,9 +21,9 @@ const importXOverrides = defineConfig([
        * 类型导入标记位置统一
        *
        * @reason
-       * - 内联标记可以减少导入语句数量，避免重复的模块路径声明
+       * - 顶层类型导入语法便于 Node.js type stripping 完全跳过纯类型包的解析
        */
-      'import-x/consistent-type-specifier-style': ['warn', 'prefer-inline'],
+      'import-x/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
       /**
        * 导出语句位置要求
        *
@@ -106,7 +106,7 @@ const importXOverrides = defineConfig([
        * @reason
        * - 合并来自同一模块的多个导入语句，提高代码整洁度和可维护性
        */
-      'import-x/no-duplicates': ['warn', { 'prefer-inline': true }],
+      'import-x/no-duplicates': ['warn', { 'prefer-inline': false }],
       /**
        * 模块内部路径导入控制
        *

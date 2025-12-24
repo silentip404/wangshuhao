@@ -1,4 +1,5 @@
-import { consola, type InputLogObject } from 'consola';
+import { consola } from 'consola';
+import type { InputLogObject } from 'consola';
 import { flat, isEmptyish, isIncludedIn } from 'remeda';
 import { z } from 'zod';
 
@@ -39,4 +40,5 @@ const printMessage = ({
   consola[type](typedOptions);
 };
 
-export { printMessage, printMessageOptionsSchema, type PrintMessageOptions };
+export type { PrintMessageOptions };
+export { printMessage, printMessageOptionsSchema };

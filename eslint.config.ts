@@ -1,7 +1,7 @@
 import createIgnoreConfig from 'eslint-config-flat-gitignore';
 import { defineConfig } from 'eslint/config';
-import { type SetRequired } from 'type-fest';
-import { type ConfigWithExtends } from 'typescript-eslint';
+import type { SetRequired } from 'type-fest';
+import type { ConfigWithExtends } from 'typescript-eslint';
 
 import {
   builtinOverrides,

@@ -1,5 +1,5 @@
-import { type Linter } from 'eslint';
-import { type Config } from 'eslint/config';
+import type { Linter } from 'eslint';
+import type { Config } from 'eslint/config';
 import {
   concat,
   drop,

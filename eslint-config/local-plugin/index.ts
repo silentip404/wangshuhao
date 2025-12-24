@@ -1,4 +1,4 @@
-import { type TSESLint } from '@typescript-eslint/utils';
+import type { TSESLint } from '@typescript-eslint/utils';
 import { fromEntries } from 'remeda';
 
 import { moduleIdentifierNamingConvention } from './rules/index.ts';

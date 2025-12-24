@@ -17,4 +17,5 @@ const getSanitizedCaseVariants = (raw: string): CaseVariants => {
   return { camelCase, pascalCase, raw };
 };
 
-export { getSanitizedCaseVariants, splitLines, type CaseVariants };
+export type { CaseVariants };
+export { getSanitizedCaseVariants, splitLines };

@@ -1,5 +1,5 @@
 import { isEmptyish, isIncludedIn, map, partition, pipe } from 'remeda';
-import { type ArgumentConfig, type ParseOptions } from 'ts-command-line-args';
+import type { ArgumentConfig, ParseOptions } from 'ts-command-line-args';
 
 import { toRelativePosixPath } from './path.ts';
 import { printMessage } from './print-message.ts';
@@ -83,11 +83,10 @@ const analyzeVerifyFiles = (
   };
 };
 
+export type { VerifyFilesArgs, WithHelpArg };
 export {
   analyzeVerifyFiles,
   helpArgConfig,
   helpArgOptions,
   verifyFilesArgsConfig,
-  type VerifyFilesArgs,
-  type WithHelpArg,
 };

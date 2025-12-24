@@ -55,7 +55,7 @@ const typescriptOverrides = defineConfig([
        */
       '@typescript-eslint/consistent-type-exports': [
         'warn',
-        { fixMixedExportsWithInlineTypeSpecifier: true },
+        { fixMixedExportsWithInlineTypeSpecifier: false },
       ],
       /**
        * 类型导入语法风格检查
@@ -63,7 +63,10 @@ const typescriptOverrides = defineConfig([
        * @reason
        * - 明确区分类型导入和值导入，提升代码可读性和构建性能
        */
-      '@typescript-eslint/consistent-type-imports': 'warn',
+      '@typescript-eslint/consistent-type-imports': [
+        'warn',
+        { fixStyle: 'separate-type-imports', prefer: 'type-imports' },
+      ],
       /**
        * 函数返回类型声明检查
        *

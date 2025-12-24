@@ -1,4 +1,4 @@
-import { type Config } from 'eslint/config';
+import type { Config } from 'eslint/config';
 import { map, merge } from 'remeda';
 import { z } from 'zod';
 

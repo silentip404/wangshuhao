@@ -23,9 +23,8 @@ import {
   resolveFromRoot,
   ROOT,
   verifyFilesArgsConfig,
-  type VerifyFilesArgs,
-  type WithHelpArg,
 } from '#node/utils/index.ts';
+import type { VerifyFilesArgs, WithHelpArg } from '#node/utils/index.ts';
 
 const packageJSON = await readPackage(ROOT);
 

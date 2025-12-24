@@ -174,8 +174,9 @@ const builtinOverrides = defineConfig([
           selector: 'ExportNamedDeclaration[declaration]',
         },
         {
-          message: 'Use inline type specifiers: export { type ... } instead.',
-          selector: 'ExportNamedDeclaration[exportKind="type"]',
+          message:
+            'Inline type exports are not allowed. Use export type { ... } instead.',
+          selector: 'ExportSpecifier[exportKind="type"]',
         },
       ],
       /**

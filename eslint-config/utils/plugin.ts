@@ -1,4 +1,4 @@
-import { type Config } from 'eslint/config';
+import type { Config } from 'eslint/config';
 import { forEach, isEmptyish, keys } from 'remeda';
 
 const collectPluginNames = (configs: Config[]): string[] => {

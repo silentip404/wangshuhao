@@ -8,9 +8,8 @@ import {
   helpArgOptions,
   printMessage,
   printMessageOptionsSchema,
-  type PrintMessageOptions,
-  type WithHelpArg,
 } from '#node/utils/index.ts';
+import type { PrintMessageOptions, WithHelpArg } from '#node/utils/index.ts';
 
 const typeSchema = printMessageOptionsSchema.shape.type.unwrap();
 

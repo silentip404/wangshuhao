@@ -1,19 +1,18 @@
-import { AST_NODE_TYPES, type TSESTree } from '@typescript-eslint/utils';
-import { type RuleContext } from '@typescript-eslint/utils/ts-eslint';
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
+import type { TSESTree } from '@typescript-eslint/utils';
+import type { RuleContext } from '@typescript-eslint/utils/ts-eslint';
 import { find, isNullish, isTruthy } from 'remeda';
 
-import {
-  getSanitizedCaseVariants,
-  type CaseVariants,
-} from '#node/utils/index.ts';
+import { getSanitizedCaseVariants } from '#node/utils/index.ts';
+import type { CaseVariants } from '#node/utils/index.ts';
 
 import {
   createESLintSchema,
   defineUnionJSONSchema,
   getNodeText,
   initRule,
-  type InferSchema,
 } from '../utils/index.ts';
+import type { InferSchema } from '../utils/index.ts';
 
 type Context = RuleContext<MessageIds, [RuleOptions]>;
 interface LintModuleIdentifierOptions {

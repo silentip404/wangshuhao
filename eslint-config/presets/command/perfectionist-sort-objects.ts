@@ -1,8 +1,5 @@
-import {
-  AST_NODE_TYPES,
-  AST_TOKEN_TYPES,
-  type TSESTree,
-} from '@typescript-eslint/utils';
+import { AST_NODE_TYPES, AST_TOKEN_TYPES } from '@typescript-eslint/utils';
+import type { TSESTree } from '@typescript-eslint/utils';
 import { Linter } from 'eslint';
 import { defineCommand } from 'eslint-plugin-command/commands';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';

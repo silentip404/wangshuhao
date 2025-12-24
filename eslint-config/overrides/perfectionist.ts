@@ -157,6 +157,13 @@ const perfectionistOverrides = defineConfig([
     // @perfectionist-sort-objects
     rules: {
       /**
+       * 强制导出排序
+       *
+       * @reason
+       * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
+       */
+      'perfectionist/sort-exports': 'warn',
+      /**
        * 导入语句排序
        *
        * @reason

@@ -33,9 +33,12 @@ const GLOB_DERIVED_JS = [
 const GLOB_DERIVED_JSON = [...GLOB_JSON, ...GLOB_JSONC, ...GLOB_JSON5] as const;
 const GLOB_DERIVED_DEPEND = ['**/package.json', ...GLOB_DERIVED_JS] as const;
 
+const GLOB_ALL = '**' as const;
+
 export {
   ALIASES_GLOB,
   ALIASES_REGEX_STRING,
+  GLOB_ALL,
   GLOB_DERIVED_DEPEND,
   GLOB_DERIVED_JS,
   GLOB_DERIVED_JSON,

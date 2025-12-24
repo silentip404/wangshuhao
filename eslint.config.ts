@@ -6,6 +6,8 @@ import { type ConfigWithExtends } from 'typescript-eslint';
 import {
   builtinOverrides,
   builtinPresets,
+  checkFileOverrides,
+  checkFilePresets,
   commandPresets,
   dependOverrides,
   dependPresets,
@@ -21,6 +23,7 @@ import {
   perfectionistPresets,
   prettierPresets,
   reactHooksPresets,
+  reactOverrides,
   reactPresets,
   regexpOverrides,
   regexpPresets,
@@ -30,6 +33,7 @@ import {
   typescriptPresets,
 } from './eslint-config/index.ts';
 import {
+  GLOB_ALL,
   GLOB_DERIVED_DEPEND,
   GLOB_DERIVED_JS,
   GLOB_DERIVED_JSON,
@@ -40,8 +44,26 @@ const eslintConfig = defineConfig([
    * 全局忽略配置
    */
   {
-    ...createIgnoreConfig({ root: true, files: ['.gitignore'] }),
+    ...createIgnoreConfig({
+      root: true,
+      files: ['.gitignore', '.husky/_/.gitignore'],
+    }),
     name: 'global:ignore',
+  },
+
+  /**
+   * 强制执行对文件名和目录结构的检查
+   */
+  {
+    name: 'global:check-file',
+    files: [GLOB_ALL],
+    extends: [checkFilePresets, checkFileOverrides],
+  },
+  {
+    name: 'global:check-file-processor',
+    files: [GLOB_ALL],
+    ignores: [...GLOB_DERIVED_JS, ...GLOB_DERIVED_JSON],
+    processor: 'check-file/eslint-processor-check-file',
   },
 
   /**
@@ -80,6 +102,7 @@ const eslintConfig = defineConfig([
       builtinOverrides,
       typescriptOverrides,
       importXOverrides,
+      reactOverrides,
       regexpOverrides,
       perfectionistOverrides,
       localOverrides,
@@ -128,6 +151,16 @@ const eslintConfig = defineConfig([
   {
     name: 'misc:overrides',
     extends: [
+      // 约定俗成的文件不进行文件命名检查
+      {
+        files: ['**/{LICENSE,README.md}'],
+        rules: { 'check-file/filename-naming-convention': 'off' },
+      },
+      // 约定俗成的文件夹不进行文件夹命名检查
+      {
+        files: ['**/{.husky,.vscode}/**'],
+        rules: { 'check-file/folder-naming-convention': 'off' },
+      },
       // 对 package.json 进行排序
       sortPackageJson,
       // 对 tsconfig.json 进行排序

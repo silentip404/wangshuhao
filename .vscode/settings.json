@@ -1,13 +1,5 @@
 {
   // ESLint 通用配置
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "jsonc",
-  ],
   "eslint.rules.customizations": [
     // 默认设置规则为警告级别，突出显示 TypeScript 的错误
     { "rule": "*", "severity": "warn" },

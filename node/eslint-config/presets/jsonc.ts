@@ -1,6 +1,6 @@
 import jsoncPlugin from 'eslint-plugin-jsonc';
 import { defineConfig } from 'eslint/config';
-import jsoncParser from 'jsonc-eslint-parser';
+import * as jsoncParser from 'jsonc-eslint-parser';
 
 import {
   GLOB_DERIVED_JSON,

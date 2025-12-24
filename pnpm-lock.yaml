@@ -153,6 +153,9 @@ importers:
       tailwindcss:
         specifier: ^4.1.18
         version: 4.1.18
+      templite:
+        specifier: ^1.2.0
+        version: 1.2.0
       ts-command-line-args:
         specifier: ^2.5.1
         version: 2.5.1
@@ -3032,6 +3035,9 @@ packages:
   tapable@2.3.0:
     resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
     engines: {node: '>=6'}
+
+  templite@1.2.0:
+    resolution: {integrity: sha512-O9BpPXF44a9Pg84Be6mjzlrqOtbP2I/B5PNLWu5hb1n9UQ1GTLsjdMg1z5ROCkF6NFXsO5LQfRXEpgTGrZ7Q0Q==}
 
   text-extensions@2.4.0:
     resolution: {integrity: sha512-te/NtwBwfiNRLf9Ijqx3T0nlqZiQ2XrrtBvu+cLL8ZRrGkO0NHTug8MYFKyoSrv/sHTaSKfilUkizV6XhxMJ3g==}
@@ -6200,6 +6206,8 @@ snapshots:
   tailwindcss@4.1.18: {}
 
   tapable@2.3.0: {}
+
+  templite@1.2.0: {}
 
   text-extensions@2.4.0: {}
 

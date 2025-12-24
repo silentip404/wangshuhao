@@ -1,6 +1,6 @@
 import { capitalize, split, toCamelCase } from 'remeda';
 
-const splitLines = (text: string): string[] => split(text, /\r\n|\r|\n/v);
+const splitLines = (text: string): string[] => split(text, /\r\n|\r|\n/);
 
 interface CaseVariants {
   camelCase: string;
@@ -9,7 +9,7 @@ interface CaseVariants {
 }
 
 const getSanitizedCaseVariants = (raw: string): CaseVariants => {
-  const sanitized = raw.replace(/[^0-9a-z]/giv, ' ');
+  const sanitized = raw.replace(/[^0-9a-z]/gi, ' ');
 
   const camelCase = toCamelCase(sanitized);
   const pascalCase = capitalize(camelCase);

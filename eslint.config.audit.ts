@@ -9,9 +9,10 @@ import {
   createRules,
   normalizeSeverity,
   resolveAuditSettings,
-} from './eslint-config/index.ts';
+} from '#node/eslint-config/index.ts';
+import { GLOB_DERIVED_JS, printMessage } from '#node/utils/index.ts';
+
 import eslintConfig from './eslint.config.ts';
-import { GLOB_DERIVED_JS, printMessage } from './utils/index.ts';
 
 const SEVERITY = 'warn';
 

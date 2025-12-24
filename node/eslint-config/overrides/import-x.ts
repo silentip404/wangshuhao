@@ -160,7 +160,10 @@ const importXOverrides = defineConfig([
        * - 命名导入使代码依赖关系更加明确，便于静态分析工具进行 tree-shaking 优化
        * - 显式导入提升代码可读性，避免命名空间对象的过度使用，降低模块耦合度
        */
-      'import-x/no-namespace': 'warn',
+      'import-x/no-namespace': [
+        'warn',
+        { ignore: ensureModulePathsInPackage(['jsonc-eslint-parser']) },
+      ],
       /**
        * Node.js 内置模块使用检查
        *

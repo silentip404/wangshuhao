@@ -35,20 +35,16 @@ const regexpOverrides = defineConfig([
        * 强制正则表达式使用 Unicode 标志
        *
        * @reason
-       * - Unicode 标志 (u) 确保正则表达式正确处理 Unicode 字符（如 emoji、多字节字符），避免字符边界判断错误
-       * - 启用 Unicode 模式可激活更严格的语法检查，在开发阶段提前发现正则表达式错误
-       * - 现代 JavaScript 应用普遍需要处理国际化内容，统一使用 u 标志是面向未来的最佳实践
+       * - 此正则表达式标志仅在面向 es2024 或更高版本时可用，需要单独在 node 环境下开启此规则
        */
-      'regexp/require-unicode-regexp': 'warn',
+      'regexp/require-unicode-regexp': 'off',
       /**
        * 强制使用 `v` 标志
        *
        * @reason
-       * - `v` 标志确保正则表达式用于 Unicode 字符集，支持国际化，适应多语言环境。
-       * - 将此标志应用于使用 `u` 标志的正则表达式，可以确保对 Unicode 字符集的支持。
-       * - 增强代码可读性和可维护性，避免因为正则表达式不支持国际字符集而带来的潜在错误。
+       * - 此正则表达式标志仅在面向 es2024 或更高版本时可用，需要单独在 node 环境下开启此规则
        */
-      'regexp/require-unicode-sets-regexp': 'warn',
+      'regexp/require-unicode-sets-regexp': 'off',
       /**
        * 强制字符类中的元素顺序
        *

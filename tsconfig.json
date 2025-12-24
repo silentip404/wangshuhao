@@ -1,43 +1,8 @@
 {
-  "compilerOptions": {
-    "incremental": true,
-    "target": "ESNext",
-    "jsx": "react-jsx",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "allowImportingTsExtensions": true,
-    "allowJs": true,
-    "checkJs": true,
-    "strict": true,
-    "allowUnreachableCode": false,
-    "noImplicitReturns": true,
-    "noUncheckedIndexedAccess": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "verbatimModuleSyntax": false,
-    "skipLibCheck": true,
-    "plugins": [{ "name": "next" }],
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx",
-    "**/*.cts",
-    "**/*.cjs",
-    "**/*.mts",
-    "**/*.mjs",
-
-    // 必要的基础类型声明文件
-    // 改动时需要同步更新 scripts/tsc-files.ts 中的 include 配置
-    "**/*.d.ts",
-    "**/*.d.cts",
-    "**/*.d.mts",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.lib.json" },
+    { "path": "./tsconfig.node.json" },
   ],
-  "exclude": ["node_modules"],
+  "files": [],
 }

@@ -3,8 +3,8 @@ import type { TSESTree } from '@typescript-eslint/utils';
 import type { RuleContext } from '@typescript-eslint/utils/ts-eslint';
 import { find, isNullish, isTruthy } from 'remeda';
 
-import { getSanitizedCaseVariants } from '#node/utils/index.ts';
-import type { CaseVariants } from '#node/utils/index.ts';
+import { getSanitizedCaseVariants } from '#lib/utils/index.ts';
+import type { CaseVariants } from '#lib/utils/index.ts';
 
 import {
   createESLintSchema,

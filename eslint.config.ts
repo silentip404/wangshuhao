@@ -31,13 +31,13 @@ import {
   sortTsconfig,
   typescriptOverrides,
   typescriptPresets,
-} from './eslint-config/index.ts';
+} from '#node/eslint-config/index.ts';
 import {
   GLOB_ALL,
   GLOB_DERIVED_DEPEND,
   GLOB_DERIVED_JS,
   GLOB_DERIVED_JSON,
-} from './utils/index.ts';
+} from '#node/utils/index.ts';
 
 const eslintConfig = defineConfig([
   /**
@@ -161,14 +161,22 @@ const eslintConfig = defineConfig([
       sortTsconfig,
       // 允许使用 Node.js 内置模块的特例
       {
-        files: ['*.config.{,*.}{js,ts}', '{scripts,utils}/**/*.ts'],
+        files: ['*.{js,ts}', 'node/**/*.ts'],
         rules: { 'import-x/no-nodejs-modules': 'off' },
       },
 
       // 允许使用默认导出的特例
       {
-        files: ['*.config.{,*.}{js,ts}', 'app/**/{layout,page}.tsx'],
+        files: ['*.{js,ts}', 'app/**/{layout,page}.tsx'],
         rules: { 'import-x/no-default-export': 'off' },
+      },
+      // 在 node 环境下启用一些较新特性的正则表达式标志
+      {
+        files: ['*.{js,ts}', 'node/**/*.ts'],
+        rules: {
+          'regexp/require-unicode-regexp': 'warn',
+          'regexp/require-unicode-sets-regexp': 'warn',
+        },
       },
     ],
   } satisfies Pick<ConfigWithExtends, 'extends' | 'name'>,

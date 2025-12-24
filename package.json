@@ -8,8 +8,10 @@
     "node": "24.11.0"
   },
   "imports": {
+    "#lib/utils/index.ts": "./lib/utils/index.ts",
     "#node/ts-expect-error-reasons.ts": "./ts-expect-error-reasons.ts",
-    "#node/utils/index.ts": "./utils/index.ts"
+    "#node/utils/index.ts": "./node/utils/index.ts",
+    "#node/eslint-config/index.ts": "./node/eslint-config/index.ts"
   },
   "engines": {
     "node": "24.11.0",
@@ -22,18 +24,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "run-s lint:*",
-    "lint:lockfile": "pnpm exec node scripts/verify-lockfile-sync.ts",
-    "lint:node-version": "pnpm exec node scripts/verify-node-version-sync.ts",
+    "lint:lockfile": "pnpm exec node node/scripts/verify-lockfile-sync.ts",
+    "lint:node-version": "pnpm exec node node/scripts/verify-node-version-sync.ts",
     "lint:knip": "knip --no-progress",
-    "lint:tsc": "tsc --noEmit",
+    "lint:tsc": "tsc --build --noEmit",
     "lint:eslint": "eslint --max-warnings=0",
     "lint:prettier": "prettier --check --log-level=warn .",
-    "lint:success-message": "pnpm exec node scripts/cli-print-message.ts --type=success --title=\"All linting checks completed successfully.\"",
+    "lint:success-message": "pnpm exec node node/scripts/cli-print-message.ts --type=success --title=\"All linting checks completed successfully.\"",
     "fix": "run-s --continue-on-error fix:*",
     "fix:knip": "knip --no-progress --fix",
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write --log-level=warn .",
-    "fix:complete-message": "pnpm exec node scripts/cli-print-message.ts --type=info --title=\"All fixing tasks completed, please review the output above.\"",
+    "fix:complete-message": "pnpm exec node node/scripts/cli-print-message.ts --type=info --title=\"All fixing tasks completed, please review the output above.\"",
     "eslint:inspector": "eslint-config-inspector",
     "eslint:audit": "cross-env SORT_BY=warnings eslint --config=eslint.config.audit.ts --format=summary",
     "eslint:audit:inspector": "eslint-config-inspector --config=eslint.config.audit.ts"
@@ -89,6 +91,7 @@
     "prettier": "^3.7.4",
     "read-yaml-file": "^2.1.0",
     "tailwindcss": "^4.1.18",
+    "templite": "^1.2.0",
     "ts-command-line-args": "^2.5.1",
     "type-fest": "^5.3.1",
     "typescript": "^5.9.3",

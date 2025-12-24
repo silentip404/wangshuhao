@@ -1,6 +1,6 @@
 import path from 'path';
 
-const ROOT = path.resolve(import.meta.dirname, '..');
+const ROOT = path.resolve(import.meta.dirname, '../../');
 
 const resolveFromRoot = (...pathSegments: string[]): string =>
   path.resolve(ROOT, ...pathSegments);

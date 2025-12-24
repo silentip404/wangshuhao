@@ -292,4 +292,4 @@ bun.lockb
 *.bundled_*.*js
 
 # 忽略由 tsc-files 脚本生成的临时配置文件
-tsconfig.tsc-files.*.json
+tsconfig.tsc-files*.json

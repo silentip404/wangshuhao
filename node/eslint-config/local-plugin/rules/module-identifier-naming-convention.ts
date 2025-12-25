@@ -169,7 +169,7 @@ const lintModuleIdentifier = (
 ): void => {
   const { moduleIdentifier, type } = options;
 
-  const modulePath = lintContext.modulePathVariants.raw;
+  const modulePath = lintContext.modulePathVariants.raw.value;
 
   if (!isTruthy(modulePath.trim())) {
     return;
@@ -237,7 +237,7 @@ const lintModuleIdentifier = (
 
     case 'PascalCase': {
       const expectedModuleIdentifier =
-        lintContext.modulePathVariants.pascalCase;
+        lintContext.modulePathVariants.PascalCase;
       reportInvalidModuleIdentifier(expectedModuleIdentifier);
 
       break;
@@ -264,11 +264,11 @@ const lintModuleIdentifier = (
       const expectedModuleIdentifier = (() => {
         switch (transformMode) {
           case 'none':
-            return replacedModulePathVariants.raw;
+            return replacedModulePathVariants.raw.value;
           case 'camelCase':
             return replacedModulePathVariants.camelCase;
           case 'PascalCase':
-            return replacedModulePathVariants.pascalCase;
+            return replacedModulePathVariants.PascalCase;
           default:
             throw new Error(
               `Unexpected transformMode: ${JSON.stringify({ transformMode })}`,

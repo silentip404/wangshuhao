@@ -8,12 +8,10 @@ const prettierConfig: Config = {
   objectWrap: 'collapse',
   htmlWhitespaceSensitivity: 'ignore',
   vueIndentScriptAndStyle: true,
+  singleAttributePerLine: true,
+
   overrides: [
     { files: [...GLOB_JSONC], options: { parser: 'jsonc' } },
-    {
-      files: ['**/*.jsx', '**/*.tsx', '**/*.vue'],
-      options: { singleAttributePerLine: true },
-    },
     {
       files: ['**/LICENSE'],
       options: { parser: 'markdown', proseWrap: 'always' },

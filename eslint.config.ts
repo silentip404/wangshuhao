@@ -5,6 +5,7 @@ import type { ConfigWithExtends } from 'typescript-eslint';
 import {
   builtinOverrides,
   builtinPresets,
+  checkFileExceptionOverrides,
   checkFileOverrides,
   checkFilePresets,
   commandPresets,
@@ -34,9 +35,11 @@ import {
 } from '#node/eslint-config/index.ts';
 import {
   GLOB_ALL,
+  GLOB_CONFIG_FILES,
   GLOB_DERIVED_DEPEND,
   GLOB_DERIVED_JS,
   GLOB_DERIVED_JSON,
+  GLOB_TSCONFIG_NODE_INCLUDE,
 } from '#node/utils/index.ts';
 
 const eslintConfig = defineConfig([
@@ -46,7 +49,7 @@ const eslintConfig = defineConfig([
   { name: 'global:ignore', extends: [ignorePresets] },
 
   /**
-   * 强制执行对文件名和目录结构的检查
+   * 强制执行对文件名和目录进行检查
    */
   {
     name: 'global:check-file',
@@ -145,34 +148,25 @@ const eslintConfig = defineConfig([
   {
     name: 'misc:overrides',
     extends: [
-      // 约定俗成的文件不进行文件命名检查
-      {
-        files: ['**/{LICENSE,README.md}'],
-        rules: { 'check-file/filename-naming-convention': 'off' },
-      },
-      // 约定俗成的文件夹不进行文件夹命名检查
-      {
-        files: ['**/{.husky,.vscode}/**'],
-        rules: { 'check-file/folder-naming-convention': 'off' },
-      },
+      // 一些特殊的文件名和目录检查规则
+      checkFileExceptionOverrides,
       // 对 package.json 进行排序
       sortPackageJson,
       // 对 tsconfig.json 进行排序
       sortTsconfig,
       // 允许使用 Node.js 内置模块的特例
       {
-        files: ['*.{js,ts}', 'node/**/*.ts'],
+        files: [...GLOB_TSCONFIG_NODE_INCLUDE],
         rules: { 'import-x/no-nodejs-modules': 'off' },
       },
-
       // 允许使用默认导出的特例
       {
-        files: ['*.{js,ts}', 'app/**/{layout,page}.tsx'],
+        files: [...GLOB_CONFIG_FILES, 'app/**/{layout,page}.tsx'],
         rules: { 'import-x/no-default-export': 'off' },
       },
       // 在 node 环境下启用一些较新特性的正则表达式标志
       {
-        files: ['*.{js,ts}', 'node/**/*.ts'],
+        files: [...GLOB_TSCONFIG_NODE_INCLUDE],
         rules: {
           'regexp/require-unicode-regexp': 'warn',
           'regexp/require-unicode-sets-regexp': 'warn',

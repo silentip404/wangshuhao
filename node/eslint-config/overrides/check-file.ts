@@ -1,6 +1,12 @@
 import { defineConfig } from 'eslint/config';
+import type { ConfigWithExtends } from 'typescript-eslint';
 
-import { GLOB_ALL } from '#node/utils/index.ts';
+import {
+  GLOB_ALL,
+  GLOB_DOT_FILES,
+  GLOB_FILES_IN_DOT_DIRECTORIES,
+  toCaseInsensitiveGlob,
+} from '#node/utils/index.ts';
 
 const checkFileOverrides = defineConfig([
   {
@@ -61,4 +67,37 @@ const checkFileOverrides = defineConfig([
   },
 ]);
 
-export { checkFileOverrides };
+const checkFileExceptionOverrides = defineConfig([
+  {
+    name: 'check-file:filename-naming-convention:overrides',
+    extends: [
+      // 对一些 dot files 关闭检查
+      {
+        files: [GLOB_DOT_FILES],
+        rules: { 'check-file/filename-naming-convention': 'off' },
+      },
+      // 对一些 dot directories 关闭检查
+      {
+        files: [GLOB_FILES_IN_DOT_DIRECTORIES],
+        rules: { 'check-file/folder-naming-convention': 'off' },
+      },
+      // 需要保持大写的文件名
+      {
+        files: [
+          `**/${toCaseInsensitiveGlob('LICENSE')}`,
+          `**/${toCaseInsensitiveGlob('{README,CHANGELOG}')}.md`,
+        ],
+        // @perfectionist-sort-objects
+        rules: {
+          'check-file/filename-naming-convention': [
+            'error',
+            { [GLOB_ALL]: '[A-Z]+' },
+            { ignoreMiddleExtensions: true },
+          ],
+        },
+      },
+    ],
+  } satisfies Pick<ConfigWithExtends, 'extends' | 'name'>,
+]);
+
+export { checkFileExceptionOverrides, checkFileOverrides };

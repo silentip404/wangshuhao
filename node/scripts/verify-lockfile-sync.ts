@@ -1,7 +1,7 @@
 import path from 'path';
 
-import { execa } from 'execa';
 import { omit } from 'remeda';
+import { exec } from 'tinyexec';
 import { parse } from 'ts-command-line-args';
 
 import {
@@ -51,17 +51,17 @@ if (!shouldRunVerification) {
 }
 
 // 执行 pnpm install 验证
-const { exitCode, all } = await execa(
+const { exitCode, stdout, stderr } = await exec(
   'pnpm',
   ['install', '--frozen-lockfile', '--offline', '--loglevel=warn'],
-  { reject: false, all: true },
+  { throwOnError: false },
 );
 
 if (exitCode !== 0) {
   printMessage({
     type: 'error',
     title: '验证 package.json 和 pnpm-lock.yaml 同步失败',
-    description: all,
+    description: [stdout, stderr],
   });
 
   process.exit(exitCode);

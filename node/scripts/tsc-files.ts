@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 
-import { execa } from 'execa';
 import { minimatch } from 'minimatch';
 import { writeTSConfig } from 'pkg-types';
 import {
@@ -14,6 +13,7 @@ import {
   pipe,
 } from 'remeda';
 import templite from 'templite';
+import { exec } from 'tinyexec';
 import { parse } from 'ts-command-line-args';
 
 import {
@@ -137,10 +137,10 @@ for (const project of projects) {
     include: project.baseInclude,
   });
 
-  const { exitCode, all } = await execa(
-    'pnpm exec',
-    ['tsc', '--project', configFile, '--pretty'],
-    { reject: false, all: true },
+  const { exitCode, stdout, stderr } = await exec(
+    'pnpm',
+    ['exec', 'tsc', '--project', configFile, '--pretty'],
+    { throwOnError: false },
   );
 
   fs.rmSync(configFile, { force: true });
@@ -149,7 +149,7 @@ for (const project of projects) {
     printMessage({
       type: 'error',
       title: '运行 tsc 检查失败',
-      description: all,
+      description: [stdout, stderr],
     });
 
     process.exit(exitCode);

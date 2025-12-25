@@ -27,16 +27,6 @@ const dependOverrides = defineConfig([
              * @see https://github.com/es-tooling/module-replacements/blob/main/docs/modules/lint-staged.md
              */
             'lint-staged',
-            /**
-             * 目前 execa 维护积极，且 TypeScript 类型支持友好
-             *
-             * - knip 尚未适配 tinyexec
-             * - knip 尚未适配 nanoexec
-             * - 项目暂不考虑切换到 Bun
-             *
-             * @see https://github.com/es-tooling/module-replacements/blob/main/docs/modules/execa.md
-             */
-            'execa',
           ]),
         },
       ],

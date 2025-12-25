@@ -27,7 +27,7 @@
     "lint:lockfile": "pnpm exec node node/scripts/verify-lockfile-sync.ts",
     "lint:node-version": "pnpm exec node node/scripts/verify-node-version-sync.ts",
     "lint:knip": "knip --no-progress",
-    "lint:tsc": "tsc --build --noEmit",
+    "lint:tsc": "tsc --build",
     "lint:eslint": "eslint --max-warnings=0",
     "lint:prettier": "prettier --check --log-level=warn .",
     "lint:success-message": "pnpm exec node node/scripts/cli-print-message.ts --type=success --title=\"All linting checks completed successfully.\"",

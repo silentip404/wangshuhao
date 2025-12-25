@@ -16,16 +16,16 @@ interface Project {
 
 const projects: Project[] = [
   {
-    name: 'app',
-    configName: 'tsconfig.app.json',
-    include: [...GLOB_TSCONFIG_APP_INCLUDE],
-    baseInclude: [...GLOB_TSCONFIG_APP_INCLUDE_BASE],
-  },
-  {
     name: 'lib',
     configName: 'tsconfig.lib.json',
     include: [...GLOB_TSCONFIG_LIB_INCLUDE],
     baseInclude: [...GLOB_TSCONFIG_LIB_BASE_INCLUDE],
+  },
+  {
+    name: 'app',
+    configName: 'tsconfig.app.json',
+    include: [...GLOB_TSCONFIG_APP_INCLUDE],
+    baseInclude: [...GLOB_TSCONFIG_APP_INCLUDE_BASE],
   },
   {
     name: 'node',

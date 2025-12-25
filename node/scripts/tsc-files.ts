@@ -131,8 +131,11 @@ for (const project of projects) {
 
   // 写入临时配置文件
   await writeTSConfig(configFile, {
-    extends: `./${project.configName}`,
-    compilerOptions: { noEmit: true, incremental: false },
+    extends: toRelativePosixPath({
+      filename: project.configName,
+      shouldAddDotSlash: true,
+    }),
+    compilerOptions: { incremental: false, composite: false, noEmit: true },
     files: tscFiles,
     include: project.baseInclude,
   });

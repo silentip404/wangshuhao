@@ -271,6 +271,12 @@ next-env.d.ts
 ###################################################################################################
 #### 项目其他定制化规则
 
+# 本地私有目录（用于存放不提交到仓库的文档、配置等）
+/local/
+
+# 临时工作目录（用于存放程序、脚本生成或临时文件）
+/scratch/
+
 # Npm
 package-lock.json
 
@@ -284,9 +290,6 @@ yarn.lock
 bunfig.toml
 bun.lock
 bun.lockb
-
-# 忽略某些场景下手动创建的临时文件
-*.should-be-ignored-by-git.*
 
 # 忽略由 eslint-config-inspector 生成的临时文件
 *.bundled_*.*js

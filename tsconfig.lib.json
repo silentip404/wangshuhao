@@ -1,5 +1,14 @@
 {
   "extends": "./tsconfig.base.json",
-  "compilerOptions": { "target": "ES2017", "lib": ["ESNext"] },
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "./scratch/tsbuildinfos/tsconfig.lib.tsbuildinfo",
+    "target": "ES2017",
+    "lib": ["ESNext"],
+    "declaration": true,
+    "declarationDir": "./scratch/declarations",
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+  },
   "include": ["lib/**/*.ts"],
 }

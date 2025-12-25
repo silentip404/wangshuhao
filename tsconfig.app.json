@@ -1,11 +1,13 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "tsBuildInfoFile": "./scratch/tsbuildinfos/tsconfig.app.tsbuildinfo",
     "target": "ES2017",
     "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
     "plugins": [{ "name": "next" }],
   },
+  "references": [{ "path": "./tsconfig.lib.json" }],
   "include": [
     "app/**/*.ts",
     "app/**/*.tsx",

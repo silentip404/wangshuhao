@@ -18,7 +18,7 @@ const dependOverrides = defineConfig([
       'depend/ban-dependencies': [
         'error',
         {
-          allowed: ensureModulePathsInPackage([
+          allowed: await ensureModulePathsInPackage([
             /**
              * 目前 lint-staged 维护积极，且 TypeScript 类型支持友好
              *

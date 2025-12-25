@@ -113,48 +113,50 @@ if (isEmptyish(allowedFiles)) {
   process.exit(0);
 }
 
-for (const project of projects) {
-  const tscFiles = filter(allowedFiles, (allowedFile) =>
-    project.include.some((pattern) => minimatch(allowedFile, pattern)),
-  );
+await Promise.all(
+  map(projects, async (project) => {
+    const tscFiles = filter(allowedFiles, (allowedFile) =>
+      project.include.some((pattern) => minimatch(allowedFile, pattern)),
+    );
 
-  if (isEmptyish(tscFiles)) {
-    continue;
-  }
+    if (isEmptyish(tscFiles)) {
+      return;
+    }
 
-  const configFile = resolveFromRoot(
-    templite(CONFIG_FILENAME_TEMPLATE, {
-      name: project.name,
-      uid: process.pid,
-    }),
-  );
+    const configFile = resolveFromRoot(
+      templite(CONFIG_FILENAME_TEMPLATE, {
+        name: project.name,
+        uid: process.pid,
+      }),
+    );
 
-  // 写入临时配置文件
-  await writeTSConfig(configFile, {
-    extends: toRelativePosixPath({
-      filename: project.configName,
-      shouldAddDotSlash: true,
-    }),
-    compilerOptions: { incremental: false, composite: false, noEmit: true },
-    files: tscFiles,
-    include: project.baseInclude,
-  });
-
-  const { exitCode, stdout, stderr } = await exec(
-    'pnpm',
-    ['exec', 'tsc', '--project', configFile, '--pretty'],
-    { throwOnError: false },
-  );
-
-  fs.rmSync(configFile, { force: true });
-
-  if (exitCode !== 0) {
-    printMessage({
-      type: 'error',
-      title: '运行 tsc 检查失败',
-      description: [stdout, stderr],
+    // 写入临时配置文件
+    await writeTSConfig(configFile, {
+      extends: toRelativePosixPath({
+        filename: project.configName,
+        shouldAddDotSlash: true,
+      }),
+      compilerOptions: { incremental: false, composite: false, noEmit: true },
+      files: tscFiles,
+      include: project.baseInclude,
     });
 
-    process.exit(exitCode);
-  }
-}
+    const { exitCode, stdout, stderr } = await exec(
+      'pnpm',
+      ['exec', 'tsc', '--project', configFile, '--pretty'],
+      { throwOnError: false },
+    );
+
+    fs.rmSync(configFile, { force: true });
+
+    if (exitCode !== 0) {
+      printMessage({
+        type: 'error',
+        title: '运行 tsc 检查失败',
+        description: [stdout, stderr],
+      });
+
+      process.exit(exitCode);
+    }
+  }),
+);

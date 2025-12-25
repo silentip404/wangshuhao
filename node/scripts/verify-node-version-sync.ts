@@ -1,8 +1,6 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { readPackage } from 'pkg-types';
-import readYamlFile from 'read-yaml-file';
 import {
   filter,
   isDefined,
@@ -20,17 +18,17 @@ import {
   helpArgConfig,
   helpArgOptions,
   printMessage,
+  readPackageJsonUsingCache,
+  readYamlFileUsingCache,
   resolveFromRoot,
-  ROOT,
   verifyFilesArgsConfig,
 } from '#node/utils/index.ts';
 import type { VerifyFilesArgs, WithHelpArg } from '#node/utils/index.ts';
 
-const packageJSON = await readPackage(ROOT);
-
 // 获取并验证 Node 版本
-const getStandardNodeVersion = (): string => {
-  const nodeVersion = prop(packageJSON, 'engines', 'node') as unknown;
+const getStandardNodeVersion = async (): Promise<string> => {
+  const packageJson = await readPackageJsonUsingCache();
+  const nodeVersion = prop(packageJson, 'engines', 'node') as unknown;
   const exactNodeVersionRegex = /^\d+\.\d+\.\d+$/v;
 
   if (nodeVersion === undefined) {
@@ -106,25 +104,25 @@ const shouldVerifyFile = (filename: string): boolean => {
   return isIncludedIn(filename, relatedFiles);
 };
 
-const standardNodeVersion = getStandardNodeVersion();
+const standardNodeVersion = await getStandardNodeVersion();
 
 const errors = await Promise.all([
   // 校验 package.json 中的 volta.node 字段
-  Promise.resolve(
-    (() => {
-      if (!shouldVerifyFile('package.json')) {
-        return;
-      }
+  (async () => {
+    if (!shouldVerifyFile('package.json')) {
+      return;
+    }
 
-      const nodeVersion = prop(packageJSON, 'volta', 'node') as unknown;
+    const packageJson = await readPackageJsonUsingCache();
 
-      if (nodeVersion === standardNodeVersion) {
-        return;
-      }
+    const nodeVersion = prop(packageJson, 'volta', 'node') as unknown;
 
-      return `请在 package.json 中设置 volta.node 字段为 ${standardNodeVersion}`;
-    })(),
-  ),
+    if (nodeVersion === standardNodeVersion) {
+      return;
+    }
+
+    return `请在 package.json 中设置 volta.node 字段为 ${standardNodeVersion}`;
+  })(),
 
   // 校验 pnpm-workspace.yaml 中的 useNodeVersion 字段
   (async () => {
@@ -132,7 +130,9 @@ const errors = await Promise.all([
       return;
     }
 
-    const config = await readYamlFile(resolveFromRoot('pnpm-workspace.yaml'));
+    const config = await readYamlFileUsingCache(
+      resolveFromRoot('pnpm-workspace.yaml'),
+    );
     const configSchema = z.record(z.string(), z.unknown());
     const nodeVersion = prop(configSchema.parse(config), 'useNodeVersion');
 

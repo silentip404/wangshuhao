@@ -4,9 +4,6 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.26.2",
-  "volta": {
-    "node": "24.11.0"
-  },
   "imports": {
     "#lib/utils/index.ts": "./lib/utils/index.ts",
     "#node/ts-expect-error-reasons.ts": "./ts-expect-error-reasons.ts",
@@ -17,6 +14,9 @@
     "node": "24.11.0",
     "pnpm": ">=10"
   },
+  "volta": {
+    "node": "24.11.0"
+  },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
@@ -26,13 +26,13 @@
     "lint": "run-s lint:*",
     "lint:lockfile": "pnpm exec node node/scripts/verify-lockfile-sync.ts",
     "lint:node-version": "pnpm exec node node/scripts/verify-node-version-sync.ts",
-    "lint:knip": "knip --no-progress",
+    "lint:knip": "cross-env DISABLE_PRINT_MESSAGE=true knip --no-progress",
     "lint:tsc": "tsc --build",
     "lint:eslint": "eslint --max-warnings=0",
     "lint:prettier": "prettier --check --log-level=warn .",
     "lint:success-message": "pnpm exec node node/scripts/cli-print-message.ts --type=success --title=\"All linting checks completed successfully.\"",
     "fix": "run-s --continue-on-error fix:*",
-    "fix:knip": "knip --no-progress --fix",
+    "fix:knip": "cross-env DISABLE_PRINT_MESSAGE=true knip --no-progress --fix",
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write --log-level=warn .",
     "fix:complete-message": "pnpm exec node node/scripts/cli-print-message.ts --type=info --title=\"All fixing tasks completed, please review the output above.\"",

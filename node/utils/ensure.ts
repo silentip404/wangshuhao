@@ -1,4 +1,3 @@
-import { readPackage } from 'pkg-types';
 import {
   flatMap,
   isIncludedIn,
@@ -10,32 +9,7 @@ import {
   values,
 } from 'remeda';
 
-import { ROOT } from './path.ts';
-
-const packageJSON = await readPackage(ROOT);
-const existingScripts = keys(packageJSON.scripts ?? {});
-const existingDependencies = pipe(
-  packageJSON,
-  pickBy((value, key) => toLowerCase(key).endsWith('dependencies')),
-  values(),
-  flatMap(keys()),
-);
-
-const ensureScriptInPackage = (script: string): string => {
-  if (isIncludedIn(script, existingScripts)) {
-    return script;
-  }
-
-  throw new Error(
-    `配置 ${JSON.stringify(script)} 未添加到 package.json 中，请检查相关配置`,
-  );
-};
-
-const ensureScriptsInPackage = (scripts: string[]): string[] => {
-  const ensuredScripts = map(scripts, ensureScriptInPackage);
-
-  return ensuredScripts;
-};
+import { readPackageJsonUsingCache } from './file.ts';
 
 const parsePackageName = (
   modulePath: string,
@@ -60,7 +34,16 @@ const parsePackageName = (
   return { packageName: scope + name, subpath };
 };
 
-const ensureModulePathInPackage = (modulePath: string): string => {
+const ensureModulePathInPackage = async (
+  modulePath: string,
+): Promise<string> => {
+  const existingDependencies = pipe(
+    await readPackageJsonUsingCache(),
+    pickBy((value, key) => toLowerCase(key).endsWith('dependencies')),
+    values(),
+    flatMap(keys()),
+  );
+
   const { packageName } = parsePackageName(modulePath);
 
   if (isIncludedIn(packageName, existingDependencies)) {
@@ -72,14 +55,14 @@ const ensureModulePathInPackage = (modulePath: string): string => {
   );
 };
 
-const ensureModulePathsInPackage = (modulePaths: string[]): string[] => {
-  const ensuredModulePaths = map(modulePaths, ensureModulePathInPackage);
+const ensureModulePathsInPackage = async (
+  modulePaths: string[],
+): Promise<string[]> => {
+  const ensuredModulePaths = await Promise.all(
+    map(modulePaths, ensureModulePathInPackage),
+  );
 
   return ensuredModulePaths;
 };
 
-export {
-  ensureModulePathInPackage,
-  ensureModulePathsInPackage,
-  ensureScriptsInPackage,
-};
+export { ensureModulePathInPackage, ensureModulePathsInPackage };

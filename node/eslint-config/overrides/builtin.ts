@@ -112,15 +112,6 @@ const builtinOverrides = defineConfig([
        */
       'new-cap': 'off',
       /**
-       * 禁止在循环中使用 await
-       *
-       * @reason
-       * - 规则的初衷是避免可并行操作被顺序执行影响性能
-       * - 但许多场景下顺序执行是有意为之（如需要串行依赖或提前终止）
-       * - 盲目使用 Promise.all 可能增加代码复杂度且不适合所有场景
-       */
-      'no-await-in-loop': 'off',
-      /**
        * 禁止使用控制台输出方法
        *
        * @reason
@@ -208,11 +199,9 @@ const builtinOverrides = defineConfig([
        * 禁止在变量声明时使用 undefined 进行初始化
        *
        * @reason
-       * - 禁止将变量初始化为 `undefined`，以确保变量在使用之前具有明确的值，从而提升代码的可读性和维护性。
-       * - 减少潜在的逻辑错误，避免在需要具体值的地方使用未定义的状态，保证代码逻辑的一致性。
-       * - 促使开发者采取更为明确的初始化方式，为后续的开发和维护提供便利。
+       * - 在某些场景下（如缓存变量、懒加载等），显式初始化为 `undefined` 能更清晰地表达设计意图
        */
-      'no-undef-init': 'warn',
+      'no-undef-init': 'off',
       /**
        * undefined 标识符使用检查
        *
@@ -241,6 +230,14 @@ const builtinOverrides = defineConfig([
        */
       'no-useless-assignment': 'warn',
       /**
+       * 禁止不必要的计算属性键
+       *
+       * @reason
+       * - 通过禁止不必要的计算属性提高代码的可读性，简化对象和类的定义
+       * - 明确规则可以促进一致的代码风格，降低代码审查和维护成本
+       */
+      'no-useless-computed-key': 'warn',
+      /**
        * 强制使用对象字面量的简写语法
        *
        * @reason
@@ -258,6 +255,15 @@ const builtinOverrides = defineConfig([
        * - 方便添加、删除或修改单个变量声明，简化版本控制 diff
        */
       'one-var': ['warn', 'never'],
+      /**
+       * 禁止可能导致竞态条件的赋值
+       *
+       * @reason
+       * - 避免在异步代码中由于先前值被覆盖而导致的数据丢失和逻辑错误
+       * - 强制开发者在异步赋值前读取最新值，从而确保数据一致性和准确性
+       * - 提升代码的可维护性和可读性，明确逻辑流转
+       */
+      'require-atomic-updates': 'error',
       /**
        * 对象键排序检查
        *

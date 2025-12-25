@@ -31,12 +31,12 @@ const getSanitizedCaseVariants = (raw: string): CaseVariants => {
       [`UPPERCASE`]: toUpperCase(raw),
     },
 
-    ['camelCase']: toCamelCase(sanitized),
-    ['PascalCase']: capitalize(toCamelCase(sanitized)),
-    ['kebab-case']: toKebabCase(sanitized),
-    ['snake_case']: toSnakeCase(sanitized),
-    ['SCREAMING_SNAKE_CASE']: toUpperCase(toSnakeCase(sanitized)),
-    ['Title Case']: toTitleCase(sanitized),
+    [`camelCase`]: toCamelCase(sanitized),
+    [`PascalCase`]: capitalize(toCamelCase(sanitized)),
+    [`kebab-case`]: toKebabCase(sanitized),
+    [`snake_case`]: toSnakeCase(sanitized),
+    [`SCREAMING_SNAKE_CASE`]: toUpperCase(toSnakeCase(sanitized)),
+    [`Title Case`]: toTitleCase(sanitized),
   };
 };
 

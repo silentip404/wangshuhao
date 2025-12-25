@@ -8,7 +8,7 @@ import type { CaseVariants } from '#lib/utils/index.ts';
 
 import {
   createESLintSchema,
-  defineUnionJSONSchema,
+  defineUnionJsonSchema,
   getNodeText,
   initRule,
 } from '../utils/index.ts';
@@ -44,11 +44,11 @@ type RelatedNode =
   | TSESTree.ImportDeclaration;
 type RuleOptions = InferSchema<typeof eslintSchema>[0];
 
-const typeSchema = defineUnionJSONSchema({
+const typeSchema = defineUnionJsonSchema({
   type: 'string',
   enum: ['default', 'namespace', 'all'],
 });
-const regexSourceSchema = defineUnionJSONSchema({ type: 'string' });
+const regexSourceSchema = defineUnionJsonSchema({ type: 'string' });
 const eslintSchema = createESLintSchema({
   type: 'object',
   additionalProperties: false,

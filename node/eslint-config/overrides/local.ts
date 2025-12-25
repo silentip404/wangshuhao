@@ -28,37 +28,37 @@ const localOverrides = defineConfig([
             // 特殊命名
             {
               type: 'all',
-              regexSource: `^${ensureModulePathInPackage('next/image')}$`,
+              regexSource: `^${await ensureModulePathInPackage('next/image')}$`,
               mode: 'equal',
               identifier: 'NextImage',
             },
             {
               type: 'all',
-              regexSource: `^${ensureModulePathInPackage('@eslint-react/eslint-plugin')}$`,
+              regexSource: `^${await ensureModulePathInPackage('@eslint-react/eslint-plugin')}$`,
               mode: 'equal',
               identifier: 'eslintPlugin',
             },
             {
               type: 'all',
-              regexSource: `^${ensureModulePathInPackage('eslint-config-flat-gitignore')}$`,
+              regexSource: `^${await ensureModulePathInPackage('eslint-config-flat-gitignore')}$`,
               mode: 'equal',
               identifier: 'createIgnoreConfig',
             },
             {
               type: 'all',
-              regexSource: `^${ensureModulePathInPackage('eslint-config-prettier/flat')}$`,
+              regexSource: `^${await ensureModulePathInPackage('eslint-config-prettier/flat')}$`,
               mode: 'equal',
               identifier: 'prettierConfig',
             },
             {
               type: 'all',
-              regexSource: `^${ensureModulePathInPackage('jsonc-eslint-parser')}$`,
+              regexSource: `^${await ensureModulePathInPackage('jsonc-eslint-parser')}$`,
               mode: 'equal',
               identifier: 'jsoncParser',
             },
             {
               type: 'all',
-              regexSource: `^${ensureModulePathInPackage('eslint-plugin-command/config')}$`,
+              regexSource: `^${await ensureModulePathInPackage('eslint-plugin-command/config')}$`,
               mode: 'equal',
               identifier: 'createCommandConfig',
             },

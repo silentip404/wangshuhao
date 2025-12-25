@@ -1,17 +1,17 @@
 import type { JSONSchema4 } from '@typescript-eslint/utils/json-schema';
 import type { FromSchema, JSONSchema } from 'json-schema-to-ts';
 
-type UnionJSONSchema = JSONSchema & JSONSchema4;
+type UnionJsonSchema = JSONSchema & JSONSchema4;
 
-const defineUnionJSONSchema = <const T extends UnionJSONSchema>(
-  unionJSONSchema: T,
-): T => unionJSONSchema;
+const defineUnionJsonSchema = <const T extends UnionJsonSchema>(
+  unionJsonSchema: T,
+): T => unionJsonSchema;
 
-const createESLintSchema = <const T extends UnionJSONSchema>(
-  unionJSONSchema: T,
-): [T] => [unionJSONSchema];
+const createESLintSchema = <const T extends UnionJsonSchema>(
+  unionJsonSchema: T,
+): [T] => [unionJsonSchema];
 
-type InferSchema<T extends [UnionJSONSchema]> = [FromSchema<T['0']>];
+type InferSchema<T extends [UnionJsonSchema]> = [FromSchema<T['0']>];
 
 export type { InferSchema };
-export { createESLintSchema, defineUnionJSONSchema };
+export { createESLintSchema, defineUnionJsonSchema };

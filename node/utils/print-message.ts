@@ -1,14 +1,7 @@
 import { consola } from 'consola';
 import type { InputLogObject } from 'consola';
-import { flat, isEmptyish, isIncludedIn } from 'remeda';
+import { flat, isEmptyish } from 'remeda';
 import { z } from 'zod';
-
-import { ensureScriptsInPackage } from './ensure.ts';
-
-const isRunningInKnip = isIncludedIn(
-  process.env.npm_lifecycle_event,
-  ensureScriptsInPackage(['lint:knip', 'fix:knip']),
-);
 
 const printMessageOptionsSchema = z.object({
   type: z.enum(['info', 'success', 'warn', 'error']).optional(),
@@ -23,7 +16,7 @@ const printMessage = ({
   title,
   description = '',
 }: PrintMessageOptions): void => {
-  if (isRunningInKnip) {
+  if (process.env.DISABLE_PRINT_MESSAGE === 'true') {
     return;
   }
 

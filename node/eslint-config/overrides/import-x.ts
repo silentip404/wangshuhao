@@ -128,14 +128,14 @@ const importXOverrides = defineConfig([
             '*/index.ts',
 
             // 允许导入第三方依赖的特定内部模块
-            ...ensureModulePathsInPackage([
+            ...(await ensureModulePathsInPackage([
               'next/image',
               'next/font/*',
               'eslint/config',
               'eslint-config-prettier/flat',
               '@typescript-eslint/utils/*',
               'eslint-plugin-command/*',
-            ]),
+            ])),
           ],
         },
       ],
@@ -162,7 +162,7 @@ const importXOverrides = defineConfig([
        */
       'import-x/no-namespace': [
         'warn',
-        { ignore: ensureModulePathsInPackage(['jsonc-eslint-parser']) },
+        { ignore: await ensureModulePathsInPackage(['jsonc-eslint-parser']) },
       ],
       /**
        * Node.js 内置模块使用检查

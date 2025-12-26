@@ -164,14 +164,6 @@ const eslintConfig = defineConfig([
         files: [...GLOB_CONFIG_FILES, 'app/**/{layout,page}.tsx'],
         rules: { 'import-x/no-default-export': 'off' },
       },
-      // 在 node 环境下启用一些较新特性的正则表达式标志
-      {
-        files: [...GLOB_TSCONFIG_NODE_INCLUDE],
-        rules: {
-          'regexp/require-unicode-regexp': 'warn',
-          'regexp/require-unicode-sets-regexp': 'warn',
-        },
-      },
     ],
   } satisfies Pick<ConfigWithExtends, 'extends' | 'name'>,
 ] satisfies SetRequired<ConfigWithExtends, 'name'>[]);

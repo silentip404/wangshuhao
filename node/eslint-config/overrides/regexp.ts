@@ -14,6 +14,15 @@ const regexpOverrides = defineConfig([
     // @perfectionist-sort-objects
     rules: {
       /**
+       * 禁止超线性移动的量词使用
+       *
+       * @reason
+       * - 防止正则表达式在处理输入字符串时出现超线性最坏情况的运行时，降低安全风险。
+       * - 避免 attackers 通过特定输入字符串使正则表达式变得极为低效，从而导致拒绝服务攻击（ReDoS）。
+       * - 提高代码的可维护性和可读性，促使开发者意识到正则表达式的复杂性与性能影响。
+       */
+      'regexp/no-super-linear-move': 'error',
+      /**
        * 强制使用命名捕获组
        *
        * @reason
@@ -32,19 +41,23 @@ const regexpOverrides = defineConfig([
        */
       'regexp/prefer-regexp-exec': 'warn',
       /**
-       * 强制正则表达式使用 Unicode 标志
+       * 强制使用 Unicode 正则表达式标志
        *
        * @reason
-       * - 此正则表达式标志仅在面向 es2024 或更高版本时可用，需要单独在 node 环境下开启此规则
+       * - 该规则确保正则表达式能够正确处理 Unicode 字符，避免潜在的匹配错误。
+       * - 使用 `u` 标志提升正则表达式对不同语言字符和符号的兼容性，符合现代编码标准。
+       * - 此规则支持自动修复，减少手动维护成本，提升代码一致性。
        */
-      'regexp/require-unicode-regexp': 'off',
+      'regexp/require-unicode-regexp': 'warn',
       /**
-       * 强制使用 `v` 标志
+       * 强制使用 Unicode 集支持的正则表达式标志
        *
        * @reason
-       * - 此正则表达式标志仅在面向 es2024 或更高版本时可用，需要单独在 node 环境下开启此规则
+       * - 该规则进一步确保在正则表达式中使用 `v` 标志，以便处理字符集的特殊情况。
+       * - 确保正则表达式能正确匹配 Unicode 字符集中的不同变体，提升应用程序的国际化能力。
+       * - 此规则有助于开发者避免潜在的错误匹配，提升代码质量。
        */
-      'regexp/require-unicode-sets-regexp': 'off',
+      'regexp/require-unicode-sets-regexp': 'warn',
       /**
        * 强制字符类中的元素顺序
        *

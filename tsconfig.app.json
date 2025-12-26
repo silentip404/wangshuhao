@@ -1,11 +1,11 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": ["./tsconfig.base.json", "@tsconfig/next/tsconfig.json"],
   "compilerOptions": {
     "tsBuildInfoFile": "./scratch/tsbuildinfos/tsconfig.app.tsbuildinfo",
-    "target": "ES2017",
+    "target": "es2024",
     "jsx": "react-jsx",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "plugins": [{ "name": "next" }],
+    "allowJs": false,
+    "noEmit": true,
   },
   "references": [{ "path": "./tsconfig.lib.json" }],
   "include": [

@@ -1,8 +1,9 @@
+import { readFile } from 'fs/promises';
 import path from 'path';
 
 import type { PackageJson } from 'pkg-types';
 import { readPackage } from 'pkg-types';
-import readYamlFile from 'read-yaml-file';
+import { parse as parseYaml } from 'yaml';
 
 import { ROOT } from './path.ts';
 
@@ -27,7 +28,12 @@ const readYamlFileUsingCache = async (filePath: string): Promise<unknown> => {
   let cached = yamlFileCacheMap.get(normalizedPath);
 
   if (cached === undefined) {
-    cached = readYamlFile(normalizedPath);
+    cached = (async () => {
+      const content = await readFile(normalizedPath, 'utf-8');
+
+      return parseYaml(content) as unknown;
+    })();
+
     yamlFileCacheMap.set(normalizedPath, cached);
 
     cached.catch(() => {

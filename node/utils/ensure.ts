@@ -27,9 +27,9 @@ const parsePackageName = (
     );
   }
 
-  const scope = groups.scope ?? '';
-  const name = groups.name ?? '';
-  const subpath = groups.subpath ?? '';
+  const scope = groups['scope'] ?? '';
+  const name = groups['name'] ?? '';
+  const subpath = groups['subpath'] ?? '';
 
   return { packageName: scope + name, subpath };
 };

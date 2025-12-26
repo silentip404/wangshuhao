@@ -1,10 +1,14 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": [
+    "./tsconfig.base.json",
+    "@tsconfig/node24/tsconfig.json",
+    "@tsconfig/node-ts/tsconfig.json",
+  ],
   "compilerOptions": {
     "tsBuildInfoFile": "./scratch/tsbuildinfos/tsconfig.node.tsbuildinfo",
-    "target": "ESNext",
-    "lib": ["ESNext"],
+    "target": "es2024",
     "checkJs": true,
+    "noEmit": true,
   },
   "references": [{ "path": "./tsconfig.lib.json" }],
   "include": ["*.js", "*.ts", "node/**/*.ts"],

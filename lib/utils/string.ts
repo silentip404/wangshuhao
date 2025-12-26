@@ -9,7 +9,9 @@ import {
   toUpperCase,
 } from 'remeda';
 
-const splitLines = (text: string): string[] => split(text, /\r\n|\r|\n/);
+const NEWLINE = '\n' as const;
+
+const splitLines = (text: string): string[] => split(text, /\r\n|\r|\n/v);
 
 interface CaseVariants {
   [`camelCase`]: string;
@@ -22,7 +24,7 @@ interface CaseVariants {
 }
 
 const getSanitizedCaseVariants = (raw: string): CaseVariants => {
-  const sanitized = raw.replace(/[^0-9a-z]/gi, ' ');
+  const sanitized = raw.replaceAll(/[^0-9a-z]/giv, ' ');
 
   return {
     [`raw`]: {
@@ -41,4 +43,4 @@ const getSanitizedCaseVariants = (raw: string): CaseVariants => {
 };
 
 export type { CaseVariants };
-export { getSanitizedCaseVariants, splitLines };
+export { getSanitizedCaseVariants, NEWLINE, splitLines };

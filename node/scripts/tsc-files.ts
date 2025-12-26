@@ -1,21 +1,25 @@
 import fs from 'fs';
 import path from 'path';
+import { styleText } from 'util';
 
+import Handlebars from 'handlebars';
 import { minimatch } from 'minimatch';
 import { writeTSConfig } from 'pkg-types';
 import {
   filter,
   forEach,
+  isDefined,
   isEmptyish,
+  join,
   map,
   omit,
   partition,
   pipe,
 } from 'remeda';
-import templite from 'templite';
 import { exec } from 'tinyexec';
 import { parse } from 'ts-command-line-args';
 
+import { NEWLINE } from '#lib/utils/index.ts';
 import {
   helpArgConfig,
   helpArgOptions,
@@ -32,18 +36,16 @@ type CliArguments = WithHelpArg<{
   'ignore-unknown'?: boolean;
 }>;
 
-const CONFIG_FILENAME_TEMPLATE = 'tsconfig.tsc-files-{{uid}}.{{name}}.json';
+const getConfigFilename = Handlebars.compile<{ name: string; uid: string }>(
+  'tsconfig.tsc-files-{{uid}}.{{name}}.json',
+);
 
 const cleanConfigFiles = (): void => {
   const configFiles = pipe(
     fs.readdirSync(ROOT, { withFileTypes: true }),
     filter((dirent) => dirent.isFile()),
     map((dirent) => dirent.name),
-    filter(
-      minimatch.filter(
-        templite(CONFIG_FILENAME_TEMPLATE, { name: '*', uid: '*' }),
-      ),
-    ),
+    filter(minimatch.filter(getConfigFilename({ name: '*', uid: '*' }))),
   );
 
   forEach(configFiles, (configFile) => {
@@ -113,7 +115,10 @@ if (isEmptyish(allowedFiles)) {
   process.exit(0);
 }
 
-await Promise.all(
+const errorDescriptions: (
+  | undefined
+  | { configName: string; description: string }
+)[] = await Promise.all(
   map(projects, async (project) => {
     const tscFiles = filter(allowedFiles, (allowedFile) =>
       project.include.some((pattern) => minimatch(allowedFile, pattern)),
@@ -124,10 +129,7 @@ await Promise.all(
     }
 
     const configFile = resolveFromRoot(
-      templite(CONFIG_FILENAME_TEMPLATE, {
-        name: project.name,
-        uid: process.pid,
-      }),
+      getConfigFilename({ name: project.name, uid: process.pid.toString() }),
     );
 
     // 写入临时配置文件
@@ -147,16 +149,32 @@ await Promise.all(
       { throwOnError: false },
     );
 
-    fs.rmSync(configFile, { force: true });
-
-    if (exitCode !== 0) {
-      printMessage({
-        type: 'error',
-        title: '运行 tsc 检查失败',
-        description: [stdout, stderr],
-      });
-
-      process.exit(exitCode);
+    if (exitCode === 0) {
+      return;
     }
+
+    return {
+      configName: project.configName,
+      description: join([stdout, stderr], NEWLINE),
+    };
   }),
-);
+).finally(() => {
+  cleanConfigFiles();
+});
+
+const definedErrorDescriptions = filter(errorDescriptions, isDefined);
+
+if (!isEmptyish(definedErrorDescriptions)) {
+  printMessage({
+    type: 'error',
+    title: '运行 tsc 检查失败',
+    description: map(definedErrorDescriptions, ({ configName, description }) =>
+      join(
+        [styleText('red', `Using ${configName}:`), '', description],
+        NEWLINE,
+      ),
+    ),
+  });
+
+  process.exit(1);
+}

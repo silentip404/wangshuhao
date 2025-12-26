@@ -34,6 +34,12 @@ const localOverrides = defineConfig([
             },
             {
               type: 'all',
+              regexSource: `^${await ensureModulePathInPackage('handlebars')}$`,
+              mode: 'equal',
+              identifier: 'Handlebars',
+            },
+            {
+              type: 'all',
               regexSource: `^${await ensureModulePathInPackage('@eslint-react/eslint-plugin')}$`,
               mode: 'equal',
               identifier: 'eslintPlugin',
@@ -49,12 +55,6 @@ const localOverrides = defineConfig([
               regexSource: `^${await ensureModulePathInPackage('eslint-config-prettier/flat')}$`,
               mode: 'equal',
               identifier: 'prettierConfig',
-            },
-            {
-              type: 'all',
-              regexSource: `^${await ensureModulePathInPackage('jsonc-eslint-parser')}$`,
-              mode: 'equal',
-              identifier: 'jsoncParser',
             },
             {
               type: 'all',

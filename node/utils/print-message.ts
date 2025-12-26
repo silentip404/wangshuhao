@@ -16,7 +16,7 @@ const printMessage = ({
   title,
   description = '',
 }: PrintMessageOptions): void => {
-  if (process.env.DISABLE_PRINT_MESSAGE === 'true') {
+  if (process.env['DISABLE_PRINT_MESSAGE'] === 'true') {
     return;
   }
 

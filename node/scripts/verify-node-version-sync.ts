@@ -25,6 +25,8 @@ import {
 } from '#node/utils/index.ts';
 import type { VerifyFilesArgs, WithHelpArg } from '#node/utils/index.ts';
 
+type CliArguments = WithHelpArg<VerifyFilesArgs>;
+
 // 获取并验证 Node 版本
 const getStandardNodeVersion = async (): Promise<string> => {
   const packageJson = await readPackageJsonUsingCache();
@@ -58,8 +60,6 @@ const getStandardNodeVersion = async (): Promise<string> => {
 
   return nodeVersion;
 };
-
-type CliArguments = WithHelpArg<VerifyFilesArgs>;
 
 const cliArguments = parse<CliArguments>(
   { ...helpArgConfig, ...verifyFilesArgsConfig },
@@ -106,7 +106,7 @@ const shouldVerifyFile = (filename: string): boolean => {
 
 const standardNodeVersion = await getStandardNodeVersion();
 
-const errors = await Promise.all([
+const errorDescriptions: (undefined | string)[] = await Promise.all([
   // 校验 package.json 中的 volta.node 字段
   (async () => {
     if (!shouldVerifyFile('package.json')) {
@@ -176,13 +176,16 @@ const errors = await Promise.all([
   })(),
 ]);
 
-const definedErrors = filter(errors, isDefined);
+const definedErrorDescriptions = filter(errorDescriptions, isDefined);
 
-if (!isEmptyish(definedErrors)) {
+if (!isEmptyish(definedErrorDescriptions)) {
   printMessage({
     type: 'error',
     title: '错误的 Node.js 版本配置',
-    description: map(definedErrors, (definedError) => `- ${definedError}`),
+    description: map(
+      definedErrorDescriptions,
+      (definedErrorDescription) => `- ${definedErrorDescription}`,
+    ),
   });
 
   process.exit(1);

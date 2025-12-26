@@ -1,35 +1,18 @@
-import { AST_TOKEN_TYPES } from '@typescript-eslint/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 import { findLastIndex } from 'remeda';
 
 import { splitLines } from '#lib/utils/index.ts';
 
 const createCommandMatcher = (command: string) => {
-  const blockRegex = new RegExp(
-    String.raw`(?:\b|\s)${command}(?:\b|\s|$)`,
+  const commandRegex = new RegExp(
+    String.raw`(?:^|\b|\s)${command}(?:\b|\s|$)`,
     'v',
   );
-  const lineRegex = new RegExp(String.raw`^${command}$`, 'v');
 
-  return (
-    comment: TSESTree.Comment,
-  ): null | undefined | boolean | RegExpMatchArray => {
+  return (comment: TSESTree.Comment): null | RegExpMatchArray => {
     const trimmedValue = comment.value.trim();
 
-    const regex = (() => {
-      switch (comment.type) {
-        case AST_TOKEN_TYPES.Block:
-          return blockRegex;
-        case AST_TOKEN_TYPES.Line:
-          return lineRegex;
-        default:
-          throw new Error(
-            `Unexpected comment.type: ${JSON.stringify({ comment })}`,
-          );
-      }
-    })();
-
-    return regex.exec(trimmedValue);
+    return commandRegex.exec(trimmedValue);
   };
 };
 

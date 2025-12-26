@@ -1,9 +1,10 @@
 {
   "extends": ["./tsconfig.base.json", "@tsconfig/next/tsconfig.json"],
   "compilerOptions": {
-    "tsBuildInfoFile": "./scratch/tsbuildinfos/tsconfig.app.tsbuildinfo",
-    "target": "es2024",
+    "tsBuildInfoFile": "./scratch/tsc/tsconfig.app.tsbuildinfo",
+    "target": "ES2024",
     "jsx": "react-jsx",
+    "types": ["node"],
     "allowJs": false,
     "noEmit": true,
   },

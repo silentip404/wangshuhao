@@ -5,8 +5,9 @@
     "@tsconfig/node-ts/tsconfig.json",
   ],
   "compilerOptions": {
-    "tsBuildInfoFile": "./scratch/tsbuildinfos/tsconfig.node.tsbuildinfo",
-    "target": "es2024",
+    "tsBuildInfoFile": "./scratch/tsc/tsconfig.node.tsbuildinfo",
+    "target": "ES2024",
+    "types": ["node"],
     "checkJs": true,
     "noEmit": true,
   },

@@ -49,4 +49,10 @@ const memoizedGetCaseVariants = memoize(getCaseVariants, {
 });
 
 export type { CaseVariants };
-export { memoizedGetCaseVariants, NEWLINE, NULL_CHAR, splitLines };
+export {
+  getCaseVariants,
+  memoizedGetCaseVariants,
+  NEWLINE,
+  NULL_CHAR,
+  splitLines,
+};

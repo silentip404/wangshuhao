@@ -19,7 +19,7 @@ import {
   helpArgConfig,
   helpArgOptions,
   memoizedReadPackageJson,
-  memoizedReadYamlFile,
+  readYamlFile,
   resolveFromRoot,
   verifyFilesArgsConfig,
 } from '#node/utils/index.ts';
@@ -130,9 +130,7 @@ const errorDescriptions: (undefined | string)[] = await Promise.all([
       return;
     }
 
-    const config = await memoizedReadYamlFile(
-      resolveFromRoot('pnpm-workspace.yaml'),
-    );
+    const config = await readYamlFile(resolveFromRoot('pnpm-workspace.yaml'));
     const configSchema = z.record(z.string(), z.unknown());
     const nodeVersion = prop(configSchema.parse(config), 'useNodeVersion');
 

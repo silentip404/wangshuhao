@@ -9,14 +9,11 @@ import { ROOT } from './path.ts';
 
 const memoizedReadPackageJson = memoize(() => readPackage(ROOT));
 
-const memoizedReadYamlFile = memoize(
-  async (filePath: string) => {
-    const normalizedPath = path.resolve(filePath);
-    const content = await readFile(normalizedPath, 'utf-8');
+const readYamlFile = async (filePath: string): Promise<unknown> => {
+  const normalizedPath = path.resolve(filePath);
+  const content = await readFile(normalizedPath, 'utf-8');
 
-    return parseYaml(content) as unknown;
-  },
-  { cacheKey: ([filePath]) => path.resolve(filePath) },
-);
+  return parseYaml(content) as unknown;
+};
 
-export { memoizedReadPackageJson, memoizedReadYamlFile };
+export { memoizedReadPackageJson, readYamlFile };

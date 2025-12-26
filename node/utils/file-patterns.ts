@@ -1,7 +1,7 @@
 import { makeRe } from 'minimatch';
 import { filter, isTruthy, join, map, pipe, split, zipWith } from 'remeda';
 
-import { getSanitizedCaseVariants } from '#lib/utils/index.ts';
+import { memoizedGetCaseVariants } from '#lib/utils/index.ts';
 
 const GLOB_ALL = '**' as const;
 const GLOB_DOT_FILES = '**/.*' as const;
@@ -55,7 +55,7 @@ const GLOB_CONFIG_FILES = [
 ] as const;
 
 const toCaseInsensitiveGlob = (glob: string): string => {
-  const { raw } = getSanitizedCaseVariants(glob);
+  const { raw } = memoizedGetCaseVariants(glob);
 
   const letters = zipWith(
     split(raw.lowercase, ''),

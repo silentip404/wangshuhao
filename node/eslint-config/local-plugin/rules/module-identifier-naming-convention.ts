@@ -1,9 +1,13 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 import type { RuleContext } from '@typescript-eslint/utils/ts-eslint';
-import { find, isNullish, isTruthy } from 'remeda';
+import { find, isTruthy } from 'remeda';
 
-import { getSanitizedCaseVariants } from '#lib/utils/index.ts';
+import {
+  memoizedGetCaseVariants,
+  memoizedRegexReplace,
+  memoizedRegexTest,
+} from '#lib/utils/index.ts';
 import type { CaseVariants } from '#lib/utils/index.ts';
 
 import {
@@ -25,19 +29,6 @@ type MessageIds =
   | 'invalidModuleIdentifier'
   | 'invalidRegexSource'
   | 'matcherNotFound';
-interface RegexSourceMatcher {
-  replace: (options: {
-    modulePath: string;
-    node: RelatedNode;
-    regexSource: string;
-    replacement: string;
-  }) => null | string;
-  test: (options: {
-    modulePath: string;
-    node: RelatedNode;
-    regexSource: string;
-  }) => boolean;
-}
 type RelatedNode =
   | TSESTree.ExportAllDeclaration
   | TSESTree.ExportNamedDeclaration
@@ -106,63 +97,12 @@ const eslintSchema = createESLintSchema({
   },
 });
 
-const createRegexSourceMatcher = (context: Context): RegexSourceMatcher => {
-  const cache = new Map<string, null | RegExp>();
-  const reportedErrors = new Set<string>();
-
-  const getOrCompileRegex = (
-    node: RelatedNode,
-    regexSource: string,
-  ): null | RegExp => {
-    if (!cache.has(regexSource)) {
-      try {
-        cache.set(regexSource, new RegExp(regexSource));
-      } catch {
-        cache.set(regexSource, null);
-      }
-    }
-
-    const regex = cache.get(regexSource) ?? null;
-
-    if (regex === null && !reportedErrors.has(regexSource)) {
-      context.report({
-        node,
-        messageId: 'invalidRegexSource',
-        data: { regexSource },
-      });
-
-      reportedErrors.add(regexSource);
-    }
-
-    return regex;
-  };
-
-  return {
-    test: ({ modulePath, node, regexSource }): boolean => {
-      const regex = getOrCompileRegex(node, regexSource);
-
-      return regex?.test(modulePath) ?? false;
-    },
-
-    replace: ({
-      modulePath,
-      node,
-      regexSource,
-      replacement,
-    }): null | string => {
-      const regex = getOrCompileRegex(node, regexSource);
-
-      return isNullish(regex) ? null : modulePath.replace(regex, replacement);
-    },
-  };
-};
-
 const lintModuleIdentifier = (
   lintContext: {
     context: Context;
     modulePathVariants: CaseVariants;
     node: RelatedNode;
-    regexSourceMatcher: RegexSourceMatcher;
+    reportedInvalidRegexSources: Set<string>;
     ruleOptions: RuleOptions;
   },
   options: LintModuleIdentifierOptions,
@@ -182,11 +122,23 @@ const lintModuleIdentifier = (
         return false;
       }
 
-      return lintContext.regexSourceMatcher.test({
-        node: lintContext.node,
-        regexSource: matcher.regexSource,
-        modulePath,
-      });
+      const isMatched = memoizedRegexTest(matcher.regexSource, modulePath);
+
+      if (isMatched === null) {
+        if (!lintContext.reportedInvalidRegexSources.has(matcher.regexSource)) {
+          lintContext.context.report({
+            node: lintContext.node,
+            messageId: 'invalidRegexSource',
+            data: { regexSource: matcher.regexSource },
+          });
+
+          lintContext.reportedInvalidRegexSources.add(matcher.regexSource);
+        }
+
+        return false;
+      }
+
+      return isMatched;
     },
   );
 
@@ -246,20 +198,19 @@ const lintModuleIdentifier = (
     case 'replace': {
       const { regexSource, replacement, transformMode } = matchedMatcher;
 
-      const replacedModulePath = lintContext.regexSourceMatcher.replace({
-        modulePath,
-        node: lintContext.node,
+      const replacedModulePath = memoizedRegexReplace(
         regexSource,
+        modulePath,
         replacement,
-      });
+      );
 
       if (replacedModulePath === null) {
-        // 正则替换失败，错误提示已由 regexSourceMatcher.replace 方法报告
+        // 无效正则已在 matchedMatcher 查找时报告
         return;
       }
 
       const replacedModulePathVariants =
-        getSanitizedCaseVariants(replacedModulePath);
+        memoizedGetCaseVariants(replacedModulePath);
 
       const expectedModuleIdentifier = (() => {
         switch (transformMode) {
@@ -312,12 +263,16 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
     },
   ],
   create: (context, [ruleOptions]) => {
-    const regexSourceMatcher = createRegexSourceMatcher(context);
-    const baseLintContext = { context, ruleOptions, regexSourceMatcher };
+    const reportedInvalidRegexSources = new Set<string>();
+    const baseLintContext = {
+      context,
+      ruleOptions,
+      reportedInvalidRegexSources,
+    };
 
     return {
       [`ImportDeclaration`]: (node) => {
-        const modulePathVariants = getSanitizedCaseVariants(node.source.value);
+        const modulePathVariants = memoizedGetCaseVariants(node.source.value);
 
         const defaultModuleIdentifier = find(
           node.specifiers,
@@ -362,7 +317,7 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
         }
       },
       [`ExportAllDeclaration`]: (node) => {
-        const modulePathVariants = getSanitizedCaseVariants(node.source.value);
+        const modulePathVariants = memoizedGetCaseVariants(node.source.value);
 
         const namespaceModuleIdentifier = node.exported?.name;
 
@@ -380,7 +335,7 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
           return;
         }
 
-        const modulePathVariants = getSanitizedCaseVariants(node.source.value);
+        const modulePathVariants = memoizedGetCaseVariants(node.source.value);
 
         const namedDefaultModuleIdentifier = (() => {
           const namedDefaultSpecifier = find(

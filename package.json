@@ -41,6 +41,7 @@
     "eslint:audit:inspector": "eslint-config-inspector --config=eslint.config.audit.ts"
   },
   "dependencies": {
+    "memoize": "^10.2.0",
     "next": "^16.1.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",

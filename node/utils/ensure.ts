@@ -9,7 +9,7 @@ import {
   values,
 } from 'remeda';
 
-import { readPackageJsonUsingCache } from './file.ts';
+import { memoizedReadPackageJson } from './read-file.ts';
 
 const parsePackageName = (
   modulePath: string,
@@ -38,7 +38,7 @@ const ensureModulePathInPackage = async (
   modulePath: string,
 ): Promise<string> => {
   const existingDependencies = pipe(
-    await readPackageJsonUsingCache(),
+    await memoizedReadPackageJson(),
     pickBy((value, key) => toLowerCase(key).endsWith('dependencies')),
     values(),
     flatMap(keys()),

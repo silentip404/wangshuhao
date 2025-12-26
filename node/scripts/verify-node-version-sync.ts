@@ -17,9 +17,9 @@ import {
   analyzeVerifyFiles,
   helpArgConfig,
   helpArgOptions,
+  memoizedReadPackageJson,
+  memoizedReadYamlFile,
   printMessage,
-  readPackageJsonUsingCache,
-  readYamlFileUsingCache,
   resolveFromRoot,
   verifyFilesArgsConfig,
 } from '#node/utils/index.ts';
@@ -29,7 +29,7 @@ type CliArguments = WithHelpArg<VerifyFilesArgs>;
 
 // 获取并验证 Node 版本
 const getStandardNodeVersion = async (): Promise<string> => {
-  const packageJson = await readPackageJsonUsingCache();
+  const packageJson = await memoizedReadPackageJson();
   const nodeVersion = prop(packageJson, 'engines', 'node') as unknown;
   const exactNodeVersionRegex = /^\d+\.\d+\.\d+$/v;
 
@@ -113,7 +113,7 @@ const errorDescriptions: (undefined | string)[] = await Promise.all([
       return;
     }
 
-    const packageJson = await readPackageJsonUsingCache();
+    const packageJson = await memoizedReadPackageJson();
 
     const nodeVersion = prop(packageJson, 'volta', 'node') as unknown;
 
@@ -130,7 +130,7 @@ const errorDescriptions: (undefined | string)[] = await Promise.all([
       return;
     }
 
-    const config = await readYamlFileUsingCache(
+    const config = await memoizedReadYamlFile(
       resolveFromRoot('pnpm-workspace.yaml'),
     );
     const configSchema = z.record(z.string(), z.unknown());

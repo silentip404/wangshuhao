@@ -1,3 +1,4 @@
+import memoize from 'memoize';
 import {
   capitalize,
   split,
@@ -9,6 +10,7 @@ import {
   toUpperCase,
 } from 'remeda';
 
+const NULL_CHAR = '\0' as const;
 const NEWLINE = '\n' as const;
 
 const splitLines = (text: string): string[] => split(text, /\r\n|\r|\n/v);
@@ -23,7 +25,7 @@ interface CaseVariants {
   [`Title Case`]: string;
 }
 
-const getSanitizedCaseVariants = (raw: string): CaseVariants => {
+const getCaseVariants = (raw: string): CaseVariants => {
   const sanitized = raw.replaceAll(/[^0-9a-z]/giv, ' ');
 
   return {
@@ -42,5 +44,9 @@ const getSanitizedCaseVariants = (raw: string): CaseVariants => {
   };
 };
 
+const memoizedGetCaseVariants = memoize(getCaseVariants, {
+  cacheKey: ([raw]) => raw,
+});
+
 export type { CaseVariants };
-export { getSanitizedCaseVariants, NEWLINE, splitLines };
+export { memoizedGetCaseVariants, NEWLINE, NULL_CHAR, splitLines };

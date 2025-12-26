@@ -1,8 +1,9 @@
 import { isEmptyish, isIncludedIn, map, partition, pipe } from 'remeda';
 import type { ArgumentConfig, ParseOptions } from 'ts-command-line-args';
 
+import { printMessage } from '#lib/utils/index.ts';
+
 import { toRelativePosixPath } from './path.ts';
-import { printMessage } from './print-message.ts';
 
 interface HelpArg {
   help?: boolean;

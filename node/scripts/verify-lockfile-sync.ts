@@ -4,11 +4,11 @@ import { omit } from 'remeda';
 import { exec } from 'tinyexec';
 import { parse } from 'ts-command-line-args';
 
+import { printMessage } from '#lib/utils/index.ts';
 import {
   analyzeVerifyFiles,
   helpArgConfig,
   helpArgOptions,
-  printMessage,
   verifyFilesArgsConfig,
 } from '#node/utils/index.ts';
 import type { VerifyFilesArgs, WithHelpArg } from '#node/utils/index.ts';

@@ -16,10 +16,6 @@ const printMessage = ({
   title,
   description = '',
 }: PrintMessageOptions): void => {
-  if (process.env['DISABLE_PRINT_MESSAGE'] === 'true') {
-    return;
-  }
-
   const typedOptions: InputLogObject = {
     message: title,
     additional: description,
@@ -27,7 +23,7 @@ const printMessage = ({
 
   // 在描述前添加零宽度空格以优化显示效果
   if (!isEmptyish(typedOptions.additional)) {
-    typedOptions.additional = flat(['\u200B', ...[typedOptions.additional]]);
+    typedOptions.additional = flat(['', ...[typedOptions.additional]]);
   }
 
   consola[type](typedOptions);

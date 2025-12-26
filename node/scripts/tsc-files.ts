@@ -19,11 +19,10 @@ import {
 import { exec } from 'tinyexec';
 import { parse } from 'ts-command-line-args';
 
-import { NEWLINE } from '#lib/utils/index.ts';
+import { NEWLINE, printMessage } from '#lib/utils/index.ts';
 import {
   helpArgConfig,
   helpArgOptions,
-  printMessage,
   projects,
   resolveFromRoot,
   ROOT,

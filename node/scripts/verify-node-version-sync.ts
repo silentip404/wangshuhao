@@ -13,13 +13,13 @@ import {
 import { parse } from 'ts-command-line-args';
 import { z } from 'zod';
 
+import { printMessage } from '#lib/utils/index.ts';
 import {
   analyzeVerifyFiles,
   helpArgConfig,
   helpArgOptions,
   memoizedReadPackageJson,
   memoizedReadYamlFile,
-  printMessage,
   resolveFromRoot,
   verifyFilesArgsConfig,
 } from '#node/utils/index.ts';

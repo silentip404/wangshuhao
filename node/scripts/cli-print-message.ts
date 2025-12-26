@@ -3,13 +3,10 @@ import path from 'path';
 import { join, omit } from 'remeda';
 import { parse } from 'ts-command-line-args';
 
-import {
-  helpArgConfig,
-  helpArgOptions,
-  printMessage,
-  printMessageOptionsSchema,
-} from '#node/utils/index.ts';
-import type { PrintMessageOptions, WithHelpArg } from '#node/utils/index.ts';
+import { printMessage, printMessageOptionsSchema } from '#lib/utils/index.ts';
+import type { PrintMessageOptions } from '#lib/utils/index.ts';
+import { helpArgConfig, helpArgOptions } from '#node/utils/index.ts';
+import type { WithHelpArg } from '#node/utils/index.ts';
 
 const typeSchema = printMessageOptionsSchema.shape.type.unwrap();
 

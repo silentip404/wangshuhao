@@ -15,9 +15,7 @@ const parsePackageName = (
   const { groups } = match ?? {};
 
   if (groups === undefined) {
-    throw new Error(
-      `配置 ${JSON.stringify(modulePath)} 不是有效的 npm 包路径，请检查相关配置`,
-    );
+    throw new Error(`配置 ${modulePath} 不是有效的 npm 包路径，请检查相关配置`);
   }
 
   const scope = groups['scope'] ?? '';

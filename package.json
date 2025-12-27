@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "consola": "^3.4.2",
-    "es-module-lexer": "^2.0.0",
     "memoize": "^10.2.0",
     "next": "^16.1.1",
     "react": "^19.2.3",
@@ -69,6 +68,7 @@
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/utils": "^8.50.1",
     "cross-env": "^10.1.0",
+    "es-module-lexer": "^2.0.0",
     "eslint": "^9.39.2",
     "eslint-config-flat-gitignore": "^2.1.0",
     "eslint-config-prettier": "^10.1.8",

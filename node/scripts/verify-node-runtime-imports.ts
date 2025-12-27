@@ -36,9 +36,16 @@ import {
   parsePackageName,
   resolveFromRoot,
   ROOT,
+  toRelativePosixPath,
   verifyFilesArgsConfig,
 } from '#node/utils/index.ts';
 import type { VerifyFilesArgs, WithHelpArg } from '#node/utils/index.ts';
+
+const WHITELIST = new Set<string>(await ensureModulePathsInPackage([]));
+const ALL_RELATED_FILES_PATTERNS = concat(
+  GLOB_TSCONFIG_LIB_INCLUDE,
+  GLOB_TSCONFIG_NODE_INCLUDE,
+);
 
 type CliArguments = WithHelpArg<VerifyFilesArgs>;
 interface FileWithImports {
@@ -80,14 +87,6 @@ const { files, 'ignore-unknown': shouldIgnoreUnknown } = options;
 
 await init;
 
-const WHITELIST = new Set<string>(
-  await ensureModulePathsInPackage(['@next/eslint-plugin-next']),
-);
-const ALL_RELATED_FILES_PATTERNS = concat(
-  GLOB_TSCONFIG_LIB_INCLUDE,
-  GLOB_TSCONFIG_NODE_INCLUDE,
-);
-
 const MAX_CONCURRENCY = 50;
 const MIN_CONCURRENCY = 20;
 const CONCURRENCY_FACTOR = 3;
@@ -96,7 +95,7 @@ const CONCURRENCY = Math.min(
   Math.max(MIN_CONCURRENCY, availableParallelism() * CONCURRENCY_FACTOR),
 );
 
-const IMPORT_TYPE_REGEX = /import\s+type\b/v;
+const TYPE_ONLY_REGEX = /(?:import|export)\s+type\b/v;
 const NAMESPACE_IMPORT_REGEX = /\*\s*as\s+/v;
 const DEFAULT_IMPORT_REGEX = /import\s+\w+\s+from/v;
 const NAMED_IMPORTS_REGEX = /\{(?<specifiers>[^\}]+)\}/v;
@@ -138,7 +137,7 @@ const extractModuleImports = (sourceCode: string): ModuleImport[] => {
       const statement = sourceCode.slice(statementStart, statementEnd);
 
       if (
-        IMPORT_TYPE_REGEX.test(statement) ||
+        TYPE_ONLY_REGEX.test(statement) ||
         NAMESPACE_IMPORT_REGEX.test(statement)
       ) {
         return;
@@ -266,7 +265,9 @@ forEach(filesWithImports, ({ filePath, moduleImports }) => {
       return;
     }
 
-    packageInfo.sourceFiles.add(filePath);
+    packageInfo.sourceFiles.add(
+      toRelativePosixPath({ filename: filePath, shouldAddDotSlash: true }),
+    );
 
     forEach(importedNames, (name) => packageInfo.exportedNames.add(name));
   });
@@ -303,27 +304,6 @@ const whitelistedSuccesses = filter(
   (verification) => verification.success && isInWhitelist(verification),
 );
 
-if (!isEmptyish(whitelistedSuccesses)) {
-  printMessage({
-    type: 'warn',
-    title: '模块导入验证 - 白名单提示',
-    description: [
-      ...flatMap(whitelistedSuccesses, (verification) => [
-        `  - ${styleText('cyan', verification.modulePath)}`,
-        '',
-        `    期望导出: ${styleText('gray', join(verification.exportedNames, ', '))}`,
-        `    相关文件: ${styleText('gray', join(Array.from(verification.sourceFiles), ', '))}`,
-        '',
-      ]),
-      '',
-      styleText(
-        'yellow',
-        `共 ${whitelistedSuccesses.length} 个模块在白名单中验证通过，如已修复建议移除`,
-      ),
-    ],
-  });
-}
-
 if (!isEmptyish(failedVerifications)) {
   printMessage({
     type: 'error',
@@ -341,6 +321,28 @@ if (!isEmptyish(failedVerifications)) {
       styleText(
         'red',
         `发现 ${failedVerifications.length} 个模块导入错误，请检查以上模块的导入是否正确`,
+      ),
+    ],
+  });
+
+  process.exit(1);
+}
+
+if (!isEmptyish(whitelistedSuccesses)) {
+  printMessage({
+    type: 'warn',
+    title: '模块导入验证 - 白名单提示',
+    description: [
+      ...flatMap(whitelistedSuccesses, (verification) => [
+        `  - ${styleText('cyan', verification.modulePath)}`,
+        '',
+        `    相关文件: ${styleText('gray', join(Array.from(verification.sourceFiles), ', '))}`,
+        '',
+      ]),
+      '',
+      styleText(
+        'yellow',
+        `共 ${whitelistedSuccesses.length} 个模块在白名单中验证通过，请从白名单中移除`,
       ),
     ],
   });

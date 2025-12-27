@@ -2,6 +2,7 @@ import type { Configuration } from 'lint-staged';
 
 const lintStagedConfig: Configuration = {
   '*': [
+    'pnpm exec node node/scripts/verify-node-runtime-imports.ts --ignore-unknown',
     'pnpm exec node node/scripts/verify-lockfile-sync.ts --ignore-unknown',
     'pnpm exec node node/scripts/verify-node-version-sync.ts --ignore-unknown',
     'pnpm exec node node/scripts/tsc-files.ts --ignore-unknown',

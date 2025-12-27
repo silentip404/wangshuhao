@@ -154,15 +154,18 @@ const eslintConfig = defineConfig([
       sortPackageJson,
       // 对 tsconfig.json 进行排序
       sortTsconfig,
-      // 允许使用 Node.js 内置模块的特例
-      {
-        files: [...GLOB_TSCONFIG_NODE_INCLUDE],
-        rules: { 'import-x/no-nodejs-modules': 'off' },
-      },
       // 允许使用默认导出的特例
       {
         files: [...GLOB_CONFIG_FILES, 'app/**/{layout,page}.tsx'],
         rules: { 'import-x/no-default-export': 'off' },
+      },
+      // 纯 Node.js 环境特例
+      {
+        files: [...GLOB_TSCONFIG_NODE_INCLUDE],
+        rules: {
+          'import-x/no-nodejs-modules': 'off',
+          'regexp/no-super-linear-move': 'off',
+        },
       },
     ],
   } satisfies Pick<ConfigWithExtends, 'extends' | 'name'>,

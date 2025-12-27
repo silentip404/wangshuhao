@@ -10,11 +10,6 @@ import {
   toUpperCase,
 } from 'remeda';
 
-const NULL_CHAR = '\0' as const;
-const NEWLINE = '\n' as const;
-
-const splitLines = (text: string): string[] => split(text, /\r\n|\r|\n/v);
-
 interface CaseVariants {
   [`camelCase`]: string;
   [`kebab-case`]: string;
@@ -24,6 +19,11 @@ interface CaseVariants {
   [`snake_case`]: string;
   [`Title Case`]: string;
 }
+
+const NULL_CHAR = '\0' as const;
+const NEWLINE = '\n' as const;
+
+const splitLines = (text: string): string[] => split(text, /\r\n|\r|\n/v);
 
 const getCaseVariants = (raw: string): CaseVariants => {
   const sanitized = raw.replaceAll(/[^0-9a-z]/giv, ' ');

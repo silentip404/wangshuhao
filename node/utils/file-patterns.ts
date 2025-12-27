@@ -74,6 +74,7 @@ const toCaseInsensitiveGlob = (glob: string): string => {
 
 export {
   ALIASES_GLOB,
+  ALIASES_REGEX,
   ALIASES_REGEX_STRING,
   GLOB_ALL,
   GLOB_CONFIG_FILES,

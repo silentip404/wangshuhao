@@ -52,6 +52,7 @@ const GLOB_CONFIG_FILES = [
   '*.config.js',
   '*.config.ts',
   '*.config.*.ts',
+  'nano-staged.js',
 ] as const;
 
 const toCaseInsensitiveGlob = (glob: string): string => {

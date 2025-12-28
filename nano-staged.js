@@ -1,6 +1,4 @@
-import type { Configuration } from 'lint-staged';
-
-const lintStagedConfig: Configuration = {
+const nanoStagedConfig = {
   '*': [
     'pnpm exec node node/scripts/verify-node-runtime-imports.ts --ignore-unknown',
     'pnpm exec node node/scripts/verify-lockfile-sync.ts --ignore-unknown',
@@ -11,4 +9,4 @@ const lintStagedConfig: Configuration = {
   ],
 };
 
-export default lintStagedConfig;
+export default nanoStagedConfig;

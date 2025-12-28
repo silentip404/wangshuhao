@@ -17,18 +17,7 @@ const dependOverrides = defineConfig([
        */
       'depend/ban-dependencies': [
         'error',
-        {
-          allowed: await ensureModulePathsInPackage([
-            /**
-             * 目前 lint-staged 维护积极，且 TypeScript 类型支持友好
-             *
-             * - 目前 nano-staged 不支持 typescript 配置文件
-             *
-             * @see https://github.com/es-tooling/module-replacements/blob/main/docs/modules/lint-staged.md
-             */
-            'lint-staged',
-          ]),
-        },
+        { allowed: await ensureModulePathsInPackage([]) },
       ],
     },
   },

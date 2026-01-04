@@ -33,7 +33,6 @@
     "lint:prettier": "prettier --check --log-level=warn .",
     "lint:success-message": "pnpm exec node node/scripts/cli-print-message.ts --type=success --title=\"All linting checks completed successfully.\"",
     "fix": "run-s --continue-on-error fix:*",
-    "fix:knip": "cross-env IS_KNIP_RUNNING=true knip --no-progress --fix",
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write --log-level=warn .",
     "fix:complete-message": "pnpm exec node node/scripts/cli-print-message.ts --type=info --title=\"All fixing tasks completed, please review the output above.\"",

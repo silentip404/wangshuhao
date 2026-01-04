@@ -302,8 +302,6 @@ pnpm run dev
 ### 代码修复
 
 - `pnpm run fix` - 运行所有代码修复任务
-- `pnpm run fix:typesync` - 自动同步 **TypeScript** 类型定义
-- `pnpm run fix:knip` - 使用 **Knip** 自动移除未使用的文件、导出与依赖
 - `pnpm run fix:eslint` - 使用 **ESLint** 修复可修复的问题
 - `pnpm run fix:prettier` - 使用 **Prettier** 格式化代码
 - `pnpm run fix:complete-message` - 打印所有修复任务完成的信息提示

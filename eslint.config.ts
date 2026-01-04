@@ -5,7 +5,6 @@ import type { ConfigWithExtends } from 'typescript-eslint';
 import {
   builtinOverrides,
   builtinPresets,
-  checkFileExceptionOverrides,
   checkFileOverrides,
   checkFilePresets,
   commandPresets,
@@ -40,7 +39,10 @@ import {
   GLOB_DERIVED_DEPEND,
   GLOB_DERIVED_JS,
   GLOB_DERIVED_JSON,
+  GLOB_DOT_FILES,
+  GLOB_FILES_IN_DOT_DIRECTORIES,
   GLOB_TSCONFIG_NODE_INCLUDE,
+  toCaseInsensitiveGlob,
 } from '#node/utils/index.ts';
 
 const eslintConfig = defineConfig([
@@ -150,8 +152,6 @@ const eslintConfig = defineConfig([
   {
     name: 'misc:overrides',
     extends: [
-      // 一些特殊的文件名和目录检查规则
-      checkFileExceptionOverrides,
       // 对 package.json 进行排序
       sortPackageJson,
       // 对 tsconfig.json 进行排序
@@ -168,6 +168,30 @@ const eslintConfig = defineConfig([
           'import-x/no-nodejs-modules': 'off',
           'regexp/no-super-linear-move': 'off',
         },
+      },
+      // 需要保持大写的文件名
+      {
+        files: [
+          `**/${toCaseInsensitiveGlob('LICENSE')}`,
+          `**/${toCaseInsensitiveGlob('{README,CHANGELOG}')}.md`,
+        ],
+        rules: {
+          'check-file/filename-naming-convention': [
+            'error',
+            { [GLOB_ALL]: '[A-Z]+' },
+            { ignoreMiddleExtensions: false },
+          ],
+        },
+      },
+      // 对一些 dot files 关闭文件命名检查
+      {
+        files: [GLOB_DOT_FILES],
+        rules: { 'check-file/filename-naming-convention': 'off' },
+      },
+      // 对一些 dot directories 关闭文件夹命名检查
+      {
+        files: [GLOB_FILES_IN_DOT_DIRECTORIES],
+        rules: { 'check-file/folder-naming-convention': 'off' },
       },
     ],
   } satisfies Pick<ConfigWithExtends, 'extends' | 'name'>,

@@ -4,9 +4,9 @@ import { defineCommand } from 'eslint-plugin-command/commands';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { isTruthy } from 'remeda';
 
-import { getFilenameWithoutExtension } from '#node/utils/index.ts';
+import { getFilenameWithoutExtension } from '#node/utilities/index.ts';
 
-import { createCommandMatcher, getCommandLoc } from './utils.ts';
+import { createCommandMatcher, getCommandLoc } from './utilities.ts';
 
 const COMMAND = '@perfectionist-sort-objects';
 const TEMPORARY_VARIABLE_PREFIX = 'const unsortedObject = ';

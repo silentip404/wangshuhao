@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 const ROOT = path.resolve(import.meta.dirname, '../../');
 
@@ -43,7 +43,7 @@ const toRelativePosixPath = ({
     path.normalize(filename),
   );
 
-  const posixPath = relativePath.replaceAll(/\\/gv, '/');
+  const posixPath = relativePath.replaceAll('\\', '/');
 
   return shouldAddDotSlash ? `./${posixPath}` : posixPath;
 };

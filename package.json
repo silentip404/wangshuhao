@@ -5,9 +5,9 @@
   "private": true,
   "packageManager": "pnpm@10.27.0",
   "imports": {
-    "#lib/utils/index.ts": "./lib/utils/index.ts",
+    "#lib/utilities/index.ts": "./lib/utilities/index.ts",
     "#node/ts-expect-error-reasons.ts": "./ts-expect-error-reasons.ts",
-    "#node/utils/index.ts": "./node/utils/index.ts",
+    "#node/utilities/index.ts": "./node/utilities/index.ts",
     "#node/eslint-config/index.ts": "./node/eslint-config/index.ts"
   },
   "engines": {
@@ -83,6 +83,7 @@
     "eslint-plugin-perfectionist": "^5.2.0",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-regexp": "^2.10.0",
+    "eslint-plugin-unicorn": "^62.0.0",
     "handlebars": "^4.7.8",
     "husky": "^9.1.7",
     "json-schema-to-ts": "^3.1.1",

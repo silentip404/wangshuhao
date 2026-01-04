@@ -1,7 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import { configs } from 'typescript-eslint';
 
-import { ROOT } from '#node/utils/index.ts';
+import { ROOT } from '#node/utilities/index.ts';
 
 const typescriptPresets = defineConfig([
   configs.strictTypeChecked,

@@ -32,6 +32,7 @@ import {
   sortTsconfig,
   typescriptOverrides,
   typescriptPresets,
+  unicornPresets,
 } from '#node/eslint-config/index.ts';
 import {
   GLOB_ALL,
@@ -43,7 +44,7 @@ import {
   GLOB_FILES_IN_DOT_DIRECTORIES,
   GLOB_TSCONFIG_NODE_INCLUDE,
   toCaseInsensitiveGlob,
-} from '#node/utils/index.ts';
+} from '#node/utilities/index.ts';
 
 const eslintConfig = defineConfig([
   /**
@@ -86,6 +87,7 @@ const eslintConfig = defineConfig([
       jsxA11yPresets,
       nextPresets,
       regexpPresets,
+      unicornPresets,
       perfectionistPresets,
       prettierPresets,
       localPresets,
@@ -167,6 +169,7 @@ const eslintConfig = defineConfig([
         rules: {
           'import-x/no-nodejs-modules': 'off',
           'regexp/no-super-linear-move': 'off',
+          'unicorn/no-process-exit': 'off',
         },
       },
       // 需要保持大写的文件名

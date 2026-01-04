@@ -5,7 +5,7 @@ import {
   ALIASES_GLOB,
   ALIASES_REGEX_STRING,
   ensureModulePathsInPackage,
-} from '#node/utils/index.ts';
+} from '#node/utilities/index.ts';
 
 const importXOverrides = defineConfig([
   {
@@ -184,7 +184,7 @@ const importXOverrides = defineConfig([
             ...ALIASES_REGEX_STRING,
 
             // 允许一些特殊文件导入
-            String.raw`^\.\./utils/index\.ts$`,
+            String.raw`^\.\./utilities/index\.ts$`,
             String.raw`^\.\./local-plugin/index\.ts$`,
           ],
         },

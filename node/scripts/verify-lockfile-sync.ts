@@ -1,17 +1,17 @@
-import path from 'path';
+import path from 'node:path';
 
 import { omit } from 'remeda';
 import { exec } from 'tinyexec';
 import { parse } from 'ts-command-line-args';
 
-import { printMessage } from '#lib/utils/index.ts';
+import { printMessage } from '#lib/utilities/index.ts';
 import {
   analyzeVerifyFiles,
   helpArgConfig,
   helpArgOptions,
   verifyFilesArgsConfig,
-} from '#node/utils/index.ts';
-import type { VerifyFilesArgs, WithHelpArg } from '#node/utils/index.ts';
+} from '#node/utilities/index.ts';
+import type { VerifyFilesArgs, WithHelpArg } from '#node/utilities/index.ts';
 
 type CliArguments = WithHelpArg<VerifyFilesArgs>;
 

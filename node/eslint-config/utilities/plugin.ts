@@ -11,10 +11,12 @@ const collectPluginNames = (configs: Config[]): string[] => {
       return;
     }
 
-    keys(plugins).forEach((pluginName) => pluginNames.add(pluginName));
+    for (const pluginName of keys(plugins)) {
+      pluginNames.add(pluginName);
+    }
   });
 
-  return Array.from(pluginNames);
+  return [...pluginNames];
 };
 
 export { collectPluginNames };

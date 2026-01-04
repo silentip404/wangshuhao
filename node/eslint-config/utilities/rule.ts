@@ -43,7 +43,7 @@ const collectRuleNames = (
     });
   });
 
-  return Array.from(ruleNames);
+  return [...ruleNames];
 };
 
 export { collectRuleNames, createRules };

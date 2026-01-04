@@ -7,7 +7,7 @@ import {
   GLOB_JSON,
   GLOB_JSON5,
   GLOB_JSONC,
-} from '#node/utils/index.ts';
+} from '#node/utilities/index.ts';
 
 const jsoncPresets = defineConfig([
   {

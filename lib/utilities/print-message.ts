@@ -23,7 +23,7 @@ const printMessage = ({
 
   // 在描述前添加零宽度空格以优化显示效果
   if (!isEmptyish(typedOptions.additional)) {
-    typedOptions.additional = flat(['', ...[typedOptions.additional]]);
+    typedOptions.additional = flat(['', typedOptions.additional]);
   }
 
   consola[type](typedOptions);

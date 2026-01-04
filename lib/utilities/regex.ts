@@ -4,30 +4,34 @@ import { join } from 'remeda';
 import { NULL_CHAR } from './string.ts';
 
 const memoizedCompileRegex = memoize(
-  (regexSource: string): null | RegExp => {
+  (regexSource: string): undefined | RegExp => {
     try {
       return new RegExp(regexSource);
     } catch {
-      return null;
+      return undefined;
     }
   },
   { cacheKey: ([regexSource]) => regexSource },
 );
 
 const memoizedRegexTest = memoize(
-  (regexSource: string, text: string): null | boolean => {
+  (regexSource: string, text: string): undefined | boolean => {
     const regex = memoizedCompileRegex(regexSource);
 
-    return regex === null ? null : regex.test(text);
+    return regex === undefined ? undefined : regex.test(text);
   },
   { cacheKey: (parameters) => join(parameters, NULL_CHAR) },
 );
 
 const memoizedRegexReplace = memoize(
-  (regexSource: string, text: string, replacement: string): null | string => {
+  (
+    regexSource: string,
+    text: string,
+    replacement: string,
+  ): undefined | string => {
     const regex = memoizedCompileRegex(regexSource);
 
-    return regex === null ? null : text.replace(regex, replacement);
+    return regex === undefined ? undefined : text.replace(regex, replacement);
   },
   { cacheKey: (parameters) => join(parameters, NULL_CHAR) },
 );

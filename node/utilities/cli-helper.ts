@@ -1,15 +1,15 @@
 import { isEmptyish, isIncludedIn, map, partition, pipe } from 'remeda';
 import type { ArgumentConfig, ParseOptions } from 'ts-command-line-args';
 
-import { printMessage } from '#lib/utils/index.ts';
+import { printMessage } from '#lib/utilities/index.ts';
 
 import { toRelativePosixPath } from './path.ts';
 
-interface HelpArg {
+interface HelpArgument {
   help?: boolean;
 }
-type WithHelpArg<T> = HelpArg & T;
-const helpArgConfig: ArgumentConfig<HelpArg> = {
+type WithHelpArgument<T> = HelpArgument & T;
+const helpArgumentConfig: ArgumentConfig<HelpArgument> = {
   help: {
     type: Boolean,
     optional: true,
@@ -17,13 +17,13 @@ const helpArgConfig: ArgumentConfig<HelpArg> = {
     description: '获取帮助信息',
   },
 };
-const helpArgOptions: ParseOptions<HelpArg> = { helpArg: 'help' };
+const helpArgumentOptions: ParseOptions<HelpArgument> = { helpArg: 'help' };
 
-interface VerifyFilesArgs {
+interface VerifyFilesArguments {
   'files'?: string[];
   'ignore-unknown'?: boolean;
 }
-const verifyFilesArgsConfig: ArgumentConfig<VerifyFilesArgs> = {
+const verifyFilesArgumentsConfig: ArgumentConfig<VerifyFilesArguments> = {
   'files': {
     type: String,
     typeLabel: 'file1.ts file2.ts ...',
@@ -84,10 +84,13 @@ const analyzeVerifyFiles = (
   };
 };
 
-export type { VerifyFilesArgs, WithHelpArg };
+export type {
+  VerifyFilesArguments as VerifyFilesArgs,
+  WithHelpArgument as WithHelpArg,
+};
 export {
   analyzeVerifyFiles,
-  helpArgConfig,
-  helpArgOptions,
-  verifyFilesArgsConfig,
+  helpArgumentConfig as helpArgConfig,
+  helpArgumentOptions as helpArgOptions,
+  verifyFilesArgumentsConfig as verifyFilesArgsConfig,
 };

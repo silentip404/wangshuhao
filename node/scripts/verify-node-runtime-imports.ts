@@ -1,7 +1,7 @@
-import { readFile } from 'fs/promises';
-import { availableParallelism } from 'os';
-import path from 'path';
-import { styleText } from 'util';
+import { readFile } from 'node:fs/promises';
+import { availableParallelism } from 'node:os';
+import path from 'node:path';
+import { styleText } from 'node:util';
 
 import { init, parse } from 'es-module-lexer';
 import pMap from 'p-map';
@@ -22,9 +22,9 @@ import {
   split,
 } from 'remeda';
 import { glob } from 'tinyglobby';
-import { parse as parseArgs } from 'ts-command-line-args';
+import { parse as parseArguments } from 'ts-command-line-args';
 
-import { printMessage } from '#lib/utils/index.ts';
+import { printMessage } from '#lib/utilities/index.ts';
 import {
   analyzeVerifyFiles,
   ensureModulePathsInPackage,
@@ -38,8 +38,8 @@ import {
   ROOT,
   toRelativePosixPath,
   verifyFilesArgsConfig,
-} from '#node/utils/index.ts';
-import type { VerifyFilesArgs, WithHelpArg } from '#node/utils/index.ts';
+} from '#node/utilities/index.ts';
+import type { VerifyFilesArgs, WithHelpArg } from '#node/utilities/index.ts';
 
 const WHITELIST = new Set<string>(await ensureModulePathsInPackage([]));
 const ALL_RELATED_FILES_PATTERNS = concat(
@@ -67,7 +67,7 @@ type VerificationResult = ModuleImportResult & {
   sourceFiles: Set<string>;
 };
 
-const cliArguments = parseArgs<CliArguments>(
+const cliArguments = parseArguments<CliArguments>(
   { ...helpArgConfig, ...verifyFilesArgsConfig },
   {
     ...helpArgOptions,
@@ -189,7 +189,7 @@ const extractModuleImports = (sourceCode: string): ModuleImport[] => {
     moduleImportedNamesMap,
     ([modulePath, importedNamesSet]) => ({
       modulePath,
-      importedNames: Array.from(importedNamesSet),
+      importedNames: [...importedNamesSet],
     }),
   );
 };
@@ -230,7 +230,7 @@ if (isEmptyish(verificationFiles)) {
 const filesWithImports: FileWithImports[] = await pMap(
   verificationFiles,
   async (filePath) => {
-    const sourceCode = await readFile(resolveFromRoot(filePath), 'utf-8');
+    const sourceCode = await readFile(resolveFromRoot(filePath), 'utf8');
     const moduleImports = extractModuleImports(sourceCode);
 
     return { filePath, moduleImports };
@@ -282,9 +282,9 @@ const verificationResults: VerificationResult[] = await pMap(
   async ([modulePath, { packageName, exportedNames, sourceFiles }]) => ({
     modulePath,
     packageName,
-    exportedNames: Array.from(exportedNames),
+    exportedNames: [...exportedNames],
     sourceFiles,
-    ...(await verifyModuleImport(modulePath, Array.from(exportedNames))),
+    ...(await verifyModuleImport(modulePath, [...exportedNames])),
   }),
   { concurrency: CONCURRENCY },
 );
@@ -314,7 +314,7 @@ if (!isEmptyish(failedVerifications)) {
         '',
         `    错误原因: ${styleText('yellowBright', verification.error ?? '未知错误')}`,
         `    期望导出: ${styleText('gray', join(verification.exportedNames, ', '))}`,
-        `    相关文件: ${styleText('gray', join(Array.from(verification.sourceFiles), ', '))}`,
+        `    相关文件: ${styleText('gray', join([...verification.sourceFiles], ', '))}`,
         '',
       ]),
       '',
@@ -336,7 +336,7 @@ if (!isEmptyish(whitelistedSuccesses)) {
       ...flatMap(whitelistedSuccesses, (verification) => [
         `  - ${styleText('cyan', verification.modulePath)}`,
         '',
-        `    相关文件: ${styleText('gray', join(Array.from(verification.sourceFiles), ', '))}`,
+        `    相关文件: ${styleText('gray', join([...verification.sourceFiles], ', '))}`,
         '',
       ]),
       '',

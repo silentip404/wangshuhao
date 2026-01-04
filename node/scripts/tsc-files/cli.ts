@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 
 import Handlebars from 'handlebars';
 import { minimatch } from 'minimatch';
@@ -14,31 +14,33 @@ import {
 } from 'remeda';
 import { exec } from 'tinyexec';
 
-import { NEWLINE } from '#lib/utils/index.ts';
+import { NEWLINE } from '#lib/utilities/index.ts';
 import {
   projects,
   resolveFromRoot,
   ROOT,
   toRelativePosixPath,
-} from '#node/utils/index.ts';
+} from '#node/utilities/index.ts';
 
 import type { TypeCheckResult } from './types.ts';
 
-const buildTempConfigFilename = Handlebars.compile<{
+const buildTemporaryConfigFilename = Handlebars.compile<{
   name: string;
   uid: string;
 }>('tsconfig.tsc-files-{{uid}}.{{name}}.json');
 
-const cleanupTempConfigs = (): void => {
-  const tempConfigFiles = pipe(
+const cleanupTemporaryConfigs = (): void => {
+  const temporaryConfigFiles = pipe(
     fs.readdirSync(ROOT, { withFileTypes: true }),
     filter((dirent) => dirent.isFile()),
     map((dirent) => dirent.name),
-    filter(minimatch.filter(buildTempConfigFilename({ name: '*', uid: '*' }))),
+    filter(
+      minimatch.filter(buildTemporaryConfigFilename({ name: '*', uid: '*' })),
+    ),
   );
 
-  forEach(tempConfigFiles, (tempConfigFile) => {
-    fs.rmSync(resolveFromRoot(tempConfigFile), { force: true });
+  forEach(temporaryConfigFiles, (temporaryConfigFile) => {
+    fs.rmSync(resolveFromRoot(temporaryConfigFile), { force: true });
   });
 };
 
@@ -50,7 +52,7 @@ const cleanupTempConfigs = (): void => {
 const typeCheckViaCli = async (
   typeCheckableFiles: string[],
 ): Promise<TypeCheckResult> => {
-  cleanupTempConfigs();
+  cleanupTemporaryConfigs();
 
   const projectCheckResults: (
     | undefined
@@ -65,15 +67,15 @@ const typeCheckViaCli = async (
         return;
       }
 
-      const tempConfigPath = resolveFromRoot(
-        buildTempConfigFilename({
+      const temporaryConfigPath = resolveFromRoot(
+        buildTemporaryConfigFilename({
           name: project.name,
           uid: process.pid.toString(),
         }),
       );
 
       // 写入临时配置文件
-      await writeTSConfig(tempConfigPath, {
+      await writeTSConfig(temporaryConfigPath, {
         extends: toRelativePosixPath({
           filename: project.configName,
           shouldAddDotSlash: true,
@@ -85,7 +87,7 @@ const typeCheckViaCli = async (
 
       const { exitCode, stdout, stderr } = await exec(
         'pnpm',
-        ['exec', 'tsc', '--project', tempConfigPath],
+        ['exec', 'tsc', '--project', temporaryConfigPath],
         { throwOnError: false },
       );
 
@@ -99,7 +101,7 @@ const typeCheckViaCli = async (
       };
     }),
   ).finally(() => {
-    cleanupTempConfigs();
+    cleanupTemporaryConfigs();
   });
 
   const failedProjects = filter(projectCheckResults, isDefined);

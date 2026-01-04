@@ -1,6 +1,6 @@
 import { defineConfig } from 'eslint/config';
 
-import { GLOB_ALL } from '#node/utils/index.ts';
+import { GLOB_ALL } from '#node/utilities/index.ts';
 
 const checkFileOverrides = defineConfig([
   {

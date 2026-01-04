@@ -7,16 +7,16 @@ import {
   memoizedGetCaseVariants,
   memoizedRegexReplace,
   memoizedRegexTest,
-} from '#lib/utils/index.ts';
-import type { CaseVariants } from '#lib/utils/index.ts';
+} from '#lib/utilities/index.ts';
+import type { CaseVariants } from '#lib/utilities/index.ts';
 
 import {
   createESLintSchema,
   defineUnionJsonSchema,
   getNodeText,
   initRule,
-} from '../utils/index.ts';
-import type { InferSchema } from '../utils/index.ts';
+} from '../utilities/index.ts';
+import type { InferSchema } from '../utilities/index.ts';
 
 type Context = RuleContext<MessageIds, [RuleOptions]>;
 interface LintModuleIdentifierOptions {
@@ -124,7 +124,7 @@ const lintModuleIdentifier = (
 
       const isMatched = memoizedRegexTest(matcher.regexSource, modulePath);
 
-      if (isMatched === null) {
+      if (isMatched === undefined) {
         if (!lintContext.reportedInvalidRegexSources.has(matcher.regexSource)) {
           lintContext.context.report({
             node: lintContext.node,
@@ -204,7 +204,7 @@ const lintModuleIdentifier = (
         replacement,
       );
 
-      if (replacedModulePath === null) {
+      if (replacedModulePath === undefined) {
         // 无效正则已在 matchedMatcher 查找时报告
         return;
       }
@@ -214,16 +214,20 @@ const lintModuleIdentifier = (
 
       const expectedModuleIdentifier = (() => {
         switch (transformMode) {
-          case 'none':
+          case 'none': {
             return replacedModulePathVariants.raw.value;
-          case 'camelCase':
+          }
+          case 'camelCase': {
             return replacedModulePathVariants.camelCase;
-          case 'PascalCase':
+          }
+          case 'PascalCase': {
             return replacedModulePathVariants.PascalCase;
-          default:
+          }
+          default: {
             throw new Error(
               `Unexpected transformMode: ${JSON.stringify({ transformMode })}`,
             );
+          }
         }
       })();
       reportInvalidModuleIdentifier(expectedModuleIdentifier);

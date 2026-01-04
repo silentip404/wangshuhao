@@ -1,9 +1,9 @@
-import { styleText } from 'util';
+import { styleText } from 'node:util';
 
 import eslintJs from '@eslint/js';
 import { concat, isEmptyish, map, merge } from 'remeda';
 
-import { printMessage } from '#lib/utils/index.ts';
+import { printMessage } from '#lib/utilities/index.ts';
 import {
   collectPluginNames,
   collectRuleNames,
@@ -11,7 +11,7 @@ import {
   normalizeSeverity,
   resolveAuditSettings,
 } from '#node/eslint-config/index.ts';
-import { GLOB_DERIVED_JS } from '#node/utils/index.ts';
+import { GLOB_DERIVED_JS } from '#node/utilities/index.ts';
 
 import eslintConfig from './eslint.config.ts';
 

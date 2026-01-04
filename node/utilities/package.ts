@@ -1,4 +1,4 @@
-import { isBuiltin } from 'module';
+import { isBuiltin } from 'node:module';
 
 import { startsWith } from 'remeda';
 

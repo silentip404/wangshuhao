@@ -1,12 +1,15 @@
-import path from 'path';
+import path from 'node:path';
 
 import { join, omit } from 'remeda';
 import { parse } from 'ts-command-line-args';
 
-import { printMessage, printMessageOptionsSchema } from '#lib/utils/index.ts';
-import type { PrintMessageOptions } from '#lib/utils/index.ts';
-import { helpArgConfig, helpArgOptions } from '#node/utils/index.ts';
-import type { WithHelpArg } from '#node/utils/index.ts';
+import {
+  printMessage,
+  printMessageOptionsSchema,
+} from '#lib/utilities/index.ts';
+import type { PrintMessageOptions } from '#lib/utilities/index.ts';
+import { helpArgConfig, helpArgOptions } from '#node/utilities/index.ts';
+import type { WithHelpArg } from '#node/utilities/index.ts';
 
 const typeSchema = printMessageOptionsSchema.shape.type.unwrap();
 

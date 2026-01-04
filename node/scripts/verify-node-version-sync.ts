@@ -1,5 +1,5 @@
-import { readFile } from 'fs/promises';
-import path from 'path';
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 
 import {
   filter,
@@ -13,7 +13,7 @@ import {
 import { parse } from 'ts-command-line-args';
 import { z } from 'zod';
 
-import { printMessage } from '#lib/utils/index.ts';
+import { printMessage } from '#lib/utilities/index.ts';
 import {
   analyzeVerifyFiles,
   helpArgConfig,
@@ -22,8 +22,8 @@ import {
   readYamlFile,
   resolveFromRoot,
   verifyFilesArgsConfig,
-} from '#node/utils/index.ts';
-import type { VerifyFilesArgs, WithHelpArg } from '#node/utils/index.ts';
+} from '#node/utilities/index.ts';
+import type { VerifyFilesArgs, WithHelpArg } from '#node/utilities/index.ts';
 
 type CliArguments = WithHelpArg<VerifyFilesArgs>;
 
@@ -147,7 +147,7 @@ const errorDescriptions: (undefined | string)[] = await Promise.all([
       return;
     }
 
-    const content = await readFile(resolveFromRoot('.nvmrc'), 'utf-8');
+    const content = await readFile(resolveFromRoot('.nvmrc'), 'utf8');
     const nodeVersion = content.trim();
 
     if (nodeVersion === standardNodeVersion) {
@@ -163,7 +163,7 @@ const errorDescriptions: (undefined | string)[] = await Promise.all([
       return;
     }
 
-    const content = await readFile(resolveFromRoot('.node-version'), 'utf-8');
+    const content = await readFile(resolveFromRoot('.node-version'), 'utf8');
     const nodeVersion = content.trim();
 
     if (nodeVersion === standardNodeVersion) {

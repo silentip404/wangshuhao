@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 import { minimatch } from 'minimatch';
 import { filter, isDefined, isEmptyish, join, map } from 'remeda';
@@ -11,12 +11,12 @@ import {
 } from 'typescript';
 import type { Diagnostic } from 'typescript';
 
-import { NEWLINE } from '#lib/utils/index.ts';
+import { NEWLINE } from '#lib/utilities/index.ts';
 import {
   projects,
   resolveFromRoot,
   toRelativePosixPath,
-} from '#node/utils/index.ts';
+} from '#node/utilities/index.ts';
 
 import type { TypeCheckResult } from './types.ts';
 

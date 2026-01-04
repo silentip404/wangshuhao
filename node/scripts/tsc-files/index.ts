@@ -1,20 +1,20 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import { minimatch } from 'minimatch';
 import { isEmptyish, map, omit, partition, pipe, sumBy } from 'remeda';
 import { parse } from 'ts-command-line-args';
 import { z } from 'zod';
 
-import { JSON_INDENT, printMessage } from '#lib/utils/index.ts';
+import { JSON_INDENT, printMessage } from '#lib/utilities/index.ts';
 import {
   helpArgConfig,
   helpArgOptions,
   readJsoncFile,
   resolveFromRoot,
   toRelativePosixPath,
-} from '#node/utils/index.ts';
-import type { WithHelpArg } from '#node/utils/index.ts';
+} from '#node/utilities/index.ts';
+import type { WithHelpArg } from '#node/utilities/index.ts';
 
 import { typeCheckViaApi } from './api.ts';
 import { typeCheckViaCli } from './cli.ts';
@@ -86,6 +86,7 @@ const { files, 'ignore-unknown': shouldIgnoreUnknown } = options;
 const [typeCheckableFiles, unsupportedFiles] = pipe(
   files,
   map((filename) => toRelativePosixPath({ filename })),
+  // eslint-disable-next-line unicorn/no-array-callback-reference
   partition(minimatch.filter(TS_FILE_EXTENSIONS_PATTERN)),
 );
 
@@ -129,8 +130,8 @@ const benchmarkRecord: BenchmarkRecord = {
 };
 
 // 确保目录存在
-const benchmarkLogDir = path.dirname(BENCHMARK_LOG_PATH);
-fs.mkdirSync(benchmarkLogDir, { recursive: true });
+const benchmarkLogDirectory = path.dirname(BENCHMARK_LOG_PATH);
+fs.mkdirSync(benchmarkLogDirectory, { recursive: true });
 
 // 读取现有记录或创建新对象
 let benchmarkLog: BenchmarkLog = {
@@ -158,7 +159,7 @@ benchmarkLog.totalCliDuration = sumBy(
 
 fs.writeFileSync(
   BENCHMARK_LOG_PATH,
-  JSON.stringify(benchmarkLog, null, JSON_INDENT),
+  JSON.stringify(benchmarkLog, undefined, JSON_INDENT),
 );
 
 // 打印 API 模式输出

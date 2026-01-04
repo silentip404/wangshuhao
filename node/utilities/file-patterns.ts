@@ -1,7 +1,7 @@
 import { makeRe } from 'minimatch';
 import { filter, isTruthy, join, map, pipe, split, zipWith } from 'remeda';
 
-import { getCaseVariants } from '#lib/utils/index.ts';
+import { getCaseVariants } from '#lib/utilities/index.ts';
 
 const GLOB_ALL = '**' as const;
 const GLOB_DOT_FILES = '**/.*' as const;

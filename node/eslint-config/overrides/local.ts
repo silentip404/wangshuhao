@@ -1,6 +1,6 @@
 import { defineConfig } from 'eslint/config';
 
-import { ensureModulePathInPackage } from '#node/utils/index.ts';
+import { ensureModulePathInPackage } from '#node/utilities/index.ts';
 
 const localOverrides = defineConfig([
   {
@@ -64,6 +64,13 @@ const localOverrides = defineConfig([
             },
 
             // 通用命名
+            {
+              type: 'all',
+              regexSource: /^node:(?<name>.+)$/v.source,
+              mode: 'replace',
+              replacement: '$<name>',
+              transformMode: 'none',
+            },
             {
               type: 'all',
               regexSource:

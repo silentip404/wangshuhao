@@ -4,6 +4,7 @@ export * from './depend.ts';
 export * from './import-x.ts';
 export * from './jsonc.ts';
 export * from './local.ts';
+export * from './next.ts';
 export * from './perfectionist.ts';
 export * from './react.ts';
 export * from './regexp.ts';

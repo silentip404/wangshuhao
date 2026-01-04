@@ -59,6 +59,13 @@ const regexpOverrides = defineConfig([
        */
       'regexp/require-unicode-sets-regexp': 'warn',
       /**
+       * 正则表达式分支选项排序
+       *
+       * @reason
+       * - 对不影响匹配结果的正则分支自动排序，降低代码审查时的认知负担
+       */
+      'regexp/sort-alternatives': 'warn',
+      /**
        * 强制字符类中的元素顺序
        *
        * @reason

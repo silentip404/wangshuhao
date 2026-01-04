@@ -101,8 +101,10 @@ const checkFilesWithProject = (
   return filter(
     allDiagnostics,
     (diagnostic) =>
-      diagnostic.file === undefined || // 全局错误
-      absoluteFileSet.has(path.normalize(diagnostic.file.fileName)), // 指定文件的错误
+      // 全局错误
+      diagnostic.file === undefined ||
+      // 指定文件的错误
+      absoluteFileSet.has(path.normalize(diagnostic.file.fileName)),
   );
 };
 

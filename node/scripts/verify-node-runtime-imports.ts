@@ -95,7 +95,7 @@ const CONCURRENCY = Math.min(
   Math.max(MIN_CONCURRENCY, availableParallelism() * CONCURRENCY_FACTOR),
 );
 
-const TYPE_ONLY_REGEX = /(?:import|export)\s+type\b/v;
+const TYPE_ONLY_REGEX = /(?:export|import)\s+type\b/v;
 const NAMESPACE_IMPORT_REGEX = /\*\s*as\s+/v;
 const DEFAULT_IMPORT_REGEX = /import\s+\w+\s+from/v;
 const NAMED_IMPORTS_REGEX = /\{(?<specifiers>[^\}]+)\}/v;

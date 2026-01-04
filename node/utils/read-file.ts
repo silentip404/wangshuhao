@@ -8,7 +8,7 @@ import { parse as parseYaml } from 'yaml';
 
 import { ROOT } from './path.ts';
 
-const memoizedReadPackageJson = memoize(() => readPackage(ROOT));
+const memoizedReadPackageJson = memoize(async () => readPackage(ROOT));
 
 const readYamlFile = async (filePath: string): Promise<unknown> => {
   const normalizedPath = path.resolve(filePath);

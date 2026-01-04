@@ -245,7 +245,6 @@ const typescriptOverrides = defineConfig([
        * - 要求开发者手动评估「空值」与「假值」的语义，避免产生难以发现的 bug，提升代码健壮性
        */
       '@typescript-eslint/prefer-nullish-coalescing': 'error',
-
       /**
        * 函数参数只读性检查
        *
@@ -255,6 +254,17 @@ const typescriptOverrides = defineConfig([
        * - AI 辅助编程场景下，过度的 readonly 约束会频繁触发类型错误修复，降低开发效率
        */
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
+      /**
+       * Promise 返回函数的 async 标记
+       *
+       * @reason
+       * - 统一异常处理模式,避免函数同时具备 reject promise 和 throw error 两种错误路径
+       * - 增强代码可预测性,调用方只需处理 try-catch 或 .catch() 降低错误处理复杂度
+       */
+      '@typescript-eslint/promise-function-async': [
+        'warn',
+        { allowAny: false },
+      ],
       /**
        * 模板字符串表达式类型约束
        *

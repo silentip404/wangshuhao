@@ -136,6 +136,13 @@ const builtinOverrides = defineConfig([
        */
       'no-else-return': ['warn', { allowElseIf: false }],
       /**
+       * 行内注释控制
+       *
+       * @reason
+       * - 行内注释容易与代码混杂，建议使用块注释或行前注释来提供更结构化的说明
+       */
+      'no-inline-comments': 'warn',
+      /**
        * 禁止使用否定条件
        *
        * @reason

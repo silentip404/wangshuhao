@@ -12,5 +12,5 @@
     "noEmit": true,
   },
   "references": [{ "path": "./tsconfig.lib.json" }],
-  "include": ["*.js", "*.ts", "node/**/*.ts"],
+  "include": ["external-types/**/*.d.ts", "*.js", "*.ts", "node/**/*.ts"],
 }

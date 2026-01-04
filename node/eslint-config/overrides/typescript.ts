@@ -134,7 +134,7 @@ const typescriptOverrides = defineConfig([
 
         // 特殊规则
         {
-          // eslint-disable-next-line unicorn/no-null
+          // eslint-disable-next-line unicorn/no-null -- 此规则强制要求使用 null 而不是 undefined
           format: null,
           modifiers: ['requiresQuotes'],
           selector: ['property', 'method'],
@@ -153,7 +153,7 @@ const typescriptOverrides = defineConfig([
               return join([camelCaseRegex, upperCaseRegex], '|');
             })(),
           },
-          // eslint-disable-next-line unicorn/no-null
+          // eslint-disable-next-line unicorn/no-null -- 此规则强制要求使用 null 而不是 undefined
           format: null,
           selector: [
             'variable',

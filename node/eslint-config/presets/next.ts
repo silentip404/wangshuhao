@@ -3,9 +3,7 @@ import { defineConfig } from 'eslint/config';
 
 import { ROOT } from '#node/utilities/index.ts';
 
-// @next/eslint-plugin-next is a CommonJS module that doesn't support named imports.
-// Accessing default export properties is the intended usage pattern.
-// eslint-disable-next-line import-x/no-named-as-default-member
+// eslint-disable-next-line import-x/no-named-as-default-member -- @next/eslint-plugin-next 是 CommonJS 模块，不支持命名导入
 const { configs } = nextPlugin;
 
 const nextPresets = defineConfig([

@@ -37,16 +37,19 @@ const GLOB_DERIVED_JS = [
 const GLOB_DERIVED_JSON = [...GLOB_JSON, ...GLOB_JSONC, ...GLOB_JSON5] as const;
 const GLOB_DERIVED_DEPEND = ['**/package.json', ...GLOB_DERIVED_JS] as const;
 
+const GLOB_EXTERNAL_TYPES = ['external-types/**/*.d.ts'] as const;
+
 const GLOB_TSCONFIG_APP_INCLUDE = ['app/**/*.ts', 'app/**/*.tsx'] as const;
-const GLOB_TSCONFIG_APP_INCLUDE_BASE = [
+const GLOB_TSCONFIG_APP_BASE_INCLUDE = [
+  ...GLOB_EXTERNAL_TYPES,
   'next-env.d.ts',
   '.next/types/**/*.ts',
   '.next/dev/types/**/*.ts',
 ] as const;
 const GLOB_TSCONFIG_LIB_INCLUDE = ['lib/**/*.ts'] as const;
-const GLOB_TSCONFIG_LIB_BASE_INCLUDE = [] as const;
+const GLOB_TSCONFIG_LIB_BASE_INCLUDE = [...GLOB_EXTERNAL_TYPES] as const;
 const GLOB_TSCONFIG_NODE_INCLUDE = ['*.js', '*.ts', 'node/**/*.ts'] as const;
-const GLOB_TSCONFIG_NODE_BASE_INCLUDE = [] as const;
+const GLOB_TSCONFIG_NODE_BASE_INCLUDE = [...GLOB_EXTERNAL_TYPES] as const;
 
 const GLOB_CONFIG_FILES = [
   '*.config.js',
@@ -83,12 +86,13 @@ export {
   GLOB_DERIVED_JS,
   GLOB_DERIVED_JSON,
   GLOB_DOT_FILES,
+  GLOB_EXTERNAL_TYPES,
   GLOB_FILES_IN_DOT_DIRECTORIES,
   GLOB_JSON,
   GLOB_JSON5,
   GLOB_JSONC,
+  GLOB_TSCONFIG_APP_BASE_INCLUDE,
   GLOB_TSCONFIG_APP_INCLUDE,
-  GLOB_TSCONFIG_APP_INCLUDE_BASE,
   GLOB_TSCONFIG_LIB_BASE_INCLUDE,
   GLOB_TSCONFIG_LIB_INCLUDE,
   GLOB_TSCONFIG_NODE_BASE_INCLUDE,

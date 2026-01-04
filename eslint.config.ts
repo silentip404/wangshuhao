@@ -10,6 +10,8 @@ import {
   commandPresets,
   dependOverrides,
   dependPresets,
+  eslintCommentsOverrides,
+  eslintCommentsPresets,
   ignorePresets,
   importXOverrides,
   importXPresets,
@@ -41,6 +43,7 @@ import {
   GLOB_DERIVED_JS,
   GLOB_DERIVED_JSON,
   GLOB_DOT_FILES,
+  GLOB_EXTERNAL_TYPES,
   GLOB_FILES_IN_DOT_DIRECTORIES,
   GLOB_TSCONFIG_NODE_INCLUDE,
   toCaseInsensitiveGlob,
@@ -79,6 +82,7 @@ const eslintConfig = defineConfig([
     name: 'derived-js:presets',
     files: [...GLOB_DERIVED_JS],
     extends: [
+      eslintCommentsPresets,
       builtinPresets,
       typescriptPresets,
       importXPresets,
@@ -101,6 +105,7 @@ const eslintConfig = defineConfig([
     name: 'derived-js:overrides',
     files: [...GLOB_DERIVED_JS],
     extends: [
+      eslintCommentsOverrides,
       builtinOverrides,
       typescriptOverrides,
       importXOverrides,
@@ -160,7 +165,11 @@ const eslintConfig = defineConfig([
       sortTsconfig,
       // 允许使用默认导出的特例
       {
-        files: [...GLOB_CONFIG_FILES, 'app/**/{layout,page}.tsx'],
+        files: [
+          ...GLOB_EXTERNAL_TYPES,
+          ...GLOB_CONFIG_FILES,
+          'app/**/{layout,page}.tsx',
+        ],
         rules: { 'import-x/no-default-export': 'off' },
       },
       // 纯 Node.js 环境特例
@@ -186,14 +195,14 @@ const eslintConfig = defineConfig([
           ],
         },
       },
-      // 对一些 dot files 关闭文件命名检查
+      // 关闭文件命名检查的特例
       {
         files: [GLOB_DOT_FILES],
         rules: { 'check-file/filename-naming-convention': 'off' },
       },
-      // 对一些 dot directories 关闭文件夹命名检查
+      // 关闭文件夹命名检查的特例
       {
-        files: [GLOB_FILES_IN_DOT_DIRECTORIES],
+        files: [...GLOB_EXTERNAL_TYPES, GLOB_FILES_IN_DOT_DIRECTORIES],
         rules: { 'check-file/folder-naming-convention': 'off' },
       },
     ],

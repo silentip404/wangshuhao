@@ -2,6 +2,7 @@ export * from './builtin.ts';
 export * from './check-file.ts';
 export * from './command/index.ts';
 export * from './depend.ts';
+export * from './eslint-comments.ts';
 export * from './ignore.ts';
 export * from './import-x.ts';
 export * from './jsonc.ts';

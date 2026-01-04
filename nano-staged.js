@@ -3,7 +3,7 @@ const nanoStagedConfig = {
     'pnpm exec node node/scripts/verify-node-runtime-imports.ts --ignore-unknown',
     'pnpm exec node node/scripts/verify-lockfile-sync.ts --ignore-unknown',
     'pnpm exec node node/scripts/verify-node-version-sync.ts --ignore-unknown',
-    'pnpm exec node node/scripts/tsc-files/index.ts --ignore-unknown',
+    'pnpm exec node node/scripts/tsc-files.ts --ignore-unknown',
     'eslint --no-warn-ignored --max-warnings=0',
     'prettier --ignore-unknown --check --log-level=warn',
   ],

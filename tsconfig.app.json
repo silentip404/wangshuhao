@@ -10,6 +10,7 @@
   },
   "references": [{ "path": "./tsconfig.lib.json" }],
   "include": [
+    "external-types/**/*.d.ts",
     "app/**/*.ts",
     "app/**/*.tsx",
     "next-env.d.ts",

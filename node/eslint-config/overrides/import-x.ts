@@ -135,6 +135,7 @@ const importXOverrides = defineConfig([
               'eslint-config-prettier/flat',
               '@typescript-eslint/utils/*',
               'eslint-plugin-command/*',
+              '@eslint-community/eslint-plugin-eslint-comments/configs',
             ])),
           ],
         },
@@ -204,6 +205,13 @@ const importXOverrides = defineConfig([
        * - 已启用 import-x/no-default-export 鼓励命名导出，再启用此规则会导致冲突
        */
       'import-x/prefer-default-export': 'off',
+      /**
+       * 模块语法歧义检查
+       *
+       * @reason
+       * - 在明确的 ESM 环境中，此规则带来的价值有限但会增加不必要的约束
+       */
+      'import-x/unambiguous': 'off',
     },
   },
 ]);

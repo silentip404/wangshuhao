@@ -1,6 +1,6 @@
 import {
+  GLOB_TSCONFIG_APP_BASE_INCLUDE,
   GLOB_TSCONFIG_APP_INCLUDE,
-  GLOB_TSCONFIG_APP_INCLUDE_BASE,
   GLOB_TSCONFIG_LIB_BASE_INCLUDE,
   GLOB_TSCONFIG_LIB_INCLUDE,
   GLOB_TSCONFIG_NODE_BASE_INCLUDE,
@@ -25,7 +25,7 @@ const projects: Project[] = [
     name: 'app',
     configName: 'tsconfig.app.json',
     include: [...GLOB_TSCONFIG_APP_INCLUDE],
-    baseInclude: [...GLOB_TSCONFIG_APP_INCLUDE_BASE],
+    baseInclude: [...GLOB_TSCONFIG_APP_BASE_INCLUDE],
   },
   {
     name: 'node',

@@ -226,14 +226,14 @@ const builtinOverrides = defineConfig([
 
         // 导入导出相关语法限制
         {
+          selector: 'ExportNamedDeclaration[declaration]',
           message:
             'Inline exports are not allowed. Use export { ... } instead.',
-          selector: 'ExportNamedDeclaration[declaration]',
         },
         {
+          selector: 'ExportSpecifier[exportKind="type"]',
           message:
             'Inline type exports are not allowed. Use export type { ... } instead.',
-          selector: 'ExportSpecifier[exportKind="type"]',
         },
       ],
 

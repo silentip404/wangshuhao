@@ -31,13 +31,12 @@ const typescriptOverrides = defineConfig([
       '@typescript-eslint/ban-ts-comment': [
         'error',
         {
-          'minimumDescriptionLength': 3,
+          'ts-ignore': true,
+          'ts-nocheck': true,
           'ts-check': false,
           'ts-expect-error': {
             descriptionFormat: String.raw`^: See reasons\['(${join(keys(reasons), '|')})'\] in ts-expect-error-reasons\.ts$`,
           },
-          'ts-ignore': true,
-          'ts-nocheck': true,
         },
       ],
 
@@ -74,8 +73,8 @@ const typescriptOverrides = defineConfig([
       '@typescript-eslint/consistent-type-imports': [
         'warn',
         {
-          fixStyle: 'separate-type-imports',
           prefer: 'type-imports',
+          fixStyle: 'separate-type-imports',
         },
       ],
 
@@ -130,54 +129,64 @@ const typescriptOverrides = defineConfig([
 
         // 默认规则
         {
-          format: ['camelCase'],
           selector: 'default',
+          format: ['camelCase'],
         },
 
         // 基础规则
         {
-          format: ['camelCase', 'UPPER_CASE'],
           selector: 'variable',
+          format: ['camelCase', 'UPPER_CASE'],
         },
         {
-          format: ['camelCase'],
           selector: 'parameter',
+          format: ['camelCase'],
         },
         {
-          format: ['camelCase', 'PascalCase'],
           selector: 'function',
+          format: ['camelCase', 'PascalCase'],
         },
         {
+          selector: ['classProperty', 'classMethod'],
+          modifiers: ['private'],
           format: ['camelCase'],
           leadingUnderscore: 'require',
-          modifiers: ['private'],
-          selector: ['classProperty', 'classMethod'],
         },
 
         // 类型系统规则
         {
-          format: ['PascalCase'],
           selector: 'typeLike',
+          format: ['PascalCase'],
         },
         {
-          format: ['UPPER_CASE'],
           selector: 'enumMember',
+          format: ['UPPER_CASE'],
         },
 
         // 导入规则
         {
-          format: ['camelCase', 'PascalCase'],
           selector: 'import',
+          format: ['camelCase', 'PascalCase'],
         },
 
         // 特殊规则
         {
+          selector: ['property', 'method'],
+          modifiers: ['requiresQuotes'],
           // eslint-disable-next-line unicorn/no-null -- 此规则强制要求使用 null 而不是 undefined
           format: null,
-          modifiers: ['requiresQuotes'],
-          selector: ['property', 'method'],
         },
         {
+          selector: [
+            'variable',
+            'parameter',
+            'classProperty',
+            'parameterProperty',
+            'accessor',
+          ],
+          types: ['boolean'],
+          // eslint-disable-next-line unicorn/no-null -- 此规则强制要求使用 null 而不是 undefined
+          format: null,
           custom: {
             match: true,
             regex: (() => {
@@ -191,16 +200,6 @@ const typescriptOverrides = defineConfig([
               return join([camelCaseRegex, upperCaseRegex], '|');
             })(),
           },
-          // eslint-disable-next-line unicorn/no-null -- 此规则强制要求使用 null 而不是 undefined
-          format: null,
-          selector: [
-            'variable',
-            'parameter',
-            'classProperty',
-            'parameterProperty',
-            'accessor',
-          ],
-          types: ['boolean'],
         },
       ],
 

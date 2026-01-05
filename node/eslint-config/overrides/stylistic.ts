@@ -15,6 +15,9 @@ const stylisticOverrides = defineConfig([
       '@stylistic/lines-around-comment': [
         'warn',
         {
+          beforeBlockComment: true,
+          beforeLineComment: true,
+
           allowArrayStart: true,
           allowBlockStart: true,
           allowClassStart: true,
@@ -23,8 +26,6 @@ const stylisticOverrides = defineConfig([
           allowModuleStart: true,
           allowObjectStart: true,
           allowTypeStart: true,
-          beforeBlockComment: true,
-          beforeLineComment: true,
         },
       ],
 

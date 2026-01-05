@@ -40,6 +40,12 @@
   | `local/module-identifier-naming-convention` | 强制模块默认导入和命名空间导入的标识符遵循基于模块路径的命名规范 |
   | `local/padding-line-before-process-exit`    | 强制 `process.exit()` 调用前有空行，提升程序终止点的视觉可识别性 |
 
+- ✅ **自定义 ESLint 命令**：基于 `eslint-plugin-command` 开发的注释命令，通过特殊注释触发代码转换。
+
+  | 命令名                        | 说明                                                                              |
+  | ----------------------------- | --------------------------------------------------------------------------------- |
+  | `@perfectionist-sort-objects` | 通过占位符机制对对象属性键进行自然排序，仅排序浅层属性键而不影响嵌套对象/数组内容 |
+
 - ✅ **ESLint 配置验证**：通过独立的验证配置文件，确保 **ESLint** 配置的完整性，帮助识别遗漏的规则。
   - 创建 `eslint.config.audit.ts` 作为独立的验证配置文件，启用所有可用规则作为警告
   - 提供 `eslint:audit` 脚本运行验证配置，`eslint:audit:inspector` 脚本可视化查看配置结构

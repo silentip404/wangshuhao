@@ -235,40 +235,6 @@ const perfectionistOverrides = defineConfig([
       'perfectionist/sort-jsx-props': [
         'warn',
         {
-          customGroups: [
-            {
-              elementNamePattern: '^key$',
-              groupName: 'key',
-            },
-            {
-              elementNamePattern: '^ref$',
-              groupName: 'ref',
-            },
-            {
-              elementNamePattern: '^id$',
-              groupName: 'id',
-            },
-            {
-              elementNamePattern: '^className$',
-              groupName: 'className',
-            },
-            {
-              elementNamePattern: '^style$',
-              groupName: 'style',
-            },
-            {
-              elementNamePattern: '^data-.*$',
-              groupName: 'data-attribute',
-            },
-            {
-              elementNamePattern: '^aria-.*$',
-              groupName: 'aria-attribute',
-            },
-            {
-              elementNamePattern: '^on[A-Z].*$',
-              groupName: 'callback',
-            },
-          ],
           groups: [
             'key',
             'ref',
@@ -282,6 +248,40 @@ const perfectionistOverrides = defineConfig([
             'multiline-prop',
             'callback',
             ...UNKNOWN_GROUP_GUARD,
+          ],
+          customGroups: [
+            {
+              groupName: 'key',
+              elementNamePattern: '^key$',
+            },
+            {
+              groupName: 'ref',
+              elementNamePattern: '^ref$',
+            },
+            {
+              groupName: 'id',
+              elementNamePattern: '^id$',
+            },
+            {
+              groupName: 'className',
+              elementNamePattern: '^className$',
+            },
+            {
+              groupName: 'style',
+              elementNamePattern: '^style$',
+            },
+            {
+              groupName: 'data-attribute',
+              elementNamePattern: '^data-.*$',
+            },
+            {
+              groupName: 'aria-attribute',
+              elementNamePattern: '^aria-.*$',
+            },
+            {
+              groupName: 'callback',
+              elementNamePattern: '^on[A-Z].*$',
+            },
           ],
         },
       ],

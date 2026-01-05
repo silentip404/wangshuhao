@@ -31,77 +31,77 @@ const localOverrides = defineConfig([
           matchers: [
             // 特殊命名
             {
+              mode: 'equal',
+              type: 'all',
               identifier: 'NextImage',
-              mode: 'equal',
               regexSource: `^${await ensureModulePathInPackage('next/image')}$`,
-              type: 'all',
             },
             {
+              mode: 'equal',
+              type: 'all',
               identifier: 'Handlebars',
-              mode: 'equal',
               regexSource: `^${await ensureModulePathInPackage('handlebars')}$`,
-              type: 'all',
             },
             {
+              mode: 'equal',
+              type: 'all',
               identifier: 'eslintPlugin',
-              mode: 'equal',
               regexSource: `^${await ensureModulePathInPackage('@eslint-react/eslint-plugin')}$`,
-              type: 'all',
             },
             {
+              mode: 'equal',
+              type: 'all',
               identifier: 'createIgnoreConfig',
-              mode: 'equal',
               regexSource: `^${await ensureModulePathInPackage('eslint-config-flat-gitignore')}$`,
-              type: 'all',
             },
             {
+              mode: 'equal',
+              type: 'all',
               identifier: 'prettierConfig',
-              mode: 'equal',
               regexSource: `^${await ensureModulePathInPackage('eslint-config-prettier/flat')}$`,
-              type: 'all',
             },
             {
+              mode: 'equal',
+              type: 'all',
               identifier: 'createCommandConfig',
-              mode: 'equal',
               regexSource: `^${await ensureModulePathInPackage('eslint-plugin-command/config')}$`,
-              type: 'all',
             },
             {
-              identifier: 'stylisticPlugin',
               mode: 'equal',
-              regexSource: `^${await ensureModulePathInPackage('@stylistic/eslint-plugin')}$`,
               type: 'all',
+              identifier: 'stylisticPlugin',
+              regexSource: `^${await ensureModulePathInPackage('@stylistic/eslint-plugin')}$`,
             },
 
             // 通用命名
             {
               mode: 'replace',
+              type: 'all',
               regexSource: /^node:(?<name>.+)$/v.source,
               replacement: '$<name>',
               transformMode: 'none',
-              type: 'all',
             },
             {
               mode: 'replace',
+              type: 'all',
               regexSource:
                 /^(?:@[\-.0-9_a-z]+\/)?[\-.0-9_a-z]+-plugin-(?<name>[^\/]+)(?<subpath>\/.*)?$/v
                   .source,
               replacement: '$<name>Plugin$<subpath>',
               transformMode: 'camelCase',
-              type: 'all',
             },
             {
               mode: 'replace',
+              type: 'all',
               regexSource: /^(?<path>\.\.?\/.+)\.\w+$/v.source,
               replacement: '$<path>',
               transformMode: 'camelCase',
-              type: 'all',
             },
 
             // 默认命名
             {
-              mode: 'camelCase',
               regexSource: '^.*$',
+              mode: 'camelCase',
               type: 'all',
             },
           ],

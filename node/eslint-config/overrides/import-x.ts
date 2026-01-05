@@ -83,8 +83,8 @@ const importXOverrides = defineConfig([
       'import-x/max-dependencies': [
         'warn',
         {
-          ignoreTypeImports: true,
           max: 16,
+          ignoreTypeImports: true,
         },
       ],
 
@@ -108,8 +108,8 @@ const importXOverrides = defineConfig([
       'import-x/no-cycle': [
         'error',
         {
-          ignoreExternal: true,
           maxDepth: Infinity,
+          ignoreExternal: true,
         },
       ],
 

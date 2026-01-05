@@ -18,12 +18,14 @@ const checkFileOverrides = defineConfig([
         'error',
         {
           '**/*.cjs': '*.js',
+          '**/*.mjs': '*.js',
           '**/*.cts': '*.ts',
+          '**/*.mts': '*.ts',
           '**/*.d.cts': '*.d.ts',
           '**/*.d.mts': '*.d.ts',
           '**/*.jsx': '*.tsx',
-          '**/*.mjs': '*.js',
-          '**/*.mts': '*.ts',
+          '**/*.cjsx': '*.tsx',
+          '**/*.mjsx': '*.tsx',
         },
       ],
 

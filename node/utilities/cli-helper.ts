@@ -83,6 +83,7 @@ const analyzeVerifyFiles = (
         '如需自动忽略未知文件，请使用 --ignore-unknown 选项',
       ],
     });
+
     process.exit(1);
   }
 

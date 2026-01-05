@@ -39,6 +39,7 @@ const getStandardNodeVersion = async (): Promise<string> => {
       title: '未读取到 Node.js 版本配置',
       description: '请在 package.json 中设置 engines.node 字段',
     });
+
     process.exit(1);
   }
 
@@ -48,6 +49,7 @@ const getStandardNodeVersion = async (): Promise<string> => {
       title: '错误的 Node.js 版本配置',
       description: '原因：package.json 中的 engines.node 字段必须为字符串',
     });
+
     process.exit(1);
   }
 
@@ -57,6 +59,7 @@ const getStandardNodeVersion = async (): Promise<string> => {
       title: '错误的 Node.js 版本配置',
       description: `原因：package.json 中的 engines.node 字段必须满足 ${exactNodeVersionRegex.source} 格式`,
     });
+
     process.exit(1);
   }
 

@@ -157,6 +157,7 @@ const perfectionistOverrides = defineConfig([
 
     // @perfectionist-sort-objects
     rules: {
+      '@stylistic/jsx-sort-props': 'off',
       'import-x/order': 'off',
       'sort-imports': 'off',
     },

@@ -8,9 +8,11 @@ const getNodeText = (
     case AST_NODE_TYPES.Identifier: {
       return node.name;
     }
+
     case AST_NODE_TYPES.Literal: {
       return node.value;
     }
+
     default: {
       throw new Error(
         `Unexpected node.type: ${JSON.stringify({

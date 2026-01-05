@@ -65,7 +65,6 @@ type ModuleImportResult =
       success: true;
       error?: undefined;
     };
-
 type VerificationResult = ModuleImportResult & {
   exportedNames: string[];
   modulePath: string;
@@ -135,7 +134,6 @@ const shouldVerifyFile = (filePath: string): boolean => {
 
 const extractModuleImports = (sourceCode: string): ModuleImport[] => {
   const moduleImportedNamesMap = new Map<string, Set<string>>();
-
   const [importStatements] = parse(sourceCode);
 
   forEach(

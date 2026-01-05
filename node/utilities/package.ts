@@ -14,7 +14,6 @@ const parsePackageName = (
     /^(?<scope>@[\-0-9a-z~][\-.0-9_a-z~]*\/)?(?<name>[\-0-9a-z~][\-.0-9_a-z~]*)(?:\/(?<subpath>.*))?$/v.exec(
       modulePath,
     );
-
   const { groups } = match ?? {};
 
   if (groups === undefined) {

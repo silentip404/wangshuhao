@@ -30,4 +30,5 @@ const printMessage = ({
 };
 
 export type { PrintMessageOptions };
+
 export { printMessage, printMessageOptionsSchema };

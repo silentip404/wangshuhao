@@ -53,6 +53,7 @@ const memoizedGetCaseVariants = memoize(getCaseVariants, {
 });
 
 export type { CaseVariants };
+
 export {
   getCaseVariants,
   memoizedGetCaseVariants,

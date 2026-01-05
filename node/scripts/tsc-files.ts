@@ -33,7 +33,6 @@ type CliArguments = WithHelpArg<{
   'files': string[];
   'ignore-unknown'?: boolean;
 }>;
-
 interface TypeCheckResult {
   isSuccess: boolean;
   output: string;

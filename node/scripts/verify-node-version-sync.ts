@@ -41,6 +41,7 @@ const getStandardNodeVersion = async (): Promise<string> => {
     });
     process.exit(1);
   }
+
   if (typeof nodeVersion !== 'string') {
     printMessage({
       type: 'error',
@@ -49,6 +50,7 @@ const getStandardNodeVersion = async (): Promise<string> => {
     });
     process.exit(1);
   }
+
   if (!exactNodeVersionRegex.test(nodeVersion)) {
     printMessage({
       type: 'error',
@@ -117,7 +119,6 @@ const errorDescriptions: (undefined | string)[] = await Promise.all([
     }
 
     const packageJson = await memoizedReadPackageJson();
-
     const nodeVersion = prop(packageJson, 'volta', 'node') as unknown;
 
     if (nodeVersion === standardNodeVersion) {

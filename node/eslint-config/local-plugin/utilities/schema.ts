@@ -14,4 +14,5 @@ const createESLintSchema = <const T extends UnionJsonSchema>(
 type InferSchema<T extends [UnionJsonSchema]> = [FromSchema<T['0']>];
 
 export type { InferSchema };
+
 export { createESLintSchema, defineUnionJsonSchema };

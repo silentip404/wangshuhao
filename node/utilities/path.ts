@@ -2,14 +2,14 @@ import path from 'node:path';
 
 const ROOT = path.resolve(import.meta.dirname, '../../');
 
-const resolveFromRoot = (...pathSegments: string[]): string =>
-  path.resolve(ROOT, ...pathSegments);
-
 interface ToRelativePosixPathOptions {
   filename: string;
   relativeDirname?: string;
   shouldAddDotSlash?: boolean;
 }
+
+const resolveFromRoot = (...pathSegments: string[]): string =>
+  path.resolve(ROOT, ...pathSegments);
 
 /**
  * 将任意格式的文件路径转换为相对于指定目录的 POSIX 格式路径
@@ -42,7 +42,6 @@ const toRelativePosixPath = ({
     path.normalize(relativeDirname),
     path.normalize(filename),
   );
-
   const posixPath = relativePath.replaceAll('\\', '/');
 
   return shouldAddDotSlash ? `./${posixPath}` : posixPath;

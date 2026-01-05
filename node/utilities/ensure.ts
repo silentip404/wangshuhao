@@ -21,7 +21,6 @@ const ensureModulePathInPackage = async (
     values(),
     flatMap(keys()),
   );
-
   const { packageName } = parsePackageName(modulePath);
 
   if (isIncludedIn(packageName, existingDependencies)) {

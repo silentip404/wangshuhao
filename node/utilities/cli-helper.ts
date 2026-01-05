@@ -9,6 +9,7 @@ interface HelpArgument {
   help?: boolean;
 }
 type WithHelpArgument<T> = HelpArgument & T;
+
 const helpArgumentConfig: ArgumentConfig<HelpArgument> = {
   help: {
     type: Boolean,
@@ -25,6 +26,7 @@ interface VerifyFilesArguments {
   'files'?: string[];
   'ignore-unknown'?: boolean;
 }
+
 const verifyFilesArgumentsConfig: ArgumentConfig<VerifyFilesArguments> = {
   'files': {
     type: String,
@@ -40,6 +42,7 @@ const verifyFilesArgumentsConfig: ArgumentConfig<VerifyFilesArguments> = {
     description: '是否自动忽略未知文件',
   },
 };
+
 interface AnalyzeVerifyFilesOptions {
   allRelatedFiles: string[];
   unknownErrorTitle: string;
@@ -51,12 +54,12 @@ interface AnalyzeVerifyFilesResult {
   shouldRunVerification: boolean;
   unknownFiles: string[];
 }
+
 const analyzeVerifyFiles = (
   options: AnalyzeVerifyFilesOptions,
 ): AnalyzeVerifyFilesResult => {
   const { files, allRelatedFiles, shouldIgnoreUnknown, unknownErrorTitle } =
     options;
-
   const [relatedFiles, unknownFiles] = pipe(
     files ?? [],
     map((filename) =>
@@ -94,6 +97,7 @@ export type {
   VerifyFilesArguments as VerifyFilesArgs,
   WithHelpArgument as WithHelpArg,
 };
+
 export {
   analyzeVerifyFiles,
   helpArgumentConfig as helpArgConfig,

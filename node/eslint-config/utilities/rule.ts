@@ -2,6 +2,9 @@ import type { Linter } from 'eslint';
 import type { Config } from 'eslint/config';
 import { forEachObj, isEmptyish, isTruthy, mapToObj } from 'remeda';
 
+interface CollectRuleNamesOptions {
+  shouldWithPluginName?: boolean;
+}
 type Plugins = NonNullable<Config['plugins']>;
 
 const createRules = (
@@ -10,9 +13,6 @@ const createRules = (
 ): Linter.RulesRecord =>
   mapToObj(ruleNames, (ruleName) => [ruleName, severity]);
 
-interface CollectRuleNamesOptions {
-  shouldWithPluginName?: boolean;
-}
 const collectRuleNames = (
   plugins: Plugins,
   options: CollectRuleNamesOptions = {},

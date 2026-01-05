@@ -200,6 +200,7 @@ const lintModuleIdentifier = (
   switch (mode) {
     case 'equal': {
       const expectedModuleIdentifier = matchedMatcher.identifier;
+
       reportInvalidModuleIdentifier(expectedModuleIdentifier);
 
       break;
@@ -207,6 +208,7 @@ const lintModuleIdentifier = (
 
     case 'camelCase': {
       const expectedModuleIdentifier = lintContext.modulePathVariants.camelCase;
+
       reportInvalidModuleIdentifier(expectedModuleIdentifier);
 
       break;
@@ -215,6 +217,7 @@ const lintModuleIdentifier = (
     case 'PascalCase': {
       const expectedModuleIdentifier =
         lintContext.modulePathVariants.PascalCase;
+
       reportInvalidModuleIdentifier(expectedModuleIdentifier);
 
       break;
@@ -222,7 +225,6 @@ const lintModuleIdentifier = (
 
     case 'replace': {
       const { regexSource, replacement, transformMode } = matchedMatcher;
-
       const replacedModulePath = memoizedRegexReplace(
         regexSource,
         modulePath,
@@ -236,18 +238,20 @@ const lintModuleIdentifier = (
 
       const replacedModulePathVariants =
         memoizedGetCaseVariants(replacedModulePath);
-
       const expectedModuleIdentifier = (() => {
         switch (transformMode) {
           case 'none': {
             return replacedModulePathVariants.raw.value;
           }
+
           case 'camelCase': {
             return replacedModulePathVariants.camelCase;
           }
+
           case 'PascalCase': {
             return replacedModulePathVariants.PascalCase;
           }
+
           default: {
             throw new Error(
               `Unexpected transformMode: ${JSON.stringify({
@@ -257,6 +261,7 @@ const lintModuleIdentifier = (
           }
         }
       })();
+
       reportInvalidModuleIdentifier(expectedModuleIdentifier);
 
       break;
@@ -363,7 +368,6 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
       },
       [`ExportAllDeclaration`]: (node) => {
         const modulePathVariants = memoizedGetCaseVariants(node.source.value);
-
         const namespaceModuleIdentifier = node.exported?.name;
 
         const lintContext = {

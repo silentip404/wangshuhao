@@ -35,6 +35,7 @@ const normalizeSeverity = (
 
         if (isArray(ruleValue)) {
           const ruleOptions = drop(ruleValue, 1);
+
           return concat([severity], ruleOptions);
         }
 

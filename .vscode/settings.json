@@ -8,6 +8,7 @@
     { "rule": "depend/ban-dependencies", "severity": "error" },
 
     // 关闭或降级一些支持自动修复的规则提示，降低开发过程的心智负担
+    { "rule": "@stylistic/*", "severity": "off" },
     { "rule": "perfectionist/*", "severity": "off" },
     { "rule": "command/command", "severity": "info" },
     { "rule": "curly", "severity": "off" },

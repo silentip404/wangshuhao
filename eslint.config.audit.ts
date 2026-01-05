@@ -15,42 +15,41 @@ import { GLOB_DERIVED_JS } from '#node/utilities/index.ts';
 
 import eslintConfig from './eslint.config.ts';
 
-const SEVERITY = 'warn';
+const AUDIT_SEVERITY = 'warn';
 
-const builtinConfigWithAllRules = normalizeSeverity(
-  [
-    {
-      name: 'eslint:audit/all-builtin-rules',
-      files: [...GLOB_DERIVED_JS],
-      rules: eslintJs.configs.all.rules,
-    },
-  ],
-  SEVERITY,
+const auditConfig = concat(
+  normalizeSeverity(
+    [
+      {
+        name: 'eslint:audit/all-builtin-rules',
+        files: [...GLOB_DERIVED_JS],
+        rules: eslintJs.configs.all.rules,
+      },
+    ],
+    AUDIT_SEVERITY,
+  ),
+  map(eslintConfig, (config) => {
+    const { shouldPrependAllRules } = resolveAuditSettings(config);
+
+    if (shouldPrependAllRules === false) {
+      return config;
+    }
+
+    const { plugins } = config;
+
+    if (isEmptyish(plugins)) {
+      return config;
+    }
+
+    const ruleNames = collectRuleNames(plugins);
+    const rules = createRules(ruleNames, AUDIT_SEVERITY);
+
+    return {
+      ...config,
+      rules: merge(rules, config.rules),
+    };
+  }),
 );
-
-const eslintConfigWithAllRules = map(eslintConfig, (config) => {
-  const { shouldPrependAllRules } = resolveAuditSettings(config);
-
-  if (shouldPrependAllRules === false) {
-    return config;
-  }
-
-  const { plugins } = config;
-
-  if (isEmptyish(plugins)) {
-    return config;
-  }
-
-  const ruleNames = collectRuleNames(plugins);
-  const rules = createRules(ruleNames, SEVERITY);
-
-  return {
-    ...config,
-    rules: merge(rules, config.rules),
-  };
-});
-
-const allPluginNames = collectPluginNames(eslintConfigWithAllRules);
 
 if (process.env['IS_KNIP_RUNNING'] !== 'true') {
   printMessage({
@@ -59,7 +58,7 @@ if (process.env['IS_KNIP_RUNNING'] !== 'true') {
       '已开启以下插件的全部规则对项目代码运行 ESLint 检查',
       '',
       `  - js${styleText('gray', '(@eslint/js)')}`,
-      ...allPluginNames.map((name) => `  - ${name}`),
+      ...map(collectPluginNames(auditConfig), (name) => `  - ${name}`),
       '',
       '请结合问题统计结果和项目实际需求，明确开启或关闭尚未配置的规则',
       '',
@@ -69,4 +68,4 @@ if (process.env['IS_KNIP_RUNNING'] !== 'true') {
   });
 }
 
-export default concat(builtinConfigWithAllRules, eslintConfigWithAllRules);
+export default auditConfig;

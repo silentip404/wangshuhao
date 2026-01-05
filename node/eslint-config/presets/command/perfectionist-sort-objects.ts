@@ -58,6 +58,7 @@ const perfectionistSortObjects = defineCommand({
 
     if (node === undefined) {
       context.reportError('Unable to find object to sort.');
+
       return;
     }
 
@@ -66,7 +67,6 @@ const perfectionistSortObjects = defineCommand({
     }
 
     const objectText = context.source.getText(node);
-
     const wrappedObjectText = `${TEMPORARY_VARIABLE_PREFIX}${objectText}`;
     const fixReport = linter.verifyAndFix(wrappedObjectText, config);
 

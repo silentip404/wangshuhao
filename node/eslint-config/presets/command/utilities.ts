@@ -22,7 +22,6 @@ const getCommandLoc = (
 ): TSESTree.SourceLocation => {
   const { loc } = comment;
   const commandLength = command.length;
-
   const commentLines = splitLines(comment.value);
   const commandCommentIndex = findLastIndex(commentLines, (commentLine) =>
     commentLine.includes(command),
@@ -34,7 +33,6 @@ const getCommandLoc = (
   }
 
   const columnOffset = commandComment.indexOf(command);
-
   const line = loc.start.line + commandCommentIndex;
   const column =
     commandCommentIndex === 0

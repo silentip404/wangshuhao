@@ -49,11 +49,124 @@ const stylisticOverrides = defineConfig([
             minProperties: 1,
             multiline: true,
           },
-
           [`TSTypeLiteral`]: {
             minProperties: 1,
             multiline: true,
           },
+        },
+      ],
+
+      /**
+       * 特定语句间空行控制
+       *
+       * @reason
+       * - 在关键语句块之间建立清晰的视觉边界，符合现代代码可读性最佳实践
+       */
+      '@stylistic/padding-line-between-statements': [
+        'warn',
+
+        // 指令
+        {
+          blankLine: 'always',
+          next: 'directive',
+          prev: '*',
+        },
+        {
+          blankLine: 'always',
+          next: '*',
+          prev: 'directive',
+        },
+        {
+          blankLine: 'any',
+          next: 'directive',
+          prev: 'directive',
+        },
+
+        // 类型声明
+        {
+          blankLine: 'always',
+          next: ['interface', 'type'],
+          prev: '*',
+        },
+        {
+          blankLine: 'always',
+          next: '*',
+          prev: ['interface', 'type'],
+        },
+        {
+          blankLine: 'any',
+          next: ['interface', 'type'],
+          prev: ['interface', 'type'],
+        },
+
+        // 变量声明
+        {
+          blankLine: 'always',
+          next: '*',
+          prev: ['const', 'let', 'var'],
+        },
+        {
+          blankLine: 'always',
+          next: ['const', 'let', 'var'],
+          prev: '*',
+        },
+        {
+          blankLine: 'any',
+          next: ['const', 'let', 'var'],
+          prev: ['const', 'let', 'var'],
+        },
+
+        // 表达式
+        {
+          blankLine: 'always',
+          next: 'expression',
+          prev: '*',
+        },
+        {
+          blankLine: 'always',
+          next: '*',
+          prev: 'expression',
+        },
+        {
+          blankLine: 'any',
+          next: 'expression',
+          prev: 'expression',
+        },
+
+        // 块状语句
+        {
+          blankLine: 'always',
+          next: 'block-like',
+          prev: '*',
+        },
+        {
+          blankLine: 'always',
+          next: '*',
+          prev: 'block-like',
+        },
+
+        // 中断点
+        {
+          blankLine: 'always',
+          next: ['return', 'throw', 'break', 'continue'],
+          prev: '*',
+        },
+        {
+          blankLine: 'always',
+          next: '*',
+          prev: ['return', 'throw', 'break', 'continue'],
+        },
+
+        // 导出
+        {
+          blankLine: 'always',
+          next: 'export',
+          prev: '*',
+        },
+        {
+          blankLine: 'always',
+          next: '*',
+          prev: 'export',
         },
       ],
     },

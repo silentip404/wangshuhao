@@ -1,10 +1,10 @@
-import { defineConfig } from 'eslint/config';
-
 /**
  * 感谢 antfu 的 eslint-config，本文件的代码完全来自于他的 eslint-config
  *
  * @see https://github.com/antfu/eslint-config/blob/main/src/configs/sort.ts
  */
+
+import { defineConfig } from 'eslint/config';
 
 const sortPackageJson = defineConfig([
   {

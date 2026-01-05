@@ -3,6 +3,7 @@ import { defineConfig } from 'eslint/config';
 const eslintCommentsOverrides = defineConfig([
   {
     name: 'eslint-comments:overrides',
+
     // @perfectionist-sort-objects
     rules: {
       /**
@@ -17,6 +18,7 @@ const eslintCommentsOverrides = defineConfig([
         'error',
         { allow: ['eslint-disable-next-line'] },
       ],
+
       /**
        * ESLint 指令注释描述要求
        *

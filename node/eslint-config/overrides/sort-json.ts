@@ -1,7 +1,10 @@
 import { defineConfig } from 'eslint/config';
 
-// 感谢 antfu 的 eslint-config，本文件的代码完全来自于他的 eslint-config
-// @see https://github.com/antfu/eslint-config/blob/main/src/configs/sort.ts
+/**
+ * 感谢 antfu 的 eslint-config，本文件的代码完全来自于他的 eslint-config
+ *
+ * @see https://github.com/antfu/eslint-config/blob/main/src/configs/sort.ts
+ */
 
 const sortPackageJson = defineConfig([
   {
@@ -132,6 +135,7 @@ const sortTsconfig = defineConfig([
             'disableSourceOfProjectReferenceRedirect',
             'disableSolutionSearching',
             'disableReferencedProjectLoad',
+
             /* Language and Environment */
             'target',
             'jsx',
@@ -146,6 +150,7 @@ const sortTsconfig = defineConfig([
             'emitDecoratorMetadata',
             'experimentalDecorators',
             'libReplacement',
+
             /* Modules */
             'baseUrl',
             'rootDir',
@@ -164,10 +169,12 @@ const sortTsconfig = defineConfig([
             'allowArbitraryExtensions',
             'allowImportingTsExtensions',
             'allowUmdGlobalAccess',
+
             /* JavaScript Support */
             'allowJs',
             'checkJs',
             'maxNodeModuleJsDepth',
+
             /* Type Checking */
             'strict',
             'strictBindCallApply',
@@ -188,6 +195,7 @@ const sortTsconfig = defineConfig([
             'noUnusedLocals',
             'noUnusedParameters',
             'useUnknownInCatchVariables',
+
             /* Emit */
             'declaration',
             'declarationDir',
@@ -212,6 +220,7 @@ const sortTsconfig = defineConfig([
             'sourceMap',
             'sourceRoot',
             'stripInternal',
+
             /* Interop Constraints */
             'allowSyntheticDefaultImports',
             'esModuleInterop',
@@ -221,6 +230,7 @@ const sortTsconfig = defineConfig([
             'preserveSymlinks',
             'verbatimModuleSyntax',
             'erasableSyntaxOnly',
+
             /* Completeness */
             'skipDefaultLibCheck',
             'skipLibCheck',

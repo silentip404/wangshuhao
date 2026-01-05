@@ -145,11 +145,13 @@ const createInterfacesObjectTypesGroups = (): Group[] => [
 const perfectionistOverrides = defineConfig([
   {
     name: 'perfectionist:conflicting-rules',
+
     // @perfectionist-sort-objects
     rules: { 'import-x/order': 'off', 'sort-imports': 'off' },
   },
   {
     name: 'perfectionist:overrides',
+
     // @perfectionist-sort-objects
     rules: {
       /**
@@ -159,6 +161,7 @@ const perfectionistOverrides = defineConfig([
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-exports': 'warn',
+
       /**
        * 导入语句排序
        *
@@ -183,6 +186,7 @@ const perfectionistOverrides = defineConfig([
           newlinesBetween: 1,
         },
       ],
+
       /**
        * TypeScript 接口属性排序
        *
@@ -193,6 +197,7 @@ const perfectionistOverrides = defineConfig([
         'warn',
         { groups: createInterfacesObjectTypesGroups() },
       ],
+
       /**
        * 交叉类型成员排序
        *
@@ -203,6 +208,7 @@ const perfectionistOverrides = defineConfig([
         'warn',
         { groups: createUnionIntersectionTypesGroups() },
       ],
+
       /**
        * JSX 属性排序规范
        *
@@ -238,6 +244,7 @@ const perfectionistOverrides = defineConfig([
           ],
         },
       ],
+
       /**
        * 强制模块成员排序
        *
@@ -245,6 +252,7 @@ const perfectionistOverrides = defineConfig([
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-modules': 'warn',
+
       /**
        * 具名导出排序规则
        *
@@ -252,6 +260,7 @@ const perfectionistOverrides = defineConfig([
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-named-exports': 'warn',
+
       /**
        * 具名导入排序规则
        *
@@ -259,6 +268,7 @@ const perfectionistOverrides = defineConfig([
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-named-imports': 'warn',
+
       /**
        * 强制对象类型的排序
        *
@@ -269,6 +279,7 @@ const perfectionistOverrides = defineConfig([
         'warn',
         { groups: createInterfacesObjectTypesGroups() },
       ],
+
       /**
        * 对象键排序检查
        *
@@ -278,6 +289,7 @@ const perfectionistOverrides = defineConfig([
        * - 通过 @perfectionist-sort-objects 注释在需要的地方手动启用，实现精准控制
        */
       'perfectionist/sort-objects': 'off',
+
       /**
        * 强制 switch 语句分支排序
        *
@@ -285,6 +297,7 @@ const perfectionistOverrides = defineConfig([
        * - 尊重开发者对代码结构的主导权
        */
       'perfectionist/sort-switch-case': 'off',
+
       /**
        * 联合类型成员排序
        *

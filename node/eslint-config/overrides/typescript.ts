@@ -6,6 +6,7 @@ import { reasons } from '#node/ts-expect-error-reasons.ts';
 const typescriptOverrides = defineConfig([
   {
     name: 'typescript:conflicting-rules',
+
     // @perfectionist-sort-objects
     rules: {
       'camelcase': 'off',
@@ -16,6 +17,7 @@ const typescriptOverrides = defineConfig([
   },
   {
     name: 'typescript:overrides',
+
     // @perfectionist-sort-objects
     rules: {
       /**
@@ -38,6 +40,7 @@ const typescriptOverrides = defineConfig([
           'ts-nocheck': true,
         },
       ],
+
       /**
        * return 语句值检查
        *
@@ -46,6 +49,7 @@ const typescriptOverrides = defineConfig([
        * - TypeScript 编译器能够进行更精确的控制流分析，因此覆盖范围比此规则更广
        */
       '@typescript-eslint/consistent-return': 'off',
+
       /**
        * 类型导出一致性检查
        *
@@ -58,6 +62,7 @@ const typescriptOverrides = defineConfig([
         'warn',
         { fixMixedExportsWithInlineTypeSpecifier: false },
       ],
+
       /**
        * 类型导入语法风格检查
        *
@@ -68,6 +73,7 @@ const typescriptOverrides = defineConfig([
         'warn',
         { fixStyle: 'separate-type-imports', prefer: 'type-imports' },
       ],
+
       /**
        * 函数返回类型声明检查
        *
@@ -81,6 +87,7 @@ const typescriptOverrides = defineConfig([
         'warn',
         { allowExpressions: true, allowIIFEs: true },
       ],
+
       /**
        * 模块边界类型声明检查
        *
@@ -91,6 +98,7 @@ const typescriptOverrides = defineConfig([
        * - 为 AI 辅助编程提供明确的类型上下文，提升代码生成质量和准确性
        */
       '@typescript-eslint/explicit-module-boundary-types': 'warn',
+
       /**
        * 强制使用变量初始化声明
        *
@@ -100,6 +108,7 @@ const typescriptOverrides = defineConfig([
        * - 在复杂逻辑中明确变量的初始状态，有助于增加团队协作的信心和可维护性。
        */
       '@typescript-eslint/init-declarations': 'warn',
+
       /**
        * 代码标识符命名检查
        *
@@ -165,6 +174,7 @@ const typescriptOverrides = defineConfig([
           types: ['boolean'],
         },
       ],
+
       /**
        * 类型导入副作用检查
        *
@@ -173,6 +183,7 @@ const typescriptOverrides = defineConfig([
        * - Next.js 内置打包工具能够自动管理模块导入和副作用
        */
       '@typescript-eslint/no-import-type-side-effects': 'off',
+
       /**
        * 魔法数字使用检查
        *
@@ -195,6 +206,7 @@ const typescriptOverrides = defineConfig([
           ignoreTypeIndexes: true,
         },
       ],
+
       /**
        * 禁止变量声明遮蔽外部作用域中的变量
        *
@@ -204,6 +216,7 @@ const typescriptOverrides = defineConfig([
        * - 理清各作用域中的变量关系有助于开发者更好地理解代码的结构。
        */
       '@typescript-eslint/no-shadow': 'warn',
+
       /**
        * 条件表达式类型检查
        *
@@ -212,6 +225,7 @@ const typescriptOverrides = defineConfig([
        * - 消除冗余的条件判断，让代码意图更清晰，便于理解代码逻辑
        */
       '@typescript-eslint/no-unnecessary-condition': 'error',
+
       /**
        * 类型断言安全性检查
        *
@@ -221,6 +235,7 @@ const typescriptOverrides = defineConfig([
        * - AI 辅助编程场景中防止生成不安全的类型断言代码
        */
       '@typescript-eslint/no-unsafe-type-assertion': 'error',
+
       /**
        * 禁止在变量定义之前使用变量
        *
@@ -230,6 +245,7 @@ const typescriptOverrides = defineConfig([
        * - TypeScript 静态检查无法检测此类时序问题，需要 ESLint 规则补充
        */
       '@typescript-eslint/no-use-before-define': 'error',
+
       /**
        * 强制使用解构赋值
        *
@@ -239,6 +255,7 @@ const typescriptOverrides = defineConfig([
        * - 在 TypeScript 中，解构赋值可以充分利用类型注释，增强类型安全。
        */
       '@typescript-eslint/prefer-destructuring': 'warn',
+
       /**
        * 空值合并运算符使用检查
        *
@@ -247,6 +264,7 @@ const typescriptOverrides = defineConfig([
        * - 要求开发者手动评估「空值」与「假值」的语义，避免产生难以发现的 bug，提升代码健壮性
        */
       '@typescript-eslint/prefer-nullish-coalescing': 'error',
+
       /**
        * 函数参数只读性检查
        *
@@ -256,6 +274,7 @@ const typescriptOverrides = defineConfig([
        * - AI 辅助编程场景下，过度的 readonly 约束会频繁触发类型错误修复，降低开发效率
        */
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
+
       /**
        * Promise 返回函数的 async 标记
        *
@@ -267,6 +286,7 @@ const typescriptOverrides = defineConfig([
         'warn',
         { allowAny: false },
       ],
+
       /**
        * 模板字符串表达式类型约束
        *
@@ -285,6 +305,7 @@ const typescriptOverrides = defineConfig([
           allowRegExp: false,
         },
       ],
+
       /**
        * 布尔表达式类型检查
        *
@@ -296,6 +317,7 @@ const typescriptOverrides = defineConfig([
         'error',
         { allowNullableObject: false, allowNumber: false, allowString: false },
       ],
+
       /**
        * switch 语句穷尽性检查
        *

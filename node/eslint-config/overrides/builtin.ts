@@ -3,6 +3,7 @@ import { defineConfig } from 'eslint/config';
 const builtinOverrides = defineConfig([
   {
     name: 'builtin:overrides',
+
     // @perfectionist-sort-objects
     rules: {
       /**
@@ -12,6 +13,7 @@ const builtinOverrides = defineConfig([
        * - 简洁的隐式返回语法减少模板代码，提升代码密度和可读性
        */
       'arrow-body-style': ['warn', 'as-needed'],
+
       /**
        * 注释首字母大写检查
        *
@@ -20,6 +22,7 @@ const builtinOverrides = defineConfig([
        * - 注释风格属于个人或团队偏好，不影响代码逻辑和可维护性
        */
       'capitalized-comments': 'off',
+
       /**
        * 圈复杂度控制
        *
@@ -28,6 +31,7 @@ const builtinOverrides = defineConfig([
        * - 限制圈复杂度可促使开发者拆分过长函数，提升代码可读性
        */
       'complexity': 'error',
+
       /**
        * 控制语句花括号风格
        *
@@ -36,6 +40,7 @@ const builtinOverrides = defineConfig([
        * - 提升代码清晰度，消除视觉歧义，降低维护风险
        */
       'curly': 'error',
+
       /**
        * switch 语句 default 分支检查
        *
@@ -43,6 +48,7 @@ const builtinOverrides = defineConfig([
        * - 强制开发者显式声明默认行为，避免运行时遗漏边界情况的错误处理
        */
       'default-case': 'warn',
+
       /**
        * 函数定义风格检查
        *
@@ -50,6 +56,7 @@ const builtinOverrides = defineConfig([
        * - 函数表达式避免了提升带来的隐式行为，使代码执行流程更清晰可预测
        */
       'func-style': ['warn', 'expression'],
+
       /**
        * 限制标识符的长度
        *
@@ -58,6 +65,7 @@ const builtinOverrides = defineConfig([
        * - 确保标识符具有足够的描述性，有助于明确代码的意图。
        */
       'id-length': 'warn',
+
       /**
        * 代码块嵌套深度控制
        *
@@ -66,6 +74,7 @@ const builtinOverrides = defineConfig([
        * - 限制嵌套深度可促使开发者拆分过长函数，提升代码可读性
        */
       'max-depth': 'error',
+
       /**
        * 文件代码行数控制
        *
@@ -78,6 +87,7 @@ const builtinOverrides = defineConfig([
         'warn',
         { max: 512, skipBlankLines: true, skipComments: true },
       ],
+
       /**
        * 函数代码行数控制
        *
@@ -90,6 +100,7 @@ const builtinOverrides = defineConfig([
         'warn',
         { max: 256, skipBlankLines: true, skipComments: true },
       ],
+
       /**
        * 函数语句数量控制
        *
@@ -102,6 +113,7 @@ const builtinOverrides = defineConfig([
         { max: 32 },
         { ignoreTopLevelFunctions: true },
       ],
+
       /**
        * 构造函数命名检查
        *
@@ -111,6 +123,7 @@ const builtinOverrides = defineConfig([
        * - 现代框架（React 函数组件、工厂函数）广泛使用大写命名但非构造函数的模式
        */
       'new-cap': 'off',
+
       /**
        * 禁止使用控制台输出方法
        *
@@ -120,6 +133,7 @@ const builtinOverrides = defineConfig([
        * - 临时调试代码使用之后需要及时删除
        */
       'no-console': 'warn',
+
       /**
        * 禁止使用 continue 语句
        *
@@ -128,6 +142,7 @@ const builtinOverrides = defineConfig([
        * - 在循环中提前跳过不满足条件的迭代是常见且合理的模式
        */
       'no-continue': 'off',
+
       /**
        * 禁止在包含 return 语句的 if 块之后使用 else 块
        *
@@ -135,6 +150,7 @@ const builtinOverrides = defineConfig([
        * - 简化代码逻辑，避免不必要的嵌套结构，使得控制流程更加清晰。
        */
       'no-else-return': ['warn', { allowElseIf: false }],
+
       /**
        * 行内注释控制
        *
@@ -142,6 +158,7 @@ const builtinOverrides = defineConfig([
        * - 行内注释容易与代码混杂，建议使用块注释或行前注释来提供更结构化的说明
        */
       'no-inline-comments': 'warn',
+
       /**
        * 禁止使用否定条件
        *
@@ -151,6 +168,7 @@ const builtinOverrides = defineConfig([
        * - 特别是在包含 `else` 分支或使用三元表达式时，避免否定条件可以减少潜在的错误。
        */
       'no-negated-condition': 'warn',
+
       /**
        * 三元表达式嵌套检查
        *
@@ -159,6 +177,7 @@ const builtinOverrides = defineConfig([
        * - 复杂的嵌套条件更适合用类型守卫或策略模式表达
        */
       'no-nested-ternary': 'error',
+
       /**
        * 禁止函数参数重新赋值
        *
@@ -167,6 +186,7 @@ const builtinOverrides = defineConfig([
        * - 遵循明确的不可变约定，减少副作用追踪难度
        */
       'no-param-reassign': ['error', { props: true }],
+
       /**
        * 语法限制规则
        *
@@ -194,6 +214,7 @@ const builtinOverrides = defineConfig([
           selector: 'ExportSpecifier[exportKind="type"]',
         },
       ],
+
       /**
        * 三元运算符使用检查
        *
@@ -202,6 +223,7 @@ const builtinOverrides = defineConfig([
        * - 通过 no-nested-ternary 规则限制嵌套使用即可
        */
       'no-ternary': 'off',
+
       /**
        * 禁止在变量声明时使用 undefined 进行初始化
        *
@@ -209,6 +231,7 @@ const builtinOverrides = defineConfig([
        * - 在某些场景下（如缓存变量、懒加载等），显式初始化为 `undefined` 能更清晰地表达设计意图
        */
       'no-undef-init': 'off',
+
       /**
        * undefined 标识符使用检查
        *
@@ -219,6 +242,7 @@ const builtinOverrides = defineConfig([
        * - 现代工具链（no-global-assign、no-shadow-restricted-names）已提供更精确的保护
        */
       'no-undefined': 'off',
+
       /**
        * 冗余三元表达式检查
        *
@@ -227,6 +251,7 @@ const builtinOverrides = defineConfig([
        * - 简化的布尔逻辑或空值合并更符合现代 JavaScript/TypeScript 习惯用法
        */
       'no-unneeded-ternary': ['warn', { defaultAssignment: false }],
+
       /**
        * 禁止不必要的赋值
        *
@@ -236,6 +261,7 @@ const builtinOverrides = defineConfig([
        * - 明确表达意图，减少可能引起混淆的代码片段，使得代码更加易于理解。
        */
       'no-useless-assignment': 'warn',
+
       /**
        * 禁止不必要的计算属性键
        *
@@ -244,6 +270,7 @@ const builtinOverrides = defineConfig([
        * - 明确规则可以促进一致的代码风格，降低代码审查和维护成本
        */
       'no-useless-computed-key': 'warn',
+
       /**
        * 强制使用对象字面量的简写语法
        *
@@ -253,6 +280,7 @@ const builtinOverrides = defineConfig([
        * - 符合现代 JavaScript 编码习惯，避免不一致的语法风格可能带来的困惑。
        */
       'object-shorthand': ['error', 'always'],
+
       /**
        * 变量声明方式控制
        *
@@ -262,6 +290,7 @@ const builtinOverrides = defineConfig([
        * - 方便添加、删除或修改单个变量声明，简化版本控制 diff
        */
       'one-var': ['warn', 'never'],
+
       /**
        * 禁止可能导致竞态条件的赋值
        *
@@ -271,6 +300,7 @@ const builtinOverrides = defineConfig([
        * - 提升代码的可维护性和可读性，明确逻辑流转
        */
       'require-atomic-updates': 'error',
+
       /**
        * 对象键排序检查
        *

@@ -3,6 +3,7 @@ import { defineConfig } from 'eslint/config';
 const reactOverrides = defineConfig([
   {
     name: 'react:overrides',
+
     // @perfectionist-sort-objects
     rules: {
       /**

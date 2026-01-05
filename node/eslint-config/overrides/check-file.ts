@@ -5,6 +5,7 @@ import { GLOB_ALL } from '#node/utilities/index.ts';
 const checkFileOverrides = defineConfig([
   {
     name: 'check-file:overrides',
+
     // @perfectionist-sort-objects
     rules: {
       /**
@@ -25,6 +26,7 @@ const checkFileOverrides = defineConfig([
           '**/*.mts': '*.ts',
         },
       ],
+
       /**
        * 文件命名检查
        *
@@ -37,6 +39,7 @@ const checkFileOverrides = defineConfig([
         { [GLOB_ALL]: 'KEBAB_CASE' },
         { ignoreMiddleExtensions: true },
       ],
+
       /**
        * 文件夹匹配检查
        *
@@ -47,6 +50,7 @@ const checkFileOverrides = defineConfig([
         'error',
         { '*.test.ts': '**/__tests__/' },
       ],
+
       /**
        * 文件夹命名检查
        *
@@ -57,6 +61,7 @@ const checkFileOverrides = defineConfig([
         'error',
         { [GLOB_ALL]: 'KEBAB_CASE' },
       ],
+
       /**
        * 禁止 index 文件
        *

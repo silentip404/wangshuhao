@@ -24,7 +24,7 @@ import {
   nextPresets,
   perfectionistOverrides,
   perfectionistPresets,
-  prettierPresets,
+  prettierOverrides,
   reactHooksPresets,
   reactOverrides,
   reactPresets,
@@ -32,6 +32,8 @@ import {
   regexpPresets,
   sortPackageJson,
   sortTsconfig,
+  stylisticOverrides,
+  stylisticPresets,
   typescriptOverrides,
   typescriptPresets,
   unicornPresets,
@@ -92,8 +94,8 @@ const eslintConfig = defineConfig([
       nextPresets,
       regexpPresets,
       unicornPresets,
+      stylisticPresets,
       perfectionistPresets,
-      prettierPresets,
       localPresets,
     ],
   },
@@ -112,8 +114,10 @@ const eslintConfig = defineConfig([
       reactOverrides,
       nextOverrides,
       regexpOverrides,
+      stylisticOverrides,
       perfectionistOverrides,
       localOverrides,
+      prettierOverrides,
     ],
   },
 
@@ -161,8 +165,10 @@ const eslintConfig = defineConfig([
     extends: [
       // 对 package.json 进行排序
       sortPackageJson,
+
       // 对 tsconfig.json 进行排序
       sortTsconfig,
+
       // 允许使用默认导出的特例
       {
         files: [
@@ -172,6 +178,7 @@ const eslintConfig = defineConfig([
         ],
         rules: { 'import-x/no-default-export': 'off' },
       },
+
       // 纯 Node.js 环境特例
       {
         files: [...GLOB_TSCONFIG_NODE_INCLUDE],
@@ -181,6 +188,7 @@ const eslintConfig = defineConfig([
           'unicorn/no-process-exit': 'off',
         },
       },
+
       // 需要保持大写的文件名
       {
         files: [
@@ -195,11 +203,13 @@ const eslintConfig = defineConfig([
           ],
         },
       },
+
       // 关闭文件命名检查的特例
       {
         files: [GLOB_DOT_FILES],
         rules: { 'check-file/filename-naming-convention': 'off' },
       },
+
       // 关闭文件夹命名检查的特例
       {
         files: [...GLOB_EXTERNAL_TYPES, GLOB_FILES_IN_DOT_DIRECTORIES],

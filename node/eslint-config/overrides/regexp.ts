@@ -3,6 +3,7 @@ import { defineConfig } from 'eslint/config';
 const regexpOverrides = defineConfig([
   {
     name: 'regexp:conflicting-rules',
+
     // @perfectionist-sort-objects
     rules: {
       '@typescript-eslint/prefer-regexp-exec': 'off',
@@ -11,6 +12,7 @@ const regexpOverrides = defineConfig([
   },
   {
     name: 'regexp:overrides',
+
     // @perfectionist-sort-objects
     rules: {
       /**
@@ -22,6 +24,7 @@ const regexpOverrides = defineConfig([
        * - 提高代码的可维护性和可读性，促使开发者意识到正则表达式的复杂性与性能影响。
        */
       'regexp/no-super-linear-move': 'error',
+
       /**
        * 强制使用命名捕获组
        *
@@ -31,6 +34,7 @@ const regexpOverrides = defineConfig([
        * - 避免使用无名捕获组可能导致的混淆，特别是在正则表达式较复杂时。
        */
       'regexp/prefer-named-capture-group': 'warn',
+
       /**
        * 正则表达式执行方法检查
        *
@@ -40,6 +44,7 @@ const regexpOverrides = defineConfig([
        * - 明确区分单次匹配和全局匹配的语义，避免 API 混用
        */
       'regexp/prefer-regexp-exec': 'warn',
+
       /**
        * 强制使用 Unicode 正则表达式标志
        *
@@ -49,6 +54,7 @@ const regexpOverrides = defineConfig([
        * - 此规则支持自动修复，减少手动维护成本，提升代码一致性。
        */
       'regexp/require-unicode-regexp': 'warn',
+
       /**
        * 强制使用 Unicode 集支持的正则表达式标志
        *
@@ -58,6 +64,7 @@ const regexpOverrides = defineConfig([
        * - 此规则有助于开发者避免潜在的错误匹配，提升代码质量。
        */
       'regexp/require-unicode-sets-regexp': 'warn',
+
       /**
        * 正则表达式分支选项排序
        *
@@ -65,6 +72,7 @@ const regexpOverrides = defineConfig([
        * - 对不影响匹配结果的正则分支自动排序，降低代码审查时的认知负担
        */
       'regexp/sort-alternatives': 'warn',
+
       /**
        * 强制字符类中的元素顺序
        *

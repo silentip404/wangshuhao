@@ -5,6 +5,7 @@ import { ensureModulePathsInPackage } from '#node/utilities/index.ts';
 const dependOverrides = defineConfig([
   {
     name: 'depend:overrides',
+
     // @perfectionist-sort-objects
     rules: {
       /**

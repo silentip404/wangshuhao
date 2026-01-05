@@ -20,6 +20,7 @@ const jsoncOverrides = defineConfig([
   },
   {
     name: 'jsonc:overrides',
+
     // @perfectionist-sort-objects
     rules: {
       /**
@@ -30,6 +31,7 @@ const jsoncOverrides = defineConfig([
        * - 显式配置规则以确保 linting 行为的精确控制和可预测性
        */
       'jsonc/auto': 'off',
+
       /**
        * JSON 属性键命名规范
        *
@@ -37,6 +39,7 @@ const jsoncOverrides = defineConfig([
        * - JSON 文件承载多种场景，强制统一命名会破坏生态兼容性
        */
       'jsonc/key-name-casing': 'off',
+
       /**
        * JSON 数组值排序检查
        *
@@ -44,6 +47,7 @@ const jsoncOverrides = defineConfig([
        * - 提倡根据上下文语义手动管理数组顺序
        */
       'jsonc/sort-array-values': 'off',
+
       /**
        * JSON 对象键排序
        *

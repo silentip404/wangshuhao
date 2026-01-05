@@ -10,11 +10,13 @@ import {
 const importXOverrides = defineConfig([
   {
     name: 'import-x:conflicting-rules',
+
     // @perfectionist-sort-objects
     rules: { 'no-duplicate-imports': 'off' },
   },
   {
     name: 'import-x:overrides',
+
     // @perfectionist-sort-objects
     rules: {
       /**
@@ -24,6 +26,7 @@ const importXOverrides = defineConfig([
        * - 顶层类型导入语法便于 Node.js type stripping 完全跳过纯类型包的解析
        */
       'import-x/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
+
       /**
        * 导出语句位置要求
        *
@@ -32,6 +35,7 @@ const importXOverrides = defineConfig([
        * - 符合现代 ESM 模块化实践，便于大型项目维护和团队协作
        */
       'import-x/exports-last': 'warn',
+
       /**
        * 导入语句文件扩展名检查
        *
@@ -44,6 +48,7 @@ const importXOverrides = defineConfig([
         'ignorePackages',
         { checkTypeImports: true, fix: true },
       ],
+
       /**
        * import 语句位置规范
        *
@@ -51,6 +56,7 @@ const importXOverrides = defineConfig([
        * - 统一的导入位置便于快速了解模块依赖关系，提升代码可维护性
        */
       'import-x/first': 'error',
+
       /**
        * 导出语句集中管理
        *
@@ -59,6 +65,7 @@ const importXOverrides = defineConfig([
        * - 集中式导出便于快速定位模块的公共接口,降低维护成本
        */
       'import-x/group-exports': 'warn',
+
       /**
        * 模块依赖数量控制
        *
@@ -72,6 +79,7 @@ const importXOverrides = defineConfig([
         'warn',
         { ignoreTypeImports: true, max: 16 },
       ],
+
       /**
        * 导入语句后空行处理
        *
@@ -80,6 +88,7 @@ const importXOverrides = defineConfig([
        * - 明确区分模块依赖声明和实际业务逻辑，便于代码审查和理解
        */
       'import-x/newline-after-import': 'warn',
+
       /**
        * 循环依赖检测
        *
@@ -92,6 +101,7 @@ const importXOverrides = defineConfig([
         'error',
         { ignoreExternal: true, maxDepth: Infinity },
       ],
+
       /**
        * 禁止使用默认导出
        *
@@ -100,6 +110,7 @@ const importXOverrides = defineConfig([
        * - 命名导出提供更好的 IDE 支持（自动补全、重命名重构）和代码可追溯性
        */
       'import-x/no-default-export': 'warn',
+
       /**
        * 重复导入检查
        *
@@ -107,6 +118,7 @@ const importXOverrides = defineConfig([
        * - 合并来自同一模块的多个导入语句，提高代码整洁度和可维护性
        */
       'import-x/no-duplicates': ['warn', { 'prefer-inline': false }],
+
       /**
        * 模块内部路径导入控制
        *
@@ -140,6 +152,7 @@ const importXOverrides = defineConfig([
           ],
         },
       ],
+
       /**
        * 禁止将默认导出作为命名导入
        *
@@ -147,6 +160,7 @@ const importXOverrides = defineConfig([
        * - 保持默认导入风格一致，避免混淆命名导入和默认导入
        */
       'import-x/no-named-default': 'warn',
+
       /**
        * 禁止使用命名导出
        *
@@ -154,6 +168,7 @@ const importXOverrides = defineConfig([
        * - 已启用 import-x/no-default-export 鼓励命名导出，再启用此规则会导致冲突
        */
       'import-x/no-named-export': 'off',
+
       /**
        * 命名空间导入使用约束
        *
@@ -162,6 +177,7 @@ const importXOverrides = defineConfig([
        * - 显式导入提升代码可读性，避免命名空间对象的过度使用，降低模块耦合度
        */
       'import-x/no-namespace': 'warn',
+
       /**
        * Node.js 内置模块使用检查
        *
@@ -170,6 +186,7 @@ const importXOverrides = defineConfig([
        * - 外部通过显式的文件匹配来放开限制，使项目边界清晰、职责分明
        */
       'import-x/no-nodejs-modules': 'error',
+
       /**
        * 禁止相对路径导入父目录模块
        *
@@ -190,6 +207,7 @@ const importXOverrides = defineConfig([
           ],
         },
       ],
+
       /**
        * 未分配导入检查
        *
@@ -198,6 +216,7 @@ const importXOverrides = defineConfig([
        * - 避免误报项目中合理的副作用导入，同时防止无意义的导入语句
        */
       'import-x/no-unassigned-import': ['error', { allow: ['**/*.css'] }],
+
       /**
        * 单一导出时使用默认导出
        *
@@ -205,6 +224,7 @@ const importXOverrides = defineConfig([
        * - 已启用 import-x/no-default-export 鼓励命名导出，再启用此规则会导致冲突
        */
       'import-x/prefer-default-export': 'off',
+
       /**
        * 模块语法歧义检查
        *

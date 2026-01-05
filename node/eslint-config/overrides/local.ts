@@ -5,11 +5,13 @@ import { ensureModulePathInPackage } from '#node/utilities/index.ts';
 const localOverrides = defineConfig([
   {
     name: 'local:conflicting-rules',
+
     // @perfectionist-sort-objects
     rules: { 'import-x/no-rename-default': 'off' },
   },
   {
     name: 'local:overrides',
+
     // @perfectionist-sort-objects
     rules: {
       /**
@@ -61,6 +63,12 @@ const localOverrides = defineConfig([
               regexSource: `^${await ensureModulePathInPackage('eslint-plugin-command/config')}$`,
               mode: 'equal',
               identifier: 'createCommandConfig',
+            },
+            {
+              type: 'all',
+              regexSource: `^${await ensureModulePathInPackage('@stylistic/eslint-plugin')}$`,
+              mode: 'equal',
+              identifier: 'stylisticPlugin',
             },
 
             // 通用命名

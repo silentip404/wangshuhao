@@ -3,7 +3,7 @@ import { availableParallelism } from 'node:os';
 import path from 'node:path';
 import { styleText } from 'node:util';
 
-import { init, parse } from 'es-module-lexer';
+import { init, parse as parseEsModuleLexer } from 'es-module-lexer';
 import pMap from 'p-map';
 import {
   concat,
@@ -26,20 +26,23 @@ import { parse as parseArguments } from 'ts-command-line-args';
 
 import { printMessage } from '#lib/utilities/index.ts';
 import {
-  analyzeVerifyFiles,
   ensureModulePathsInPackage,
   GLOB_TSCONFIG_LIB_INCLUDE,
   GLOB_TSCONFIG_NODE_INCLUDE,
-  helpArgConfig,
-  helpArgOptions,
   isNpmPackage,
   parsePackageName,
   resolveFromRoot,
   ROOT,
   toRelativePosixPath,
-  verifyFilesArgsConfig,
 } from '#node/utilities/index.ts';
-import type { VerifyFilesArgs, WithHelpArg } from '#node/utilities/index.ts';
+
+import {
+  analyzeVerifyFiles,
+  helpArgumentConfig,
+  helpArgumentOptions,
+  verifyFilesArgumentsConfig,
+} from './utilities.ts';
+import type { VerifyFilesArguments, WithHelpArgument } from './utilities.ts';
 
 const WHITELIST = new Set<string>(await ensureModulePathsInPackage([]));
 const ALL_RELATED_FILES_PATTERNS = concat(
@@ -47,7 +50,7 @@ const ALL_RELATED_FILES_PATTERNS = concat(
   GLOB_TSCONFIG_NODE_INCLUDE,
 );
 
-type CliArguments = WithHelpArg<VerifyFilesArgs>;
+type CliArguments = WithHelpArgument<VerifyFilesArguments>;
 interface FileWithImports {
   filePath: string;
   moduleImports: ModuleImport[];
@@ -74,11 +77,11 @@ type VerificationResult = ModuleImportResult & {
 
 const cliArguments = parseArguments<CliArguments>(
   {
-    ...helpArgConfig,
-    ...verifyFilesArgsConfig,
+    ...helpArgumentConfig,
+    ...verifyFilesArgumentsConfig,
   },
   {
-    ...helpArgOptions,
+    ...helpArgumentOptions,
 
     headerContentSections: [
       {
@@ -134,7 +137,7 @@ const shouldVerifyFile = (filePath: string): boolean => {
 
 const extractModuleImports = (sourceCode: string): ModuleImport[] => {
   const moduleImportedNamesMap = new Map<string, Set<string>>();
-  const [importStatements] = parse(sourceCode);
+  const [importStatements] = parseEsModuleLexer(sourceCode);
 
   forEach(
     importStatements,

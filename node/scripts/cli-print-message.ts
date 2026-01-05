@@ -1,21 +1,22 @@
 import path from 'node:path';
 
 import { join, omit } from 'remeda';
-import { parse } from 'ts-command-line-args';
+import { parse as parseArguments } from 'ts-command-line-args';
 
 import {
   printMessage,
   printMessageOptionsSchema,
 } from '#lib/utilities/index.ts';
 import type { PrintMessageOptions } from '#lib/utilities/index.ts';
-import { helpArgConfig, helpArgOptions } from '#node/utilities/index.ts';
-import type { WithHelpArg } from '#node/utilities/index.ts';
+
+import { helpArgumentConfig, helpArgumentOptions } from './utilities.ts';
+import type { WithHelpArgument } from './utilities.ts';
 
 const typeSchema = printMessageOptionsSchema.shape.type.unwrap();
 
-const cliArguments = parse<WithHelpArg<PrintMessageOptions>>(
+const cliArguments = parseArguments<WithHelpArgument<PrintMessageOptions>>(
   {
-    ...helpArgConfig,
+    ...helpArgumentConfig,
 
     type: {
       type: (value) => typeSchema.parse(value),
@@ -35,7 +36,7 @@ const cliArguments = parse<WithHelpArg<PrintMessageOptions>>(
     },
   },
   {
-    ...helpArgOptions,
+    ...helpArgumentOptions,
 
     headerContentSections: [
       {

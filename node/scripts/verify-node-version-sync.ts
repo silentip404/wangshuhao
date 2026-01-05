@@ -10,22 +10,25 @@ import {
   omit,
   prop,
 } from 'remeda';
-import { parse } from 'ts-command-line-args';
+import { parse as parseArguments } from 'ts-command-line-args';
 import { z } from 'zod';
 
 import { printMessage } from '#lib/utilities/index.ts';
 import {
-  analyzeVerifyFiles,
-  helpArgConfig,
-  helpArgOptions,
   memoizedReadPackageJson,
   readYamlFile,
   resolveFromRoot,
-  verifyFilesArgsConfig,
 } from '#node/utilities/index.ts';
-import type { VerifyFilesArgs, WithHelpArg } from '#node/utilities/index.ts';
 
-type CliArguments = WithHelpArg<VerifyFilesArgs>;
+import {
+  analyzeVerifyFiles,
+  helpArgumentConfig,
+  helpArgumentOptions,
+  verifyFilesArgumentsConfig,
+} from './utilities.ts';
+import type { VerifyFilesArguments, WithHelpArgument } from './utilities.ts';
+
+type CliArguments = WithHelpArgument<VerifyFilesArguments>;
 
 // 获取并验证 Node 版本
 const getStandardNodeVersion = async (): Promise<string> => {
@@ -66,13 +69,13 @@ const getStandardNodeVersion = async (): Promise<string> => {
   return nodeVersion;
 };
 
-const cliArguments = parse<CliArguments>(
+const cliArguments = parseArguments<CliArguments>(
   {
-    ...helpArgConfig,
-    ...verifyFilesArgsConfig,
+    ...helpArgumentConfig,
+    ...verifyFilesArgumentsConfig,
   },
   {
-    ...helpArgOptions,
+    ...helpArgumentOptions,
 
     headerContentSections: [
       {

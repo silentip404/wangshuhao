@@ -2,8 +2,7 @@ import { isEmptyish, isIncludedIn, map, partition, pipe } from 'remeda';
 import type { ArgumentConfig, ParseOptions } from 'ts-command-line-args';
 
 import { printMessage } from '#lib/utilities/index.ts';
-
-import { toRelativePosixPath } from './path.ts';
+import { toRelativePosixPath } from '#node/utilities/index.ts';
 
 interface HelpArgument {
   help?: boolean;
@@ -94,14 +93,11 @@ const analyzeVerifyFiles = (
   };
 };
 
-export type {
-  VerifyFilesArguments as VerifyFilesArgs,
-  WithHelpArgument as WithHelpArg,
-};
+export type { VerifyFilesArguments, WithHelpArgument };
 
 export {
   analyzeVerifyFiles,
-  helpArgumentConfig as helpArgConfig,
-  helpArgumentOptions as helpArgOptions,
-  verifyFilesArgumentsConfig as verifyFilesArgsConfig,
+  helpArgumentConfig,
+  helpArgumentOptions,
+  verifyFilesArgumentsConfig,
 };

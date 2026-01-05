@@ -74,7 +74,7 @@ const getBlockStatements = (
 
 const { ruleName, createRule } = initRule(import.meta.url);
 
-const ruleValue = createRule<[], MessageIds>({
+const ruleValue = createRule<never[], MessageIds>({
   name: ruleName,
   meta: {
     type: 'layout',

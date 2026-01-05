@@ -187,13 +187,20 @@ const eslintConfig = defineConfig([
         },
       },
 
+      // 允许使用 process.exit() 的特例
+      {
+        files: ['node/scripts/**/*.ts'],
+        rules: {
+          'unicorn/no-process-exit': 'off',
+        },
+      },
+
       // 纯 Node.js 环境特例
       {
         files: [...GLOB_TSCONFIG_NODE_INCLUDE],
         rules: {
           'import-x/no-nodejs-modules': 'off',
           'regexp/no-super-linear-move': 'off',
-          'unicorn/no-process-exit': 'off',
         },
       },
 

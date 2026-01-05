@@ -16,20 +16,20 @@ import {
   pipe,
 } from 'remeda';
 import { exec } from 'tinyexec';
-import { parse } from 'ts-command-line-args';
+import { parse as parseArguments } from 'ts-command-line-args';
 
 import { NEWLINE, printMessage } from '#lib/utilities/index.ts';
 import {
-  helpArgConfig,
-  helpArgOptions,
   projects,
   resolveFromRoot,
   ROOT,
   toRelativePosixPath,
 } from '#node/utilities/index.ts';
-import type { WithHelpArg } from '#node/utilities/index.ts';
 
-type CliArguments = WithHelpArg<{
+import { helpArgumentConfig, helpArgumentOptions } from './utilities.ts';
+import type { WithHelpArgument } from './utilities.ts';
+
+type CliArguments = WithHelpArgument<{
   'files': string[];
   'ignore-unknown'?: boolean;
 }>;
@@ -161,9 +161,9 @@ const typeCheckViaCli = async (
   };
 };
 
-const cliArguments = parse<CliArguments>(
+const cliArguments = parseArguments<CliArguments>(
   {
-    ...helpArgConfig,
+    ...helpArgumentConfig,
 
     'files': {
       type: String,
@@ -179,7 +179,7 @@ const cliArguments = parse<CliArguments>(
     },
   },
   {
-    ...helpArgOptions,
+    ...helpArgumentOptions,
 
     headerContentSections: [
       {

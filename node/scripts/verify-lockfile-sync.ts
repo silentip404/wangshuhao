@@ -2,26 +2,27 @@ import path from 'node:path';
 
 import { omit } from 'remeda';
 import { exec } from 'tinyexec';
-import { parse } from 'ts-command-line-args';
+import { parse as parseArguments } from 'ts-command-line-args';
 
 import { printMessage } from '#lib/utilities/index.ts';
+
 import {
   analyzeVerifyFiles,
-  helpArgConfig,
-  helpArgOptions,
-  verifyFilesArgsConfig,
-} from '#node/utilities/index.ts';
-import type { VerifyFilesArgs, WithHelpArg } from '#node/utilities/index.ts';
+  helpArgumentConfig,
+  helpArgumentOptions,
+  verifyFilesArgumentsConfig,
+} from './utilities.ts';
+import type { VerifyFilesArguments, WithHelpArgument } from './utilities.ts';
 
-type CliArguments = WithHelpArg<VerifyFilesArgs>;
+type CliArguments = WithHelpArgument<VerifyFilesArguments>;
 
-const cliArguments = parse<CliArguments>(
+const cliArguments = parseArguments<CliArguments>(
   {
-    ...helpArgConfig,
-    ...verifyFilesArgsConfig,
+    ...helpArgumentConfig,
+    ...verifyFilesArgumentsConfig,
   },
   {
-    ...helpArgOptions,
+    ...helpArgumentOptions,
 
     headerContentSections: [
       {

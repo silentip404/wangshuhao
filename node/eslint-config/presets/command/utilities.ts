@@ -42,8 +42,14 @@ const getCommandLoc = (
       : columnOffset;
 
   return {
-    start: { line, column },
-    end: { line, column: column + commandLength },
+    start: {
+      line,
+      column,
+    },
+    end: {
+      line,
+      column: column + commandLength,
+    },
   };
 };
 

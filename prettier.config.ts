@@ -5,16 +5,23 @@ import { GLOB_JSONC } from '#node/utilities/index.ts';
 const prettierConfig: Config = {
   singleQuote: true,
   quoteProps: 'consistent',
-  objectWrap: 'collapse',
   htmlWhitespaceSensitivity: 'ignore',
   vueIndentScriptAndStyle: true,
   singleAttributePerLine: true,
 
   overrides: [
-    { files: [...GLOB_JSONC], options: { parser: 'jsonc' } },
+    {
+      files: [...GLOB_JSONC],
+      options: {
+        parser: 'jsonc',
+      },
+    },
     {
       files: ['**/LICENSE'],
-      options: { parser: 'markdown', proseWrap: 'always' },
+      options: {
+        parser: 'markdown',
+        proseWrap: 'always',
+      },
     },
   ],
 };

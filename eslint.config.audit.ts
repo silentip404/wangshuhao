@@ -44,7 +44,10 @@ const eslintConfigWithAllRules = map(eslintConfig, (config) => {
   const ruleNames = collectRuleNames(plugins);
   const rules = createRules(ruleNames, SEVERITY);
 
-  return { ...config, rules: merge(rules, config.rules) };
+  return {
+    ...config,
+    rules: merge(rules, config.rules),
+  };
 });
 
 const allPluginNames = collectPluginNames(eslintConfigWithAllRules);

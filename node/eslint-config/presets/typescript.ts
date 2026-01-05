@@ -8,7 +8,10 @@ const typescriptPresets = defineConfig([
   configs.stylisticTypeChecked,
   {
     languageOptions: {
-      parserOptions: { tsconfigRootDir: ROOT, projectService: true },
+      parserOptions: {
+        tsconfigRootDir: ROOT,
+        projectService: true,
+      },
     },
   },
 ]);

@@ -3,7 +3,9 @@ import { defineConfig } from 'eslint/config';
 
 const perfectionistPresets = defineConfig([
   {
-    plugins: { perfectionist: perfectionistPlugin },
+    plugins: {
+      perfectionist: perfectionistPlugin,
+    },
     settings: {
       perfectionist: {
         type: 'natural',

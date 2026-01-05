@@ -85,7 +85,11 @@ const builtinOverrides = defineConfig([
        */
       'max-lines': [
         'warn',
-        { max: 512, skipBlankLines: true, skipComments: true },
+        {
+          max: 512,
+          skipBlankLines: true,
+          skipComments: true,
+        },
       ],
 
       /**
@@ -98,7 +102,11 @@ const builtinOverrides = defineConfig([
        */
       'max-lines-per-function': [
         'warn',
-        { max: 256, skipBlankLines: true, skipComments: true },
+        {
+          max: 256,
+          skipBlankLines: true,
+          skipComments: true,
+        },
       ],
 
       /**
@@ -110,8 +118,12 @@ const builtinOverrides = defineConfig([
        */
       'max-statements': [
         'warn',
-        { max: 32 },
-        { ignoreTopLevelFunctions: true },
+        {
+          max: 32,
+        },
+        {
+          ignoreTopLevelFunctions: true,
+        },
       ],
 
       /**
@@ -149,7 +161,12 @@ const builtinOverrides = defineConfig([
        * @reason
        * - 简化代码逻辑，避免不必要的嵌套结构，使得控制流程更加清晰。
        */
-      'no-else-return': ['warn', { allowElseIf: false }],
+      'no-else-return': [
+        'warn',
+        {
+          allowElseIf: false,
+        },
+      ],
 
       /**
        * 行内注释控制
@@ -185,7 +202,12 @@ const builtinOverrides = defineConfig([
        * - 防止参数重新赋值导致的反直觉行为，提高代码可预测性
        * - 遵循明确的不可变约定，减少副作用追踪难度
        */
-      'no-param-reassign': ['error', { props: true }],
+      'no-param-reassign': [
+        'error',
+        {
+          props: true,
+        },
+      ],
 
       /**
        * 语法限制规则
@@ -250,7 +272,12 @@ const builtinOverrides = defineConfig([
        * - 冗余的三元表达式增加认知负担，降低代码表达力
        * - 简化的布尔逻辑或空值合并更符合现代 JavaScript/TypeScript 习惯用法
        */
-      'no-unneeded-ternary': ['warn', { defaultAssignment: false }],
+      'no-unneeded-ternary': [
+        'warn',
+        {
+          defaultAssignment: false,
+        },
+      ],
 
       /**
        * 禁止不必要的赋值

@@ -23,7 +23,10 @@ const cliArguments = parse<WithHelpArg<PrintMessageOptions>>(
       optional: true,
       description: '消息类型',
     },
-    title: { type: String, description: '消息标题' },
+    title: {
+      type: String,
+      description: '消息标题',
+    },
     description: {
       type: String,
       multiple: true,

@@ -18,7 +18,9 @@ const dependOverrides = defineConfig([
        */
       'depend/ban-dependencies': [
         'error',
-        { allowed: await ensureModulePathsInPackage([]) },
+        {
+          allowed: await ensureModulePathsInPackage([]),
+        },
       ],
     },
   },

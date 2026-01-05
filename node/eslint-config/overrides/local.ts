@@ -7,7 +7,9 @@ const localOverrides = defineConfig([
     name: 'local:conflicting-rules',
 
     // @perfectionist-sort-objects
-    rules: { 'import-x/no-rename-default': 'off' },
+    rules: {
+      'import-x/no-rename-default': 'off',
+    },
   },
   {
     name: 'local:overrides',
@@ -97,7 +99,11 @@ const localOverrides = defineConfig([
             },
 
             // 默认命名
-            { type: 'all', regexSource: '^.*$', mode: 'camelCase' },
+            {
+              type: 'all',
+              regexSource: '^.*$',
+              mode: 'camelCase',
+            },
           ],
         },
       ],

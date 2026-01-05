@@ -8,7 +8,13 @@ const { configs } = nextPlugin;
 
 const nextPresets = defineConfig([
   configs['core-web-vitals'],
-  { settings: { next: { rootDir: ROOT } } },
+  {
+    settings: {
+      next: {
+        rootDir: ROOT,
+      },
+    },
+  },
 ]);
 
 export { nextPresets };

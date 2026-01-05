@@ -98,7 +98,11 @@
 
 import { defineConfig } from 'eslint/config';
 
-type Group = string | { newlinesBetween: number };
+type Group =
+  | string
+  | {
+      newlinesBetween: number;
+    };
 
 /**
  * Unknown 组守卫配置
@@ -111,7 +115,12 @@ type Group = string | { newlinesBetween: number };
  * @reason
  * - 利用格式化冲突作为主动告警机制，而非被动发现分类遗漏
  */
-const UNKNOWN_GROUP_GUARD = [{ newlinesBetween: 3 }, 'unknown'];
+const UNKNOWN_GROUP_GUARD = [
+  {
+    newlinesBetween: 3,
+  },
+  'unknown',
+];
 
 const createUnionIntersectionTypesGroups = (): Group[] => [
   'nullish',
@@ -147,7 +156,10 @@ const perfectionistOverrides = defineConfig([
     name: 'perfectionist:conflicting-rules',
 
     // @perfectionist-sort-objects
-    rules: { 'import-x/order': 'off', 'sort-imports': 'off' },
+    rules: {
+      'import-x/order': 'off',
+      'sort-imports': 'off',
+    },
   },
   {
     name: 'perfectionist:overrides',
@@ -195,7 +207,9 @@ const perfectionistOverrides = defineConfig([
        */
       'perfectionist/sort-interfaces': [
         'warn',
-        { groups: createInterfacesObjectTypesGroups() },
+        {
+          groups: createInterfacesObjectTypesGroups(),
+        },
       ],
 
       /**
@@ -206,7 +220,9 @@ const perfectionistOverrides = defineConfig([
        */
       'perfectionist/sort-intersection-types': [
         'warn',
-        { groups: createUnionIntersectionTypesGroups() },
+        {
+          groups: createUnionIntersectionTypesGroups(),
+        },
       ],
 
       /**
@@ -219,14 +235,38 @@ const perfectionistOverrides = defineConfig([
         'warn',
         {
           customGroups: [
-            { elementNamePattern: '^key$', groupName: 'key' },
-            { elementNamePattern: '^ref$', groupName: 'ref' },
-            { elementNamePattern: '^id$', groupName: 'id' },
-            { elementNamePattern: '^className$', groupName: 'className' },
-            { elementNamePattern: '^style$', groupName: 'style' },
-            { elementNamePattern: '^data-.*$', groupName: 'data-attribute' },
-            { elementNamePattern: '^aria-.*$', groupName: 'aria-attribute' },
-            { elementNamePattern: '^on[A-Z].*$', groupName: 'callback' },
+            {
+              elementNamePattern: '^key$',
+              groupName: 'key',
+            },
+            {
+              elementNamePattern: '^ref$',
+              groupName: 'ref',
+            },
+            {
+              elementNamePattern: '^id$',
+              groupName: 'id',
+            },
+            {
+              elementNamePattern: '^className$',
+              groupName: 'className',
+            },
+            {
+              elementNamePattern: '^style$',
+              groupName: 'style',
+            },
+            {
+              elementNamePattern: '^data-.*$',
+              groupName: 'data-attribute',
+            },
+            {
+              elementNamePattern: '^aria-.*$',
+              groupName: 'aria-attribute',
+            },
+            {
+              elementNamePattern: '^on[A-Z].*$',
+              groupName: 'callback',
+            },
           ],
           groups: [
             'key',
@@ -277,7 +317,9 @@ const perfectionistOverrides = defineConfig([
        */
       'perfectionist/sort-object-types': [
         'warn',
-        { groups: createInterfacesObjectTypesGroups() },
+        {
+          groups: createInterfacesObjectTypesGroups(),
+        },
       ],
 
       /**
@@ -306,7 +348,9 @@ const perfectionistOverrides = defineConfig([
        */
       'perfectionist/sort-union-types': [
         'warn',
-        { groups: createUnionIntersectionTypesGroups() },
+        {
+          groups: createUnionIntersectionTypesGroups(),
+        },
       ],
     },
   },

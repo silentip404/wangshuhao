@@ -10,7 +10,11 @@ const GLOB_FILES_IN_DOT_DIRECTORIES = '**/.*/**' as const;
 const ALIASES_GLOB = ['#*/**'];
 const ALIASES_REGEX = pipe(
   ALIASES_GLOB,
-  map((alias) => makeRe(alias, { nocomment: true })),
+  map((alias) =>
+    makeRe(alias, {
+      nocomment: true,
+    }),
+  ),
   filter(isTruthy),
 );
 const ALIASES_REGEX_STRING = map(ALIASES_REGEX, (regex) => regex.source);

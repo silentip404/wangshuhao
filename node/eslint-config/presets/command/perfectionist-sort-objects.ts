@@ -15,14 +15,22 @@ const matchCommand = createCommandMatcher(COMMAND);
 
 const linter = new Linter();
 const config: Linter.Config = {
-  plugins: { perfectionist: perfectionistPlugin },
+  plugins: {
+    perfectionist: perfectionistPlugin,
+  },
   rules: {
     'perfectionist/sort-objects': [
       'warn',
-      { type: 'natural', ignoreCase: false },
+      {
+        type: 'natural',
+        ignoreCase: false,
+      },
     ],
   },
-  languageOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  languageOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
 };
 
 const perfectionistSortObjects = defineCommand({

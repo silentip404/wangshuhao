@@ -13,7 +13,12 @@ const sortPackageJson = defineConfig([
     rules: {
       'jsonc/sort-array-values': [
         'error',
-        { order: { type: 'asc' }, pathPattern: '^files$' },
+        {
+          order: {
+            type: 'asc',
+          },
+          pathPattern: '^files$',
+        },
       ],
       'jsonc/sort-keys': [
         'error',
@@ -68,19 +73,27 @@ const sortPackageJson = defineConfig([
           pathPattern: '^$',
         },
         {
-          order: { type: 'asc' },
+          order: {
+            type: 'asc',
+          },
           pathPattern: '^(?:dev|peer|optional|bundled)?[Dd]ependencies(Meta)?$',
         },
         {
-          order: { type: 'asc' },
+          order: {
+            type: 'asc',
+          },
           pathPattern: '^(?:resolutions|overrides|pnpm.overrides)$',
         },
         {
-          order: { type: 'asc' },
+          order: {
+            type: 'asc',
+          },
           pathPattern: String.raw`^workspaces\.catalog$`,
         },
         {
-          order: { type: 'asc' },
+          order: {
+            type: 'asc',
+          },
           pathPattern: String.raw`^workspaces\.catalogs\.[^.]+$`,
         },
         {

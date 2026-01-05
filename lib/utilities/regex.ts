@@ -11,7 +11,9 @@ const memoizedCompileRegex = memoize(
       return undefined;
     }
   },
-  { cacheKey: ([regexSource]) => regexSource },
+  {
+    cacheKey: ([regexSource]) => regexSource,
+  },
 );
 
 const memoizedRegexTest = memoize(
@@ -20,7 +22,9 @@ const memoizedRegexTest = memoize(
 
     return regex === undefined ? undefined : regex.test(text);
   },
-  { cacheKey: (parameters) => join(parameters, NULL_CHAR) },
+  {
+    cacheKey: (parameters) => join(parameters, NULL_CHAR),
+  },
 );
 
 const memoizedRegexReplace = memoize(
@@ -33,7 +37,9 @@ const memoizedRegexReplace = memoize(
 
     return regex === undefined ? undefined : text.replace(regex, replacement);
   },
-  { cacheKey: (parameters) => join(parameters, NULL_CHAR) },
+  {
+    cacheKey: (parameters) => join(parameters, NULL_CHAR),
+  },
 );
 
 export { memoizedRegexReplace, memoizedRegexTest };

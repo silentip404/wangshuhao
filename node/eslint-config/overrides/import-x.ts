@@ -12,7 +12,9 @@ const importXOverrides = defineConfig([
     name: 'import-x:conflicting-rules',
 
     // @perfectionist-sort-objects
-    rules: { 'no-duplicate-imports': 'off' },
+    rules: {
+      'no-duplicate-imports': 'off',
+    },
   },
   {
     name: 'import-x:overrides',
@@ -46,7 +48,10 @@ const importXOverrides = defineConfig([
       'import-x/extensions': [
         'error',
         'ignorePackages',
-        { checkTypeImports: true, fix: true },
+        {
+          checkTypeImports: true,
+          fix: true,
+        },
       ],
 
       /**
@@ -77,7 +82,10 @@ const importXOverrides = defineConfig([
        */
       'import-x/max-dependencies': [
         'warn',
-        { ignoreTypeImports: true, max: 16 },
+        {
+          ignoreTypeImports: true,
+          max: 16,
+        },
       ],
 
       /**
@@ -99,7 +107,10 @@ const importXOverrides = defineConfig([
        */
       'import-x/no-cycle': [
         'error',
-        { ignoreExternal: true, maxDepth: Infinity },
+        {
+          ignoreExternal: true,
+          maxDepth: Infinity,
+        },
       ],
 
       /**
@@ -117,7 +128,12 @@ const importXOverrides = defineConfig([
        * @reason
        * - 合并来自同一模块的多个导入语句，提高代码整洁度和可维护性
        */
-      'import-x/no-duplicates': ['warn', { 'prefer-inline': false }],
+      'import-x/no-duplicates': [
+        'warn',
+        {
+          'prefer-inline': false,
+        },
+      ],
 
       /**
        * 模块内部路径导入控制
@@ -215,7 +231,12 @@ const importXOverrides = defineConfig([
        * - 明确标记允许的副作用导入模式，提高代码可维护性和可理解性
        * - 避免误报项目中合理的副作用导入，同时防止无意义的导入语句
        */
-      'import-x/no-unassigned-import': ['error', { allow: ['**/*.css'] }],
+      'import-x/no-unassigned-import': [
+        'error',
+        {
+          allow: ['**/*.css'],
+        },
+      ],
 
       /**
        * 单一导出时使用默认导出

@@ -17,7 +17,7 @@ const prettierOverrides = defineConfig([
        */
       ...omitBy(prettierConfig.rules, (ruleValue) => ruleValue === 0),
 
-      // 其他冲突规则
+      '@stylistic/exp-list-style': 'off',
       '@stylistic/max-len': 'off',
     },
   },

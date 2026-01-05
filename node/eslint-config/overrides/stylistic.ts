@@ -35,6 +35,27 @@ const stylisticOverrides = defineConfig([
        * - 统一的注释风格有助于维护代码库的一致性，降低认知负担
        */
       '@stylistic/multiline-comment-style': 'warn',
+
+      /**
+       * 对象花括号换行风格控制
+       *
+       * @reason
+       * - 强制多行提升属性可读性，便于版本控制中追踪单个属性变更
+       */
+      '@stylistic/object-curly-newline': [
+        'warn',
+        {
+          [`ObjectExpression`]: {
+            minProperties: 1,
+            multiline: true,
+          },
+
+          [`TSTypeLiteral`]: {
+            minProperties: 1,
+            multiline: true,
+          },
+        },
+      ],
     },
   },
 ]);

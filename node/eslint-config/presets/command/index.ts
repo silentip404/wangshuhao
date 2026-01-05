@@ -4,7 +4,9 @@ import { defineConfig } from 'eslint/config';
 import { perfectionistSortObjects } from './perfectionist-sort-objects.ts';
 
 const commandPresets = defineConfig([
-  createCommandConfig({ commands: [perfectionistSortObjects] }),
+  createCommandConfig({
+    commands: [perfectionistSortObjects],
+  }),
 ]);
 
 export { commandPresets };

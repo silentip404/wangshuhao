@@ -12,7 +12,11 @@ const getNodeText = (
       return node.value;
     }
     default: {
-      throw new Error(`Unexpected node.type: ${JSON.stringify({ node })}`);
+      throw new Error(
+        `Unexpected node.type: ${JSON.stringify({
+          node,
+        })}`,
+      );
     }
   }
 };

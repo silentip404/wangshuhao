@@ -36,8 +36,12 @@ const checkFileOverrides = defineConfig([
        */
       'check-file/filename-naming-convention': [
         'error',
-        { [GLOB_ALL]: 'KEBAB_CASE' },
-        { ignoreMiddleExtensions: true },
+        {
+          [GLOB_ALL]: 'KEBAB_CASE',
+        },
+        {
+          ignoreMiddleExtensions: true,
+        },
       ],
 
       /**
@@ -48,7 +52,9 @@ const checkFileOverrides = defineConfig([
        */
       'check-file/folder-match-with-fex': [
         'error',
-        { '*.test.ts': '**/__tests__/' },
+        {
+          '*.test.ts': '**/__tests__/',
+        },
       ],
 
       /**
@@ -59,7 +65,9 @@ const checkFileOverrides = defineConfig([
        */
       'check-file/folder-naming-convention': [
         'error',
-        { [GLOB_ALL]: 'KEBAB_CASE' },
+        {
+          [GLOB_ALL]: 'KEBAB_CASE',
+        },
       ],
 
       /**

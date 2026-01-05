@@ -60,7 +60,9 @@ const typescriptOverrides = defineConfig([
        */
       '@typescript-eslint/consistent-type-exports': [
         'warn',
-        { fixMixedExportsWithInlineTypeSpecifier: false },
+        {
+          fixMixedExportsWithInlineTypeSpecifier: false,
+        },
       ],
 
       /**
@@ -71,7 +73,10 @@ const typescriptOverrides = defineConfig([
        */
       '@typescript-eslint/consistent-type-imports': [
         'warn',
-        { fixStyle: 'separate-type-imports', prefer: 'type-imports' },
+        {
+          fixStyle: 'separate-type-imports',
+          prefer: 'type-imports',
+        },
       ],
 
       /**
@@ -85,7 +90,10 @@ const typescriptOverrides = defineConfig([
        */
       '@typescript-eslint/explicit-function-return-type': [
         'warn',
-        { allowExpressions: true, allowIIFEs: true },
+        {
+          allowExpressions: true,
+          allowIIFEs: true,
+        },
       ],
 
       /**
@@ -121,12 +129,24 @@ const typescriptOverrides = defineConfig([
         'warn',
 
         // 默认规则
-        { format: ['camelCase'], selector: 'default' },
+        {
+          format: ['camelCase'],
+          selector: 'default',
+        },
 
         // 基础规则
-        { format: ['camelCase', 'UPPER_CASE'], selector: 'variable' },
-        { format: ['camelCase'], selector: 'parameter' },
-        { format: ['camelCase', 'PascalCase'], selector: 'function' },
+        {
+          format: ['camelCase', 'UPPER_CASE'],
+          selector: 'variable',
+        },
+        {
+          format: ['camelCase'],
+          selector: 'parameter',
+        },
+        {
+          format: ['camelCase', 'PascalCase'],
+          selector: 'function',
+        },
         {
           format: ['camelCase'],
           leadingUnderscore: 'require',
@@ -135,11 +155,20 @@ const typescriptOverrides = defineConfig([
         },
 
         // 类型系统规则
-        { format: ['PascalCase'], selector: 'typeLike' },
-        { format: ['UPPER_CASE'], selector: 'enumMember' },
+        {
+          format: ['PascalCase'],
+          selector: 'typeLike',
+        },
+        {
+          format: ['UPPER_CASE'],
+          selector: 'enumMember',
+        },
 
         // 导入规则
-        { format: ['camelCase', 'PascalCase'], selector: 'import' },
+        {
+          format: ['camelCase', 'PascalCase'],
+          selector: 'import',
+        },
 
         // 特殊规则
         {
@@ -284,7 +313,9 @@ const typescriptOverrides = defineConfig([
        */
       '@typescript-eslint/promise-function-async': [
         'warn',
-        { allowAny: false },
+        {
+          allowAny: false,
+        },
       ],
 
       /**
@@ -315,7 +346,11 @@ const typescriptOverrides = defineConfig([
        */
       '@typescript-eslint/strict-boolean-expressions': [
         'error',
-        { allowNullableObject: false, allowNumber: false, allowString: false },
+        {
+          allowNullableObject: false,
+          allowNumber: false,
+          allowString: false,
+        },
       ],
 
       /**
@@ -328,7 +363,9 @@ const typescriptOverrides = defineConfig([
        */
       '@typescript-eslint/switch-exhaustiveness-check': [
         'error',
-        { requireDefaultForNonUnion: true },
+        {
+          requireDefaultForNonUnion: true,
+        },
       ],
     },
   },

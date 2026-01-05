@@ -62,7 +62,10 @@ const getStandardNodeVersion = async (): Promise<string> => {
 };
 
 const cliArguments = parse<CliArguments>(
-  { ...helpArgConfig, ...verifyFilesArgsConfig },
+  {
+    ...helpArgConfig,
+    ...verifyFilesArgsConfig,
+  },
   {
     ...helpArgOptions,
 

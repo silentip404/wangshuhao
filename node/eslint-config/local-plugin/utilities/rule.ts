@@ -14,7 +14,10 @@ const initRule = (
       `https://github.com/silentip404/wangshuhao/blob/main/eslint-config/local-plugin/rules/${name}.ts`,
   );
 
-  return { ruleName, createRule };
+  return {
+    ruleName,
+    createRule,
+  };
 };
 
 export { initRule };

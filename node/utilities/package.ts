@@ -6,7 +6,10 @@ import { ALIASES_REGEX } from './file-patterns.ts';
 
 const parsePackageName = (
   modulePath: string,
-): { packageName: string; subpath: string } => {
+): {
+  packageName: string;
+  subpath: string;
+} => {
   const match =
     /^(?<scope>@[\-0-9a-z~][\-.0-9_a-z~]*\/)?(?<name>[\-0-9a-z~][\-.0-9_a-z~]*)(?:\/(?<subpath>.*))?$/v.exec(
       modulePath,
@@ -22,7 +25,10 @@ const parsePackageName = (
   const name = groups['name'] ?? '';
   const subpath = groups['subpath'] ?? '';
 
-  return { packageName: scope + name, subpath };
+  return {
+    packageName: scope + name,
+    subpath,
+  };
 };
 
 const isNpmPackage = (modulePath: string): boolean =>

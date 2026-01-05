@@ -49,16 +49,25 @@ const buildTemporaryConfigFilename = Handlebars.compile<{
 
 const cleanupTemporaryConfigs = (): void => {
   const temporaryConfigFiles = pipe(
-    fs.readdirSync(ROOT, { withFileTypes: true }),
+    fs.readdirSync(ROOT, {
+      withFileTypes: true,
+    }),
     filter((dirent) => dirent.isFile()),
     map((dirent) => dirent.name),
     filter(
-      minimatch.filter(buildTemporaryConfigFilename({ name: '*', uid: '*' })),
+      minimatch.filter(
+        buildTemporaryConfigFilename({
+          name: '*',
+          uid: '*',
+        }),
+      ),
     ),
   );
 
   forEach(temporaryConfigFiles, (temporaryConfigFile) => {
-    fs.rmSync(resolveFromRoot(temporaryConfigFile), { force: true });
+    fs.rmSync(resolveFromRoot(temporaryConfigFile), {
+      force: true,
+    });
   });
 };
 
@@ -74,7 +83,10 @@ const typeCheckViaCli = async (
 
   const projectCheckResults: (
     | undefined
-    | { configName: string; errorOutput: string }
+    | {
+        configName: string;
+        errorOutput: string;
+      }
   )[] = await Promise.all(
     map(projects, async (project) => {
       const matchingFiles = filter(typeCheckableFiles, (file) =>
@@ -98,7 +110,11 @@ const typeCheckViaCli = async (
           filename: project.configName,
           shouldAddDotSlash: true,
         }),
-        compilerOptions: { composite: false, incremental: false, noEmit: true },
+        compilerOptions: {
+          composite: false,
+          incremental: false,
+          noEmit: true,
+        },
         files: matchingFiles,
         include: project.baseInclude,
       });
@@ -106,7 +122,9 @@ const typeCheckViaCli = async (
       const { exitCode, stdout, stderr } = await exec(
         'pnpm',
         ['exec', 'tsc', '--project', temporaryConfigPath, '--pretty'],
-        { throwOnError: false },
+        {
+          throwOnError: false,
+        },
       );
 
       if (exitCode === 0) {
@@ -125,7 +143,10 @@ const typeCheckViaCli = async (
   const failedProjects = filter(projectCheckResults, isDefined);
 
   if (isEmptyish(failedProjects)) {
-    return { isSuccess: true, output: '' };
+    return {
+      isSuccess: true,
+      output: '',
+    };
   }
 
   const output = join(
@@ -135,7 +156,10 @@ const typeCheckViaCli = async (
     NEWLINE,
   );
 
-  return { isSuccess: false, output };
+  return {
+    isSuccess: false,
+    output,
+  };
 };
 
 const cliArguments = parse<CliArguments>(
@@ -173,7 +197,11 @@ const { files, 'ignore-unknown': shouldIgnoreUnknown } = options;
 
 const [typeCheckableFiles, unsupportedFiles] = pipe(
   files,
-  map((filename) => toRelativePosixPath({ filename })),
+  map((filename) =>
+    toRelativePosixPath({
+      filename,
+    }),
+  ),
   // eslint-disable-next-line unicorn/no-array-callback-reference -- 此处为误报：minimatch.filter 接收的第一个参数为 pattern 字符串而非回调函数
   partition(minimatch.filter(TS_FILE_EXTENSIONS_PATTERN)),
 );

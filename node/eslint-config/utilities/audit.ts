@@ -16,7 +16,9 @@ const defineConfigWithAuditSettings = (
 ): Config[] =>
   map(configs, (config) => ({
     ...config,
-    settings: merge(config.settings, { [AUDIT_SETTINGS_NAMESPACE]: settings }),
+    settings: merge(config.settings, {
+      [AUDIT_SETTINGS_NAMESPACE]: settings,
+    }),
   }));
 
 const resolveAuditSettings = (config: Config): AuditSettings => {

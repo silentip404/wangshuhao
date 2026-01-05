@@ -16,7 +16,9 @@ const eslintCommentsOverrides = defineConfig([
        */
       '@eslint-community/eslint-comments/no-use': [
         'error',
-        { allow: ['eslint-disable-next-line'] },
+        {
+          allow: ['eslint-disable-next-line'],
+        },
       ],
 
       /**

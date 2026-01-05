@@ -39,12 +39,16 @@ const typeSchema = defineUnionJsonSchema({
   type: 'string',
   enum: ['default', 'namespace', 'all'],
 });
-const regexSourceSchema = defineUnionJsonSchema({ type: 'string' });
+const regexSourceSchema = defineUnionJsonSchema({
+  type: 'string',
+});
 const eslintSchema = createESLintSchema({
   type: 'object',
   additionalProperties: false,
   properties: {
-    ignoreUnMatched: { type: 'boolean' },
+    ignoreUnMatched: {
+      type: 'boolean',
+    },
     matchers: {
       type: 'array',
       items: {
@@ -56,8 +60,13 @@ const eslintSchema = createESLintSchema({
             properties: {
               type: typeSchema,
               regexSource: regexSourceSchema,
-              mode: { type: 'string', const: 'equal' },
-              identifier: { type: 'string' },
+              mode: {
+                type: 'string',
+                const: 'equal',
+              },
+              identifier: {
+                type: 'string',
+              },
             },
           },
           {
@@ -67,7 +76,10 @@ const eslintSchema = createESLintSchema({
             properties: {
               type: typeSchema,
               regexSource: regexSourceSchema,
-              mode: { type: 'string', enum: ['camelCase', 'PascalCase'] },
+              mode: {
+                type: 'string',
+                enum: ['camelCase', 'PascalCase'],
+              },
             },
           },
           {
@@ -83,8 +95,13 @@ const eslintSchema = createESLintSchema({
             properties: {
               type: typeSchema,
               regexSource: regexSourceSchema,
-              mode: { type: 'string', const: 'replace' },
-              replacement: { type: 'string' },
+              mode: {
+                type: 'string',
+                const: 'replace',
+              },
+              replacement: {
+                type: 'string',
+              },
               transformMode: {
                 type: 'string',
                 enum: ['none', 'camelCase', 'PascalCase'],
@@ -129,7 +146,9 @@ const lintModuleIdentifier = (
           lintContext.context.report({
             node: lintContext.node,
             messageId: 'invalidRegexSource',
-            data: { regexSource: matcher.regexSource },
+            data: {
+              regexSource: matcher.regexSource,
+            },
           });
 
           lintContext.reportedInvalidRegexSources.add(matcher.regexSource);
@@ -150,7 +169,9 @@ const lintModuleIdentifier = (
     lintContext.context.report({
       node: lintContext.node,
       messageId: 'matcherNotFound',
-      data: { modulePath },
+      data: {
+        modulePath,
+      },
     });
 
     return;
@@ -166,7 +187,11 @@ const lintModuleIdentifier = (
     lintContext.context.report({
       node: lintContext.node,
       messageId: 'invalidModuleIdentifier',
-      data: { moduleIdentifier, modulePath, expectedModuleIdentifier },
+      data: {
+        moduleIdentifier,
+        modulePath,
+        expectedModuleIdentifier,
+      },
     });
   };
 
@@ -225,7 +250,9 @@ const lintModuleIdentifier = (
           }
           default: {
             throw new Error(
-              `Unexpected transformMode: ${JSON.stringify({ transformMode })}`,
+              `Unexpected transformMode: ${JSON.stringify({
+                transformMode,
+              })}`,
             );
           }
         }
@@ -236,7 +263,11 @@ const lintModuleIdentifier = (
     }
 
     default: {
-      throw new Error(`Unexpected mode: ${JSON.stringify({ mode })}`);
+      throw new Error(
+        `Unexpected mode: ${JSON.stringify({
+          mode,
+        })}`,
+      );
     }
   }
 };
@@ -263,7 +294,13 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
   defaultOptions: [
     {
       ignoreUnMatched: false,
-      matchers: [{ type: 'all', regexSource: '^.*$', mode: 'camelCase' }],
+      matchers: [
+        {
+          type: 'all',
+          regexSource: '^.*$',
+          mode: 'camelCase',
+        },
+      ],
     },
   ],
   create: (context, [ruleOptions]) => {
@@ -297,7 +334,11 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
           },
         )?.local.name;
 
-        const lintContext = { ...baseLintContext, node, modulePathVariants };
+        const lintContext = {
+          ...baseLintContext,
+          node,
+          modulePathVariants,
+        };
 
         if (defaultModuleIdentifier !== undefined) {
           lintModuleIdentifier(lintContext, {
@@ -325,7 +366,11 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
 
         const namespaceModuleIdentifier = node.exported?.name;
 
-        const lintContext = { ...baseLintContext, node, modulePathVariants };
+        const lintContext = {
+          ...baseLintContext,
+          node,
+          modulePathVariants,
+        };
 
         if (namespaceModuleIdentifier !== undefined) {
           lintModuleIdentifier(lintContext, {
@@ -352,7 +397,11 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
             : getNodeText(namedDefaultSpecifier.exported);
         })();
 
-        const lintContext = { ...baseLintContext, node, modulePathVariants };
+        const lintContext = {
+          ...baseLintContext,
+          node,
+          modulePathVariants,
+        };
 
         if (namedDefaultModuleIdentifier !== undefined) {
           lintModuleIdentifier(lintContext, {

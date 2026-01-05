@@ -16,7 +16,10 @@ import type { VerifyFilesArgs, WithHelpArg } from '#node/utilities/index.ts';
 type CliArguments = WithHelpArg<VerifyFilesArgs>;
 
 const cliArguments = parse<CliArguments>(
-  { ...helpArgConfig, ...verifyFilesArgsConfig },
+  {
+    ...helpArgConfig,
+    ...verifyFilesArgsConfig,
+  },
   {
     ...helpArgOptions,
 
@@ -54,7 +57,9 @@ if (!shouldRunVerification) {
 const { exitCode, stdout, stderr } = await exec(
   'pnpm',
   ['install', '--frozen-lockfile', '--offline', '--loglevel=warn'],
-  { throwOnError: false },
+  {
+    throwOnError: false,
+  },
 );
 
 if (exitCode !== 0) {

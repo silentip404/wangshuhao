@@ -27,7 +27,11 @@ const jsoncPresets = defineConfig([
   },
   {
     files: [...GLOB_DERIVED_JSON],
-    languageOptions: { parser: { parseForESLint } },
+    languageOptions: {
+      parser: {
+        parseForESLint,
+      },
+    },
   },
 ]);
 

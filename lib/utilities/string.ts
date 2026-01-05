@@ -14,10 +14,14 @@ interface CaseVariants {
   [`camelCase`]: string;
   [`kebab-case`]: string;
   [`PascalCase`]: string;
-  [`raw`]: { [`lowercase`]: string; [`UPPERCASE`]: string; [`value`]: string };
   [`SCREAMING_SNAKE_CASE`]: string;
   [`snake_case`]: string;
   [`Title Case`]: string;
+  [`raw`]: {
+    [`lowercase`]: string;
+    [`UPPERCASE`]: string;
+    [`value`]: string;
+  };
 }
 
 const NULL_CHAR = '\0' as const;

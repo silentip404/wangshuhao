@@ -57,8 +57,14 @@ interface ModuleImport {
   modulePath: string;
 }
 type ModuleImportResult =
-  | { error: string; success: false }
-  | { success: true; error?: undefined };
+  | {
+      error: string;
+      success: false;
+    }
+  | {
+      success: true;
+      error?: undefined;
+    };
 
 type VerificationResult = ModuleImportResult & {
   exportedNames: string[];
@@ -68,7 +74,10 @@ type VerificationResult = ModuleImportResult & {
 };
 
 const cliArguments = parseArguments<CliArguments>(
-  { ...helpArgConfig, ...verifyFilesArgsConfig },
+  {
+    ...helpArgConfig,
+    ...verifyFilesArgsConfig,
+  },
   {
     ...helpArgOptions,
 
@@ -102,7 +111,9 @@ const NAMED_IMPORTS_REGEX = /\{(?<specifiers>[^\}]+)\}/v;
 const SPECIFIER_TYPE_PREFIX_REGEX = /^type\s+/v;
 const AS_RENAME_REGEX = /\s+as\s+/v;
 
-const allRelatedFiles = await glob(ALL_RELATED_FILES_PATTERNS, { cwd: ROOT });
+const allRelatedFiles = await glob(ALL_RELATED_FILES_PATTERNS, {
+  cwd: ROOT,
+});
 const { shouldRunVerification, relatedFiles } = analyzeVerifyFiles({
   files,
   allRelatedFiles,
@@ -202,7 +213,10 @@ const verifyModuleImport = async (
     const importedModule = (await import(modulePath)) as unknown;
 
     if (!isPlainObject(importedModule)) {
-      return { success: false, error: '导入的模块不是对象' };
+      return {
+        success: false,
+        error: '导入的模块不是对象',
+      };
     }
 
     const missingExports = filter(
@@ -211,8 +225,13 @@ const verifyModuleImport = async (
     );
 
     return isEmptyish(missingExports)
-      ? { success: true }
-      : { success: false, error: `缺少导出(${join(missingExports, ', ')})` };
+      ? {
+          success: true,
+        }
+      : {
+          success: false,
+          error: `缺少导出(${join(missingExports, ', ')})`,
+        };
   } catch (error) {
     return {
       success: false,
@@ -233,14 +252,23 @@ const filesWithImports: FileWithImports[] = await pMap(
     const sourceCode = await readFile(resolveFromRoot(filePath), 'utf8');
     const moduleImports = extractModuleImports(sourceCode);
 
-    return { filePath, moduleImports };
+    return {
+      filePath,
+      moduleImports,
+    };
   },
-  { concurrency: CONCURRENCY },
+  {
+    concurrency: CONCURRENCY,
+  },
 );
 
 const npmPackageMap = new Map<
   string,
-  { exportedNames: Set<string>; packageName: string; sourceFiles: Set<string> }
+  {
+    exportedNames: Set<string>;
+    packageName: string;
+    sourceFiles: Set<string>;
+  }
 >();
 
 forEach(filesWithImports, ({ filePath, moduleImports }) => {
@@ -266,7 +294,10 @@ forEach(filesWithImports, ({ filePath, moduleImports }) => {
     }
 
     packageInfo.sourceFiles.add(
-      toRelativePosixPath({ filename: filePath, shouldAddDotSlash: true }),
+      toRelativePosixPath({
+        filename: filePath,
+        shouldAddDotSlash: true,
+      }),
     );
 
     forEach(importedNames, (name) => packageInfo.exportedNames.add(name));
@@ -286,7 +317,9 @@ const verificationResults: VerificationResult[] = await pMap(
     sourceFiles,
     ...(await verifyModuleImport(modulePath, [...exportedNames])),
   }),
-  { concurrency: CONCURRENCY },
+  {
+    concurrency: CONCURRENCY,
+  },
 );
 
 const isInWhitelist = (verification: {

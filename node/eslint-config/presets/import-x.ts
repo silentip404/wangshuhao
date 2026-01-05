@@ -11,7 +11,9 @@ const importXPresets = defineConfig([
   {
     settings: {
       'import-x/resolver-next': [
-        createTypeScriptImportResolver({ alwaysTryTypes: true }),
+        createTypeScriptImportResolver({
+          alwaysTryTypes: true,
+        }),
       ],
     },
   },

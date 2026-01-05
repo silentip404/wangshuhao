@@ -17,7 +17,9 @@ const helpArgumentConfig: ArgumentConfig<HelpArgument> = {
     description: '获取帮助信息',
   },
 };
-const helpArgumentOptions: ParseOptions<HelpArgument> = { helpArg: 'help' };
+const helpArgumentOptions: ParseOptions<HelpArgument> = {
+  helpArg: 'help',
+};
 
 interface VerifyFilesArguments {
   'files'?: string[];
@@ -57,7 +59,11 @@ const analyzeVerifyFiles = (
 
   const [relatedFiles, unknownFiles] = pipe(
     files ?? [],
-    map((filename) => toRelativePosixPath({ filename })),
+    map((filename) =>
+      toRelativePosixPath({
+        filename,
+      }),
+    ),
     partition((filename) => isIncludedIn(filename, allRelatedFiles)),
   );
 

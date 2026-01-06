@@ -46,11 +46,11 @@ const stylisticOverrides = defineConfig([
       '@stylistic/object-curly-newline': [
         'warn',
         {
-          [`ObjectExpression`]: {
+          ObjectExpression: {
             minProperties: 1,
             multiline: true,
           },
-          [`TSTypeLiteral`]: {
+          TSTypeLiteral: {
             minProperties: 1,
             multiline: true,
           },
@@ -168,6 +168,20 @@ const stylisticOverrides = defineConfig([
           blankLine: 'always',
           next: '*',
           prev: 'export',
+        },
+      ],
+
+      /**
+       * 字符串引号风格统一
+       *
+       * @reason
+       * - 禁止滥用模板字符串确保语义准确性
+       */
+      '@stylistic/quotes': [
+        'warn',
+        'single',
+        {
+          allowTemplateLiterals: 'never',
         },
       ],
     },

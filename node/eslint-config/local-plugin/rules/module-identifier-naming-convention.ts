@@ -317,7 +317,7 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
     };
 
     return {
-      [`ImportDeclaration`]: (node) => {
+      ImportDeclaration: (node) => {
         const modulePathVariants = memoizedGetCaseVariants(node.source.value);
 
         const defaultModuleIdentifier = find(
@@ -366,7 +366,7 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
           });
         }
       },
-      [`ExportAllDeclaration`]: (node) => {
+      ExportAllDeclaration: (node) => {
         const modulePathVariants = memoizedGetCaseVariants(node.source.value);
         const namespaceModuleIdentifier = node.exported?.name;
 
@@ -383,7 +383,7 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
           });
         }
       },
-      [`ExportNamedDeclaration`]: (node) => {
+      ExportNamedDeclaration: (node) => {
         if (node.source === null) {
           return;
         }

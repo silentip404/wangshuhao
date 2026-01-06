@@ -11,16 +11,16 @@ import {
 } from 'remeda';
 
 interface CaseVariants {
-  [`camelCase`]: string;
-  [`kebab-case`]: string;
-  [`PascalCase`]: string;
-  [`SCREAMING_SNAKE_CASE`]: string;
-  [`snake_case`]: string;
-  [`Title Case`]: string;
-  [`raw`]: {
-    [`lowercase`]: string;
-    [`UPPERCASE`]: string;
-    [`value`]: string;
+  'camelCase': string;
+  'kebab-case': string;
+  'PascalCase': string;
+  'SCREAMING_SNAKE_CASE': string;
+  'snake_case': string;
+  'Title Case': string;
+  'raw': {
+    lowercase: string;
+    UPPERCASE: string;
+    value: string;
   };
 }
 
@@ -33,18 +33,18 @@ const getCaseVariants = (raw: string): CaseVariants => {
   const sanitized = raw.replaceAll(/[^0-9a-z]/giv, ' ');
 
   return {
-    [`raw`]: {
-      [`value`]: raw,
-      [`lowercase`]: toLowerCase(raw),
-      [`UPPERCASE`]: toUpperCase(raw),
+    'raw': {
+      value: raw,
+      lowercase: toLowerCase(raw),
+      UPPERCASE: toUpperCase(raw),
     },
 
-    [`camelCase`]: toCamelCase(sanitized),
-    [`PascalCase`]: capitalize(toCamelCase(sanitized)),
-    [`kebab-case`]: toKebabCase(sanitized),
-    [`snake_case`]: toSnakeCase(sanitized),
-    [`SCREAMING_SNAKE_CASE`]: toUpperCase(toSnakeCase(sanitized)),
-    [`Title Case`]: toTitleCase(sanitized),
+    'camelCase': toCamelCase(sanitized),
+    'PascalCase': capitalize(toCamelCase(sanitized)),
+    'kebab-case': toKebabCase(sanitized),
+    'snake_case': toSnakeCase(sanitized),
+    'SCREAMING_SNAKE_CASE': toUpperCase(toSnakeCase(sanitized)),
+    'Title Case': toTitleCase(sanitized),
   };
 };
 

@@ -61,12 +61,12 @@ interface ModuleImport {
 }
 type ModuleImportResult =
   | {
-      error: string;
-      success: false;
+      errorMessage: string;
+      isSuccess: false;
     }
   | {
-      success: true;
-      error?: undefined;
+      isSuccess: true;
+      errorMessage?: undefined;
     };
 type VerificationResult = ModuleImportResult & {
   exportedNames: string[];
@@ -215,8 +215,8 @@ const verifyModuleImport = async (
 
     if (!isPlainObject(importedModule)) {
       return {
-        success: false,
-        error: '导入的模块不是对象',
+        isSuccess: false,
+        errorMessage: '导入的模块不是对象',
       };
     }
 
@@ -227,16 +227,18 @@ const verifyModuleImport = async (
 
     return isEmptyish(missingExports)
       ? {
-          success: true,
+          isSuccess: true,
         }
       : {
-          success: false,
-          error: `缺少导出(${join(missingExports, ', ')})`,
+          isSuccess: false,
+          errorMessage: `缺少导出(${join(missingExports, ', ')})`,
         };
   } catch (error) {
     return {
-      success: false,
-      error: isError(error) ? (error.stack ?? error.message) : String(error),
+      isSuccess: false,
+      errorMessage: isError(error)
+        ? (error.stack ?? error.message)
+        : String(error),
     };
   }
 };
@@ -330,12 +332,12 @@ const isInWhitelist = (verification: {
 
 const failedVerifications = filter(
   verificationResults,
-  (verification) => !verification.success && !isInWhitelist(verification),
+  (verification) => !verification.isSuccess && !isInWhitelist(verification),
 );
 
 const whitelistedSuccesses = filter(
   verificationResults,
-  (verification) => verification.success && isInWhitelist(verification),
+  (verification) => verification.isSuccess && isInWhitelist(verification),
 );
 
 if (!isEmptyish(failedVerifications)) {
@@ -346,7 +348,7 @@ if (!isEmptyish(failedVerifications)) {
       ...flatMap(failedVerifications, (verification) => [
         `  - ${styleText('cyan', verification.modulePath)}`,
         '',
-        `    错误原因: ${styleText('yellowBright', verification.error ?? '未知错误')}`,
+        `    错误原因: ${styleText('yellowBright', verification.errorMessage ?? '未知错误')}`,
         `    期望导出: ${styleText('gray', join(verification.exportedNames, ', '))}`,
         `    相关文件: ${styleText('gray', join([...verification.sourceFiles], ', '))}`,
         '',

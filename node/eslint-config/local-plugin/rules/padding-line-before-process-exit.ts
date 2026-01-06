@@ -130,7 +130,7 @@ const ruleValue = createRule<never[], MessageIds>({
     };
 
     return {
-      [`CallExpression`]: (node) => {
+      CallExpression: (node) => {
         if (!isProcessExitCall(node)) {
           return;
         }

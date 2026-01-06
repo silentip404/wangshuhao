@@ -5,6 +5,7 @@ import { printMessage } from '#lib/utilities/index.ts';
 import { toRelativePosixPath } from '#node/utilities/index.ts';
 
 interface HelpArgument {
+  // eslint-disable-next-line @typescript-eslint/naming-convention -- help 符合命令行参数的标准惯例
   help?: boolean;
 }
 type WithHelpArgument<T> = HelpArgument & T;

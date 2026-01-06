@@ -1,6 +1,8 @@
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import { defineConfig } from 'eslint/config';
-import { join, keys, toUpperCase } from 'remeda';
+import { concat, join, keys, toUpperCase } from 'remeda';
 
+import { getCaseVariants } from '#lib/utilities/index.ts';
 import { reasons } from '#node/ts-expect-error-reasons.ts';
 
 const typescriptOverrides = defineConfig([
@@ -127,55 +129,43 @@ const typescriptOverrides = defineConfig([
       '@typescript-eslint/naming-convention': [
         'warn',
 
-        // 默认规则
+        // 默认
         {
           selector: 'default',
           format: ['camelCase'],
         },
 
-        // 基础规则
-        {
-          selector: 'variable',
-          format: ['camelCase', 'UPPER_CASE'],
-        },
-        {
-          selector: 'parameter',
-          format: ['camelCase'],
-        },
-        {
-          selector: 'function',
-          format: ['camelCase', 'PascalCase'],
-        },
-        {
-          selector: ['classProperty', 'classMethod'],
-          modifiers: ['private'],
-          format: ['camelCase'],
-          leadingUnderscore: 'require',
-        },
-
-        // 类型系统规则
-        {
-          selector: 'typeLike',
-          format: ['PascalCase'],
-        },
-        {
-          selector: 'enumMember',
-          format: ['UPPER_CASE'],
-        },
-
-        // 导入规则
+        // 导入
         {
           selector: 'import',
           format: ['camelCase', 'PascalCase'],
         },
 
-        // 特殊规则
+        // 类型
         {
-          selector: ['property', 'method'],
-          modifiers: ['requiresQuotes'],
-          // eslint-disable-next-line unicorn/no-null -- 此规则强制要求使用 null 而不是 undefined
-          format: null,
+          selector: 'typeLike',
+          format: ['PascalCase'],
         },
+
+        // 枚举
+        {
+          selector: 'enumMember',
+          format: ['UPPER_CASE'],
+        },
+
+        // 变量
+        {
+          selector: 'variable',
+          format: ['camelCase', 'UPPER_CASE'],
+        },
+
+        // 函数
+        {
+          selector: 'function',
+          format: ['camelCase', 'PascalCase'],
+        },
+
+        // 布尔值
         {
           selector: [
             'variable',
@@ -183,6 +173,7 @@ const typescriptOverrides = defineConfig([
             'classProperty',
             'parameterProperty',
             'accessor',
+            'typeProperty',
           ],
           types: ['boolean'],
           // eslint-disable-next-line unicorn/no-null -- 此规则强制要求使用 null 而不是 undefined
@@ -200,6 +191,45 @@ const typescriptOverrides = defineConfig([
               return join([camelCaseRegex, upperCaseRegex], '|');
             })(),
           },
+        },
+
+        // 关闭检查的特例
+        {
+          selector: ['default', 'objectLiteralProperty'],
+          modifiers: ['requiresQuotes'],
+          // eslint-disable-next-line unicorn/no-null -- 此规则强制要求使用 null 而不是 undefined
+          format: null,
+        },
+        {
+          selector: [
+            'objectLiteralProperty',
+            'objectLiteralMethod',
+            'typeProperty',
+          ],
+          // eslint-disable-next-line unicorn/no-null -- 此规则强制要求使用 null 而不是 undefined
+          format: null,
+          filter: {
+            regex: (() => {
+              let allowedNames: string[] = [];
+
+              allowedNames = concat(allowedNames, keys(AST_NODE_TYPES));
+
+              const caseVariants = getCaseVariants('');
+
+              allowedNames = concat(allowedNames, keys(caseVariants));
+              allowedNames = concat(allowedNames, keys(caseVariants.raw));
+
+              return `^(${join(allowedNames, '|')})$`;
+            })(),
+            match: true,
+          },
+        },
+        {
+          selector: ['typeProperty'],
+          types: ['boolean'],
+          modifiers: ['requiresQuotes'],
+          // eslint-disable-next-line unicorn/no-null -- 此规则强制要求使用 null 而不是 undefined
+          format: null,
         },
       ],
 

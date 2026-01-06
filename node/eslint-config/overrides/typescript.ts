@@ -37,7 +37,7 @@ const typescriptOverrides = defineConfig([
           'ts-nocheck': true,
           'ts-check': false,
           'ts-expect-error': {
-            descriptionFormat: String.raw`^: See reasons\['(${join(keys(reasons), '|')})'\] in ts-expect-error-reasons\.ts$`,
+            descriptionFormat: String.raw`^ -- See reasons\['(${join(keys(reasons), '|')})'\] in ts-expect-error-reasons\.ts$`,
           },
         },
       ],

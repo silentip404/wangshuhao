@@ -1,22 +1,22 @@
-import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import type { RuleContext } from '@typescript-eslint/utils/ts-eslint';
 import { find, isTruthy } from 'remeda';
 
+import type { CaseVariants } from '#lib/utilities/index.ts';
 import {
   memoizedGetCaseVariants,
   memoizedRegexReplace,
   memoizedRegexTest,
 } from '#lib/utilities/index.ts';
-import type { CaseVariants } from '#lib/utilities/index.ts';
 
+import type { InferSchema } from '../utilities/index.ts';
 import {
   createESLintSchema,
   defineUnionJsonSchema,
   getNodeText,
   initRule,
 } from '../utilities/index.ts';
-import type { InferSchema } from '../utilities/index.ts';
 
 type Context = RuleContext<MessageIds, [RuleOptions]>;
 interface LintModuleIdentifierOptions {

@@ -187,7 +187,9 @@ const perfectionistOverrides = defineConfig([
           groups: [
             'builtin',
             'external',
-            ['subpath', 'tsconfig-path', 'internal'],
+            'subpath',
+            'tsconfig-path',
+            'internal',
             'parent',
             'sibling',
             'index',
@@ -197,6 +199,9 @@ const perfectionistOverrides = defineConfig([
             ...UNKNOWN_GROUP_GUARD,
           ],
           newlinesBetween: 1,
+          fallbackSort: {
+            type: 'type-import-first',
+          },
         },
       ],
 

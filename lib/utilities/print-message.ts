@@ -1,5 +1,5 @@
-import { consola } from 'consola';
 import type { InputLogObject } from 'consola';
+import { consola } from 'consola';
 import { flat, isEmptyish } from 'remeda';
 import { z } from 'zod';
 

@@ -6,13 +6,13 @@ import { parse as parseArguments } from 'ts-command-line-args';
 
 import { printMessage } from '#lib/utilities/index.ts';
 
+import type { VerifyFilesArguments, WithHelpArgument } from './utilities.ts';
 import {
   analyzeVerifyFiles,
   helpArgumentConfig,
   helpArgumentOptions,
   verifyFilesArgumentsConfig,
 } from './utilities.ts';
-import type { VerifyFilesArguments, WithHelpArgument } from './utilities.ts';
 
 type CliArguments = WithHelpArgument<VerifyFilesArguments>;
 

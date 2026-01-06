@@ -20,13 +20,13 @@ import {
   resolveFromRoot,
 } from '#node/utilities/index.ts';
 
+import type { VerifyFilesArguments, WithHelpArgument } from './utilities.ts';
 import {
   analyzeVerifyFiles,
   helpArgumentConfig,
   helpArgumentOptions,
   verifyFilesArgumentsConfig,
 } from './utilities.ts';
-import type { VerifyFilesArguments, WithHelpArgument } from './utilities.ts';
 
 type CliArguments = WithHelpArgument<VerifyFilesArguments>;
 

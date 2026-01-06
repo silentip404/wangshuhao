@@ -26,8 +26,8 @@ import {
   toRelativePosixPath,
 } from '#node/utilities/index.ts';
 
-import { helpArgumentConfig, helpArgumentOptions } from './utilities.ts';
 import type { WithHelpArgument } from './utilities.ts';
+import { helpArgumentConfig, helpArgumentOptions } from './utilities.ts';
 
 type CliArguments = WithHelpArgument<{
   'files': string[];

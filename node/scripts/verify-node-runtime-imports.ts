@@ -36,13 +36,13 @@ import {
   toRelativePosixPath,
 } from '#node/utilities/index.ts';
 
+import type { VerifyFilesArguments, WithHelpArgument } from './utilities.ts';
 import {
   analyzeVerifyFiles,
   helpArgumentConfig,
   helpArgumentOptions,
   verifyFilesArgumentsConfig,
 } from './utilities.ts';
-import type { VerifyFilesArguments, WithHelpArgument } from './utilities.ts';
 
 const WHITELIST = new Set<string>(await ensureModulePathsInPackage([]));
 const ALL_RELATED_FILES_PATTERNS = concat(

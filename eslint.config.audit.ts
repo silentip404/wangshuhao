@@ -11,7 +11,7 @@ import {
   normalizeSeverity,
   resolveAuditSettings,
 } from '#node/eslint-config/index.ts';
-import { GLOB_DERIVED_JS } from '#node/utilities/index.ts';
+import { GLOB_COMBINED_JS } from '#node/utilities/index.ts';
 
 import eslintConfig from './eslint.config.ts';
 
@@ -22,7 +22,7 @@ const auditConfig = concat(
     [
       {
         name: 'eslint:audit/all-builtin-rules',
-        files: [...GLOB_DERIVED_JS],
+        files: [...GLOB_COMBINED_JS],
         rules: eslintJs.configs.all.rules,
       },
     ],

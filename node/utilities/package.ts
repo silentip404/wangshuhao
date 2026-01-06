@@ -2,7 +2,7 @@ import { isBuiltin } from 'node:module';
 
 import { startsWith } from 'remeda';
 
-import { ALIASES_REGEX } from './file-patterns.ts';
+import { ALIASES_REGEX } from './globs.ts';
 
 const parsePackageName = (
   modulePath: string,
@@ -33,7 +33,7 @@ const parsePackageName = (
 const isNpmPackage = (modulePath: string): boolean =>
   !startsWith(modulePath, '.') &&
   !startsWith(modulePath, '/') &&
-  !ALIASES_REGEX.some((aliasRegex) => aliasRegex.test(modulePath)) &&
+  !ALIASES_REGEX.test(modulePath) &&
   !isBuiltin(modulePath);
 
 export { isNpmPackage, parsePackageName };

@@ -40,13 +40,14 @@ import {
 } from '#node/eslint-config/index.ts';
 import {
   GLOB_ALL,
+  GLOB_COMBINED_DEPENDENCY_SOURCES,
+  GLOB_COMBINED_JS,
+  GLOB_COMBINED_JSON,
   GLOB_CONFIG_FILES,
-  GLOB_DERIVED_DEPEND,
-  GLOB_DERIVED_JS,
-  GLOB_DERIVED_JSON,
   GLOB_DOT_FILES,
-  GLOB_EXTERNAL_TYPES,
-  GLOB_FILES_IN_DOT_DIRECTORIES,
+  GLOB_EXTERNAL_TYPE_DECLARATIONS,
+  GLOB_FILES_IN_DOT_DIRECTORY,
+  GLOB_SCRIPTS_FILES,
   GLOB_TSCONFIG_NODE_INCLUDE,
   toCaseInsensitiveGlob,
 } from '#node/utilities/index.ts';
@@ -56,7 +57,7 @@ const eslintConfig = defineConfig([
    * 全局忽略配置
    */
   {
-    name: 'global:ignore',
+    name: 'global-ignore',
     extends: [ignorePresets],
   },
 
@@ -64,14 +65,14 @@ const eslintConfig = defineConfig([
    * 强制执行对文件名和目录进行检查
    */
   {
-    name: 'global:check-file',
+    name: 'check-file',
     files: [GLOB_ALL],
     extends: [checkFilePresets, checkFileOverrides],
   },
   {
-    name: 'global:check-file-processor',
+    name: 'check-file:processor',
     files: [GLOB_ALL],
-    ignores: [...GLOB_DERIVED_JS, ...GLOB_DERIVED_JSON],
+    ignores: [...GLOB_COMBINED_JS, ...GLOB_COMBINED_JSON],
     processor: 'check-file/eslint-processor-check-file',
   },
 
@@ -84,11 +85,11 @@ const eslintConfig = defineConfig([
   },
 
   /**
-   * JS 派生文件预设配置
+   * JS 组合文件预设配置
    */
   {
-    name: 'derived-js:presets',
-    files: [...GLOB_DERIVED_JS],
+    name: 'combined-js:presets',
+    files: [...GLOB_COMBINED_JS],
     extends: [
       eslintCommentsPresets,
       builtinPresets,
@@ -107,11 +108,11 @@ const eslintConfig = defineConfig([
   },
 
   /**
-   * JS 派生文件覆盖配置
+   * JS 组合文件覆盖配置
    */
   {
-    name: 'derived-js:overrides',
-    files: [...GLOB_DERIVED_JS],
+    name: 'combined-js:overrides',
+    files: [...GLOB_COMBINED_JS],
     extends: [
       prettierOverrides,
       eslintCommentsOverrides,
@@ -128,39 +129,30 @@ const eslintConfig = defineConfig([
   },
 
   /**
-   * JSON 派生文件预设配置
+   * JSON 组合文件预设配置
    */
   {
-    name: 'derived-json:presets',
-    files: [...GLOB_DERIVED_JSON],
+    name: 'combined-json:presets',
+    files: [...GLOB_COMBINED_JSON],
     extends: [jsoncPresets],
   },
 
   /**
-   * JSON 派生文件覆盖配置
+   * JSON 组合文件覆盖配置
    */
   {
-    name: 'derived-json:overrides',
-    files: [...GLOB_DERIVED_JSON],
+    name: 'combined-json:overrides',
+    files: [...GLOB_COMBINED_JSON],
     extends: [jsoncOverrides],
   },
 
   /**
-   * 依赖项使用限制预设配置
+   * 依赖项使用限制
    */
   {
-    name: 'depend:presets',
-    files: [...GLOB_DERIVED_DEPEND],
-    extends: [dependPresets],
-  },
-
-  /**
-   * 依赖项使用限制覆盖配置
-   */
-  {
-    name: 'depend:overrides',
-    files: [...GLOB_DERIVED_DEPEND],
-    extends: [dependOverrides],
+    name: 'depend',
+    files: [...GLOB_COMBINED_DEPENDENCY_SOURCES],
+    extends: [dependPresets, dependOverrides],
   },
 
   /**
@@ -178,7 +170,7 @@ const eslintConfig = defineConfig([
       // 允许使用默认导出的特例
       {
         files: [
-          ...GLOB_EXTERNAL_TYPES,
+          GLOB_EXTERNAL_TYPE_DECLARATIONS,
           ...GLOB_CONFIG_FILES,
           'app/**/{layout,page}.tsx',
         ],
@@ -187,20 +179,20 @@ const eslintConfig = defineConfig([
         },
       },
 
-      // 允许使用 process.exit() 的特例
-      {
-        files: ['node/scripts/**/*.ts'],
-        rules: {
-          'unicorn/no-process-exit': 'off',
-        },
-      },
-
-      // 纯 Node.js 环境特例
+      // Node.js 环境特例
       {
         files: [...GLOB_TSCONFIG_NODE_INCLUDE],
         rules: {
           'import-x/no-nodejs-modules': 'off',
           'regexp/no-super-linear-move': 'off',
+        },
+      },
+
+      // Node.js 脚本特例
+      {
+        files: [GLOB_SCRIPTS_FILES],
+        rules: {
+          'unicorn/no-process-exit': 'off',
         },
       },
 
@@ -233,7 +225,7 @@ const eslintConfig = defineConfig([
 
       // 关闭文件夹命名检查的特例
       {
-        files: [...GLOB_EXTERNAL_TYPES, GLOB_FILES_IN_DOT_DIRECTORIES],
+        files: [GLOB_EXTERNAL_TYPE_DECLARATIONS, GLOB_FILES_IN_DOT_DIRECTORY],
         rules: {
           'check-file/folder-naming-convention': 'off',
         },

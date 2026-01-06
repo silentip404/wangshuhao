@@ -1,6 +1,6 @@
 import type { Config } from 'prettier';
 
-import { GLOB_JSONC } from '#node/utilities/index.ts';
+import { GLOB_JSONC_SPECIAL, GLOB_LICENSE } from '#node/utilities/index.ts';
 
 const prettierConfig: Config = {
   singleQuote: true,
@@ -11,13 +11,13 @@ const prettierConfig: Config = {
 
   overrides: [
     {
-      files: [...GLOB_JSONC],
+      files: [...GLOB_JSONC_SPECIAL],
       options: {
         parser: 'jsonc',
       },
     },
     {
-      files: ['**/LICENSE'],
+      files: [GLOB_LICENSE],
       options: {
         parser: 'markdown',
         proseWrap: 'always',

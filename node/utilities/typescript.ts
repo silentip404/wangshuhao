@@ -5,7 +5,7 @@ import {
   GLOB_TSCONFIG_LIB_INCLUDE,
   GLOB_TSCONFIG_NODE_BASE_INCLUDE,
   GLOB_TSCONFIG_NODE_INCLUDE,
-} from './file-patterns.ts';
+} from './globs.ts';
 
 interface Project {
   baseInclude: string[];

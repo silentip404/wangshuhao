@@ -1,9 +1,8 @@
 import { defineConfig } from 'eslint/config';
-import { map } from 'remeda';
 
 import {
   ALIASES_GLOB,
-  ALIASES_REGEX_STRING,
+  ALIASES_REGEX,
   ensureModulePathsInPackage,
 } from '#node/utilities/index.ts';
 
@@ -148,9 +147,7 @@ const importXOverrides = defineConfig([
         {
           allow: [
             // 允许导入别名路径（此规则使用 makeRe 默认选项匹配，不支持外部传入 { nocomment: true } 以支持 # 符号）
-            ...map(ALIASES_GLOB, (alias) =>
-              alias.replaceAll('#', String.raw`\#`),
-            ),
+            ALIASES_GLOB.replaceAll('#', String.raw`\#`),
 
             // 允许导入一层目录下的 index.ts
             '*/index.ts',
@@ -215,7 +212,7 @@ const importXOverrides = defineConfig([
         {
           ignore: [
             // 允许别名导入（此规则使用 new RegExp 匹配）
-            ...ALIASES_REGEX_STRING,
+            ALIASES_REGEX.source,
 
             // 允许一些特殊文件导入
             String.raw`^\.\./utilities/index\.ts$`,

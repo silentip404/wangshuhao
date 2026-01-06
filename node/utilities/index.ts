@@ -1,6 +1,6 @@
 export * from './ensure.ts';
 
-export * from './file-patterns.ts';
+export * from './globs.ts';
 
 export * from './package.ts';
 

@@ -1,0 +1,12 @@
+{
+  "对象属性排序命令（有注释）": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "@perfectionist-sort-objects: with-comment",
+    "body": ["// @perfectionist-sort-objects"],
+  },
+  "对象属性排序命令（无注释）": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "@perfectionist-sort-objects: without-comment",
+    "body": ["@perfectionist-sort-objects"],
+  },
+}

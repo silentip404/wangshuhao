@@ -112,6 +112,7 @@
   - 配置 `.vscode/settings.json`，设置 **ESLint** 规则级别、**Prettier** 格式化和保存时自动修复
   - 配置 `.vscode/extensions.json`，推荐安装 **ESLint**、**Prettier** 和 **EditorConfig** 插件
   - 针对不同文件类型配置独立的编辑器行为
+  - 提供按用途分类的代码片段模板，支持快速生成 **ESLint** 规则、**Node.js** 脚本等常用代码结构
 
 - 📋 **配置测试框架**：选择并配置测试框架，添加测试工具脚本，创建测试目录结构和示例测试，配置测试覆盖率阈值。
 

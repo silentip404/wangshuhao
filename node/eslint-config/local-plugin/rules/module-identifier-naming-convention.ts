@@ -283,6 +283,7 @@ const ruleValue = createRule<[RuleOptions], MessageIds>({
   name: ruleName,
   meta: {
     type: 'suggestion',
+    fixable: undefined,
     schema: eslintSchema,
     docs: {
       description:

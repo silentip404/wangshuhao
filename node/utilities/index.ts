@@ -8,4 +8,6 @@ export * from './path.ts';
 
 export * from './read-file.ts';
 
+export * from './scratch.ts';
+
 export * from './typescript.ts';

@@ -16,7 +16,7 @@ const regexpOverrides = defineConfig([
     // @perfectionist-sort-objects
     rules: {
       /**
-       * 禁止超线性移动的量词使用
+       * 禁止可能导致超线性回溯的正则表达式
        *
        * @reason
        * - 防止正则表达式在处理输入字符串时出现超线性最坏情况的运行时，降低安全风险。

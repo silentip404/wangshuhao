@@ -156,37 +156,52 @@ const eslintConfig = defineConfig([
   {
     name: 'miscellaneous:overrides',
     extends: [
-      // Node.js 环境特例
+      // 允许导入内置模块
       {
-        files: [...GLOB_TSCONFIG_NODE_INCLUDE],
         rules: {
           'import-x/no-nodejs-modules': 'off',
-          'regexp/no-super-linear-move': 'off',
         },
+        files: [...GLOB_TSCONFIG_NODE_INCLUDE],
       },
 
-      // 配置文件特例
+      // 允许拥有更多的依赖项
       {
-        files: [...GLOB_CONFIG_FILES],
         rules: {
           'import-x/max-dependencies': 'off',
         },
+        files: [...GLOB_CONFIG_FILES],
       },
 
-      // Node.js 脚本特例
+      // 允许使用默认导出
       {
-        files: [GLOB_SCRIPTS_FILES],
+        rules: {
+          'import-x/no-default-export': 'off',
+        },
+        files: [
+          GLOB_EXTERNAL_TYPE_DECLARATIONS,
+          ...GLOB_CONFIG_FILES,
+          'app/**/{layout,page}.tsx',
+        ],
+      },
+
+      // 允许使用可能导致超线性回溯的正则表达式
+      {
+        rules: {
+          'regexp/no-super-linear-move': 'off',
+        },
+        files: [...GLOB_TSCONFIG_NODE_INCLUDE],
+      },
+
+      // 允许调用 process.exit() 方法
+      {
         rules: {
           'unicorn/no-process-exit': 'off',
         },
+        files: [GLOB_SCRIPTS_FILES],
       },
 
-      // 需要保持大写的文件名
+      // 强制使用全大写文件名
       {
-        files: [
-          `**/${toCaseInsensitiveGlob('LICENSE')}`,
-          `**/${toCaseInsensitiveGlob('{README,CHANGELOG}')}.md`,
-        ],
         rules: {
           'check-file/filename-naming-convention': [
             'error',
@@ -198,34 +213,26 @@ const eslintConfig = defineConfig([
             },
           ],
         },
+        files: [
+          `**/${toCaseInsensitiveGlob('LICENSE')}`,
+          `**/${toCaseInsensitiveGlob('{README,CHANGELOG}')}.md`,
+        ],
       },
 
-      // 关闭文件命名检查的特例
+      // 关闭文件命名检查
       {
-        files: [GLOB_DOT_FILES],
         rules: {
           'check-file/filename-naming-convention': 'off',
         },
+        files: [GLOB_DOT_FILES],
       },
 
-      // 关闭文件夹命名检查的特例
+      // 关闭文件夹命名检查
       {
-        files: [GLOB_EXTERNAL_TYPE_DECLARATIONS, GLOB_FILES_IN_DOT_DIRECTORY],
         rules: {
           'check-file/folder-naming-convention': 'off',
         },
-      },
-
-      // 允许使用默认导出的特例
-      {
-        files: [
-          GLOB_EXTERNAL_TYPE_DECLARATIONS,
-          ...GLOB_CONFIG_FILES,
-          'app/**/{layout,page}.tsx',
-        ],
-        rules: {
-          'import-x/no-default-export': 'off',
-        },
+        files: [GLOB_EXTERNAL_TYPE_DECLARATIONS, GLOB_FILES_IN_DOT_DIRECTORY],
       },
 
       // 对 package.json 进行排序

@@ -4,7 +4,7 @@ import { omit } from 'remeda';
 import { exec } from 'tinyexec';
 import { parse as parseArguments } from 'ts-command-line-args';
 
-import { printMessage } from '#lib/utilities/index.ts';
+import { printMessage } from '#lib/utilities/print-message.ts';
 
 import type { VerifyFilesArguments, WithHelpArgument } from './utilities.ts';
 import {

@@ -1,6 +1,6 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-import { getFilenameWithoutExtension } from '#node/utilities/index.ts';
+import { getFilenameWithoutExtension } from '#node/utilities/path.ts';
 
 const initRule = (
   ruleFilePath: string,

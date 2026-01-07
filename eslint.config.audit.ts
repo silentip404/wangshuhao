@@ -3,15 +3,15 @@ import { styleText } from 'node:util';
 import eslintJs from '@eslint/js';
 import { concat, isEmptyish, map, merge } from 'remeda';
 
-import { printMessage } from '#lib/utilities/index.ts';
+import { printMessage } from '#lib/utilities/print-message.ts';
+import { resolveAuditSettings } from '#node/eslint-config/utilities/audit.ts';
+import { collectPluginNames } from '#node/eslint-config/utilities/plugin.ts';
 import {
-  collectPluginNames,
   collectRuleNames,
   createRules,
-  normalizeSeverity,
-  resolveAuditSettings,
-} from '#node/eslint-config/index.ts';
-import { GLOB_COMBINED_JS } from '#node/utilities/index.ts';
+} from '#node/eslint-config/utilities/rule.ts';
+import { normalizeSeverity } from '#node/eslint-config/utilities/severity.ts';
+import { GLOB_COMBINED_JS } from '#node/utilities/globs.ts';
 
 import eslintConfig from './eslint.config.ts';
 

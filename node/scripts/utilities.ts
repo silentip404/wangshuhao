@@ -1,8 +1,8 @@
 import { isEmptyish, isIncludedIn, map, partition, pipe } from 'remeda';
 import type { ArgumentConfig, ParseOptions } from 'ts-command-line-args';
 
-import { printMessage } from '#lib/utilities/index.ts';
-import { toRelativePosixPath } from '#node/utilities/index.ts';
+import { printMessage } from '#lib/utilities/print-message.ts';
+import { toRelativePosixPath } from '#node/utilities/path.ts';
 
 interface HelpArgument {
   // eslint-disable-next-line @typescript-eslint/naming-convention -- help 符合命令行参数的标准惯例

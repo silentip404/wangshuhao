@@ -1,6 +1,6 @@
 import { defineConfig } from 'eslint/config';
 
-import { GLOB_ALL } from '#node/utilities/index.ts';
+import { GLOB_ALL } from '#node/utilities/globs.ts';
 
 const checkFileOverrides = defineConfig([
   {
@@ -73,12 +73,19 @@ const checkFileOverrides = defineConfig([
       ],
 
       /**
-       * 禁止 index 文件
+       * 禁止使用 index 文件
        *
        * @reason
-       * - 保持使用 index 文件作为模块边界，符合 Node.js 生态系统的标准做法
+       * - 避免桶文件（barrel file）带来的循环依赖风险
+       * - 促进模块化设计，鼓励开发者对导出内容进行清晰命名
+       * - 使模块依赖关系更加清晰明确，提升打包器 tree-shaking 的准确性
        */
-      'check-file/no-index': 'off',
+      'check-file/no-index': [
+        'error',
+        {
+          ignoreMiddleExtensions: true,
+        },
+      ],
     },
   },
 ]);

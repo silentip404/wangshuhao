@@ -1,7 +1,7 @@
 import type { TSESTree } from '@typescript-eslint/utils';
 import { findLastIndex } from 'remeda';
 
-import { splitLines } from '#lib/utilities/index.ts';
+import { splitLines } from '#lib/utilities/string.ts';
 
 const createCommandMatcher = (command: string) => {
   const commandRegex = new RegExp(

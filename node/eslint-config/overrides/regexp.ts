@@ -26,6 +26,16 @@ const regexpOverrides = defineConfig([
       'regexp/no-super-linear-move': 'error',
 
       /**
+       * 正则表达式优先使用环视断言
+       *
+       * @reason
+       * - 环视断言表达式意图更明确，减少捕获组的副作用和复杂性
+       * - 提升正则表达式性能，避免不必要的捕获和反向引用开销
+       * - 更符合现代正则表达式最佳实践，增强代码可维护性
+       */
+      'regexp/prefer-lookaround': 'warn',
+
+      /**
        * 强制使用命名捕获组
        *
        * @reason

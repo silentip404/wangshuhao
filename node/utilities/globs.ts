@@ -1,7 +1,30 @@
-import { makeRe } from 'minimatch';
 import { join, split, zipWith } from 'remeda';
 
-import { getCaseVariants } from '#lib/utilities/index.ts';
+import { getCaseVariants } from '#lib/utilities/string.ts';
+
+/**
+ * 将文本转换为大小写不敏感的 glob 模式
+ *
+ * @param text - 文本
+ * @returns 大小写不敏感的 glob 模式
+ */
+const toCaseInsensitiveGlob = (text: string): string => {
+  const { raw } = getCaseVariants(text);
+
+  const letters = zipWith(
+    split(raw.lowercase, ''),
+    split(raw.UPPERCASE, ''),
+    (lowercase, uppercase) => {
+      if (lowercase === uppercase) {
+        return lowercase;
+      }
+
+      return `[${lowercase}${uppercase}]`;
+    },
+  );
+
+  return join(letters, '');
+};
 
 /*
  * ════════════════════════════════════════════════════════════════════════════
@@ -10,32 +33,9 @@ import { getCaseVariants } from '#lib/utilities/index.ts';
  * ════════════════════════════════════════════════════════════════════════════
  */
 const GLOB_ALL = '**';
+const GLOB_ONE_LEVEL_FILES = '*/*';
 const GLOB_DOT_FILES = '**/.*';
 const GLOB_FILES_IN_DOT_DIRECTORY = '**/.*/**';
-
-/*
- * ════════════════════════════════════════════════════════════════════════════
- * 路径别名模式
- * 匹配项目中定义的模块路径别名
- * ════════════════════════════════════════════════════════════════════════════
- */
-const ALIASES_GLOB = '#*/**';
-
-const ALIASES_REGEX = (() => {
-  const regex = makeRe(ALIASES_GLOB, {
-    nocomment: true,
-  });
-
-  if (regex === false) {
-    throw new Error(
-      `Unexpected regex: ${JSON.stringify({
-        regex,
-      })}`,
-    );
-  }
-
-  return regex;
-})();
 
 /*
  * ════════════════════════════════════════════════════════════════════════════
@@ -126,33 +126,7 @@ const GLOB_COMBINED_JSON = [
   GLOB_JSON5,
 ] as const;
 
-/**
- * 将文本转换为大小写不敏感的 glob 模式
- *
- * @param text - 文本
- * @returns 大小写不敏感的 glob 模式
- */
-const toCaseInsensitiveGlob = (text: string): string => {
-  const { raw } = getCaseVariants(text);
-
-  const letters = zipWith(
-    split(raw.lowercase, ''),
-    split(raw.UPPERCASE, ''),
-    (lowercase, uppercase) => {
-      if (lowercase === uppercase) {
-        return lowercase;
-      }
-
-      return `[${lowercase}${uppercase}]`;
-    },
-  );
-
-  return join(letters, '');
-};
-
 export {
-  ALIASES_GLOB,
-  ALIASES_REGEX,
   GLOB_ALL,
   GLOB_COMBINED_DEPENDENCY_SOURCES,
   GLOB_COMBINED_JS,
@@ -166,6 +140,7 @@ export {
   GLOB_JSON5,
   GLOB_JSONC_SPECIAL,
   GLOB_LICENSE,
+  GLOB_ONE_LEVEL_FILES,
   GLOB_SCRIPTS_FILES,
   GLOB_TSCONFIG_APP_BASE_INCLUDE,
   GLOB_TSCONFIG_APP_INCLUDE,

@@ -18,13 +18,14 @@ import {
 import { exec } from 'tinyexec';
 import { parse as parseArguments } from 'ts-command-line-args';
 
-import { NEWLINE, printMessage } from '#lib/utilities/index.ts';
+import { printMessage } from '#lib/utilities/print-message.ts';
+import { NEWLINE } from '#lib/utilities/string.ts';
 import {
-  projects,
   resolveFromRoot,
   ROOT,
   toRelativePosixPath,
-} from '#node/utilities/index.ts';
+} from '#node/utilities/path.ts';
+import { projects } from '#node/utilities/typescript.ts';
 
 import type { WithHelpArgument } from './utilities.ts';
 import { helpArgumentConfig, helpArgumentOptions } from './utilities.ts';

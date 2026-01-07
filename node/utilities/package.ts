@@ -1,8 +1,17 @@
 import { isBuiltin } from 'node:module';
 
-import { startsWith } from 'remeda';
+import {
+  flatMap,
+  keys,
+  pickBy,
+  pipe,
+  startsWith,
+  toLowerCase,
+  values,
+} from 'remeda';
 
-import { ALIASES_REGEX } from './globs.ts';
+import { getAliasRegexs } from './alias.ts';
+import { memoizedReadPackageJson } from './read-file.ts';
 
 const parsePackageName = (
   modulePath: string,
@@ -30,10 +39,23 @@ const parsePackageName = (
   };
 };
 
-const isNpmPackage = (modulePath: string): boolean =>
-  !startsWith(modulePath, '.') &&
-  !startsWith(modulePath, '/') &&
-  !ALIASES_REGEX.test(modulePath) &&
-  !isBuiltin(modulePath);
+const isNpmPackage = (modulePath: string): boolean => {
+  const ALIAS_REGEXS = getAliasRegexs();
 
-export { isNpmPackage, parsePackageName };
+  return (
+    !startsWith(modulePath, '.') &&
+    !startsWith(modulePath, '/') &&
+    !ALIAS_REGEXS.some((aliasRegex) => aliasRegex.test(modulePath)) &&
+    !isBuiltin(modulePath)
+  );
+};
+
+const getExistingDependencies = async (): Promise<string[]> =>
+  pipe(
+    await memoizedReadPackageJson(),
+    pickBy((value, key) => toLowerCase(key).endsWith('dependencies')),
+    values(),
+    flatMap(keys()),
+  );
+
+export { getExistingDependencies, isNpmPackage, parsePackageName };

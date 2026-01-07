@@ -1,6 +1,6 @@
 import type { Config } from 'prettier';
 
-import { GLOB_JSONC_SPECIAL, GLOB_LICENSE } from '#node/utilities/index.ts';
+import { GLOB_JSONC_SPECIAL, GLOB_LICENSE } from '#node/utilities/globs.ts';
 
 const prettierConfig: Config = {
   singleQuote: true,
@@ -21,6 +21,12 @@ const prettierConfig: Config = {
       options: {
         parser: 'markdown',
         proseWrap: 'always',
+      },
+    },
+    {
+      files: ['node/eslint-config/local-plugins/setup.ts'],
+      options: {
+        printWidth: 160,
       },
     },
   ],

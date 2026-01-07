@@ -1,10 +1,15 @@
 import { defineConfig } from 'eslint/config';
+import { map } from 'remeda';
 
-import {
-  ALIASES_GLOB,
-  ALIASES_REGEX,
-  ensureModulePathsInPackage,
-} from '#node/utilities/index.ts';
+import { getAliasGlobs, getAliasRegexs } from '#node/utilities/alias.ts';
+import { GLOB_ONE_LEVEL_FILES } from '#node/utilities/globs.ts';
+import { getExistingDependencies } from '#node/utilities/package.ts';
+
+const DOUBLE_STAR_END_REGEX = /\*\*$/gv;
+
+const aliasGlobs = getAliasGlobs();
+const aliasRegexs = getAliasRegexs();
+const existingDependencies = await getExistingDependencies();
 
 const importXOverrides = defineConfig([
   {
@@ -138,7 +143,7 @@ const importXOverrides = defineConfig([
        * 模块内部路径导入控制
        *
        * @reason
-       * - 强制通过公开 API 访问模块，建立清晰的模块边界和依赖关系
+       * - 建立清晰的模块边界和依赖关系
        * - 降低模块间耦合度，提升代码重构的安全性和可维护性
        * - 通过白名单机制平衡架构约束与工程实用性
        */
@@ -146,22 +151,25 @@ const importXOverrides = defineConfig([
         'warn',
         {
           allow: [
-            // 允许导入别名路径（此规则使用 makeRe 默认选项匹配，不支持外部传入 { nocomment: true } 以支持 # 符号）
-            ALIASES_GLOB.replaceAll('#', String.raw`\#`),
+            /*
+             * 重要说明：
+             *
+             * 此选项仅接受 glob 字符串，内部使用 makeRe 创建正则表达式后匹配
+             * 并且不支持外部传入 { nocomment: true } 参数，因此 # 号需要转义
+             */
 
-            // 允许导入一层目录下的 index.ts
-            '*/index.ts',
+            // 允许导入别名路径中的浅层文件
+            ...map(aliasGlobs, (glob) =>
+              glob
+                .replaceAll(DOUBLE_STAR_END_REGEX, '*')
+                .replaceAll('#', String.raw`\#`),
+            ),
 
-            // 允许导入第三方依赖的特定内部模块
-            ...(await ensureModulePathsInPackage([
-              'next/image',
-              'next/font/*',
-              'eslint/config',
-              'eslint-config-prettier/flat',
-              '@typescript-eslint/utils/*',
-              'eslint-plugin-command/*',
-              '@eslint-community/eslint-plugin-eslint-comments/configs',
-            ])),
+            // 允许导入一层目录下的所有文件
+            GLOB_ONE_LEVEL_FILES,
+
+            // 允许导入第三方依赖的内部模块
+            ...map(existingDependencies, (dependency) => `${dependency}/**`),
           ],
         },
       ],
@@ -211,12 +219,18 @@ const importXOverrides = defineConfig([
         'warn',
         {
           ignore: [
-            // 允许别名导入（此规则使用 new RegExp 匹配）
-            ALIASES_REGEX.source,
+            /*
+             * 重要说明：
+             *
+             * 此选项仅接受正则字符串，内部使用 new RegExp 匹配
+             */
 
-            // 允许一些特殊文件导入
-            String.raw`^\.\./utilities/index\.ts$`,
-            String.raw`^\.\./local-plugin/index\.ts$`,
+            // 允许导入别名路径
+            ...map(aliasRegexs, (regex) => regex.source),
+
+            // 专门设计用于被多个子模块复用的辅助函数
+            String.raw`^\.\./utilities\.ts$`,
+            String.raw`^\.\./utilities/.*$`,
           ],
         },
       ],

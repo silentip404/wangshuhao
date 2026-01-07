@@ -24,17 +24,18 @@ import {
 import { glob } from 'tinyglobby';
 import { parse as parseArguments } from 'ts-command-line-args';
 
-import { printMessage } from '#lib/utilities/index.ts';
+import { printMessage } from '#lib/utilities/print-message.ts';
+import { ensureModulePathsInPackage } from '#node/utilities/ensure.ts';
 import {
-  ensureModulePathsInPackage,
   GLOB_TSCONFIG_LIB_INCLUDE,
   GLOB_TSCONFIG_NODE_INCLUDE,
-  isNpmPackage,
-  parsePackageName,
+} from '#node/utilities/globs.ts';
+import { isNpmPackage, parsePackageName } from '#node/utilities/package.ts';
+import {
   resolveFromRoot,
   ROOT,
   toRelativePosixPath,
-} from '#node/utilities/index.ts';
+} from '#node/utilities/path.ts';
 
 import type { VerifyFilesArguments, WithHelpArgument } from './utilities.ts';
 import {

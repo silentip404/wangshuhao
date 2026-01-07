@@ -5,10 +5,14 @@
   "private": true,
   "packageManager": "pnpm@10.27.0",
   "imports": {
-    "#lib/utilities/index.ts": "./lib/utilities/index.ts",
+    "#lib/utilities/*": "./lib/utilities/*",
     "#node/ts-expect-error-reasons.ts": "./ts-expect-error-reasons.ts",
-    "#node/utilities/index.ts": "./node/utilities/index.ts",
-    "#node/eslint-config/index.ts": "./node/eslint-config/index.ts"
+    "#node/utilities/*": "./node/utilities/*",
+    "#node/eslint-config/command/setup.ts": "./node/eslint-config/command/setup.ts",
+    "#node/eslint-config/local-plugins/setup.ts": "./node/eslint-config/local-plugins/setup.ts",
+    "#node/eslint-config/overrides/*": "./node/eslint-config/overrides/*",
+    "#node/eslint-config/presets/*": "./node/eslint-config/presets/*",
+    "#node/eslint-config/utilities/*": "./node/eslint-config/utilities/*"
   },
   "engines": {
     "node": "24.11.0",

@@ -1,6 +1,6 @@
 import { defineConfig } from 'eslint/config';
 
-import { ensureModulePathInPackage } from '#node/utilities/index.ts';
+import { ensureModulePathInPackage } from '#node/utilities/ensure.ts';
 
 const localOverrides = defineConfig([
   {
@@ -24,7 +24,7 @@ const localOverrides = defineConfig([
        * - 规范化的模块标识符能降低代码审查和重构的认知负担
        * - 在大型项目中便于快速定位和理解模块依赖关系，提升代码的可读性和可维护性
        */
-      'local/module-identifier-naming-convention': [
+      '@local/miscellaneous/module-identifier-naming-convention': [
         'warn',
         {
           ignoreUnMatched: false,
@@ -115,7 +115,7 @@ const localOverrides = defineConfig([
        * - process.exit() 是程序的终止点，需要视觉上的分隔以提升代码可读性
        * - 在代码审查时更容易识别程序的退出点
        */
-      'local/padding-line-before-process-exit': 'warn',
+      '@local/miscellaneous/padding-line-before-process-exit': 'warn',
     },
   },
 ]);

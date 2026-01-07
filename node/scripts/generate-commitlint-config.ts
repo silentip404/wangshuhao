@@ -3,8 +3,8 @@ import path from 'node:path';
 import { exec } from 'tinyexec';
 import { parse as parseArguments } from 'ts-command-line-args';
 
-import { printMessage } from '#lib/utilities/index.ts';
-import { writeToScratch } from '#node/utilities/index.ts';
+import { printMessage } from '#lib/utilities/print-message.ts';
+import { writeToScratch } from '#node/utilities/scratch.ts';
 
 import type { WithHelpArgument } from './utilities.ts';
 import { helpArgumentConfig, helpArgumentOptions } from './utilities.ts';

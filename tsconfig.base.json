@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/strictest/tsconfig.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "allowUnreachableCode": true,
     "allowUnusedLabels": true,
     "exactOptionalPropertyTypes": false,

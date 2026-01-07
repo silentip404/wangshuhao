@@ -1,26 +1,11 @@
-import {
-  flatMap,
-  isIncludedIn,
-  keys,
-  map,
-  pickBy,
-  pipe,
-  toLowerCase,
-  values,
-} from 'remeda';
+import { isIncludedIn, map } from 'remeda';
 
-import { parsePackageName } from './package.ts';
-import { memoizedReadPackageJson } from './read-file.ts';
+import { getExistingDependencies, parsePackageName } from './package.ts';
 
 const ensureModulePathInPackage = async (
   modulePath: string,
 ): Promise<string> => {
-  const existingDependencies = pipe(
-    await memoizedReadPackageJson(),
-    pickBy((value, key) => toLowerCase(key).endsWith('dependencies')),
-    values(),
-    flatMap(keys()),
-  );
+  const existingDependencies = await getExistingDependencies();
   const { packageName } = parsePackageName(modulePath);
 
   if (isIncludedIn(packageName, existingDependencies)) {

@@ -3,20 +3,20 @@ import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import type { RuleContext } from '@typescript-eslint/utils/ts-eslint';
 import { find, isTruthy } from 'remeda';
 
-import type { CaseVariants } from '#lib/utilities/index.ts';
 import {
-  memoizedGetCaseVariants,
   memoizedRegexReplace,
   memoizedRegexTest,
-} from '#lib/utilities/index.ts';
+} from '#lib/utilities/regex.ts';
+import type { CaseVariants } from '#lib/utilities/string.ts';
+import { memoizedGetCaseVariants } from '#lib/utilities/string.ts';
 
-import type { InferSchema } from '../utilities/index.ts';
+import { getNodeText } from '../utilities/ast.ts';
+import { initRule } from '../utilities/rule.ts';
+import type { InferSchema } from '../utilities/schema.ts';
 import {
   createESLintSchema,
   defineUnionJsonSchema,
-  getNodeText,
-  initRule,
-} from '../utilities/index.ts';
+} from '../utilities/schema.ts';
 
 type Context = RuleContext<MessageIds, [RuleOptions]>;
 interface LintModuleIdentifierOptions {

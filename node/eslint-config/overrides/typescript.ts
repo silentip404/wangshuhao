@@ -2,7 +2,7 @@ import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import { defineConfig } from 'eslint/config';
 import { concat, join, keys, toUpperCase } from 'remeda';
 
-import { getCaseVariants } from '#lib/utilities/index.ts';
+import { getCaseVariants } from '#lib/utilities/string.ts';
 import { reasons } from '#node/ts-expect-error-reasons.ts';
 
 const typescriptOverrides = defineConfig([
@@ -13,6 +13,7 @@ const typescriptOverrides = defineConfig([
     rules: {
       'camelcase': 'off',
       'consistent-return': 'off',
+      'init-declarations': 'off',
       'no-magic-numbers': 'off',
       'no-use-before-define': 'off',
     },
@@ -107,16 +108,6 @@ const typescriptOverrides = defineConfig([
        * - 为 AI 辅助编程提供明确的类型上下文，提升代码生成质量和准确性
        */
       '@typescript-eslint/explicit-module-boundary-types': 'warn',
-
-      /**
-       * 强制使用变量初始化声明
-       *
-       * @reason
-       * - 提高代码清晰度，确保变量在使用之前被明确初始化，避免潜在的未定义行为。
-       * - 通过保证变量总是有初始值，减少在不同作用域中出现未初始化变量的错误。
-       * - 在复杂逻辑中明确变量的初始状态，有助于增加团队协作的信心和可维护性。
-       */
-      '@typescript-eslint/init-declarations': 'warn',
 
       /**
        * 代码标识符命名检查

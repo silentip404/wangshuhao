@@ -12,7 +12,10 @@
     { "rule": "perfectionist/*", "severity": "off" },
     { "rule": "command/command", "severity": "info" },
     { "rule": "curly", "severity": "off" },
-    { "rule": "local/padding-line-before-process-exit", "severity": "off" },
+    {
+      "rule": "@local/miscellaneous/padding-line-before-process-exit",
+      "severity": "off",
+    },
   ],
 
   // Prettier 通用配置

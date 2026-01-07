@@ -5,7 +5,7 @@ import { defineCommand } from 'eslint-plugin-command/commands';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { isTruthy } from 'remeda';
 
-import { getFilenameWithoutExtension } from '#node/utilities/index.ts';
+import { getFilenameWithoutExtension } from '#node/utilities/path.ts';
 
 import { createCommandMatcher, getCommandLoc } from './utilities.ts';
 

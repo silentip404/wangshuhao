@@ -45,10 +45,10 @@
 
 - 🚧 **自定义 ESLint 规则**：开发项目专属的本地 **ESLint** 规则，满足特定的代码规范需求。
 
-  | 规则名                                      | 说明                                                             |
-  | ------------------------------------------- | ---------------------------------------------------------------- |
-  | `local/module-identifier-naming-convention` | 强制模块默认导入和命名空间导入的标识符遵循基于模块路径的命名规范 |
-  | `local/padding-line-before-process-exit`    | 强制 `process.exit()` 调用前有空行，提升程序终止点的视觉可识别性 |
+  | 规则名                                                     | 说明                                                             |
+  | ---------------------------------------------------------- | ---------------------------------------------------------------- |
+  | `@local/miscellaneous/module-identifier-naming-convention` | 强制模块默认导入和命名空间导入的标识符遵循基于模块路径的命名规范 |
+  | `@local/miscellaneous/padding-line-before-process-exit`    | 强制 `process.exit()` 调用前有空行，提升程序终止点的视觉可识别性 |
 
 - ✅ **自定义 ESLint 命令**：基于 `eslint-plugin-command` 开发的注释命令，通过特殊注释触发代码转换。
 

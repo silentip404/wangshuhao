@@ -13,12 +13,12 @@ import {
 import { parse as parseArguments } from 'ts-command-line-args';
 import { z } from 'zod';
 
-import { printMessage } from '#lib/utilities/index.ts';
+import { printMessage } from '#lib/utilities/print-message.ts';
+import { resolveFromRoot } from '#node/utilities/path.ts';
 import {
   memoizedReadPackageJson,
   readYamlFile,
-  resolveFromRoot,
-} from '#node/utilities/index.ts';
+} from '#node/utilities/read-file.ts';
 
 import type { VerifyFilesArguments, WithHelpArgument } from './utilities.ts';
 import {

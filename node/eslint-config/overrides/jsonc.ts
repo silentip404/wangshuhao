@@ -36,6 +36,21 @@ const jsoncOverrides = defineConfig([
       'jsonc/key-name-casing': 'off',
 
       /**
+       * 对象花括号换行一致性
+       *
+       * @reason
+       * - 统一的换行风格确保所有对象字面量在花括号后换行，提升代码视觉结构的一致性
+       * - 便于 Git diff 时逐行追踪属性变更，减少合并冲突
+       */
+      'jsonc/object-curly-newline': [
+        'warn',
+        {
+          minProperties: 1,
+          multiline: true,
+        },
+      ],
+
+      /**
        * JSON 数组值排序检查
        *
        * @reason

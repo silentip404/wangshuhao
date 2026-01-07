@@ -12,6 +12,10 @@
     "noEmit": true,
     "rewriteRelativeImportExtensions": false,
   },
-  "references": [{ "path": "./tsconfig.lib.json" }],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json",
+    },
+  ],
   "include": ["external-types/**/*.d.ts", "*.js", "*.ts", "node/**/*.ts"],
 }

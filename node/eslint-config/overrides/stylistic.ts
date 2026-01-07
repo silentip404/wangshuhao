@@ -54,6 +54,14 @@ const stylisticOverrides = defineConfig([
             minProperties: 1,
             multiline: true,
           },
+          TSInterfaceBody: {
+            minProperties: 1,
+            multiline: true,
+          },
+          TSEnumBody: {
+            minProperties: 1,
+            multiline: true,
+          },
         },
       ],
 
@@ -98,6 +106,23 @@ const stylisticOverrides = defineConfig([
           blankLine: 'any',
           next: ['interface', 'type'],
           prev: ['interface', 'type'],
+        },
+
+        // 枚举
+        {
+          blankLine: 'always',
+          next: 'enum',
+          prev: '*',
+        },
+        {
+          blankLine: 'always',
+          next: '*',
+          prev: 'enum',
+        },
+        {
+          blankLine: 'any',
+          next: 'enum',
+          prev: 'enum',
         },
 
         // 变量声明

@@ -8,7 +8,11 @@
     "allowJs": false,
     "noEmit": true,
   },
-  "references": [{ "path": "./tsconfig.lib.json" }],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json",
+    },
+  ],
   "include": [
     "external-types/**/*.d.ts",
     "app/**/*.ts",

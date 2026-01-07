@@ -35,7 +35,7 @@ const stylisticOverrides = defineConfig([
        * @reason
        * - 统一的注释风格有助于维护代码库的一致性，降低认知负担
        */
-      '@stylistic/multiline-comment-style': 'warn',
+      '@stylistic/multiline-comment-style': ['warn', 'separate-lines'],
 
       /**
        * 对象花括号换行风格控制

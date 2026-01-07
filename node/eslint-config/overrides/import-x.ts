@@ -151,12 +151,10 @@ const importXOverrides = defineConfig([
         'warn',
         {
           allow: [
-            /*
-             * 重要说明：
-             *
-             * 此选项仅接受 glob 字符串，内部使用 makeRe 创建正则表达式后匹配
-             * 并且不支持外部传入 { nocomment: true } 参数，因此 # 号需要转义
-             */
+            // 重要说明：
+            //
+            // 此选项仅接受 glob 字符串，内部使用 makeRe 创建正则表达式后匹配
+            // 并且不支持外部传入 { nocomment: true } 参数，因此 # 号需要转义
 
             // 允许导入别名路径中的浅层文件
             ...map(aliasGlobs, (glob) =>
@@ -219,11 +217,9 @@ const importXOverrides = defineConfig([
         'warn',
         {
           ignore: [
-            /*
-             * 重要说明：
-             *
-             * 此选项仅接受正则字符串，内部使用 new RegExp 匹配
-             */
+            // 重要说明：
+            //
+            // 此选项仅接受正则字符串，内部使用 new RegExp 匹配
 
             // 允许导入别名路径
             ...map(aliasRegexs, (regex) => regex.source),

@@ -9,11 +9,6 @@ const jsoncOverrides = defineConfig([
     extends: defineConfigWithAuditSettings(
       jsoncPlugin.configs['flat/prettier'],
       {
-        /**
-         * 本意是为了仅关闭可能与 Prettier 冲突的 jsonc 规则
-         * 但在 configs['flat/prettier'] 中存在 jsonc 插件定义
-         * 因此在运行规则审查时，应明确跳过为此配置前置追加全部规则
-         */
         shouldPrependAllRules: false,
       },
     ),

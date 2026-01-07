@@ -60,19 +60,23 @@ const GLOB_LICENSE = '**/LICENSE';
  * ════════════════════════════════════════════════════════════════════════════
  */
 const GLOB_CONFIG_FILES = [
+  '*.config.js',
+  '*.config.ts',
+  '*.config.*.ts',
   'nano-staged.js',
-  '*.config.?(*.)?([cm])[jt]s',
 ] as const;
 
-const GLOB_SCRIPTS_FILES = 'node/scripts/**/*.?([cm])ts';
+const GLOB_SCRIPTS_FILES = 'node/scripts/**/*.ts';
 
 const GLOB_EXTERNAL_TYPE_DECLARATIONS = 'external-types/**/*.d.ts';
 
 const GLOB_PACKAGE_JSON = '**/package.json';
 
 const GLOB_JSONC_SPECIAL = [
-  '**/tsconfig.?(*.)json',
-  '**/.vscode/**/*.{json,code-snippets}',
+  '**/tsconfig.json',
+  '**/tsconfig.*.json',
+  '**/.vscode/**/*.json',
+  '**/.vscode/**/*.code-snippets',
 ] as const;
 
 /*

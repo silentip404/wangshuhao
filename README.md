@@ -14,13 +14,13 @@
 
 ### 🤖 AI 辅助编程（仅适配 Cursor）（🚧 进行中）
 
-通过 **Cursor Rules** 配置 AI 编程助手的行为规范，提升人机协作效率。
+通过 **Cursor Commands** 配置可复用的 AI 工作流，在聊天输入框中使用 `/` 前缀触发。
 
-| 规则             | 说明                                           |
+| 命令             | 说明                                           |
 | ---------------- | ---------------------------------------------- |
 | `commit-message` | 动态读取 Commitlint 配置生成规范的 commit 信息 |
 
-> **注意**：由于 Cursor 目前内置的 Generate Commit Message 按钮不支持自定义行为，建议在对话框中直接使用 **@commit-message** 以获得完善的 commit 信息生成体验。
+> **注意**：由于 Cursor 目前内置的 Generate Commit Message 按钮不支持自定义行为，建议在 Cursor 聊天输入框中输入 `/commit-message` 即可触发命令，AI 将分析暂存区变更并生成符合规范的 commit message。
 
 ### 💻 技术栈
 

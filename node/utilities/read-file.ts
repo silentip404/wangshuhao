@@ -13,7 +13,7 @@ const readYamlFile = async (filePath: string): Promise<unknown> => {
   const normalizedPath = path.resolve(filePath);
   const content = await readFile(normalizedPath, 'utf8');
 
-  return parseYaml(content) as unknown;
+  return parseYaml(content);
 };
 
 export { memoizedReadPackageJson, readYamlFile };

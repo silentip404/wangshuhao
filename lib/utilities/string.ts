@@ -24,8 +24,8 @@ interface CaseVariants {
   };
 }
 
-const NULL_CHAR = '\0' as const;
-const NEWLINE = '\n' as const;
+const NULL_CHAR = '\0';
+const NEWLINE = '\n';
 
 const splitLines = (text: string): string[] => split(text, /\r\n|\r|\n/v);
 

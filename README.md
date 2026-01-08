@@ -12,15 +12,40 @@
 
 ## 🏗️ 技术架构与功能特性
 
-### 🤖 AI 辅助编程（仅适配 Cursor）（🚧 进行中）
+### 🤖 AI 辅助编程（🚧 进行中）
+
+#### AI 代理配置
+
+项目使用 `AGENTS.md` 文件为 AI 代理提供规范指南。
+
+> 支持 Cursor、Codex CLI、GitHub Copilot 等主流 AI 编程工具读取此配置。
+
+子目录中的 `AGENTS.md` 提供了针对该目录的代码模板，供 AI 代理参考生成规范代码：
+
+| 目录                                | 模板内容                          |
+| ----------------------------------- | --------------------------------- |
+| `node/eslint-config/local-plugins/` | **ESLint** 规则模板（有/无选项）  |
+| `node/scripts/`                     | **Node.js** 脚本模板（有/无参数） |
+
+#### Cursor Commands
 
 通过 **Cursor Commands** 配置可复用的 AI 工作流，在聊天输入框中使用 `/` 前缀触发。
 
-| 命令             | 说明                                                       |
-| ---------------- | ---------------------------------------------------------- |
-| `commit-message` | 根据暂存区变更生成符合 Conventional Commits 规范的提交信息 |
+| 命令                       | 说明                                                       |
+| -------------------------- | ---------------------------------------------------------- |
+| `commit-message`           | 根据暂存区变更生成符合 Conventional Commits 规范的提交信息 |
+| `prompt-engineering-guide` | AI 提示词工程最佳实践指南，用于编写和优化 AGENTS.md 等配置 |
 
 > **注意**：由于 Cursor 目前内置的 Generate Commit Message 按钮不支持自定义行为，建议在 Cursor 聊天输入框中输入 `/commit-message` 即可触发命令，AI 将分析暂存区变更并生成符合规范的 commit message。
+
+#### Cursor Skills
+
+通过 **Cursor Skills** 配置上下文感知的 AI 技能，当 AI 执行特定任务时自动激活对应技能。
+
+| 技能                       | 触发条件                                   |
+| -------------------------- | ------------------------------------------ |
+| `commit-message`           | 生成 Git commit message 时                 |
+| `prompt-engineering-guide` | 创建或编辑 AI 指导文档（`AGENTS.md` 等）时 |
 
 ### 💻 技术栈
 
@@ -112,7 +137,6 @@
   - 配置 `.vscode/settings.json`，设置 **ESLint** 规则级别、**Prettier** 格式化和保存时自动修复
   - 配置 `.vscode/extensions.json`，推荐安装 **ESLint**、**Prettier** 和 **EditorConfig** 插件
   - 针对不同文件类型配置独立的编辑器行为
-  - 提供按用途分类的代码片段模板，支持快速生成 **ESLint** 规则、**Node.js** 脚本等常用代码结构
 
 - 📋 **配置测试框架**：选择并配置测试框架，添加测试工具脚本，创建测试目录结构和示例测试，配置测试覆盖率阈值。
 

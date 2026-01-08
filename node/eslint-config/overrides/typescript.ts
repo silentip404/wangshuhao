@@ -225,13 +225,13 @@ const typescriptOverrides = defineConfig([
       ],
 
       /**
-       * 类型导入副作用检查
+       * 类型导入副作用控制
        *
        * @reason
-       * - 项目未启用 verbatimModuleSyntax，TypeScript 编译器会自动处理类型导入的擦除
-       * - Next.js 内置打包工具能够自动管理模块导入和副作用
+       * - 避免在仅导入类型时意外产生运行时副作用导入
+       * - 可配合 verbatimModuleSyntax 确保导入语句的转译行为可预测
        */
-      '@typescript-eslint/no-import-type-side-effects': 'off',
+      '@typescript-eslint/no-import-type-side-effects': 'error',
 
       /**
        * 魔法数字使用检查

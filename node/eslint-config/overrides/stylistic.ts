@@ -9,7 +9,7 @@ const stylisticOverrides = defineConfig([
       /**
        * 注释周围空行规范
        *
-       * @reason
+       * @remarks
        * - 在注释前保持空行提升代码视觉层次，使注释与其描述的代码形成清晰的逻辑分组
        */
       '@stylistic/lines-around-comment': [
@@ -32,7 +32,7 @@ const stylisticOverrides = defineConfig([
       /**
        * 多行注释风格规范
        *
-       * @reason
+       * @remarks
        * - 统一的注释风格有助于维护代码库的一致性，降低认知负担
        */
       '@stylistic/multiline-comment-style': ['warn', 'separate-lines'],
@@ -40,7 +40,7 @@ const stylisticOverrides = defineConfig([
       /**
        * 对象花括号换行风格控制
        *
-       * @reason
+       * @remarks
        * - 强制多行提升属性可读性，便于版本控制中追踪单个属性变更
        */
       '@stylistic/object-curly-newline': [
@@ -68,7 +68,7 @@ const stylisticOverrides = defineConfig([
       /**
        * 特定语句间空行控制
        *
-       * @reason
+       * @remarks
        * - 在关键语句块之间建立清晰的视觉边界，符合现代代码可读性最佳实践
        */
       '@stylistic/padding-line-between-statements': [
@@ -199,7 +199,7 @@ const stylisticOverrides = defineConfig([
       /**
        * 字符串引号风格统一
        *
-       * @reason
+       * @remarks
        * - 禁止滥用模板字符串确保语义准确性
        */
       '@stylistic/quotes': [

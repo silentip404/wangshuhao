@@ -11,7 +11,7 @@ const checkFileOverrides = defineConfig([
       /**
        * 文件名黑名单
        *
-       * @reason
+       * @remarks
        * - 确保文件命名符合一致的命名约定，提升团队协作效率和代码可读性
        */
       'check-file/filename-blocklist': [
@@ -32,7 +32,7 @@ const checkFileOverrides = defineConfig([
       /**
        * 文件命名检查
        *
-       * @reason
+       * @remarks
        * - 确保文件命名符合一致的命名约定，提升团队协作效率和代码可读性
        */
       'check-file/filename-naming-convention': [
@@ -48,7 +48,7 @@ const checkFileOverrides = defineConfig([
       /**
        * 文件夹匹配检查
        *
-       * @reason
+       * @remarks
        * - 确保文件夹匹配符合一致的约定，提升团队协作效率和代码可读性
        */
       'check-file/folder-match-with-fex': [
@@ -61,7 +61,7 @@ const checkFileOverrides = defineConfig([
       /**
        * 文件夹命名检查
        *
-       * @reason
+       * @remarks
        * - 确保文件夹命名符合一致的约定，提升团队协作效率和代码可读性
        */
       'check-file/folder-naming-convention': [
@@ -74,7 +74,7 @@ const checkFileOverrides = defineConfig([
       /**
        * 禁止使用 index 文件
        *
-       * @reason
+       * @remarks
        * - 避免桶文件（barrel file）带来的循环依赖风险
        * - 促进模块化设计，鼓励开发者对导出内容进行清晰命名
        * - 使模块依赖关系更加清晰明确，提升打包器 tree-shaking 的准确性

@@ -115,7 +115,7 @@ type Group =
  * 通过设置异常的换行数量作为哨兵值，当有元素未被正确分类而 落入 unknown 组时，将产生与 Prettier 格式化规范的冲突，以此作为
  * 视觉提示，提醒开发者完善自定义分组配置
  *
- * @reason
+ * @remarks
  * - 利用格式化冲突作为主动告警机制，而非被动发现分类遗漏
  */
 const UNKNOWN_GROUP_GUARD = [
@@ -173,7 +173,7 @@ const perfectionistOverrides = defineConfig([
       /**
        * 强制导出排序
        *
-       * @reason
+       * @remarks
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-exports': 'warn',
@@ -181,7 +181,7 @@ const perfectionistOverrides = defineConfig([
       /**
        * 导入语句排序
        *
-       * @reason
+       * @remarks
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-imports': [
@@ -211,7 +211,7 @@ const perfectionistOverrides = defineConfig([
       /**
        * TypeScript 接口属性排序
        *
-       * @reason
+       * @remarks
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-interfaces': [
@@ -224,7 +224,7 @@ const perfectionistOverrides = defineConfig([
       /**
        * 交叉类型成员排序
        *
-       * @reason
+       * @remarks
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-intersection-types': [
@@ -237,7 +237,7 @@ const perfectionistOverrides = defineConfig([
       /**
        * JSX 属性排序规范
        *
-       * @reason
+       * @remarks
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-jsx-props': [
@@ -297,7 +297,7 @@ const perfectionistOverrides = defineConfig([
       /**
        * 强制模块成员排序
        *
-       * @reason
+       * @remarks
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-modules': 'warn',
@@ -305,7 +305,7 @@ const perfectionistOverrides = defineConfig([
       /**
        * 具名导出排序规则
        *
-       * @reason
+       * @remarks
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-named-exports': 'warn',
@@ -313,7 +313,7 @@ const perfectionistOverrides = defineConfig([
       /**
        * 具名导入排序规则
        *
-       * @reason
+       * @remarks
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-named-imports': 'warn',
@@ -321,7 +321,7 @@ const perfectionistOverrides = defineConfig([
       /**
        * 强制对象类型的排序
        *
-       * @reason
+       * @remarks
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-object-types': [
@@ -334,17 +334,17 @@ const perfectionistOverrides = defineConfig([
       /**
        * 对象键排序检查
        *
-       * @reason
+       * @remarks
        * - 全局禁用自动排序，避免对所有对象字面量强制排序造成不必要的约束
        * - 对象属性顺序可能反映业务优先级或重要性层级，应尊重开发者的设计意图
-       * - 通过 @perfectionist-sort-objects 注释在需要的地方手动启用，实现精准控制
+       * - 通过 `@perfectionist-sort-objects` 注释在需要的地方手动启用，实现精准控制
        */
       'perfectionist/sort-objects': 'off',
 
       /**
        * 强制 switch 语句分支排序
        *
-       * @reason
+       * @remarks
        * - 尊重开发者对代码结构的主导权
        */
       'perfectionist/sort-switch-case': 'off',
@@ -352,7 +352,7 @@ const perfectionistOverrides = defineConfig([
       /**
        * 联合类型成员排序
        *
-       * @reason
+       * @remarks
        * - 降低代码审查和合并冲突的认知负担，避免因顺序差异引发无意义的讨论
        */
       'perfectionist/sort-union-types': [

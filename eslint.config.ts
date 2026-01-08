@@ -37,6 +37,7 @@ import { reactHooksPresets } from '#node/eslint-config/presets/react-hooks.ts';
 import { reactPresets } from '#node/eslint-config/presets/react.ts';
 import { regexpPresets } from '#node/eslint-config/presets/regexp.ts';
 import { stylisticPresets } from '#node/eslint-config/presets/stylistic.ts';
+import { tsdocPresets } from '#node/eslint-config/presets/tsdoc.ts';
 import { typescriptPresets } from '#node/eslint-config/presets/typescript.ts';
 import { unicornPresets } from '#node/eslint-config/presets/unicorn.ts';
 import {
@@ -44,6 +45,7 @@ import {
   GLOB_COMBINED_DEPENDENCY_SOURCES,
   GLOB_COMBINED_JS,
   GLOB_COMBINED_JSON,
+  GLOB_COMBINED_TS,
   GLOB_CONFIG_FILES,
   GLOB_DOT_FILES,
   GLOB_EXTERNAL_TYPE_DECLARATIONS,
@@ -130,6 +132,15 @@ const eslintConfig = defineConfig([
       perfectionistOverrides,
       localOverrides,
     ],
+  },
+
+  /**
+   * TS 相关文件配置
+   */
+  {
+    name: 'combined-ts',
+    files: [...GLOB_COMBINED_TS],
+    extends: [tsdocPresets],
   },
 
   /**

@@ -44,7 +44,7 @@ const typescriptOverrides = defineConfig([
       ],
 
       /**
-       * return 语句值检查
+       * Return 语句值检查
        *
        * @reason
        * - 推荐使用 TypeScript 的 noImplicitReturns 选项替代此规则
@@ -374,7 +374,7 @@ const typescriptOverrides = defineConfig([
       ],
 
       /**
-       * switch 语句穷尽性检查
+       * Switch 语句穷尽性检查
        *
        * @reason
        * - TypeScript-first 项目应充分利用类型系统确保联合类型和枚举的完整性

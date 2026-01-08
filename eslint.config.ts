@@ -18,7 +18,7 @@ import { reactOverrides } from '#node/eslint-config/overrides/react.ts';
 import { regexpOverrides } from '#node/eslint-config/overrides/regexp.ts';
 import {
   sortPackageJson,
-  sortTsconfig,
+  sortTsconfigJson,
 } from '#node/eslint-config/overrides/sort-json.ts';
 import { stylisticOverrides } from '#node/eslint-config/overrides/stylistic.ts';
 import { typescriptOverrides } from '#node/eslint-config/overrides/typescript.ts';
@@ -156,7 +156,13 @@ const eslintConfig = defineConfig([
   {
     name: 'miscellaneous:overrides',
     extends: [
-      // 允许导入内置模块
+      sortPackageJson,
+
+      sortTsconfigJson,
+
+      /**
+       * 允许导入内置模块
+       */
       {
         rules: {
           'import-x/no-nodejs-modules': 'off',
@@ -164,7 +170,9 @@ const eslintConfig = defineConfig([
         files: [...GLOB_TSCONFIG_NODE_INCLUDE],
       },
 
-      // 允许拥有更多的依赖项
+      /**
+       * 允许拥有更多的依赖项
+       */
       {
         rules: {
           'import-x/max-dependencies': 'off',
@@ -172,7 +180,9 @@ const eslintConfig = defineConfig([
         files: [...GLOB_CONFIG_FILES],
       },
 
-      // 允许使用默认导出
+      /**
+       * 允许使用默认导出
+       */
       {
         rules: {
           'import-x/no-default-export': 'off',
@@ -184,7 +194,9 @@ const eslintConfig = defineConfig([
         ],
       },
 
-      // 允许使用可能导致超线性回溯的正则表达式
+      /**
+       * 允许使用可能导致超线性回溯的正则表达式
+       */
       {
         rules: {
           'regexp/no-super-linear-move': 'off',
@@ -192,7 +204,9 @@ const eslintConfig = defineConfig([
         files: [...GLOB_TSCONFIG_NODE_INCLUDE],
       },
 
-      // 允许调用 process.exit() 方法
+      /**
+       * 允许调用 process.exit() 方法
+       */
       {
         rules: {
           'unicorn/no-process-exit': 'off',
@@ -200,7 +214,9 @@ const eslintConfig = defineConfig([
         files: [GLOB_SCRIPTS_FILES],
       },
 
-      // 强制使用全大写文件名
+      /**
+       * 强制使用全大写文件名
+       */
       {
         rules: {
           'check-file/filename-naming-convention': [
@@ -219,7 +235,9 @@ const eslintConfig = defineConfig([
         ],
       },
 
-      // 关闭文件命名检查
+      /**
+       * 关闭文件命名检查
+       */
       {
         rules: {
           'check-file/filename-naming-convention': 'off',
@@ -227,19 +245,15 @@ const eslintConfig = defineConfig([
         files: [GLOB_DOT_FILES],
       },
 
-      // 关闭文件夹命名检查
+      /**
+       * 关闭文件夹命名检查
+       */
       {
         rules: {
           'check-file/folder-naming-convention': 'off',
         },
         files: [GLOB_EXTERNAL_TYPE_DECLARATIONS, GLOB_FILES_IN_DOT_DIRECTORY],
       },
-
-      // 对 package.json 进行排序
-      sortPackageJson,
-
-      // 对 tsconfig.json 进行排序
-      sortTsconfig,
     ],
   } satisfies Pick<ConfigWithExtends, 'extends' | 'name'>,
 ] satisfies SetRequired<ConfigWithExtends, 'name'>[]);

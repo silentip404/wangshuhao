@@ -5,8 +5,9 @@ import { getCaseVariants } from '#lib/utilities/string.ts';
 /**
  * 将文本转换为大小写不敏感的 glob 模式
  *
- * @param text - 文本
- * @returns 大小写不敏感的 glob 模式
+ * @param   text - 文本
+ *
+ * @returns      大小写不敏感的 glob 模式
  */
 const toCaseInsensitiveGlob = (text: string): string => {
   const { raw } = getCaseVariants(text);
@@ -130,9 +131,11 @@ export {
   GLOB_DOT_FILES,
   GLOB_EXTERNAL_TYPE_DECLARATIONS,
   GLOB_FILES_IN_DOT_DIRECTORY,
+  GLOB_JS,
   GLOB_JSON,
   GLOB_JSON5,
   GLOB_JSONC_SPECIAL,
+  GLOB_JSX,
   GLOB_LICENSE,
   GLOB_ONE_LEVEL_FILES,
   GLOB_SCRIPTS_FILES,

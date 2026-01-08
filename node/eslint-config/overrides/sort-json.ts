@@ -6,6 +6,9 @@
 
 import { defineConfig } from 'eslint/config';
 
+/**
+ * 对 package.json 进行排序
+ */
 const sortPackageJson = defineConfig([
   {
     files: ['**/package.json'],
@@ -121,7 +124,10 @@ const sortPackageJson = defineConfig([
   },
 ]);
 
-const sortTsconfig = defineConfig([
+/**
+ * 对 tsconfig.json 进行排序
+ */
+const sortTsconfigJson = defineConfig([
   {
     files: ['**/[jt]sconfig.json', '**/[jt]sconfig.*.json'],
     name: 'antfu/sort/tsconfig-json',
@@ -255,4 +261,4 @@ const sortTsconfig = defineConfig([
   },
 ]);
 
-export { sortPackageJson, sortTsconfig };
+export { sortPackageJson, sortTsconfigJson };

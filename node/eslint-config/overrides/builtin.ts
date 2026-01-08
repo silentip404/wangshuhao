@@ -42,7 +42,7 @@ const builtinOverrides = defineConfig([
       'curly': 'error',
 
       /**
-       * switch 语句 default 分支检查
+       * Switch 语句 default 分支检查
        *
        * @reason
        * - 强制开发者显式声明默认行为，避免运行时遗漏边界情况的错误处理
@@ -255,7 +255,7 @@ const builtinOverrides = defineConfig([
       'no-undef-init': 'off',
 
       /**
-       * undefined 标识符使用检查
+       * Undefined 标识符使用检查
        *
        * @reason
        * - 该规则已正式弃用，不再推荐使用

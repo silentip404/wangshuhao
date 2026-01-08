@@ -71,11 +71,6 @@ const cleanupTemporaryConfigs = (): void => {
   });
 };
 
-/**
- * 使用 CLI 方式（tsc 命令）检查指定文件
- *
- * @returns isSuccess 表示检查是否通过，output 为格式化的诊断输出
- */
 const typeCheckViaCli = async (
   typeCheckableFiles: string[],
 ): Promise<TypeCheckResult> => {

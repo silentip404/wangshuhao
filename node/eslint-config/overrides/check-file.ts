@@ -34,7 +34,6 @@ const checkFileOverrides = defineConfig([
        *
        * @reason
        * - 确保文件命名符合一致的命名约定，提升团队协作效率和代码可读性
-       *
        */
       'check-file/filename-naming-convention': [
         'error',

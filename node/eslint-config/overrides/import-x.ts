@@ -59,7 +59,7 @@ const importXOverrides = defineConfig([
       ],
 
       /**
-       * import 语句位置规范
+       * Import 语句位置规范
        *
        * @reason
        * - 统一的导入位置便于快速了解模块依赖关系，提升代码可维护性

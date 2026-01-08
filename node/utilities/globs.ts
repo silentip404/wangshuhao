@@ -2,13 +2,6 @@ import { join, split, zipWith } from 'remeda';
 
 import { getCaseVariants } from '#lib/utilities/string.ts';
 
-/**
- * 将文本转换为大小写不敏感的 glob 模式
- *
- * @param   text - 文本
- *
- * @returns      大小写不敏感的 glob 模式
- */
 const toCaseInsensitiveGlob = (text: string): string => {
   const { raw } = getCaseVariants(text);
 
@@ -108,8 +101,6 @@ const GLOB_COMBINED_JS = [
   GLOB_TSX,
 ] as const;
 
-const GLOB_COMBINED_TS = [GLOB_TS, GLOB_D_TS, GLOB_TSX] as const;
-
 const GLOB_COMBINED_DEPENDENCY_SOURCES = [
   GLOB_PACKAGE_JSON,
   ...GLOB_COMBINED_JS,
@@ -129,7 +120,6 @@ export {
   GLOB_COMBINED_JS,
   GLOB_COMBINED_JSON,
   GLOB_COMBINED_JSONC,
-  GLOB_COMBINED_TS,
   GLOB_CONFIG_FILES,
   GLOB_DOT_FILES,
   GLOB_EXTERNAL_TYPE_DECLARATIONS,

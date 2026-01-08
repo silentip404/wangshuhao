@@ -36,9 +36,6 @@ const config: Linter.Config = {
   },
 };
 
-/**
- * 替换属性值为占位符
- */
 const replacePropertyValues = (
   objectText: string,
   node: TSESTree.ObjectExpression | TSESTree.ObjectPattern,
@@ -92,9 +89,6 @@ const replacePropertyValues = (
   };
 };
 
-/**
- * 将占位符替换回原始内容
- */
 const restorePlaceholders = (
   text: string,
   placeholderMap: Map<string, string>,

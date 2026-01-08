@@ -20,6 +20,7 @@ const prettierOverrides = defineConfig([
 
       '@stylistic/exp-list-style': 'off',
       '@stylistic/max-len': 'off',
+      'jsdoc/tag-lines': 'off',
     },
   },
 ]);

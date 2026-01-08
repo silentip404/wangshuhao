@@ -9,6 +9,7 @@ import { checkFileOverrides } from '#node/eslint-config/overrides/check-file.ts'
 import { dependOverrides } from '#node/eslint-config/overrides/depend.ts';
 import { eslintCommentsOverrides } from '#node/eslint-config/overrides/eslint-comments.ts';
 import { importXOverrides } from '#node/eslint-config/overrides/import-x.ts';
+import { jsdocOverrides } from '#node/eslint-config/overrides/jsdoc.ts';
 import { jsoncOverrides } from '#node/eslint-config/overrides/jsonc.ts';
 import { localOverrides } from '#node/eslint-config/overrides/local.ts';
 import { nextOverrides } from '#node/eslint-config/overrides/next.ts';
@@ -21,6 +22,7 @@ import {
   sortTsconfigJson,
 } from '#node/eslint-config/overrides/sort-json.ts';
 import { stylisticOverrides } from '#node/eslint-config/overrides/stylistic.ts';
+import { tsdocOverrides } from '#node/eslint-config/overrides/tsdoc.ts';
 import { typescriptOverrides } from '#node/eslint-config/overrides/typescript.ts';
 import { unicornOverrides } from '#node/eslint-config/overrides/unicorn.ts';
 import { builtinPresets } from '#node/eslint-config/presets/builtin.ts';
@@ -29,6 +31,7 @@ import { dependPresets } from '#node/eslint-config/presets/depend.ts';
 import { eslintCommentsPresets } from '#node/eslint-config/presets/eslint-comments.ts';
 import { ignorePresets } from '#node/eslint-config/presets/ignore.ts';
 import { importXPresets } from '#node/eslint-config/presets/import-x.ts';
+import { jsdocPresets } from '#node/eslint-config/presets/jsdoc.ts';
 import { jsoncPresets } from '#node/eslint-config/presets/jsonc.ts';
 import { jsxA11yPresets } from '#node/eslint-config/presets/jsx-a11y.ts';
 import { nextPresets } from '#node/eslint-config/presets/next.ts';
@@ -45,11 +48,12 @@ import {
   GLOB_COMBINED_DEPENDENCY_SOURCES,
   GLOB_COMBINED_JS,
   GLOB_COMBINED_JSON,
-  GLOB_COMBINED_TS,
   GLOB_CONFIG_FILES,
   GLOB_DOT_FILES,
   GLOB_EXTERNAL_TYPE_DECLARATIONS,
   GLOB_FILES_IN_DOT_DIRECTORY,
+  GLOB_JS,
+  GLOB_JSX,
   GLOB_SCRIPTS_FILES,
   GLOB_TSCONFIG_NODE_INCLUDE,
   toCaseInsensitiveGlob,
@@ -115,6 +119,8 @@ const eslintConfig = defineConfig([
       nextPresets,
       regexpPresets,
       unicornPresets,
+      jsdocPresets,
+      tsdocPresets,
       stylisticPresets,
       perfectionistPresets,
 
@@ -128,19 +134,12 @@ const eslintConfig = defineConfig([
       nextOverrides,
       regexpOverrides,
       unicornOverrides,
+      jsdocOverrides,
+      tsdocOverrides,
       stylisticOverrides,
       perfectionistOverrides,
       localOverrides,
     ],
-  },
-
-  /**
-   * TS 相关文件配置
-   */
-  {
-    name: 'combined-ts',
-    files: [...GLOB_COMBINED_TS],
-    extends: [tsdocPresets],
   },
 
   /**
@@ -223,6 +222,16 @@ const eslintConfig = defineConfig([
           'unicorn/no-process-exit': 'off',
         },
         files: [GLOB_SCRIPTS_FILES],
+      },
+
+      /**
+       * 关闭 tsdoc 语法检查
+       */
+      {
+        rules: {
+          'tsdoc/syntax': 'off',
+        },
+        files: [GLOB_JS, GLOB_JSX],
       },
 
       /**

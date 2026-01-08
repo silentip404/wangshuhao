@@ -1,42 +1,83 @@
-# 生成 Commit Message
+<!-- ====================================================================== -->
+<!-- PROJECT-SPECIFIC GUIDELINES - START                                    -->
+<!-- ====================================================================== -->
 
-## 概述
+Generate commit messages following the Conventional Commits specification below, with these additional project-specific requirements:
 
-根据 Git 暂存区的文件变更，生成符合项目 Commitlint 配置规范的 commit message。
+### Language
 
-## 步骤
+**Important: The generated commit message MUST be written in the user's target language.**
 
-### 1. 获取配置
+### Staged Changes Analysis
 
-读取项目根目录下的 `scratch/commitlint-config.json` 文件获取完整规则配置，严格按照配置规则生成。
+- Only analyze staged (not unstaged) file changes as the basis for generating commit messages.
+- Distinguish between primary changes and secondary changes caused by them (e.g., import path updates due to file renaming).
+- If the intent of the changes cannot be accurately determined, ASK the user for clarification rather than guessing.
 
-### 2. 分析暂存区变更
+### Commit Atomicity
 
-- 仅读取 staged 文件变更作为分析依据
-- 区分主要修改与由此产生的次要修改（如重命名导致的 import 路径更新）
-- 若无法准确判断修改意图，应向用户询问而非猜测
+- Each commit SHOULD focus on a single purpose or logical change.
+- If staged changes contain multiple unrelated modifications, RECOMMEND the user to split them into separate commits.
 
-### 3. 生成 Commit Message
+### Scope Selection
 
-#### 语言与风格
+- The scope SHOULD reflect the actual module or component being modified.
+- If changes span multiple modules, multiple scopes MAY be separated by commas (e.g., `feat(auth,api): ...`).
+- If changes are too scattered to identify a clear subject, the scope MAY be omitted, but you MUST explain to the user why the scope was omitted.
 
-- 使用与用户相同的语言生成 commit message
-- subject 应简洁明了，详细说明放入 body
-- 生成结果时回复应简洁，仅输出关键内容，无需过多解释
+### Response Style
 
-#### 原子性
+- Keep the subject line concise; place detailed explanations in the body.
+- Provide a concise response with only essential content; avoid excessive explanations.
 
-- 一个 commit 应聚焦于单一目的
-- 若 staged 内容包含多个不相关的改动，应提醒用户拆分提交
+### Interaction Protocol
 
-#### Scope 选择
+- Do NOT execute the commit directly. Only provide the generated commit message and ask the user for confirmation before committing.
 
-- scope 应反映实际修改的模块或组件
-- 若修改涉及多个模块，可使用英文逗号分隔多个 scope（如 `feat(auth,api): ...`）
-- 若修改过于分散且无法归纳出明确主体，可省略 scope
+<!-- ====================================================================== -->
+<!-- PROJECT-SPECIFIC GUIDELINES - END                                      -->
+<!-- ====================================================================== -->
 
-### 4. 交互确认
+Use the Conventional Commit Messages specification to generate commit messages
 
-- 不要直接执行 commit，仅提供生成的 commit message 并询问用户是否提交
-- 明确告知用户生成的 commit message 基于暂存区(staged)文件分析所得
-- 明确告知用户你已阅读 `scratch/commitlint-config.json` 配置，若此文件不存在则终止操作并反馈给用户，禁止读取其他 commitlint 配置文件
+The commit message should be structured as follows:
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+---
+
+The commit contains the following structural elements, to communicate intent to the consumers of your library:
+
+- fix: a commit of the type fix patches a bug in your codebase (this correlates with PATCH in Semantic Versioning).
+- feat: a commit of the type feat introduces a new feature to the codebase (this correlates with MINOR in Semantic Versioning).
+- BREAKING CHANGE: a commit that has a footer BREAKING CHANGE:, or appends a ! after the type/scope, introduces a breaking API change (correlating with MAJOR in Semantic Versioning). A BREAKING CHANGE can be part of commits of any type.
+- types other than fix: and feat: are allowed, for example @commitlint/config-conventional (based on the Angular convention) recommends build:, chore:, ci:, docs:, style:, refactor:, perf:, test:, and others.
+- footers other than BREAKING CHANGE: <description> may be provided and follow a convention similar to git trailer format.
+- Additional types are not mandated by the Conventional Commits specification, and have no implicit effect in Semantic Versioning (unless they include a BREAKING CHANGE). A scope may be provided to a commit’s type, to provide additional contextual information and is contained within parenthesis, e.g., feat(parser): add ability to parse arrays.
+
+### Specification Details
+
+The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
+
+Commits MUST be prefixed with a type, which consists of a noun, feat, fix, etc., followed by the OPTIONAL scope, OPTIONAL !, and REQUIRED terminal colon and space.
+The type feat MUST be used when a commit adds a new feature to your application or library.
+The type fix MUST be used when a commit represents a bug fix for your application.
+A scope MAY be provided after a type. A scope MUST consist of a noun describing a section of the codebase surrounded by parenthesis, e.g., fix(parser):
+A description MUST immediately follow the colon and space after the type/scope prefix. The description is a short summary of the code changes, e.g., fix: array parsing issue when multiple spaces were contained in string.
+A longer commit body MAY be provided after the short description, providing additional contextual information about the code changes. The body MUST begin one blank line after the description.
+A commit body is free-form and MAY consist of any number of newline separated paragraphs.
+One or more footers MAY be provided one blank line after the body. Each footer MUST consist of a word token, followed by either a :<space> or <space># separator, followed by a string value (this is inspired by the git trailer convention).
+A footer’s token MUST use - in place of whitespace characters, e.g., Acked-by (this helps differentiate the footer section from a multi-paragraph body). An exception is made for BREAKING CHANGE, which MAY also be used as a token.
+A footer’s value MAY contain spaces and newlines, and parsing MUST terminate when the next valid footer token/separator pair is observed.
+Breaking changes MUST be indicated in the type/scope prefix of a commit, or as an entry in the footer.
+If included as a footer, a breaking change MUST consist of the uppercase text BREAKING CHANGE, followed by a colon, space, and description, e.g., BREAKING CHANGE: environment variables now take precedence over config files.
+If included in the type/scope prefix, breaking changes MUST be indicated by a ! immediately before the :. If ! is used, BREAKING CHANGE: MAY be omitted from the footer section, and the commit description SHALL be used to describe the breaking change.
+Types other than feat and fix MAY be used in your commit messages, e.g., docs: update ref docs.
+The units of information that make up Conventional Commits MUST NOT be treated as case sensitive by implementors, with the exception of BREAKING CHANGE which MUST be uppercase.
+BREAKING-CHANGE MUST be synonymous with BREAKING CHANGE, when used as a token in a footer.

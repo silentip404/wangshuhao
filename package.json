@@ -23,9 +23,7 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "prepare": "run-s prepare:* --silent",
-    "prepare:husky": "husky",
-    "prepare:generate-commitlint-config": "pnpm exec node node/scripts/generate-commitlint-config.ts",
+    "prepare": "husky",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

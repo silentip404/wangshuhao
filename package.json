@@ -6,7 +6,7 @@
   "packageManager": "pnpm@10.27.0",
   "imports": {
     "#lib/utilities/*": "./lib/utilities/*",
-    "#node/ts-expect-error-reasons.ts": "./ts-expect-error-reasons.ts",
+    "#node/ts-expect-error.ts": "./ts-expect-error.ts",
     "#node/utilities/*": "./node/utilities/*",
     "#node/eslint-config/command/setup.ts": "./node/eslint-config/command/setup.ts",
     "#node/eslint-config/local-plugins/setup.ts": "./node/eslint-config/local-plugins/setup.ts",

@@ -3,7 +3,7 @@ import { defineConfig } from 'eslint/config';
 import { concat, join, keys, toUpperCase } from 'remeda';
 
 import { getCaseVariants } from '#lib/utilities/string.ts';
-import { reasons } from '#node/ts-expect-error-reasons.ts';
+import { reasons } from '#node/ts-expect-error.ts';
 
 const typescriptOverrides = defineConfig([
   {
@@ -38,7 +38,7 @@ const typescriptOverrides = defineConfig([
           'ts-nocheck': true,
           'ts-check': false,
           'ts-expect-error': {
-            descriptionFormat: String.raw`^ -- See reasons\['(${join(keys(reasons), '|')})'\] in ts-expect-error-reasons\.ts$`,
+            descriptionFormat: String.raw`^ -- See reasons\['(${join(keys(reasons), '|')})'\] in ts-expect-error\.ts$`,
           },
         },
       ],

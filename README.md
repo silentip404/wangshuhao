@@ -31,21 +31,20 @@
 
 通过 **Cursor Commands** 配置可复用的 AI 工作流，在聊天输入框中使用 `/` 前缀触发。
 
-| 命令                       | 说明                                                       |
-| -------------------------- | ---------------------------------------------------------- |
-| `commit-message`           | 根据暂存区变更生成符合 Conventional Commits 规范的提交信息 |
-| `prompt-engineering-guide` | AI 提示词工程最佳实践指南，用于编写和优化 AGENTS.md 等配置 |
+| 指令             | 说明                                                       |
+| ---------------- | ---------------------------------------------------------- |
+| `commit-message` | 智能分析变更并生成符合 Conventional Commits 规范的提交信息 |
 
-> **注意**：由于 Cursor 目前内置的 Generate Commit Message 按钮不支持自定义行为，建议在 Cursor 聊天输入框中输入 `/commit-message` 即可触发命令，AI 将分析暂存区变更并生成符合规范的 commit message。
+> **注意**：由于 Cursor 目前内置的 Generate Commit Message 按钮不支持自定义行为，建议在 Cursor 聊天输入框中输入 `/commit-message` 即可触发指令。
 
 #### Cursor Skills
 
 通过 **Cursor Skills** 配置上下文感知的 AI 技能，当 AI 执行特定任务时自动激活对应技能。
 
-| 技能                       | 触发条件                                   |
-| -------------------------- | ------------------------------------------ |
-| `commit-message`           | 生成 Git commit message 时                 |
-| `prompt-engineering-guide` | 创建或编辑 AI 指导文档（`AGENTS.md` 等）时 |
+| 技能             | 触发条件                                                      | 说明                                                       |
+| ---------------- | ------------------------------------------------------------- | ---------------------------------------------------------- |
+| `ai-guidance`    | 创建或编辑 AI 指导文档（`**/AGENTS.md`、`.cursor/**/*.md`）时 | AI 提示词工程最佳实践指南，用于编写和优化 AI 配置文档      |
+| `commit-message` | 生成 Git commit message 时                                    | 智能分析变更并生成符合 Conventional Commits 规范的提交信息 |
 
 ### 💻 技术栈
 

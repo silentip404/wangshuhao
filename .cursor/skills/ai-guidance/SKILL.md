@@ -1,6 +1,11 @@
+---
+name: ai-guidance
+description: Apply when creating or editing AI guidance documents ('**/AGENTS.md', '.cursor/**/*.md')
+---
+
 # AI Prompt Engineering Guide
 
-This guide summarizes best practices for writing effective AI prompts and AI configuration files.
+Before creating or modifying any AI guidance documents, you **MUST** read and apply these guidelines.
 
 ---
 
@@ -135,7 +140,7 @@ When rules are defined elsewhere, reference them instead of duplicating:
 ```markdown
 ## Git Commit Messages
 
-When generating Git commit messages, you **MUST** strictly follow the specifications in [.cursor/commands/commit-message.md](.cursor/commands/commit-message.md). You **MUST NOT** reference any other commit message configurations, conventions, or formats (e.g., Angular commit guidelines, or repository commit history).
+When generating Git commit messages, you **MUST** strictly follow the specifications in [.cursor/skills/commit-message/SKILL.md](../commit-message/SKILL.md). You **MUST NOT** reference any other commit message configurations, conventions, or formats (e.g., Angular commit guidelines, or repository commit history).
 ```
 
 ---
@@ -178,24 +183,9 @@ Guide AI behavior when encountering issues:
 - If type errors cannot be resolved: Use @ts-expect-error with reason
 ```
 
-### Context Management
-
-Reference existing documentation instead of duplicating:
-
-```markdown
-### Commit Messages
-
-**MUST** follow specifications in [.cursor/commands/commit-message.md](.cursor/commands/commit-message.md).
-```
-
 ---
 
 ## Anti-Patterns to Avoid
-
-### Vague Instructions
-
-**Incorrect:** "Write clean code"
-**Correct:** "Follow the naming conventions defined in the Naming Conventions section"
 
 ### Overly Complex Prompts
 
@@ -205,17 +195,12 @@ Reference existing documentation instead of duplicating:
 ### Duplicate Documentation
 
 **Incorrect:** Copying README content into AGENTS.md
-**Correct:** Reference: "See [README.md](README.md) for setup instructions"
+**Correct:** Reference: "See [README.md](../../../README.md) for setup instructions"
 
 ### Implicit Assumptions
 
 **Incorrect:** Assuming AI knows project conventions
 **Correct:** Explicitly define all conventions with examples
-
-### Missing Examples
-
-**Incorrect:** "Use proper naming conventions"
-**Correct:** "Variables: `userName`, Functions: `calculateTotal`, Constants: `MAX_COUNT`"
 
 ---
 
@@ -264,25 +249,6 @@ const example = (): string => 'hello';
 
 - **MUST** use `---` (horizontal rule) as the separator between the header block and the first H2 section, and between each subsequent H2 section
 - **MUST NOT** use other separators such as HTML comments, `***`, `___`, or blank lines only
-- The horizontal rule provides clear visual separation while remaining valid Markdown syntax
-
-```markdown
-# Document Title
-
-Brief introduction.
-
----
-
-## First Section
-
-Content for first section.
-
----
-
-## Second Section
-
-Content for second section.
-```
 
 ### Avoid Numbered Lists for Extensible Content
 
@@ -317,12 +283,14 @@ Content for second section.
 
 ## Conflict Resolution
 
-### When Existing Content Violates This Guide
+### Checklist Violation Handling
 
-If you discover content that violates the conventions in this guide:
+When any rule document contains a Checklist section, if existing code or content violates the Checklist conventions:
 
 - **MUST** report the violation to the user
 - **MUST NOT** modify the content without explicit user approval
+
+This rule applies universally to all rule documents that include a Checklist.
 
 ### When User Requests Conflict with This Guide
 
@@ -337,6 +305,8 @@ If a user's explicit request conflicts with the conventions in this guide:
 
 ## Checklist for AI Guidance Documents
 
+The Checklist section **MUST** be placed at the end of the rule document as a standalone module. Use H3 headings for categorization.
+
 ### Structure Checklist
 
 - [ ] H1 title follows the appropriate convention (standardized or functional)
@@ -345,6 +315,7 @@ If a user's explicit request conflicts with the conventions in this guide:
 - [ ] Horizontal rules (`---`) after header block and between each H2 section
 - [ ] No deeply nested subsections (avoid H4+)
 - [ ] No numbered prefixes on extensible sections
+- [ ] Checklist section (if present) is placed at the end as `## Checklist for AI Guidance Documents`
 
 ### Content Checklist
 
@@ -355,3 +326,8 @@ If a user's explicit request conflicts with the conventions in this guide:
 - [ ] RFC 2119 keywords used consistently and bold (**MUST**, **SHOULD**, **MAY**)
 - [ ] Rules are professionally worded (not direct copies of informal user requests)
 - [ ] All content is written in English only (no other languages)
+
+### Compliance Checklist
+
+- [ ] Report violations to user when existing content conflicts with Checklist conventions
+- [ ] Do not modify content without explicit user approval

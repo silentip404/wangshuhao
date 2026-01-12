@@ -4,14 +4,14 @@ import eslintJs from '@eslint/js';
 import { concat, isEmptyish, map, merge } from 'remeda';
 
 import { printMessage } from '#lib/utilities/print-message.ts';
-import { resolveAuditSettings } from '#node/eslint-config/utilities/audit.ts';
 import { collectPluginNames } from '#node/eslint-config/utilities/plugin.ts';
 import {
   collectRuleNames,
   createRules,
 } from '#node/eslint-config/utilities/rule.ts';
+import { resolveLocalSettings } from '#node/eslint-config/utilities/setting.ts';
 import { normalizeSeverity } from '#node/eslint-config/utilities/severity.ts';
-import { GLOB_COMBINED_JS } from '#node/utilities/globs.ts';
+import { GLOBS_COMBINED_JS } from '#node/utilities/globs.ts';
 
 import eslintConfig from './eslint.config.ts';
 
@@ -22,14 +22,14 @@ const auditConfig = concat(
     [
       {
         name: 'eslint:audit/all-builtin-rules',
-        files: [...GLOB_COMBINED_JS],
+        files: [...GLOBS_COMBINED_JS],
         rules: eslintJs.configs.all.rules,
       },
     ],
     AUDIT_SEVERITY,
   ),
   map(eslintConfig, (config) => {
-    const { shouldPrependAllRules } = resolveAuditSettings(config);
+    const { shouldPrependAllRules } = resolveLocalSettings(config);
 
     if (shouldPrependAllRules === false) {
       return config;

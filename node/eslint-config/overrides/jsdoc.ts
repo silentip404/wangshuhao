@@ -1,6 +1,8 @@
-import { defineConfig } from 'eslint/config';
+import { jsdocScopedFiles } from '#node/eslint-config/setups/jsdoc.ts';
 
-const jsdocOverrides = defineConfig([
+import { defineScopedConfig } from '../utilities/config.ts';
+
+const jsdocOverrides = defineScopedConfig(jsdocScopedFiles, [
   {
     name: 'jsdoc:overrides',
 

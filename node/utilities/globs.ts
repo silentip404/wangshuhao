@@ -47,7 +47,7 @@ const GLOB_LICENSE = '**/LICENSE';
 // 项目特定文件模式
 // 匹配具有特定用途的文件
 // ════════════════════════════════════════════════════════════════════════════
-const GLOB_CONFIG_FILES = [
+const GLOBS_CONFIG_FILES = [
   '*.config.js',
   '*.config.ts',
   '*.config.*.ts',
@@ -58,9 +58,7 @@ const GLOB_SCRIPTS_FILES = 'node/scripts/**/*.ts';
 
 const GLOB_EXTERNAL_TYPE_DECLARATIONS = 'external-types/**/*.d.ts';
 
-const GLOB_PACKAGE_JSON = '**/package.json';
-
-const GLOB_JSONC_SPECIAL = [
+const GLOBS_JSONC_SPECIAL = [
   '**/tsconfig.json',
   '**/tsconfig.*.json',
   '**/.vscode/**/*.json',
@@ -71,21 +69,21 @@ const GLOB_JSONC_SPECIAL = [
 // TypeScript 项目配置
 // 用于各 tsconfig.*.json 的 include 字段
 // ════════════════════════════════════════════════════════════════════════════
-const GLOB_TSCONFIG_LIB_INCLUDE = ['lib/**/*.ts'] as const;
-const GLOB_TSCONFIG_LIB_BASE_INCLUDE = [
+const GLOBS_TSCONFIG_LIB_INCLUDE = ['lib/**/*.ts'] as const;
+const GLOBS_TSCONFIG_LIB_BASE_INCLUDE = [
   GLOB_EXTERNAL_TYPE_DECLARATIONS,
 ] as const;
 
-const GLOB_TSCONFIG_APP_INCLUDE = ['app/**/*.ts', 'app/**/*.tsx'] as const;
-const GLOB_TSCONFIG_APP_BASE_INCLUDE = [
+const GLOBS_TSCONFIG_APP_INCLUDE = ['app/**/*.ts', 'app/**/*.tsx'] as const;
+const GLOBS_TSCONFIG_APP_BASE_INCLUDE = [
   GLOB_EXTERNAL_TYPE_DECLARATIONS,
   'next-env.d.ts',
   '.next/types/**/*.ts',
   '.next/dev/types/**/*.ts',
 ] as const;
 
-const GLOB_TSCONFIG_NODE_INCLUDE = ['*.js', '*.ts', 'node/**/*.ts'] as const;
-const GLOB_TSCONFIG_NODE_BASE_INCLUDE = [
+const GLOBS_TSCONFIG_NODE_INCLUDE = ['*.js', '*.ts', 'node/**/*.ts'] as const;
+const GLOBS_TSCONFIG_NODE_BASE_INCLUDE = [
   GLOB_EXTERNAL_TYPE_DECLARATIONS,
 ] as const;
 
@@ -93,7 +91,7 @@ const GLOB_TSCONFIG_NODE_BASE_INCLUDE = [
 // 组合模式
 // 基于上述原子模式聚合而成，用于匹配一组相关联的文件类型
 // ════════════════════════════════════════════════════════════════════════════
-const GLOB_COMBINED_JS = [
+const GLOBS_COMBINED_JS = [
   GLOB_JS,
   GLOB_TS,
   GLOB_D_TS,
@@ -101,42 +99,36 @@ const GLOB_COMBINED_JS = [
   GLOB_TSX,
 ] as const;
 
-const GLOB_COMBINED_DEPENDENCY_SOURCES = [
-  GLOB_PACKAGE_JSON,
-  ...GLOB_COMBINED_JS,
-] as const;
+const GLOBS_COMBINED_JSONC = [GLOB_JSONC, ...GLOBS_JSONC_SPECIAL] as const;
 
-const GLOB_COMBINED_JSONC = [GLOB_JSONC, ...GLOB_JSONC_SPECIAL] as const;
-
-const GLOB_COMBINED_JSON = [
+const GLOBS_COMBINED_JSON = [
   GLOB_JSON,
-  ...GLOB_COMBINED_JSONC,
+  ...GLOBS_COMBINED_JSONC,
   GLOB_JSON5,
 ] as const;
 
 export {
   GLOB_ALL,
-  GLOB_COMBINED_DEPENDENCY_SOURCES,
-  GLOB_COMBINED_JS,
-  GLOB_COMBINED_JSON,
-  GLOB_COMBINED_JSONC,
-  GLOB_CONFIG_FILES,
   GLOB_DOT_FILES,
   GLOB_EXTERNAL_TYPE_DECLARATIONS,
   GLOB_FILES_IN_DOT_DIRECTORY,
   GLOB_JS,
   GLOB_JSON,
   GLOB_JSON5,
-  GLOB_JSONC_SPECIAL,
   GLOB_JSX,
   GLOB_LICENSE,
   GLOB_ONE_LEVEL_FILES,
   GLOB_SCRIPTS_FILES,
-  GLOB_TSCONFIG_APP_BASE_INCLUDE,
-  GLOB_TSCONFIG_APP_INCLUDE,
-  GLOB_TSCONFIG_LIB_BASE_INCLUDE,
-  GLOB_TSCONFIG_LIB_INCLUDE,
-  GLOB_TSCONFIG_NODE_BASE_INCLUDE,
-  GLOB_TSCONFIG_NODE_INCLUDE,
+  GLOBS_COMBINED_JS,
+  GLOBS_COMBINED_JSON,
+  GLOBS_COMBINED_JSONC,
+  GLOBS_CONFIG_FILES,
+  GLOBS_JSONC_SPECIAL,
+  GLOBS_TSCONFIG_APP_BASE_INCLUDE,
+  GLOBS_TSCONFIG_APP_INCLUDE,
+  GLOBS_TSCONFIG_LIB_BASE_INCLUDE,
+  GLOBS_TSCONFIG_LIB_INCLUDE,
+  GLOBS_TSCONFIG_NODE_BASE_INCLUDE,
+  GLOBS_TSCONFIG_NODE_INCLUDE,
   toCaseInsensitiveGlob,
 };

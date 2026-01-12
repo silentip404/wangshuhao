@@ -27,8 +27,8 @@ import { parse as parseArguments } from 'ts-command-line-args';
 import { printMessage } from '#lib/utilities/print-message.ts';
 import { ensureModulePathsInPackage } from '#node/utilities/ensure.ts';
 import {
-  GLOB_TSCONFIG_LIB_INCLUDE,
-  GLOB_TSCONFIG_NODE_INCLUDE,
+  GLOBS_TSCONFIG_LIB_INCLUDE,
+  GLOBS_TSCONFIG_NODE_INCLUDE,
 } from '#node/utilities/globs.ts';
 import { isNpmPackage, parsePackageName } from '#node/utilities/package.ts';
 import {
@@ -47,8 +47,8 @@ import {
 
 const WHITELIST = new Set<string>(await ensureModulePathsInPackage([]));
 const ALL_RELATED_FILES_PATTERNS = concat(
-  GLOB_TSCONFIG_LIB_INCLUDE,
-  GLOB_TSCONFIG_NODE_INCLUDE,
+  GLOBS_TSCONFIG_LIB_INCLUDE,
+  GLOBS_TSCONFIG_NODE_INCLUDE,
 );
 
 type CliArguments = WithHelpArgument<VerifyFilesArguments>;

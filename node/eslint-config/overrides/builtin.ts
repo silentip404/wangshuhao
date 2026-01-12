@@ -1,6 +1,8 @@
-import { defineConfig } from 'eslint/config';
+import { builtinScopedFiles } from '#node/eslint-config/setups/builtin.ts';
 
-const builtinOverrides = defineConfig([
+import { defineScopedConfig } from '../utilities/config.ts';
+
+const builtinOverrides = defineScopedConfig(builtinScopedFiles, [
   {
     name: 'builtin:overrides',
 

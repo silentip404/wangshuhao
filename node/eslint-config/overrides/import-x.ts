@@ -1,17 +1,18 @@
-import { defineConfig } from 'eslint/config';
 import { map } from 'remeda';
 
+import { importXScopedFiles } from '#node/eslint-config/setups/import-x.ts';
 import { getAliasGlobs, getAliasRegexs } from '#node/utilities/alias.ts';
 import { GLOB_ONE_LEVEL_FILES } from '#node/utilities/globs.ts';
 import { getExistingDependencies } from '#node/utilities/package.ts';
+
+import { defineScopedConfig } from '../utilities/config.ts';
 
 const DOUBLE_STAR_END_REGEX = /\*\*$/gv;
 
 const aliasGlobs = getAliasGlobs();
 const aliasRegexs = getAliasRegexs();
 const existingDependencies = await getExistingDependencies();
-
-const importXOverrides = defineConfig([
+const importXOverrides = defineScopedConfig(importXScopedFiles, [
   {
     name: 'import-x:conflicting-rules',
 
@@ -32,6 +33,14 @@ const importXOverrides = defineConfig([
        * - 顶层类型导入语法便于 Node.js type stripping 完全跳过纯类型包的解析
        */
       'import-x/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
+
+      /**
+       * 动态导入代码块命名规范
+       *
+       * @remarks
+       * - 该规则主要针对 Webpack 特定注释语法，与本项目的工具链无关
+       */
+      'import-x/dynamic-import-chunkname': 'off',
 
       /**
        * 导出语句位置要求
@@ -244,6 +253,14 @@ const importXOverrides = defineConfig([
           allow: ['**/*.css'],
         },
       ],
+
+      /**
+       * 导入路径简化
+       *
+       * @remarks
+       * - 冗余路径段（如 `..` 重复、双斜杠）会降低代码可读性，增加路径理解成本
+       */
+      'import-x/no-useless-path-segments': 'warn',
 
       /**
        * 单一导出时使用默认导出

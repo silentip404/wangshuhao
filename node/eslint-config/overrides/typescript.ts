@@ -1,11 +1,13 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
-import { defineConfig } from 'eslint/config';
 import { concat, join, keys, toUpperCase } from 'remeda';
 
 import { getCaseVariants } from '#lib/utilities/string.ts';
+import { typescriptScopedFiles } from '#node/eslint-config/setups/typescript.ts';
 import { reasons } from '#node/ts-expect-error.ts';
 
-const typescriptOverrides = defineConfig([
+import { defineScopedConfig } from '../utilities/config.ts';
+
+const typescriptOverrides = defineScopedConfig(typescriptScopedFiles, [
   {
     name: 'typescript:conflicting-rules',
 

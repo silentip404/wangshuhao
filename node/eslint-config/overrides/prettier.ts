@@ -1,8 +1,11 @@
 import prettierConfig from 'eslint-config-prettier/flat';
-import { defineConfig } from 'eslint/config';
 import { omitBy } from 'remeda';
 
-const prettierOverrides = defineConfig([
+import { GLOB_ALL } from '#node/utilities/globs.ts';
+
+import { defineScopedConfig } from '../utilities/config.ts';
+
+const prettierOverrides = defineScopedConfig({ files: [GLOB_ALL] }, [
   {
     name: 'prettier:conflicting-rules',
 
@@ -21,6 +24,20 @@ const prettierOverrides = defineConfig([
       '@stylistic/exp-list-style': 'off',
       '@stylistic/max-len': 'off',
       'jsdoc/tag-lines': 'off',
+      'jsonc/array-bracket-newline': 'off',
+      'jsonc/array-bracket-spacing': 'off',
+      'jsonc/array-element-newline': 'off',
+      'jsonc/comma-dangle': 'off',
+      'jsonc/comma-style': 'off',
+      'jsonc/indent': 'off',
+      'jsonc/key-spacing': 'off',
+      'jsonc/no-floating-decimal': 'off',
+      'jsonc/object-curly-newline': 'off',
+      'jsonc/object-curly-spacing': 'off',
+      'jsonc/object-property-newline': 'off',
+      'jsonc/quote-props': 'off',
+      'jsonc/quotes': 'off',
+      'jsonc/space-unary-ops': 'off',
     },
   },
 ]);

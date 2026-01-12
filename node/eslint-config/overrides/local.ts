@@ -1,8 +1,9 @@
-import { defineConfig } from 'eslint/config';
-
+import { localScopedFiles } from '#node/eslint-config/local-plugins/setup.ts';
 import { ensureModulePathInPackage } from '#node/utilities/ensure.ts';
 
-const localOverrides = defineConfig([
+import { defineScopedConfig } from '../utilities/config.ts';
+
+const localOverrides = defineScopedConfig(localScopedFiles, [
   {
     name: 'local:conflicting-rules',
 

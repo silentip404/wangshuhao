@@ -2,9 +2,9 @@ import type { Config } from 'prettier';
 
 import {
   GLOB_JS,
-  GLOB_JSONC_SPECIAL,
   GLOB_JSX,
   GLOB_LICENSE,
+  GLOBS_JSONC_SPECIAL,
 } from '#node/utilities/globs.ts';
 
 const prettierConfig: Config = {
@@ -43,7 +43,7 @@ const prettierConfig: Config = {
      */
     {
       options: {
-        printWidth: 160,
+        printWidth: 128,
       },
       files: ['node/eslint-config/local-plugins/setup.ts'],
     },
@@ -55,7 +55,7 @@ const prettierConfig: Config = {
       options: {
         parser: 'jsonc',
       },
-      files: [...GLOB_JSONC_SPECIAL],
+      files: [...GLOBS_JSONC_SPECIAL],
     },
 
     /**

@@ -1,6 +1,8 @@
-import { defineConfig } from 'eslint/config';
+import { stylisticScopedFiles } from '#node/eslint-config/setups/stylistic.ts';
 
-const stylisticOverrides = defineConfig([
+import { defineScopedConfig } from '../utilities/config.ts';
+
+const stylisticOverrides = defineScopedConfig(stylisticScopedFiles, [
   {
     name: 'stylistic:overrides',
 

@@ -1,18 +1,8 @@
-import jsoncPlugin from 'eslint-plugin-jsonc';
-import { defineConfig } from 'eslint/config';
+import { allJsoncScopedFiles } from '#node/eslint-config/setups/jsonc.ts';
 
-import { defineConfigWithAuditSettings } from '../utilities/audit.ts';
+import { defineScopedConfig } from '../utilities/config.ts';
 
-const jsoncOverrides = defineConfig([
-  {
-    name: 'jsonc:conflicting-rules',
-    extends: defineConfigWithAuditSettings(
-      jsoncPlugin.configs['flat/prettier'],
-      {
-        shouldPrependAllRules: false,
-      },
-    ),
-  },
+const jsoncOverrides = defineScopedConfig(allJsoncScopedFiles, [
   {
     name: 'jsonc:overrides',
 

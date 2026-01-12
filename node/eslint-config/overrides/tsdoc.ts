@@ -1,6 +1,8 @@
-import { defineConfig } from 'eslint/config';
+import { tsdocScopedFiles } from '#node/eslint-config/setups/tsdoc.ts';
 
-const tsdocOverrides = defineConfig([
+import { defineScopedConfig } from '../utilities/config.ts';
+
+const tsdocOverrides = defineScopedConfig(tsdocScopedFiles, [
   {
     name: 'tsdoc:conflicting-rules',
 

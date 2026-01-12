@@ -101,7 +101,9 @@
  * 这不是妥协，而是在工程效率与代码表达力之间找到的平衡点。
  */
 
-import { defineConfig } from 'eslint/config';
+import { perfectionistScopedFiles } from '#node/eslint-config/setups/perfectionist.ts';
+
+import { defineScopedConfig } from '../utilities/config.ts';
 
 type Group =
   | string
@@ -153,8 +155,7 @@ const createInterfacesObjectTypesGroups = (): Group[] => [
   'index-signature',
   ...UNKNOWN_GROUP_GUARD,
 ];
-
-const perfectionistOverrides = defineConfig([
+const perfectionistOverrides = defineScopedConfig(perfectionistScopedFiles, [
   {
     name: 'perfectionist:conflicting-rules',
 

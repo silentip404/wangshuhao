@@ -1,6 +1,8 @@
-import { defineConfig } from 'eslint/config';
+import { regexpScopedFiles } from '#node/eslint-config/setups/regexp.ts';
 
-const regexpOverrides = defineConfig([
+import { defineScopedConfig } from '../utilities/config.ts';
+
+const regexpOverrides = defineScopedConfig(regexpScopedFiles, [
   {
     name: 'regexp:conflicting-rules',
 

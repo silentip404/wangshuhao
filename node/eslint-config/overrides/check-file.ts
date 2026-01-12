@@ -1,8 +1,17 @@
-import { defineConfig } from 'eslint/config';
-
+import { checkFileScopedFiles } from '#node/eslint-config/setups/check-file.ts';
 import { GLOB_ALL } from '#node/utilities/globs.ts';
 
-const checkFileOverrides = defineConfig([
+import { defineScopedConfig } from '../utilities/config.ts';
+
+const checkFileOverrides = defineScopedConfig(checkFileScopedFiles, [
+  {
+    name: 'check-file:conflicting-rules',
+
+    // @perfectionist-sort-objects
+    rules: {
+      '@eslint-react/naming-convention/filename': 'off',
+    },
+  },
   {
     name: 'check-file:overrides',
 

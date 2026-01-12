@@ -102,8 +102,7 @@
  */
 
 import { perfectionistScopedFiles } from '#node/eslint-config/setups/perfectionist.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 
 type Group =
   | string

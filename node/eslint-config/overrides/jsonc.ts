@@ -1,6 +1,5 @@
 import { allJsoncScopedFiles } from '#node/eslint-config/setups/jsonc.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 
 const jsoncOverrides = defineScopedConfig(allJsoncScopedFiles, [
   {

@@ -1,16 +1,15 @@
 import jsoncPlugin from 'eslint-plugin-jsonc';
 import { defineConfig } from 'eslint/config';
 
+import type { ScopedFiles } from '#node/eslint-config/utilities/config.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
+import { appendLocalSettings } from '#node/eslint-config/utilities/setting.ts';
 import {
   GLOB_JSON,
   GLOB_JSON5,
   GLOBS_COMBINED_JSON,
   GLOBS_COMBINED_JSONC,
 } from '#node/utilities/globs.ts';
-
-import type { ScopedFiles } from '../utilities/config.ts';
-import { defineScopedConfig } from '../utilities/config.ts';
-import { appendLocalSettings } from '../utilities/setting.ts';
 
 const allJsoncScopedFiles: ScopedFiles = { files: GLOBS_COMBINED_JSON };
 

@@ -1,6 +1,5 @@
 import { builtinScopedFiles } from '#node/eslint-config/setups/builtin.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 
 const builtinOverrides = defineScopedConfig(builtinScopedFiles, [
   {

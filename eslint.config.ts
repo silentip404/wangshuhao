@@ -27,6 +27,7 @@ import { checkFileSetup } from '#node/eslint-config/setups/check-file.ts';
 import { dependSetup } from '#node/eslint-config/setups/depend.ts';
 import { eslintCommentsSetup } from '#node/eslint-config/setups/eslint-comments.ts';
 import { ignoreSetup } from '#node/eslint-config/setups/ignore.ts';
+import { importAliasSetup } from '#node/eslint-config/setups/import-alias.ts';
 import { importXSetup } from '#node/eslint-config/setups/import-x.ts';
 import { jsdocSetup } from '#node/eslint-config/setups/jsdoc.ts';
 import { jsoncSetup } from '#node/eslint-config/setups/jsonc.ts';
@@ -78,6 +79,7 @@ const eslintConfig = defineConfig([
       // 代码质量
       dependSetup,
       importXSetup,
+      importAliasSetup,
       regexpSetup,
       unicornSetup,
       eslintCommentsSetup,

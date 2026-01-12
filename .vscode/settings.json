@@ -31,6 +31,10 @@
       "severity": "off",
     },
     {
+      "rule": "@dword-design/import-alias/prefer-alias",
+      "severity": "off",
+    },
+    {
       "rule": "@local/miscellaneous/padding-line-before-process-exit",
       "severity": "off",
     },

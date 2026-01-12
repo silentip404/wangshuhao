@@ -1,13 +1,12 @@
 import checkFilePlugin from 'eslint-plugin-check-file';
 
+import type { ScopedFiles } from '#node/eslint-config/utilities/config.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import {
   GLOB_ALL,
   GLOBS_COMBINED_JS,
   GLOBS_COMBINED_JSON,
 } from '#node/utilities/globs.ts';
-
-import type { ScopedFiles } from '../utilities/config.ts';
-import { defineScopedConfig } from '../utilities/config.ts';
 
 const checkFileScopedFiles: ScopedFiles = { files: [GLOB_ALL] };
 

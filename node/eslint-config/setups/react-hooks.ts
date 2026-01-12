@@ -1,9 +1,8 @@
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
+import type { ScopedFiles } from '#node/eslint-config/utilities/config.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import { GLOBS_TSCONFIG_APP_INCLUDE } from '#node/utilities/globs.ts';
-
-import type { ScopedFiles } from '../utilities/config.ts';
-import { defineScopedConfig } from '../utilities/config.ts';
 
 const scopedFiles: ScopedFiles = { files: GLOBS_TSCONFIG_APP_INCLUDE };
 

@@ -1,11 +1,10 @@
 import { map } from 'remeda';
 
 import { importXScopedFiles } from '#node/eslint-config/setups/import-x.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import { getAliasGlobs, getAliasRegexs } from '#node/utilities/alias.ts';
 import { GLOB_ONE_LEVEL_FILES } from '#node/utilities/globs.ts';
 import { getExistingDependencies } from '#node/utilities/package.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
 
 const DOUBLE_STAR_END_REGEX = /\*\*$/gv;
 

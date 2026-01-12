@@ -24,9 +24,8 @@ import {
   ROOT,
   toRelativePosixPath,
 } from '#node/utilities/path.ts';
+import { NEWLINE } from '#node/utilities/string.ts';
 import { projects } from '#node/utilities/typescript.ts';
-
-import { NEWLINE } from '../utilities/string.ts';
 
 import type { WithHelpArgument } from './utilities.ts';
 import { helpArgumentConfig, helpArgumentOptions } from './utilities.ts';

@@ -1,6 +1,5 @@
 import { tsdocScopedFiles } from '#node/eslint-config/setups/tsdoc.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 
 const tsdocOverrides = defineScopedConfig(tsdocScopedFiles, [
   {

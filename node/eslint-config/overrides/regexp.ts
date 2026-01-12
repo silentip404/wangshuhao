@@ -1,6 +1,5 @@
 import { regexpScopedFiles } from '#node/eslint-config/setups/regexp.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 
 const regexpOverrides = defineScopedConfig(regexpScopedFiles, [
   {

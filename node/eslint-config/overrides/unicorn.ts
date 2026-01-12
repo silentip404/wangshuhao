@@ -1,6 +1,5 @@
 import { unicornScopedFiles } from '#node/eslint-config/setups/unicorn.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 
 const unicornOverrides = defineScopedConfig(unicornScopedFiles, [
   {

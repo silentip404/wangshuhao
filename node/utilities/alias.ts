@@ -7,27 +7,35 @@ import { memoizedReadPackageJson } from './read-file.ts';
 
 const STAR_REGEX = /\*/gv;
 
+const isValidAliasPattern = (pattern: string): boolean => {
+  if (!pattern.includes('*')) {
+    return true;
+  }
+
+  const starCount = (pattern.match(STAR_REGEX) ?? []).length;
+  const isEndsWithSlashStar = pattern.endsWith('/*');
+
+  // 有且仅有一个 * 并且以 /* 结尾
+  return starCount === 1 && isEndsWithSlashStar;
+};
+
 const expectedImportsSchema = z.record(z.string(), z.string());
 
 const { imports } = await memoizedReadPackageJson();
-const parsedImports = expectedImportsSchema.parse(imports);
-const aliases = keys(parsedImports);
+const aliasesObject = expectedImportsSchema.parse(imports);
 
-// 检测 aliases 符合预期结构
-for (const alias of aliases) {
-  if (!alias.includes('*')) {
-    continue;
+// 检测 aliasesObject 的 key 和 value 符合预期结构
+for (const [key, value] of Object.entries(aliasesObject)) {
+  if (!isValidAliasPattern(key)) {
+    throw new Error(`配置 ${key} 不是期望的别名路径，请检查相关配置`);
   }
 
-  const starCount = (alias.match(STAR_REGEX) ?? []).length;
-  const isEndsWithSlashStar = alias.endsWith('/*');
-
-  // 有且仅有一个 * 并且以 /* 结尾
-  if (starCount !== 1 || !isEndsWithSlashStar) {
-    throw new Error(`配置 ${alias} 不是期望的别名路径，请检查相关配置`);
+  if (!isValidAliasPattern(value)) {
+    throw new Error(`配置 ${value} 不是期望的别名路径，请检查相关配置`);
   }
 }
 
+const aliases = keys(aliasesObject);
 let aliasGlobs: undefined | string[];
 let aliasRegexs: undefined | MMRegExp[];
 
@@ -57,4 +65,4 @@ const getAliasRegexs = (): MMRegExp[] => {
   return aliasRegexs;
 };
 
-export { getAliasGlobs, getAliasRegexs };
+export { aliasesObject, getAliasGlobs, getAliasRegexs };

@@ -1,10 +1,9 @@
 import { configs } from 'typescript-eslint';
 
+import type { ScopedFiles } from '#node/eslint-config/utilities/config.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import { GLOBS_COMBINED_JS } from '#node/utilities/globs.ts';
 import { ROOT } from '#node/utilities/path.ts';
-
-import type { ScopedFiles } from '../utilities/config.ts';
-import { defineScopedConfig } from '../utilities/config.ts';
 
 const typescriptScopedFiles: ScopedFiles = { files: GLOBS_COMBINED_JS };
 

@@ -1,7 +1,6 @@
 import { checkFileScopedFiles } from '#node/eslint-config/setups/check-file.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import { GLOB_ALL } from '#node/utilities/globs.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
 
 const checkFileOverrides = defineScopedConfig(checkFileScopedFiles, [
   {

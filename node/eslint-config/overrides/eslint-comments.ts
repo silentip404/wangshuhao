@@ -1,6 +1,5 @@
 import { eslintCommentsScopedFiles } from '#node/eslint-config/setups/eslint-comments.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 
 const eslintCommentsOverrides = defineScopedConfig(eslintCommentsScopedFiles, [
   {

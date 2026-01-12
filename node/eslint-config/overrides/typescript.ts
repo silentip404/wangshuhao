@@ -2,10 +2,9 @@ import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import { concat, join, keys, toUpperCase } from 'remeda';
 
 import { typescriptScopedFiles } from '#node/eslint-config/setups/typescript.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import { reasons } from '#node/ts-expect-error.ts';
 import { getCaseVariants } from '#node/utilities/string.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
 
 const typescriptOverrides = defineScopedConfig(typescriptScopedFiles, [
   {

@@ -1,7 +1,6 @@
 import { dependScopedFiles } from '#node/eslint-config/setups/depend.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import { ensureModulePathsInPackage } from '#node/utilities/ensure.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
 
 const dependOverrides = defineScopedConfig(dependScopedFiles, [
   {

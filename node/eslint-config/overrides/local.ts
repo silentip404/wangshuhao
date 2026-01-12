@@ -1,7 +1,6 @@
 import { localScopedFiles } from '#node/eslint-config/local-plugins/setup.ts';
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import { ensureModulePathInPackage } from '#node/utilities/ensure.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
 
 const localOverrides = defineScopedConfig(localScopedFiles, [
   {

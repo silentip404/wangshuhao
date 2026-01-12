@@ -1,9 +1,8 @@
 import prettierConfig from 'eslint-config-prettier/flat';
 import { omitBy } from 'remeda';
 
+import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import { GLOB_ALL } from '#node/utilities/globs.ts';
-
-import { defineScopedConfig } from '../utilities/config.ts';
 
 const prettierOverrides = defineScopedConfig({ files: [GLOB_ALL] }, [
   {

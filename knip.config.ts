@@ -1,9 +1,9 @@
 import type { KnipConfig } from 'knip';
 
-import { GLOB_EXTERNAL_TYPE_DECLARATIONS } from '#node/utilities/globs.ts';
+import { GLOB_TYPINGS } from '#node/utilities/globs.ts';
 
 const knipConfig: KnipConfig = {
-  ignore: [GLOB_EXTERNAL_TYPE_DECLARATIONS],
+  ignore: [GLOB_TYPINGS],
 };
 
 export default knipConfig;

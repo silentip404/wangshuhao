@@ -12,5 +12,5 @@
     "declarationDir": "./scratch/tsc",
     "emitDeclarationOnly": true,
   },
-  "include": ["external-types/**/*.d.ts", "lib/**/*.ts"],
+  "include": ["lib/**/*.ts", "typings/**/*.d.ts"],
 }

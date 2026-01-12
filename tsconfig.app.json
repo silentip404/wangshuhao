@@ -14,9 +14,9 @@
     },
   ],
   "include": [
-    "external-types/**/*.d.ts",
     "app/**/*.ts",
     "app/**/*.tsx",
+    "typings/**/*.d.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",

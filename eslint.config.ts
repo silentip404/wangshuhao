@@ -44,11 +44,11 @@ import { unicornSetup } from '#node/eslint-config/setups/unicorn.ts';
 import {
   GLOB_ALL,
   GLOB_DOT_FILES,
-  GLOB_EXTERNAL_TYPE_DECLARATIONS,
   GLOB_FILES_IN_DOT_DIRECTORY,
   GLOB_JS,
   GLOB_JSX,
   GLOB_SCRIPTS_FILES,
+  GLOB_TYPINGS,
   GLOBS_CONFIG_FILES,
   GLOBS_TSCONFIG_NODE_INCLUDE,
   toCaseInsensitiveGlob,
@@ -168,7 +168,7 @@ const eslintConfig = defineConfig([
           'import-x/no-default-export': 'off',
         },
         files: [
-          GLOB_EXTERNAL_TYPE_DECLARATIONS,
+          GLOB_TYPINGS,
           ...GLOBS_CONFIG_FILES,
           'app/**/{layout,page}.tsx',
         ],
@@ -243,7 +243,7 @@ const eslintConfig = defineConfig([
         rules: {
           'check-file/folder-naming-convention': 'off',
         },
-        files: [GLOB_EXTERNAL_TYPE_DECLARATIONS, GLOB_FILES_IN_DOT_DIRECTORY],
+        files: [GLOB_TYPINGS, GLOB_FILES_IN_DOT_DIRECTORY],
       },
     ],
   },

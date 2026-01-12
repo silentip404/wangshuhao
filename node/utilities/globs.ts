@@ -56,7 +56,7 @@ const GLOBS_CONFIG_FILES = [
 
 const GLOB_SCRIPTS_FILES = 'node/scripts/**/*.ts';
 
-const GLOB_EXTERNAL_TYPE_DECLARATIONS = 'external-types/**/*.d.ts';
+const GLOB_TYPINGS = 'typings/**/*.d.ts';
 
 const GLOBS_JSONC_SPECIAL = [
   '**/tsconfig.json',
@@ -70,22 +70,18 @@ const GLOBS_JSONC_SPECIAL = [
 // 用于各 tsconfig.*.json 的 include 字段
 // ════════════════════════════════════════════════════════════════════════════
 const GLOBS_TSCONFIG_LIB_INCLUDE = ['lib/**/*.ts'] as const;
-const GLOBS_TSCONFIG_LIB_BASE_INCLUDE = [
-  GLOB_EXTERNAL_TYPE_DECLARATIONS,
-] as const;
+const GLOBS_TSCONFIG_LIB_BASE_INCLUDE = [GLOB_TYPINGS] as const;
 
 const GLOBS_TSCONFIG_APP_INCLUDE = ['app/**/*.ts', 'app/**/*.tsx'] as const;
 const GLOBS_TSCONFIG_APP_BASE_INCLUDE = [
-  GLOB_EXTERNAL_TYPE_DECLARATIONS,
+  GLOB_TYPINGS,
   'next-env.d.ts',
   '.next/types/**/*.ts',
   '.next/dev/types/**/*.ts',
 ] as const;
 
 const GLOBS_TSCONFIG_NODE_INCLUDE = ['*.js', '*.ts', 'node/**/*.ts'] as const;
-const GLOBS_TSCONFIG_NODE_BASE_INCLUDE = [
-  GLOB_EXTERNAL_TYPE_DECLARATIONS,
-] as const;
+const GLOBS_TSCONFIG_NODE_BASE_INCLUDE = [GLOB_TYPINGS] as const;
 
 // ════════════════════════════════════════════════════════════════════════════
 // 组合模式
@@ -110,7 +106,6 @@ const GLOBS_COMBINED_JSON = [
 export {
   GLOB_ALL,
   GLOB_DOT_FILES,
-  GLOB_EXTERNAL_TYPE_DECLARATIONS,
   GLOB_FILES_IN_DOT_DIRECTORY,
   GLOB_JS,
   GLOB_JSON,
@@ -119,6 +114,7 @@ export {
   GLOB_LICENSE,
   GLOB_ONE_LEVEL_FILES,
   GLOB_SCRIPTS_FILES,
+  GLOB_TYPINGS,
   GLOBS_COMBINED_JS,
   GLOBS_COMBINED_JSON,
   GLOBS_COMBINED_JSONC,

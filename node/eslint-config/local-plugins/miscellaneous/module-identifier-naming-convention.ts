@@ -6,9 +6,9 @@ import { find, isTruthy } from 'remeda';
 import {
   memoizedRegexReplace,
   memoizedRegexTest,
-} from '#lib/utilities/regex.ts';
-import type { CaseVariants } from '#lib/utilities/string.ts';
-import { memoizedGetCaseVariants } from '#lib/utilities/string.ts';
+} from '#node/utilities/regex.ts';
+import type { CaseVariants } from '#node/utilities/string.ts';
+import { memoizedGetCaseVariants } from '#node/utilities/string.ts';
 
 import { getNodeText } from '../utilities/ast.ts';
 import { initRule } from '../utilities/rule.ts';

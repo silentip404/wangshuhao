@@ -1,6 +1,6 @@
 import { join, split, zipWith } from 'remeda';
 
-import { getCaseVariants } from '#lib/utilities/string.ts';
+import { getCaseVariants } from './string.ts';
 
 const toCaseInsensitiveGlob = (text: string): string => {
   const { raw } = getCaseVariants(text);

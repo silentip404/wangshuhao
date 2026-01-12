@@ -96,7 +96,12 @@ const restorePlaceholders = (
   let result = text;
 
   for (const [placeholder, original] of placeholderMap) {
-    result = result.replace(placeholder, original);
+    result = result.replace(
+      placeholder,
+
+      // 使用函数形式避免 $ 被解释为特殊替换模式
+      () => original,
+    );
   }
 
   return result;

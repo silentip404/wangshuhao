@@ -67,6 +67,12 @@
   - 配置 `eslint-plugin-jsonc` 对 **JSON/JSONC** 文件进行检查和排序
   - 通过 `tsc --build` 进行增量类型检查，提升检查效率
 
+- 🚧 **工程化注释管理**：基于 `eslint-plugin-jsdoc`、`eslint-plugin-tsdoc` 和 AI 指导规则，构建多层级注释管理策略。
+  - 使用 **JSDoc** 的 `flat/recommended-typescript` 配置，结合 **TSDoc** 语法检查，确保注释格式的标准化与可解析性
+  - 在 `AGENTS.md` 和 AI 技能文件中编写注释指导规则，让 AI 代理生成符合项目上下文的高质量注释
+  - 注释重点关注 "为什么" 和 "如何用"，而非重复类型系统已能表达的 "是什么"
+  - 为 AI 辅助编程提供业务上下文，使生成代码更符合实际需求
+
 - 🚧 **自定义 ESLint 规则**：开发项目专属的本地 **ESLint** 规则，满足特定的代码规范需求。
 
   | 规则名                                                     | 说明                                                             |

@@ -8,7 +8,9 @@ import {
   GLOBS_COMBINED_JSON,
 } from '#node/utilities/globs.ts';
 
-const checkFileScopedFiles: ScopedFiles = { files: [GLOB_ALL] };
+const checkFileScopedFiles: ScopedFiles = {
+  files: [GLOB_ALL],
+};
 
 const checkFileSetup = defineScopedConfig(checkFileScopedFiles, [
   {

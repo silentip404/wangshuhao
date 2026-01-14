@@ -5,7 +5,9 @@ import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import { GLOBS_COMBINED_JS } from '#node/utilities/globs.ts';
 import { ROOT } from '#node/utilities/path.ts';
 
-const typescriptScopedFiles: ScopedFiles = { files: GLOBS_COMBINED_JS };
+const typescriptScopedFiles: ScopedFiles = {
+  files: GLOBS_COMBINED_JS,
+};
 
 const typescriptSetup = defineScopedConfig(typescriptScopedFiles, [
   configs.strictTypeChecked,

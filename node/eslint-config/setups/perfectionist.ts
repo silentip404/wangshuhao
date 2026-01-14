@@ -4,7 +4,9 @@ import type { ScopedFiles } from '#node/eslint-config/utilities/config.ts';
 import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import { GLOBS_COMBINED_JS } from '#node/utilities/globs.ts';
 
-const perfectionistScopedFiles: ScopedFiles = { files: GLOBS_COMBINED_JS };
+const perfectionistScopedFiles: ScopedFiles = {
+  files: GLOBS_COMBINED_JS,
+};
 
 const perfectionistSetup = defineScopedConfig(perfectionistScopedFiles, [
   {

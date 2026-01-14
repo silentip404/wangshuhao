@@ -120,9 +120,9 @@ const eslintConfig = defineConfig([
       tsdocOverrides,
 
       // 代码风格
+      prettierOverrides,
       stylisticOverrides,
       perfectionistOverrides,
-      prettierOverrides,
 
       // 特殊文件
       checkFileOverrides,

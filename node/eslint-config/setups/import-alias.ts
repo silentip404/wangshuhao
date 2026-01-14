@@ -6,7 +6,9 @@ import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import { aliasesObject } from '#node/utilities/alias.ts';
 import { GLOBS_COMBINED_JS } from '#node/utilities/globs.ts';
 
-const importAliasScopedFiles: ScopedFiles = { files: GLOBS_COMBINED_JS };
+const importAliasScopedFiles: ScopedFiles = {
+  files: GLOBS_COMBINED_JS,
+};
 
 const importAliasSetup = defineScopedConfig(importAliasScopedFiles, [
   importAliasPlugin.configs.recommended,

@@ -4,7 +4,9 @@ import { GLOBS_COMBINED_JS } from '#node/utilities/globs.ts';
 
 import { moduleIdentifierNamingConvention, paddingLineBeforeProcessExit } from './miscellaneous/exports.ts';
 
-const localScopedFiles: ScopedFiles = { files: GLOBS_COMBINED_JS };
+const localScopedFiles: ScopedFiles = {
+  files: GLOBS_COMBINED_JS,
+};
 
 const localSetup = defineScopedConfig(localScopedFiles, [
   {

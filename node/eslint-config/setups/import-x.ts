@@ -5,7 +5,9 @@ import type { ScopedFiles } from '#node/eslint-config/utilities/config.ts';
 import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
 import { GLOBS_COMBINED_JS } from '#node/utilities/globs.ts';
 
-const importXScopedFiles: ScopedFiles = { files: GLOBS_COMBINED_JS };
+const importXScopedFiles: ScopedFiles = {
+  files: GLOBS_COMBINED_JS,
+};
 
 const importXSetup = defineScopedConfig(importXScopedFiles, [
   // @ts-expect-error -- See reasons['typescript-eslint/issues/11543'] in ts-expect-error.ts

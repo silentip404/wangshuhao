@@ -11,7 +11,9 @@ import {
   GLOBS_COMBINED_JSONC,
 } from '#node/utilities/globs.ts';
 
-const allJsoncScopedFiles: ScopedFiles = { files: GLOBS_COMBINED_JSON };
+const allJsoncScopedFiles: ScopedFiles = {
+  files: GLOBS_COMBINED_JSON,
+};
 
 const jsoncSetup = defineConfig([
   defineScopedConfig(

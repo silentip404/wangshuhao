@@ -15,6 +15,10 @@
 
     // 关闭或降级一些支持自动修复的规则提示，降低开发过程的心智负担
     {
+      "rule": "command/command",
+      "severity": "info",
+    },
+    {
       "rule": "@stylistic/*",
       "severity": "off",
     },
@@ -23,8 +27,48 @@
       "severity": "off",
     },
     {
-      "rule": "command/command",
-      "severity": "info",
+      "rule": "*-indent",
+      "severity": "off",
+      "fixable": true,
+    },
+    {
+      "rule": "*-spacing",
+      "severity": "off",
+      "fixable": true,
+    },
+    {
+      "rule": "*-spaces",
+      "severity": "off",
+      "fixable": true,
+    },
+    {
+      "rule": "*-order",
+      "severity": "off",
+      "fixable": true,
+    },
+    {
+      "rule": "*-dangle",
+      "severity": "off",
+      "fixable": true,
+    },
+    {
+      "rule": "*-newline",
+      "severity": "off",
+      "fixable": true,
+    },
+    {
+      "rule": "*quotes",
+      "severity": "off",
+      "fixable": true,
+    },
+    {
+      "rule": "*semi",
+      "severity": "off",
+      "fixable": true,
+    },
+    {
+      "rule": "*padding-line*",
+      "severity": "off",
     },
     {
       "rule": "curly",
@@ -32,10 +76,6 @@
     },
     {
       "rule": "@dword-design/import-alias/prefer-alias",
-      "severity": "off",
-    },
-    {
-      "rule": "@local/miscellaneous/padding-line-before-process-exit",
       "severity": "off",
     },
   ],

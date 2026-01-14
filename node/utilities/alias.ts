@@ -1,6 +1,6 @@
 import type { MMRegExp } from 'minimatch';
 import { makeRe } from 'minimatch';
-import { filter, isTruthy, keys, map, pipe } from 'remeda';
+import { filter, isTruthy, keys, map, mapKeys, mapValues, pipe } from 'remeda';
 import { z } from 'zod';
 
 import { memoizedReadPackageJson } from './read-file.ts';
@@ -22,10 +22,10 @@ const isValidAliasPattern = (pattern: string): boolean => {
 const expectedImportsSchema = z.record(z.string(), z.string());
 
 const { imports } = await memoizedReadPackageJson();
-const aliasesObject = expectedImportsSchema.parse(imports);
+const expectedImports = expectedImportsSchema.parse(imports);
 
 // 检测 aliasesObject 的 key 和 value 符合预期结构
-for (const [key, value] of Object.entries(aliasesObject)) {
+for (const [key, value] of Object.entries(expectedImports)) {
   if (!isValidAliasPattern(key)) {
     throw new Error(`配置 ${key} 不是期望的别名路径，请检查相关配置`);
   }
@@ -35,9 +35,11 @@ for (const [key, value] of Object.entries(aliasesObject)) {
   }
 }
 
-const aliases = keys(aliasesObject);
+const aliases = keys(expectedImports);
+
 let aliasGlobs: undefined | string[];
 let aliasRegexs: undefined | MMRegExp[];
+let aliasForImportAliasPlugin: undefined | Record<string, string>;
 
 const getAliasGlobs = (): string[] => {
   aliasGlobs ??= map(aliases, (alias) => {
@@ -65,4 +67,14 @@ const getAliasRegexs = (): MMRegExp[] => {
   return aliasRegexs;
 };
 
-export { aliasesObject, getAliasGlobs, getAliasRegexs };
+const getAliasForImportAliasPlugin = (): Record<string, string> => {
+  aliasForImportAliasPlugin ??= pipe(
+    expectedImports,
+    mapKeys((key) => key.replace('/*', '')),
+    mapValues((value) => value.replace('/*', '')),
+  );
+
+  return aliasForImportAliasPlugin;
+};
+
+export { getAliasForImportAliasPlugin, getAliasGlobs, getAliasRegexs };

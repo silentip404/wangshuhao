@@ -14,37 +14,31 @@
 
 ### 🤖 AI 辅助编程（🚧 进行中）
 
-#### AI 代理配置
+#### AGENTS 配置
 
-项目使用 `AGENTS.md` 文件为 AI 代理提供规范指南。
+项目使用 `AGENTS.md` 文件为 AI coding agents 提供项目特定的上下文和指令。
 
 > 支持 Cursor、Codex CLI、GitHub Copilot 等主流 AI 编程工具读取此配置。
 
-子目录中的 `AGENTS.md` 提供了针对该目录的代码模板，供 AI 代理参考生成规范代码：
+采用分层配置策略，根据目录层级提供不同粒度的指导：
 
-| 目录                                | 模板内容                          |
-| ----------------------------------- | --------------------------------- |
-| `node/eslint-config/local-plugins/` | **ESLint** 规则模板（有/无选项）  |
-| `node/scripts/`                     | **Node.js** 脚本模板（有/无参数） |
-
-#### Cursor Commands
-
-通过 **Cursor Commands** 配置可复用的 AI 工作流，在聊天输入框中使用 `/` 前缀触发。
-
-| 指令             | 说明                                                       |
-| ---------------- | ---------------------------------------------------------- |
-| `commit-message` | 智能分析变更并生成符合 Conventional Commits 规范的提交信息 |
-
-> **注意**：由于 Cursor 目前内置的 Generate Commit Message 按钮不支持自定义行为，建议在 Cursor 聊天输入框中输入 `/commit-message` 即可触发指令。
+| 文件                                         | 作用范围                                                |
+| -------------------------------------------- | ------------------------------------------------------- |
+| `AGENTS.md`                                  | 项目根目录：整体架构、TypeScript 类型安全、通用规范     |
+| `node/eslint-config/local-plugins/AGENTS.md` | ESLint 插件开发：规则模板（有/无选项）、规则注册流程    |
+| `node/scripts/AGENTS.md`                     | Node.js 脚本开发：脚本模板（有/无命令行参数）、执行约定 |
 
 #### Cursor Skills
 
-通过 **Cursor Skills** 配置上下文感知的 AI 技能，当 AI 执行特定任务时自动激活对应技能。
+通过 **Cursor Skills** 配置上下文感知的 AI 技能，基于内置的 `create-skill` 技能重构，当 AI 执行特定任务时自动激活对应技能。
 
-| 技能             | 触发条件                                                      | 说明                                                       |
-| ---------------- | ------------------------------------------------------------- | ---------------------------------------------------------- |
-| `ai-guidance`    | 创建或编辑 AI 指导文档（`**/AGENTS.md`、`.cursor/**/*.md`）时 | AI 提示词工程最佳实践指南，用于编写和优化 AI 配置文档      |
-| `commit-message` | 生成 Git commit message 时                                    | 智能分析变更并生成符合 Conventional Commits 规范的提交信息 |
+新版 Cursor 支持在聊天输入框中使用 `/` 直接调用技能，无需额外配置 Commands。
+
+| 技能                     | 触发条件                                 | 说明                                                               |
+| ------------------------ | ---------------------------------------- | ------------------------------------------------------------------ |
+| `create-agents-md`       | 创建或更新 `AGENTS.md` 文件时            | 提供 AGENTS.md 的编写规范、推荐章节、monorepo 支持指导             |
+| `create-commit-message`  | 生成 Git commit message 时               | 智能分析变更并生成符合项目 commitlint 规范的提交信息，支持范围检测 |
+| `create-skill-overrides` | 创建或编写 `SKILL.md` 文件时（作为补充） | 扩展内置 `create-skill` 的编写规范，提供跨平台兼容性、格式约定等   |
 
 ### 💻 技术栈
 

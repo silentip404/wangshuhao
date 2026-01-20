@@ -1,16 +1,16 @@
-# AGENTS Guidelines for This Directory or Its Children
+# 此目录及其子目录的 AGENTS 指南
 
-This directory contains standalone TypeScript scripts executed directly via Node.js type stripping. Each script serves a specific purpose such as verification, CLI utilities, or automation tasks.
+此目录包含通过 Node.js 类型剥离直接执行的独立 TypeScript 脚本。每个脚本都有特定用途，例如验证、CLI 工具或自动化任务。
 
 ---
 
-## Script Templates
+## 脚本模板
 
-When creating new scripts in this directory, you **MUST** follow one of the two templates below based on whether the script requires command-line arguments.
+在此目录中创建新脚本时，**必须** 根据脚本是否需要命令行参数，遵循以下两个模板之一。
 
-### Scripts Without Command-Line Arguments
+### 无命令行参数的脚本
 
-For simple scripts that do not require user input:
+适用于不需要用户输入的简单脚本：
 
 ```ts
 import path from 'node:path';
@@ -39,9 +39,9 @@ parseArguments<CliArguments>(
 );
 ```
 
-### Scripts With Command-Line Arguments
+### 有命令行参数的脚本
 
-For scripts that accept command-line arguments:
+适用于接受命令行参数的脚本：
 
 ```ts
 import path from 'node:path';

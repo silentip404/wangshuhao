@@ -1,16 +1,16 @@
-# AGENTS Guidelines for This Directory or Its Children
+# 此目录及其子目录的 AGENTS 指南
 
-This directory contains local ESLint plugins with custom rules. Rules are organized into namespace subdirectories (e.g., `miscellaneous/`) and registered via `setup.ts`.
+此目录包含带有自定义规则的本地 ESLint 插件。规则按命名空间子目录组织（例如 `miscellaneous/`）并通过 `setup.ts` 注册。
 
 ---
 
-## Rule Templates
+## 规则模板
 
-When creating new ESLint rules in this directory, you **MUST** follow one of the two templates below based on whether the rule requires configuration options.
+在此目录中创建新的 ESLint 规则时，**必须** 根据规则是否需要配置选项，遵循以下两个模板之一。
 
-### Rules Without Options
+### 无选项的规则
 
-For simple rules that do not accept user configuration:
+适用于不接受用户配置的简单规则：
 
 ```ts
 import { initRule } from '../utilities/rule.ts';
@@ -39,9 +39,9 @@ const ruleValue = createRule<never[], MessageIds>({
 export { ruleName, ruleValue };
 ```
 
-### Rules With Options
+### 有选项的规则
 
-For rules that accept configuration options via schema:
+适用于通过 schema 接受配置选项的规则：
 
 ```ts
 import { initRule } from '../utilities/rule.ts';
@@ -98,9 +98,9 @@ export { ruleName, ruleValue };
 
 ---
 
-## Rule Registration
+## 规则注册
 
-After creating a new rule, you **MUST** register it in `setup.ts` by:
+创建新规则后，**必须** 在 `setup.ts` 中注册它，方法是：
 
-1. Importing the rule from the appropriate namespace exports file (e.g., `miscellaneous/exports.ts`)
-2. Adding the rule to the corresponding plugin's `rules` object
+1. 从相应的命名空间导出文件导入规则（例如 `miscellaneous/exports.ts`）
+2. 将规则添加到相应插件的 `rules` 对象中

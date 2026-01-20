@@ -1,40 +1,40 @@
-# AGENTS Guidelines for This Directory or Its Children
+# 此目录及其子目录的 AGENTS 指南
 
-This directory contains three TypeScript subprojects: `app`, `node`, and `lib`.
+## 项目结构
 
-- **app**: A Next.js application containing both browser-side and server-side code.
-- **node**: TypeScript code executed directly in Node.js via built-in type stripping (no transpilation required), such as configurations and scripts.
-- **lib**: Shared utilities common to both `app` and `node`. Requires no standalone build; compilation is handled on-demand by the consumer (Next.js for `app`, Node.js type stripping for `node`).
+本项目包含三个 TypeScript 子项目：`app`、`node` 和 `lib`。
 
-When the subproject of a file cannot be determined from its path, read `tsconfig.json` and the referenced configuration files (`tsconfig.app.json`, `tsconfig.node.json`, `tsconfig.lib.json`) to identify which subproject includes the file via its `include` patterns.
+- **app**: Next.js 应用，包含浏览器端和服务器端代码
+- **node**: 直接在 Node.js 中通过内置类型剥离执行的 TypeScript 代码（无需转译），例如配置文件和脚本
+- **lib**: `app` 和 `node` 共享的工具库。无需独立构建；由使用者按需编译（`app` 使用 Next.js 编译，`node` 使用 Node.js 类型剥离）
 
----
+### 确定文件所属子项目
 
-## TypeScript Type Safety
+当无法从文件路径确定其所属子项目时，需要阅读 `tsconfig.json` 及引用的配置文件（`tsconfig.app.json`、`tsconfig.node.json`、`tsconfig.lib.json`），通过 `include` 模式来识别文件属于哪个子项目。
 
-- **MUST** ensure all generated code is free of TypeScript errors
-- **MUST NOT** suppress any TypeScript errors
+## TypeScript 类型安全
 
-### Runtime Type Validation with Zod
+- **必须** 确保所有生成的代码没有 TypeScript 错误
+- **禁止** 抑制任何 TypeScript 错误
 
-Use Zod for runtime type validation with the following conventions:
+## 使用 Zod 进行运行时类型验证
 
-| Subproject   | Method         | Error Handling                             |
-| ------------ | -------------- | ------------------------------------------ |
-| `node`       | `.parse()`     | Let validation errors throw                |
-| `lib`, `app` | `.safeParse()` | Handle validation failure cases explicitly |
+使用 Zod 进行运行时类型验证时，遵循以下约定：
 
-### Handling Unavoidable Third-Party Type Issues
+| 子项目   | 方法           | 错误处理               |
+| -------- | -------------- | ---------------------- |
+| node     | `.parse()`     | 让验证错误抛出         |
+| lib, app | `.safeParse()` | 显式处理验证失败的情况 |
 
-If genuinely unavoidable third-party type compatibility issues are encountered:
+## 处理不可避免的第三方类型问题
 
-- **MUST** document the reason in `ts-expect-error.ts` following the existing structure
-- **MUST** use `@ts-expect-error` with the required format: `@ts-expect-error -- See reasons['<reason-key>'] in ts-expect-error.ts`
-- **MUST** ensure the reason key matches a key defined in `ts-expect-error.ts`
+如果遇到确实无法避免的第三方类型兼容性问题：
 
----
+- **必须** 在 `ts-expect-error.ts` 中按照现有结构记录原因
+- **必须** 使用 `@ts-expect-error` 并遵循必需格式：`@ts-expect-error -- See reasons['<reason-key>'] in ts-expect-error.ts`
+- **必须** 确保 reason key 与 `ts-expect-error.ts` 中定义的 key 匹配
 
-## Linting and Formatting
+## Linting 和格式化
 
-- **SHOULD** ignore all Prettier formatting issues; the project has automated formatting
-- **SHOULD** only address ESLint issues reported at the `error` level; warnings and other severity levels **SHOULD** be ignored
+- **应该** 忽略所有 Prettier 格式化问题；项目有自动化格式化
+- **应该** 只处理 ESLint 报告的 error 级别问题；warnings 和其他严重级别 **应该** 被忽略

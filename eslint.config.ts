@@ -220,9 +220,8 @@ const eslintConfig = defineConfig([
           ],
         },
         files: [
-          `**/${toCaseInsensitiveGlob('AGENTS')}.md`,
           `**/${toCaseInsensitiveGlob('LICENSE')}`,
-          `**/${toCaseInsensitiveGlob('{README,CHANGELOG}')}.md`,
+          `**/${toCaseInsensitiveGlob('{AGENTS,README,CHANGELOG}')}.md`,
         ],
       },
 

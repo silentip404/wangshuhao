@@ -9,7 +9,7 @@ const regexpScopedFiles: ScopedFiles = {
 };
 
 const regexpSetup = defineScopedConfig(regexpScopedFiles, [
-  configs['flat/recommended'],
+  configs.recommended,
 ]);
 
 export { regexpScopedFiles, regexpSetup };

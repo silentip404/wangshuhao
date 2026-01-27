@@ -225,10 +225,10 @@ pnpm run start
 | `pnpm run lint:node-runtime-imports` | 检查 **Node.js** 运行时模块导入正确性      |
 | `pnpm run lint:lockfile`             | 检查 **Lockfile** 同步状态                 |
 | `pnpm run lint:node-version`         | 检查 **Node.js** 版本配置一致性            |
-| `pnpm run lint:knip`                 | 使用 **Knip** 检测未使用的文件、导出与依赖 |
 | `pnpm run lint:tsc`                  | 运行 **TypeScript** 类型检查               |
 | `pnpm run lint:eslint`               | 运行 **ESLint** 代码规范检查               |
 | `pnpm run lint:prettier`             | 运行 **Prettier** 格式化检查               |
+| `pnpm run lint:knip`                 | 使用 **Knip** 检测未使用的文件、导出与依赖 |
 
 ### 代码修复
 

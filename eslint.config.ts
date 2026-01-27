@@ -48,7 +48,6 @@ import {
   GLOB_JS,
   GLOB_JSX,
   GLOB_SCRIPTS_FILES,
-  GLOB_TYPINGS,
   GLOBS_CONFIG_FILES,
   GLOBS_TSCONFIG_NODE_INCLUDE,
   toCaseInsensitiveGlob,
@@ -167,11 +166,7 @@ const eslintConfig = defineConfig([
         rules: {
           'import-x/no-default-export': 'off',
         },
-        files: [
-          GLOB_TYPINGS,
-          ...GLOBS_CONFIG_FILES,
-          'app/**/{layout,page}.tsx',
-        ],
+        files: [...GLOBS_CONFIG_FILES, 'app/**/{layout,page}.tsx'],
       },
 
       /**
@@ -242,7 +237,7 @@ const eslintConfig = defineConfig([
         rules: {
           'check-file/folder-naming-convention': 'off',
         },
-        files: [GLOB_TYPINGS, GLOB_FILES_IN_DOT_DIRECTORY],
+        files: [GLOB_FILES_IN_DOT_DIRECTORY],
       },
     ],
   },

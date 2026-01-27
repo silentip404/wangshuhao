@@ -1,4 +1,4 @@
-import eslintCommentsPluginConfigs from '@eslint-community/eslint-plugin-eslint-comments/configs';
+import { recommended } from '@eslint-community/eslint-plugin-eslint-comments/configs';
 
 import type { ScopedFiles } from '#node/eslint-config/utilities/config.ts';
 import { defineScopedConfig } from '#node/eslint-config/utilities/config.ts';
@@ -9,7 +9,7 @@ const eslintCommentsScopedFiles: ScopedFiles = {
 };
 
 const eslintCommentsSetup = defineScopedConfig(eslintCommentsScopedFiles, [
-  eslintCommentsPluginConfigs.recommended,
+  recommended,
 ]);
 
 export { eslintCommentsScopedFiles, eslintCommentsSetup };

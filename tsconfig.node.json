@@ -17,5 +17,5 @@
       "path": "./tsconfig.lib.json",
     },
   ],
-  "include": ["*.js", "*.ts", "node/**/*.ts", "typings/**/*.d.ts"],
+  "include": ["*.js", "*.ts", "node/**/*.ts"],
 }

@@ -2,7 +2,7 @@
 > [!CAUTION]
 > **此仓库已废弃，不再维护。**
 >
-> 新仓库：[agent-ready-react](https://github.com/wangbaichuandev/agent-ready-react)
+> 新仓库：[intent-stack](https://github.com/wangbaichuandev/intent-stack)
 >
 > 为什么废弃？见这篇文章：[Vibe Coding 工程化的设想：从"爽"到"可靠"的平衡](https://juejin.cn/post/7647060029904322594)
 

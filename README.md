@@ -4,7 +4,7 @@
 >
 > 新仓库：[intent-stack](https://github.com/wangbaichuandev/intent-stack)
 >
-> 为什么废弃？见这篇文章：[Vibe Coding 工程化的设想：从"爽"到"可靠"的平衡](https://juejin.cn/post/7647060029904322594)
+> 为什么废弃？详见：[Vibe Coding 工程化](https://juejin.cn/column/7647064469139275816)
 
 ---
 
